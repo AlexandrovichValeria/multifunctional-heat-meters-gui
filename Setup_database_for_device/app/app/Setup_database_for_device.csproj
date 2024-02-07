@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6BE69680-B91F-404D-9866-85E6298C61C3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Setup_database_for_device</RootNamespace>
+    <AssemblyName>Setup_database_for_device</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Setup_database_for_device.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AtkSharp, Version=3.22.24.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AtkSharp.3.22.24.10\lib\netstandard2.0\AtkSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CairoSharp, Version=3.22.24.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CairoSharp.3.22.24.10\lib\netstandard2.0\CairoSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GdkSharp, Version=3.22.24.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdkSharp.3.22.24.10\lib\netstandard2.0\GdkSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GioSharp, Version=3.22.24.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GioSharp.3.22.24.10\lib\netstandard2.0\GioSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GLibSharp, Version=3.22.24.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GLibSharp.3.22.24.10\lib\netstandard2.0\GLibSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GtkSharp, Version=3.22.24.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GtkSharp.3.22.24.10\lib\netstandard2.0\GtkSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PangoSharp, Version=3.22.24.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PangoSharp.3.22.24.10\lib\netstandard2.0\PangoSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppState.cs" />
+    <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\SystemController.cs" />
+    <Compile Include="EventsArgs\MenuEventArgs.cs" />
+    <Compile Include="EventsArgs\NextFormArgs.cs" />
+    <Compile Include="FormsBuilder.cs" />
+    <Compile Include="FormSwitcher.cs" />
+    <Compile Include="MainForm.cs" />
+    <Compile Include="MenuBuilder.cs" />
+    <Compile Include="Model\Consumer.cs" />
+    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\Parameter.cs" />
+    <Compile Include="Model\Pipeline.cs" />
+    <Compile Include="Model\SystemWideSettings.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\ADS_97_Form.cs" />
+    <Compile Include="View\BackForwardComponent.cs" />
+    <Compile Include="View\ConsumerForm.cs" />
+    <Compile Include="View\ContentMenuButton.cs" />
+    <Compile Include="View\CoolantSelectionForm.cs" />
+    <Compile Include="View\DeviceSelectionForm.cs" />
+    <Compile Include="View\ContentMenu.cs" />
+    <Compile Include="View\PipelineSettings2.cs" />
+    <Compile Include="View\PipelineSettingsLimits.cs" />
+    <Compile Include="View\SystemForm\ParticipatedPipelinesBlock.cs" />
+    <Compile Include="View\SystemForm\SystemForm.cs" />
+    <Compile Include="View\SystemForm\CheckboxesBlock.cs" />
+    <Compile Include="View\TestForm.cs" />
+    <Compile Include="View\WindowForm.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="MainForm.glade" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="View\DeviceSelectionForm.glade" />
+    <EmbeddedResource Include="View\CoolantSelectionForm.glade" />
+    <EmbeddedResource Include="View\SystemForm\SystemForm.glade" />
+    <EmbeddedResource Include="View\PipelineSettings2.glade" />
+    <EmbeddedResource Include="View\ContentMenu.glade" />
+    <EmbeddedResource Include="View\PipelineSettingsLimits.glade" />
+    <EmbeddedResource Include="View\ConsumerForm.glade" />
+    <EmbeddedResource Include="View\TestForm.glade" />
+    <EmbeddedResource Include="View\ContentMenuButton.glade" />
+    <EmbeddedResource Include="View\SystemForm\CheckboxesBlock.glade" />
+    <EmbeddedResource Include="View\SystemForm\ParticipatedPipelinesBlock.glade" />
+    <EmbeddedResource Include="View\ADS_97_Form.glade" />
+    <EmbeddedResource Include="View\BackForwardComponent.glade" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\GtkSharp.Win32.3.1.2\build\net45\GtkSharp.Win32.targets" Condition="Exists('..\packages\GtkSharp.Win32.3.1.2\build\net45\GtkSharp.Win32.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\GtkSharp.Win32.3.1.2\build\net45\GtkSharp.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GtkSharp.Win32.3.1.2\build\net45\GtkSharp.Win32.targets'))" />
+  </Target>
+</Project>
