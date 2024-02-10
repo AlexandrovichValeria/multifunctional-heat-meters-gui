@@ -210,7 +210,7 @@ namespace Multifunctional_heat_meters_gui.View
                     if (node_name == "т" + pipelineNumber)
                         foreach (string str in s_pipelinesSettingsButtonsNames)
                         {
-                            ContentMenuStore.AppendValues(nodeIter, str);
+                            ContentMenuStore.AppendValues(nodeIter, str + " " + pipelineNumber);
                         }
                 }
                 while (ContentMenuStore.IterNext(ref nodeIter));
