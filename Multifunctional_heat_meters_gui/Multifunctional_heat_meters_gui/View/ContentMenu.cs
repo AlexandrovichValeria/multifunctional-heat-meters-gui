@@ -85,7 +85,7 @@ namespace Multifunctional_heat_meters_gui.View
             ContentMenuStore.AppendValues("Настройка трубопроводов");
             ContentMenuStore.AppendValues("Настройка потребителей");
 
-            Gtk.TreePath path = new TreePath("1");
+            TreePath path = new TreePath("1");
             tree.Selection.SelectPath(path);
 
             /*foreach (ContentMenuButton a in _topButtons)
@@ -112,32 +112,46 @@ namespace Multifunctional_heat_meters_gui.View
                 sectionName = "Настройка трубопроводов";
                 title = "т";
             }
+
             foreach(int number in buttonsNumbers)
             {
-                //if (buttonName == DeepButtonsNames.PIPELINES)
-                //{
-                //AddPipelinesSettingsButtons(TreeViewItemsWithButtonInside[i], buttonsNumbers[i]);
-                //}
-
-                TreeIter parentIter;
-                if (ContentMenuStore.GetIterFirst(out parentIter))
+                TreeIter nodeIter;
+                bool nodeExists = false;
+                if (ContentMenuStore.GetIter(out nodeIter, new TreePath("2:0")))
                 {
                     do
                     {
-                        string name = ContentMenuStore.GetValue(parentIter, 0).ToString();
-                        if (name == sectionName)
+                        string node_name = ContentMenuStore.GetValue(nodeIter, 0).ToString();
+                        if(node_name == title + number.ToString())
                         {
-                            Console.WriteLine("name == sectionName");
-
-                            //Gtk.TreeIter childIter = ((TreeStore)ContentMenuStore).Append(ref parentIter);
-                            //((Gtk.TreeStore)ContentMenuStore).SetValue(childIter, 0, "AAA");
-                            
-                            ContentMenuStore.AppendValues(parentIter, title + number.ToString());
-
+                            nodeExists = true;
                             break;
                         }
                     }
-                    while (ContentMenuStore.IterNext(ref parentIter));
+                    while (ContentMenuStore.IterNext(ref nodeIter));
+                }
+
+                if (!nodeExists)
+                {
+                    TreeIter parentIter;
+                    if (ContentMenuStore.GetIterFirst(out parentIter))
+                    {
+                        do
+                        {
+                            string parent_name = ContentMenuStore.GetValue(parentIter, 0).ToString();
+                            if (parent_name == sectionName)
+                            {
+                                ContentMenuStore.AppendValues(parentIter, title + number.ToString());
+                                if (buttonName == DeepButtonsNames.PIPELINES)
+                                {
+                                    AddPipelinesSettingsButtons(number);
+                                }
+
+                                break;
+                            }
+                        }
+                        while (ContentMenuStore.IterNext(ref parentIter));
+                    }
                 }
             }
             tree.ExpandAll();
@@ -180,28 +194,31 @@ namespace Multifunctional_heat_meters_gui.View
 
         }*/
 
-        /*private void AddPipelinesSettingsButtons(TreeViewItem container, int pipelineNumber)
+        private void AddPipelinesSettingsButtons(int pipelineNumber)
         {
-            List<ContentMenuButton> pipelinesSettingsButtons = s_pipelinesSettingsButtonsNames.Select((string buttonName) =>
+            Console.WriteLine("pipelineNumber");
+            Console.WriteLine(pipelineNumber);
+            TreeIter nodeIter;
+            string path = "2:0";
+            if (ContentMenuStore.GetIter(out nodeIter, new TreePath(path)))
             {
-                ContentMenuButton currentButton = ContentMenuButton.Create($"{buttonName} {pipelineNumber}", $"pipelinesSettings-{pipelineNumber}"); ;
-                currentButton.SetWidth(120);
-                //currentButton.EnableButton();
-                //currentButton.RadioButtonChecked += new EventHandler(ButtonClicked);
-                currentButton.DisableButton();
-
-                //_pipelinesButtons.Add(currentButton);
-
-                return currentButton;
-            }).ToList();
-
-            //pipelinesSettingsButtons[0].EnableButton();
-
-            //foreach (TreeViewItem item in WrapButtonsInTreeViewItem(pipelinesSettingsButtons))
-            //{
-              //  container.Items.Add(item);
-            //}
-        }*/
+                do
+                {
+                    string node_name = ContentMenuStore.GetValue(nodeIter, 0).ToString();
+                    Console.WriteLine("node_name");
+                    Console.WriteLine(node_name);
+                    if (node_name == "т" + pipelineNumber)
+                        foreach (string str in s_pipelinesSettingsButtonsNames)
+                        {
+                            ContentMenuStore.AppendValues(nodeIter, str);
+                        }
+                }
+                while (ContentMenuStore.IterNext(ref nodeIter));
+            }
+            else 
+                Console.WriteLine("Doesn't exist");
+            
+        }
 
         public void SelectButtonByName(string name)
         {
