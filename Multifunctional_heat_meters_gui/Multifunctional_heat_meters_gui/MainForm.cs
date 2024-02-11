@@ -68,8 +68,8 @@ namespace Multifunctional_heat_meters_gui
             string window_name = "Настройщик базы данных " + deviceName;
             Title = window_name;
 
-            View.SystemForm.SystemForm subForm1 = View.SystemForm.SystemForm.Create(device);
-            View.SystemForm.SystemForm subForm2 = View.SystemForm.SystemForm.Create(device);
+            View.SystemForm subForm1 = View.SystemForm.Create(device);
+            View.SystemForm subForm2 = View.SystemForm.Create(device);
             
             _sysController = new Controller.SystemController(subForm1, _model);
 

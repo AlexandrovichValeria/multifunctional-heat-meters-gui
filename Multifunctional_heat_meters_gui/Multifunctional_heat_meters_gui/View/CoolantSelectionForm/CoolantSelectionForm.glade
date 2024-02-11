@@ -151,21 +151,19 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="box4">
+          <object class="GtkBox" id="table_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="margin-start">20</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkLabel" id="label4">
+              <object class="GtkBox" id="gas_box">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="halign">start</property>
-                <property name="margin-start">10</property>
-                <property name="margin-end">10</property>
-                <property name="margin-bottom">20</property>
-                <property name="label" translatable="yes">Задайте Ширину зоны насыщения по давлению для диагностики смены фазового состояни (пар или вода)</property>
-                <property name="wrap">True</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <placeholder/>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -174,83 +172,18 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label5">
+              <object class="GtkBox" id="liquid_box">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="halign">start</property>
-                <property name="margin-start">30</property>
-                <property name="margin-end">10</property>
-                <property name="margin-bottom">10</property>
-                <property name="label" translatable="yes">Ширина зоны насыщения:</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <placeholder/>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="entry1">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="margin-start">30</property>
-                <property name="margin-end">10</property>
-                <property name="margin-bottom">10</property>
-                <property name="text" translatable="yes">0</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label6">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="halign">start</property>
-                <property name="margin-start">10</property>
-                <property name="margin-end">10</property>
-                <property name="margin-top">20</property>
-                <property name="margin-bottom">10</property>
-                <property name="label" translatable="yes">Укажите Степень сухости насыщенного пара</property>
-                <property name="wrap">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label7">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="halign">start</property>
-                <property name="margin-start">30</property>
-                <property name="margin-end">10</property>
-                <property name="margin-bottom">10</property>
-                <property name="label" translatable="yes">Степень сухости:</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">4</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="entry2">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="margin-start">30</property>
-                <property name="margin-end">10</property>
-                <property name="margin-bottom">10</property>
-                <property name="text" translatable="yes">1</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">5</property>
               </packing>
             </child>
           </object>

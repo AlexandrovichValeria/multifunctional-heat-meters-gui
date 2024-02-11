@@ -19,7 +19,7 @@ namespace Multifunctional_heat_meters_gui
         }
 
         private LinkedList<View.WindowForm> _forms;
-        private View.SystemForm.SystemForm _systemForm;
+        private View.SystemForm _systemForm;
 
         private List<int> _currentPipelinesNumbers = new List<int>();
         private List<int> _currentConsumersNumbers = new List<int>();
@@ -35,7 +35,7 @@ namespace Multifunctional_heat_meters_gui
 
             if (!(systemWindow is null))
             {
-                _systemForm = systemWindow as View.SystemForm.SystemForm;
+                _systemForm = systemWindow as View.SystemForm;
                 _systemForm.NextFormEvent += new EventHandler<EventsArgs.NextFormArgs>(SystemWindowParamsSet);
             }
         }
@@ -138,7 +138,7 @@ namespace Multifunctional_heat_meters_gui
 
         private void InsertNewPipelinesSettings(List<View.WindowForm> forms)
         {
-            LinkedListNode<View.WindowForm> beforeNode = GetBeforeNodeForNumber<View.PipelineSettings2>(forms[0].FormIndex);
+            LinkedListNode<View.WindowForm> beforeNode = GetBeforeNodeForNumber<View.PipelineSettings2Form>(forms[0].FormIndex);
 
             if (beforeNode != null)
             {
@@ -183,8 +183,8 @@ namespace Multifunctional_heat_meters_gui
         private void DeletePipelinesSettings(List<int> formsNumbers)
         {
             DeleteFormsByFormsNumbers<View.CoolantSelectionForm>(formsNumbers);
-            DeleteFormsByFormsNumbers<View.PipelineSettingsLimits>(formsNumbers);
-            DeleteFormsByFormsNumbers<View.PipelineSettings2>(formsNumbers);
+            DeleteFormsByFormsNumbers<View.PipelineSettings1Form>(formsNumbers);
+            DeleteFormsByFormsNumbers<View.PipelineSettings2Form>(formsNumbers);
         }
 
 
@@ -244,18 +244,18 @@ namespace Multifunctional_heat_meters_gui
             foreach (int pipelineNumber in pipelinesNumbers)
             {
                 View.CoolantSelectionForm coolantSelectionForm = View.CoolantSelectionForm.Create(pipelineNumber);
-                View.PipelineSettingsLimits pipelineSettingsLimits = View.PipelineSettingsLimits.Create(pipelineNumber);
-                View.PipelineSettings2 pipelineSettings2Form = View.PipelineSettings2.Create(pipelineNumber);
+                View.PipelineSettings1Form pipelineSettings1Form = View.PipelineSettings1Form.Create(pipelineNumber);
+                View.PipelineSettings2Form pipelineSettings2Form = View.PipelineSettings2Form.Create(pipelineNumber);
 
                 //coolantSelectionForm.SetNextPipelineSettings(pipelineSettingsLimits);
                 //pipelineSettingsLimits.SetNextPipelineSettings(pipelineSettings2Form);
 
-                List<View.WindowForm> pipelinesSettingsForms = new List<View.WindowForm>() { coolantSelectionForm, pipelineSettingsLimits, pipelineSettings2Form };
+                List<View.WindowForm> pipelinesSettingsForms = new List<View.WindowForm>() { coolantSelectionForm, pipelineSettings1Form, pipelineSettings2Form };
 
                 InsertNewPipelinesSettings(pipelinesSettingsForms);
 
                 NewFormCreatedEvent?.Invoke(coolantSelectionForm, EventArgs.Empty);
-                NewFormCreatedEvent?.Invoke(pipelineSettingsLimits, EventArgs.Empty);
+                NewFormCreatedEvent?.Invoke(pipelineSettings1Form, EventArgs.Empty);
                 NewFormCreatedEvent?.Invoke(pipelineSettings2Form, EventArgs.Empty);
             }
 

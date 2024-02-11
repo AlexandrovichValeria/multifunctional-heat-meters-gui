@@ -7,20 +7,20 @@ using Gtk;
 
 namespace Multifunctional_heat_meters_gui.View
 {
-    class PipelineSettingsLimits : WindowForm
+    class PipelineSettings1Form : WindowForm
     {
         
         private Builder _builder;
         [Builder.Object]
         private Box button_box;
         
-        public static PipelineSettingsLimits Create(int index)
+        public static PipelineSettings1Form Create(int index)
         {
-            Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.PipelineSettingsLimits.glade", null);
-            return new PipelineSettingsLimits(index, builder, builder.GetObject("form_box").Handle);
+            Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.PipelineSettings1Form.glade", null);
+            return new PipelineSettings1Form(index, builder, builder.GetObject("form_box").Handle);
         }
 
-        protected PipelineSettingsLimits(int index, Builder builder, IntPtr handle) : base($"Первая настройка трубопровода {index}", builder, handle)
+        protected PipelineSettings1Form(int index, Builder builder, IntPtr handle) : base($"Первая настройка трубопровода {index}", builder, handle)
         {
             _builder = builder;
             builder.Autoconnect(this);

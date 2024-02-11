@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gtk;
 
-namespace Multifunctional_heat_meters_gui.View.SystemForm
+namespace Multifunctional_heat_meters_gui.View
 {
     public class SystemForm : WindowForm
     {

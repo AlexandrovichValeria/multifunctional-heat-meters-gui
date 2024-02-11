@@ -9,11 +9,11 @@ namespace Multifunctional_heat_meters_gui.Controller
     public class SystemController : Controller
     {
 
-        private readonly View.SystemForm.SystemForm _view;
+        private readonly View.SystemForm _view;
         private readonly Model.Model _model;
         private readonly Model.SystemWideSettings _systemModel;
 
-        public SystemController(View.SystemForm.SystemForm view, Model.Model model)
+        public SystemController(View.SystemForm view, Model.Model model)
         {
             _view = view;
             _model = model;
