@@ -37,6 +37,11 @@ namespace Multifunctional_heat_meters_gui.View
         protected virtual void OnNextFormAction() { }
         protected virtual void OnPreviousFormAction() { }
 
+        protected virtual bool IsAbleToGoToNext()
+        {
+            return true;
+        }
+
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;

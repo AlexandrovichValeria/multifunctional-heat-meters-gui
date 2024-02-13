@@ -42,7 +42,7 @@ namespace Multifunctional_heat_meters_gui.View
                 _participatedPipelinesBlock = ParticipatedPipelinesBlock.Create(12, 6);
             Checkboxes_box.Add(_participatedPipelinesBlock);
 
-
+            CalculateMinPipelinesCountForm_ADS_97(device);
             //BackForwardButtons = BackForwardComponent.Create();
             button_box.Add(_backForwardComponent);
 
@@ -75,10 +75,15 @@ namespace Multifunctional_heat_meters_gui.View
             int countSelectedPipelines = (zeroOneStringPipelines != null) ? GetPipelinesCountByOneZeroString(zeroOneStringPipelines) : 0;
             if (countSelectedPipelines > _minPipelinesCountFor_ADS_97)
             {
-                MessageDialog dialog = new MessageDialog(_ADS_97_Form, DialogFlags.DestroyWithParent, MessageType.Question, ButtonsType.YesNo, "Dialog text");
-                //_ADS_97_Form.ShowDialog();
+                _ADS_97_Form.Show();
+                //MessageDialog dialog = new MessageDialog(_ADS_97_Form, DialogFlags.DestroyWithParent, MessageType.Question, ButtonsType.YesNo, "Dialog text");
             }
         }
+
+        /*protected override bool IsAbleToGoToNext()
+        {
+            return !_ADS_97_Form.Visible;
+        }*/
 
         private int GetPipelinesCountByOneZeroString(string oneZeroString)
         {
@@ -93,6 +98,19 @@ namespace Multifunctional_heat_meters_gui.View
             }
 
             return count;
+        }
+
+        private void CalculateMinPipelinesCountForm_ADS_97(Model.Device device)
+        {
+            switch (device)
+            {
+                case Model.Device.SPT963:
+                    _minPipelinesCountFor_ADS_97 = 8;
+                    break;
+                default:
+                    _minPipelinesCountFor_ADS_97 = 4;
+                    break;
+            }
         }
 
         protected void SetupHandlers()
