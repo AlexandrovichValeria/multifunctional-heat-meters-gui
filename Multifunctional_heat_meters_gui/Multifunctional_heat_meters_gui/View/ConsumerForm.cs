@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 using Gtk;
 
 namespace Multifunctional_heat_meters_gui.View
@@ -12,9 +13,10 @@ namespace Multifunctional_heat_meters_gui.View
         private Builder _builder;
         [Builder.Object]
         private Box button_box;
-
         [Builder.Object]
         private ComboBox combo1;
+        [Builder.Object]
+        private ListStore liststore1;
 
         public static ConsumerForm Create(List<int> pipelinesNumbers, int consumerNumber)
         {
@@ -29,7 +31,6 @@ namespace Multifunctional_heat_meters_gui.View
 
             _formIndex = consumerNumber;
 
-            Image image = new Image("10.jpg");
             button_box.Add(_backForwardComponent);
 
             SetupHandlers();
