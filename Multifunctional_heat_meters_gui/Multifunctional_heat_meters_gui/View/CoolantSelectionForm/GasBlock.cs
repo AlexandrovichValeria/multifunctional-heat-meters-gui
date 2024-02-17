@@ -10,6 +10,13 @@ namespace Multifunctional_heat_meters_gui.View
     class GasBlock : Frame
     {
         private Builder _builder;
+
+        [Builder.Object]
+        private Entry entry1;
+        [Builder.Object]
+        private Entry entry2;
+
+
         public static GasBlock Create()
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.CoolantSelectionForm.GasBlock.glade", null);
@@ -22,6 +29,17 @@ namespace Multifunctional_heat_meters_gui.View
             SetupHandlers();
             
         }
+
+        public Dictionary<string, string> GetGasSettings()
+        {
+            Dictionary<string, string> res = new Dictionary<string, string>()
+            {
+                { "104", entry1.Text }, //ширина зоны насыщения
+                { "105", entry2.Text }, //степень сухости
+            };
+            return res;
+        }
+
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;

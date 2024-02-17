@@ -15,6 +15,10 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private ComboBoxText combo1;
         [Builder.Object]
+        private ComboBoxText combo2;
+        [Builder.Object]
+        private ComboBoxText combo3;
+        [Builder.Object]
         private Box gas_box;
         [Builder.Object]
         private Box liquid_box;
@@ -45,14 +49,46 @@ namespace Multifunctional_heat_meters_gui.View
             SetupHandlers();
         }
 
+        public Dictionary<string, string> GetCoolantSettings()
+        {
+            string flowMeter = "";
+            if (combo2.ActiveId == "0")
+                flowMeter = "0";
+            else if (combo2.ActiveId == "1")
+                flowMeter = "12";
+
+            Dictionary<string, string> coolantSettings = new Dictionary<string, string>()
+            {
+                { "101", $"{combo1.ActiveId}" }, //тип теплоносителя
+                { "102н00", flowMeter }, //тип расходомера
+                { "034н00", $"{0}{Int32.Parse(combo3.ActiveId) + 1}{0}" }, //тип датчика
+            };
+
+            Dictionary<string, string> gasSettings = gas_block.GetGasSettings();
+            Dictionary<string, string> liquidSettings = liquid_block.GetLiquidSettings();
+
+            Dictionary<string, string> result = coolantSettings
+                .Union(gasSettings)
+                .Union(liquidSettings)
+                .ToDictionary(x => x.Key, x => x.Value);
+
+            return result;
+        }
+
         protected void SetupHandlers()
         {
             combo1.Changed += Combo1ChangedEvent;
             //DeleteEvent += OnLocalDeleteEvent;
-            //button1.Clicked += OnSendClick;
         }
         protected void Combo1ChangedEvent(object sender, EventArgs a)
         {
+            /*Console.WriteLine("CoolantData");
+            Dictionary<string, string> dic = GetCoolantSettings();
+            foreach (KeyValuePair<string, string> kvp in dic)
+            {
+                Console.WriteLine($"{kvp.Key}, {kvp.Value}");
+            }*/
+
             switch (combo1.ActiveId)
             {
                 case "0":

@@ -63,7 +63,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="entry1">
+          <object class="GtkEntry" id="entry0">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
           </object>
@@ -73,7 +73,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="entry2">
+          <object class="GtkEntry" id="entry1">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
           </object>
@@ -83,7 +83,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="entry3">
+          <object class="GtkEntry" id="entry2">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
           </object>
@@ -93,7 +93,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="entry4">
+          <object class="GtkEntry" id="entry3">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
           </object>
@@ -103,7 +103,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="entry5">
+          <object class="GtkEntry" id="entry4">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
           </object>
@@ -113,7 +113,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="entry6">
+          <object class="GtkEntry" id="entry5">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
           </object>
@@ -123,7 +123,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="entry7">
+          <object class="GtkEntry" id="entry6">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
           </object>
@@ -133,7 +133,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="entry8">
+          <object class="GtkEntry" id="entry7">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
           </object>

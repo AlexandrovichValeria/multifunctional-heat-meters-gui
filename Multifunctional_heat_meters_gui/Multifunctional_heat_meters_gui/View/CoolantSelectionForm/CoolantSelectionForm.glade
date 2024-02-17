@@ -98,6 +98,7 @@
                         <property name="can-focus">False</property>
                         <property name="margin-top">5</property>
                         <property name="margin-bottom">5</property>
+                        <property name="active-id">0</property>
                         <items>
                           <item id="0" translatable="yes">Вода</item>
                           <item id="1" translatable="yes">Перегретый пар</item>
@@ -145,9 +146,10 @@
                         <property name="can-focus">False</property>
                         <property name="margin-top">5</property>
                         <property name="margin-bottom">5</property>
+                        <property name="active-id">0</property>
                         <items>
                           <item id="0" translatable="yes">Нет</item>
-                          <item id="1" translatable="yes">датчик объемного или массового расхода</item>
+                          <item id="1" translatable="yes">Датчик объемного или массового расхода</item>
                         </items>
                       </object>
                       <packing>
@@ -190,6 +192,7 @@
                         <property name="can-focus">False</property>
                         <property name="margin-top">5</property>
                         <property name="margin-bottom">5</property>
+                        <property name="active-id">0</property>
                         <items>
                           <item id="0" translatable="yes">Датчик объема с числоимпульсным выходным сигналом</item>
                           <item id="1" translatable="yes">Датчик массы с числоимпульсным выходным сигналом</item>
