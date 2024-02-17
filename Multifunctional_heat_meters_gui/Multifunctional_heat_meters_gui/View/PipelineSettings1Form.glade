@@ -7,10 +7,14 @@
     <property name="can-focus">False</property>
     <property name="orientation">vertical</property>
     <child>
-      <!-- n-columns=9 n-rows=14 -->
+      <!-- n-columns=11 n-rows=14 -->
       <object class="GtkGrid" id="grid1">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
+        <property name="margin-start">10</property>
+        <property name="margin-end">10</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">10</property>
         <property name="row-spacing">5</property>
         <property name="column-spacing">5</property>
         <child>
@@ -53,6 +57,7 @@
           <object class="GtkLabel" id="label4">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">м/час</property>
           </object>
           <packing>
@@ -85,6 +90,7 @@
           <object class="GtkLabel" id="label5">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">м/час</property>
           </object>
           <packing>
@@ -101,7 +107,7 @@
             <property name="wrap">True</property>
           </object>
           <packing>
-            <property name="left-attach">3</property>
+            <property name="left-attach">4</property>
             <property name="top-attach">0</property>
             <property name="width">3</property>
           </packing>
@@ -113,7 +119,7 @@
             <property name="label" translatable="yes">Нижний</property>
           </object>
           <packing>
-            <property name="left-attach">3</property>
+            <property name="left-attach">4</property>
             <property name="top-attach">1</property>
           </packing>
         </child>
@@ -123,7 +129,7 @@
             <property name="can-focus">True</property>
           </object>
           <packing>
-            <property name="left-attach">4</property>
+            <property name="left-attach">5</property>
             <property name="top-attach">1</property>
           </packing>
         </child>
@@ -131,10 +137,11 @@
           <object class="GtkLabel" id="label9">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">м/час</property>
           </object>
           <packing>
-            <property name="left-attach">5</property>
+            <property name="left-attach">6</property>
             <property name="top-attach">1</property>
           </packing>
         </child>
@@ -145,7 +152,7 @@
             <property name="label" translatable="yes">Верхний</property>
           </object>
           <packing>
-            <property name="left-attach">3</property>
+            <property name="left-attach">4</property>
             <property name="top-attach">2</property>
           </packing>
         </child>
@@ -155,7 +162,7 @@
             <property name="can-focus">True</property>
           </object>
           <packing>
-            <property name="left-attach">4</property>
+            <property name="left-attach">5</property>
             <property name="top-attach">2</property>
           </packing>
         </child>
@@ -163,60 +170,25 @@
           <object class="GtkLabel" id="label10">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">м/час</property>
           </object>
           <packing>
-            <property name="left-attach">5</property>
+            <property name="left-attach">6</property>
             <property name="top-attach">2</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="label11">
+          <object class="GtkSeparator" id="sep1">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">Константное значение расхода.</property>
-            <property name="wrap">True</property>
-          </object>
-          <packing>
-            <property name="left-attach">6</property>
-            <property name="top-attach">0</property>
-            <property name="width">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="entry5">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-          </object>
-          <packing>
-            <property name="left-attach">6</property>
-            <property name="top-attach">1</property>
-            <property name="width">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label12">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="label" translatable="yes">м/час</property>
-          </object>
-          <packing>
-            <property name="left-attach">8</property>
-            <property name="top-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSeparator">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="margin-top">10</property>
-            <property name="margin-bottom">10</property>
+            <property name="margin-top">15</property>
+            <property name="margin-bottom">15</property>
           </object>
           <packing>
             <property name="left-attach">0</property>
             <property name="top-attach">3</property>
-            <property name="width">9</property>
+            <property name="width">11</property>
           </packing>
         </child>
         <child>
@@ -258,7 +230,7 @@
             <property name="wrap">True</property>
           </object>
           <packing>
-            <property name="left-attach">3</property>
+            <property name="left-attach">4</property>
             <property name="top-attach">4</property>
             <property name="width">3</property>
           </packing>
@@ -269,7 +241,7 @@
             <property name="can-focus">True</property>
           </object>
           <packing>
-            <property name="left-attach">3</property>
+            <property name="left-attach">4</property>
             <property name="top-attach">5</property>
             <property name="width">2</property>
           </packing>
@@ -278,10 +250,11 @@
           <object class="GtkLabel" id="label15">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">м/час</property>
           </object>
           <packing>
-            <property name="left-attach">5</property>
+            <property name="left-attach">6</property>
             <property name="top-attach">5</property>
           </packing>
         </child>
@@ -294,7 +267,7 @@
             <property name="wrap">True</property>
           </object>
           <packing>
-            <property name="left-attach">6</property>
+            <property name="left-attach">8</property>
             <property name="top-attach">4</property>
             <property name="width">3</property>
           </packing>
@@ -305,7 +278,7 @@
             <property name="can-focus">True</property>
           </object>
           <packing>
-            <property name="left-attach">6</property>
+            <property name="left-attach">8</property>
             <property name="top-attach">5</property>
             <property name="width">2</property>
           </packing>
@@ -314,10 +287,11 @@
           <object class="GtkLabel" id="label17">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">м/час</property>
           </object>
           <packing>
-            <property name="left-attach">8</property>
+            <property name="left-attach">10</property>
             <property name="top-attach">5</property>
           </packing>
         </child>
@@ -330,7 +304,7 @@
             <property name="wrap">True</property>
           </object>
           <packing>
-            <property name="left-attach">6</property>
+            <property name="left-attach">8</property>
             <property name="top-attach">6</property>
             <property name="width">3</property>
           </packing>
@@ -341,7 +315,7 @@
             <property name="can-focus">True</property>
           </object>
           <packing>
-            <property name="left-attach">6</property>
+            <property name="left-attach">8</property>
             <property name="top-attach">7</property>
             <property name="width">2</property>
           </packing>
@@ -350,24 +324,25 @@
           <object class="GtkLabel" id="label19">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">м/час</property>
           </object>
           <packing>
-            <property name="left-attach">8</property>
+            <property name="left-attach">10</property>
             <property name="top-attach">7</property>
           </packing>
         </child>
         <child>
-          <object class="GtkSeparator">
+          <object class="GtkSeparator" id="sep2">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-top">10</property>
-            <property name="margin-bottom">10</property>
+            <property name="margin-top">15</property>
+            <property name="margin-bottom">15</property>
           </object>
           <packing>
             <property name="left-attach">0</property>
             <property name="top-attach">8</property>
-            <property name="width">9</property>
+            <property name="width">11</property>
           </packing>
         </child>
         <child>
@@ -416,9 +391,9 @@
             <property name="wrap">True</property>
           </object>
           <packing>
-            <property name="left-attach">3</property>
+            <property name="left-attach">4</property>
             <property name="top-attach">9</property>
-            <property name="width">6</property>
+            <property name="width">7</property>
           </packing>
         </child>
         <child>
@@ -428,7 +403,7 @@
             <property name="label" translatable="yes">Нижний</property>
           </object>
           <packing>
-            <property name="left-attach">3</property>
+            <property name="left-attach">4</property>
             <property name="top-attach">10</property>
           </packing>
         </child>
@@ -439,7 +414,7 @@
             <property name="label" translatable="yes">Верхний</property>
           </object>
           <packing>
-            <property name="left-attach">3</property>
+            <property name="left-attach">4</property>
             <property name="top-attach">11</property>
           </packing>
         </child>
@@ -449,7 +424,7 @@
             <property name="can-focus">True</property>
           </object>
           <packing>
-            <property name="left-attach">4</property>
+            <property name="left-attach">5</property>
             <property name="top-attach">10</property>
           </packing>
         </child>
@@ -459,7 +434,7 @@
             <property name="can-focus">True</property>
           </object>
           <packing>
-            <property name="left-attach">4</property>
+            <property name="left-attach">5</property>
             <property name="top-attach">11</property>
           </packing>
         </child>
@@ -472,9 +447,9 @@
             <property name="wrap">True</property>
           </object>
           <packing>
-            <property name="left-attach">3</property>
+            <property name="left-attach">4</property>
             <property name="top-attach">12</property>
-            <property name="width">6</property>
+            <property name="width">7</property>
           </packing>
         </child>
         <child>
@@ -483,7 +458,7 @@
             <property name="can-focus">True</property>
           </object>
           <packing>
-            <property name="left-attach">4</property>
+            <property name="left-attach">5</property>
             <property name="top-attach">13</property>
           </packing>
         </child>
@@ -491,10 +466,11 @@
           <object class="GtkLabel" id="label25">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">м/час</property>
           </object>
           <packing>
-            <property name="left-attach">5</property>
+            <property name="left-attach">6</property>
             <property name="top-attach">10</property>
           </packing>
         </child>
@@ -502,10 +478,11 @@
           <object class="GtkLabel" id="label26">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">м/час</property>
           </object>
           <packing>
-            <property name="left-attach">5</property>
+            <property name="left-attach">6</property>
             <property name="top-attach">11</property>
           </packing>
         </child>
@@ -513,12 +490,124 @@
           <object class="GtkLabel" id="label27">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">м/час</property>
           </object>
           <packing>
-            <property name="left-attach">5</property>
+            <property name="left-attach">6</property>
             <property name="top-attach">13</property>
           </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry5">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+          </object>
+          <packing>
+            <property name="left-attach">8</property>
+            <property name="top-attach">1</property>
+            <property name="width">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label12">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">м/час</property>
+          </object>
+          <packing>
+            <property name="left-attach">10</property>
+            <property name="top-attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label11">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">Константное значение расхода.</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="left-attach">8</property>
+            <property name="top-attach">0</property>
+            <property name="width">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="sep4">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+          </object>
+          <packing>
+            <property name="left-attach">7</property>
+            <property name="top-attach">0</property>
+            <property name="height">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="sep6">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+          </object>
+          <packing>
+            <property name="left-attach">7</property>
+            <property name="top-attach">4</property>
+            <property name="height">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="sep3">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+          </object>
+          <packing>
+            <property name="left-attach">3</property>
+            <property name="top-attach">0</property>
+            <property name="height">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="sep5">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+          </object>
+          <packing>
+            <property name="left-attach">3</property>
+            <property name="top-attach">4</property>
+            <property name="height">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="sep7">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+          </object>
+          <packing>
+            <property name="left-attach">3</property>
+            <property name="top-attach">9</property>
+            <property name="height">5</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
         </child>
         <child>
           <placeholder/>

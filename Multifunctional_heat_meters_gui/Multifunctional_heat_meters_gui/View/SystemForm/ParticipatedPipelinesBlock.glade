@@ -51,10 +51,28 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="ParticipatedPipelinesResult">
+              <object class="GtkFrame" id="frame3">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">label</property>
+                <property name="label-xalign">0</property>
+                <property name="shadow-type">in</property>
+                <child>
+                  <object class="GtkLabel" id="ParticipatedPipelinesResult">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-end">10</property>
+                    <property name="margin-top">5</property>
+                    <property name="margin-bottom">5</property>
+                    <property name="label" translatable="yes">label</property>
+                    <attributes>
+                      
+                    </attributes>
+                  </object>
+                </child>
+                <child type="label_item">
+                  <placeholder/>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -118,10 +136,27 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="ParticipatedConsumersResult">
+              <object class="GtkFrame" id="frame4">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">label</property>
+                <property name="label-xalign">0</property>
+                <property name="shadow-type">in</property>
+                <child>
+                  <object class="GtkLabel" id="ParticipatedConsumersResult">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-end">10</property>
+                    <property name="margin-top">5</property>
+                    <property name="margin-bottom">5</property>
+                    <property name="label" translatable="yes">label</property>
+                    <attributes>
+                    </attributes>
+                  </object>
+                </child>
+                <child type="label_item">
+                  <placeholder/>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>

@@ -98,7 +98,7 @@ namespace Multifunctional_heat_meters_gui.View
 
             foreach (CheckButton checkbox in _checkboxes)
             {
-                _result += (bool)checkbox.Active ? "1" : "0";
+                _result += checkbox.Active ? "1" : "0";
             }
             CheckBoxesChecked(this, EventArgs.Empty);
 

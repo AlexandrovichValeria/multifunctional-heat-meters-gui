@@ -10,38 +10,18 @@
       <object class="GtkBox" id="box">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
+        <property name="margin-start">10</property>
+        <property name="margin-end">10</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">10</property>
         <property name="orientation">vertical</property>
         <child>
           <!-- n-columns=4 n-rows=11 -->
           <object class="GtkGrid" id="grid1">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="row-spacing">10</property>
+            <property name="row-spacing">20</property>
             <property name="column-spacing">10</property>
-            <child>
-              <object class="GtkLabel" id="label1">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="halign">start</property>
-                <property name="label" translatable="yes">Текущее значение 115н00:</property>
-              </object>
-              <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label2">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="halign">start</property>
-                <property name="label" translatable="yes">не определено</property>
-              </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">0</property>
-              </packing>
-            </child>
             <child>
               <object class="GtkLabel" id="label3">
                 <property name="visible">True</property>
@@ -131,8 +111,8 @@
               <object class="GtkSeparator" id="separator1">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-top">20</property>
-                <property name="margin-bottom">20</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
@@ -195,8 +175,8 @@
               <object class="GtkSeparator" id="separator2">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-top">20</property>
-                <property name="margin-bottom">20</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
@@ -242,10 +222,45 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
+              <object class="GtkBox" id="box_115">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="spacing">10</property>
+                <child>
+                  <object class="GtkLabel" id="label1">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="label" translatable="yes">Текущее значение 115н00:</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label2">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="label" translatable="yes">не определено</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">0</property>
+                <property name="width">4</property>
+              </packing>
             </child>
             <child>
               <placeholder/>

@@ -13,6 +13,10 @@ namespace Multifunctional_heat_meters_gui.View
         private Builder _builder;
         [Builder.Object]
         private Box button_box;
+        [Builder.Object]
+        private CheckButton check1;
+        [Builder.Object]
+        private Entry entry1;
 
         public static PipelineSettings2Form Create(int index)
         {
@@ -25,13 +29,30 @@ namespace Multifunctional_heat_meters_gui.View
             _builder = builder;
             builder.Autoconnect(this);
             button_box.Add(_backForwardComponent);
+            entry1.IsEditable = false;
+            entry1.CanFocus = false;
             SetupHandlers();
         }
         
         protected void SetupHandlers()
         {
+            check1.Clicked += OnCheck1Clicked;
             //DeleteEvent += OnLocalDeleteEvent;
             //button1.Clicked += OnSendClick;
+        }
+
+        private void OnCheck1Clicked(object sender, EventArgs e)
+        {
+            if (check1.Active)
+            {
+                entry1.IsEditable = true;
+                entry1.CanFocus = true;
+            }
+            else
+            {
+                entry1.IsEditable = false;
+                entry1.CanFocus = false;
+            }
         }
     }
 }

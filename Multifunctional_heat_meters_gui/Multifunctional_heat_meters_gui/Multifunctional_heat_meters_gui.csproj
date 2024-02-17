@@ -86,7 +86,6 @@
     <Compile Include="View\SystemForm\CheckboxesBlock.cs" />
     <Compile Include="View\SystemForm\ParticipatedPipelinesBlock.cs" />
     <Compile Include="View\SystemForm\SystemForm.cs" />
-    <Compile Include="View\TestForm.cs" />
     <Compile Include="View\WindowForm.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -117,7 +116,6 @@
     <EmbeddedResource Include="View\SystemForm\SystemForm.glade" />
     <EmbeddedResource Include="View\CoolantSelectionForm\GasBlock.glade" />
     <EmbeddedResource Include="View\CoolantSelectionForm\LiquidBlock.glade" />
-    <None Include="View\TestForm.glade" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
