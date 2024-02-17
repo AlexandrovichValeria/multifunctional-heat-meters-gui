@@ -72,6 +72,7 @@ namespace Multifunctional_heat_meters_gui
 
         public void ChangeFormByClickOnMenu(object sender, EventArgs e)
         {
+            
             TreeSelection selection = (TreeSelection)sender;
             ITreeModel model;
             TreeIter iter;
@@ -79,7 +80,6 @@ namespace Multifunctional_heat_meters_gui
             if (selection.GetSelected(out model, out iter))
             {
                 textValue = (string)model.GetValue(iter, 0);
-                //Console.WriteLine("Selected row text value: " + textValue);
             }
 
             LinkedListNode<View.WindowForm> formNode = GetFormNodeByName(textValue);

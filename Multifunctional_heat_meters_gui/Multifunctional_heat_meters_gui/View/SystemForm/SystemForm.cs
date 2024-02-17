@@ -15,6 +15,48 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Box button_box;
 
+        [Builder.Object]
+        private ComboBoxText pressure_combo;
+        [Builder.Object]
+        private ComboBoxText power_combo;
+
+        [Builder.Object]
+        private Entry entry1;
+        [Builder.Object]
+        private Entry entry2;
+        [Builder.Object]
+        private Entry entry3;
+        [Builder.Object]
+        private Entry entry4;
+        [Builder.Object]
+        private CheckButton check1;
+        [Builder.Object]
+        private CheckButton check2;
+        [Builder.Object]
+        private CheckButton check3;
+        [Builder.Object]
+        private CheckButton check4;
+
+        [Builder.Object]
+        private Entry entry5;
+        [Builder.Object]
+        private Entry entry6;
+        [Builder.Object]
+        private Entry entry7;
+        [Builder.Object]
+        private Entry entry8;
+        [Builder.Object]
+        private Entry entry9;
+
+        [Builder.Object]
+        private CheckButton spec1_checkbox;
+        [Builder.Object]
+        private CheckButton spec2_checkbox;
+        [Builder.Object]
+        private Entry spec1;
+        [Builder.Object]
+        private Entry spec2;
+
         private ParticipatedPipelinesBlock _participatedPipelinesBlock;
         private ADS_97_Form _ADS_97_Form;
         //private BackForwardComponent BackForwardButtons;
@@ -43,8 +85,11 @@ namespace Multifunctional_heat_meters_gui.View
             Checkboxes_box.Add(_participatedPipelinesBlock);
 
             CalculateMinPipelinesCountForm_ADS_97(device);
-            //BackForwardButtons = BackForwardComponent.Create();
             button_box.Add(_backForwardComponent);
+            spec1.IsEditable = false;
+            spec1.CanFocus = false;
+            spec2.IsEditable = false;
+            spec2.CanFocus = false;
 
             SetupHandlers();
         }
@@ -56,20 +101,38 @@ namespace Multifunctional_heat_meters_gui.View
         }
         public Dictionary<string, string> GetSystemWindowData()
         {
-            //Dictionary<string, string> result = new Dictionary<string, string>();
             Dictionary<string, string> result = _participatedPipelinesBlock.GetResult();
-            return result;
-            /*Dictionary<string, string> result = _systemWindow.GetAllSystemSettings();
-            foreach (KeyValuePair<string, string> param in ADS_97_result)
-            {
-                result.Add(param.Key, param.Value);
-            }
 
-            return result;*/
+            result.Add("030н00", $"{pressure_combo.ActiveId}{power_combo.ActiveId}");
+            
+            result.Add("030н01", entry5.Text);
+            result.Add("030н02", entry6.Text);
+            result.Add("024", entry7.Text);
+            result.Add("025", entry8.Text);
+            result.Add("008", entry9.Text);
+
+            result.Add("003", spec1.Text);
+            result.Add("004", spec2.Text);
+
+            result.Add("035н00", entry1.Text);
+            result.Add("035н01", check1.Active ? "1" : "0");
+            result.Add("036н00", entry2.Text);
+            result.Add("036н01", check2.Active ? "1" : "0");
+            result.Add("037н00", entry3.Text);
+            result.Add("037н01", check3.Active ? "1" : "0");
+            result.Add("040н00", entry4.Text);
+            result.Add("040н01", check4.Active ? "1" : "0");
+            return result;
         }
 
         protected override void OnNextFormAction()
         {
+            /*Console.WriteLine("SystemData");
+            Dictionary<string, string> dic = GetSystemWindowData();
+            foreach (KeyValuePair<string, string> kvp in dic)
+            {
+                Console.WriteLine($"{kvp.Key}, {kvp.Value}");
+            }*/
 
             string zeroOneStringPipelines = GetParamFromWindow(SelectedPipelinesParam);
             int countSelectedPipelines = (zeroOneStringPipelines != null) ? GetPipelinesCountByOneZeroString(zeroOneStringPipelines) : 0;
@@ -88,15 +151,11 @@ namespace Multifunctional_heat_meters_gui.View
         private int GetPipelinesCountByOneZeroString(string oneZeroString)
         {
             int count = 0;
-
             foreach (char sym in oneZeroString)
             {
                 if (sym == '1')
-                {
                     count++;
-                }
             }
-
             return count;
         }
 
@@ -115,8 +174,35 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void SetupHandlers()
         {
+            spec1_checkbox.Clicked += OnSpec1CheckBoxClicked;
+            spec2_checkbox.Clicked += OnSpec2CheckBoxClicked;
             //DeleteEvent += OnLocalDeleteEvent;
-            //button1.Clicked += OnSendClick;
+        }
+        protected void OnSpec1CheckBoxClicked(object sender, EventArgs a)
+        {
+            if (spec1_checkbox.Active)
+            {
+                spec1.IsEditable = true;
+                spec1.CanFocus = true;
+            }
+            else
+            {
+                spec1.IsEditable = false;
+                spec1.CanFocus = false;
+            }
+        }
+        protected void OnSpec2CheckBoxClicked(object sender, EventArgs a)
+        {
+            if (spec2_checkbox.Active)
+            {
+                spec2.IsEditable = true;
+                spec2.CanFocus = true;
+            }
+            else
+            {
+                spec2.IsEditable = false;
+                spec2.CanFocus = false;
+            }
         }
     }
 }
