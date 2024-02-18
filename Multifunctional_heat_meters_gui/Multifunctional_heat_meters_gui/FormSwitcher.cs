@@ -107,6 +107,7 @@ namespace Multifunctional_heat_meters_gui
                 //_menu.SelectButtonByName(previousForm.FormName);
             }
         }
+
         public void GoAhead(object sender, EventsArgs.NextFormArgs e)
         {
             LinkedListNode<View.WindowForm> nextFormNode = _head.Next;

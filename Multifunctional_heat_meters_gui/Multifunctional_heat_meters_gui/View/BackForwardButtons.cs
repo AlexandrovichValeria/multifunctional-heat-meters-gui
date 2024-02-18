@@ -9,11 +9,8 @@ namespace Multifunctional_heat_meters_gui.View
 {
     public class BackForwardButtons : Box
     {
-        #region Properties
         private Builder _builder;
-        #endregion
 
-        #region Constructors / Destructors
         public static BackForwardButtons Create()
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.BackForwardButtons.glade", null);
@@ -26,14 +23,9 @@ namespace Multifunctional_heat_meters_gui.View
             builder.Autoconnect(this);
             SetupHandlers();
         }
-        #endregion
-
-        #region Handlers
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
-            //button1.Clicked += OnSendClick;
         }
-        #endregion
     }
 }

@@ -205,8 +205,8 @@ namespace Multifunctional_heat_meters_gui.View
                 do
                 {
                     string node_name = ContentMenuStore.GetValue(nodeIter, 0).ToString();
-                    Console.WriteLine("node_name");
-                    Console.WriteLine(node_name);
+                    //Console.WriteLine("node_name");
+                    //Console.WriteLine(node_name);
                     if (node_name == "т" + pipelineNumber)
                         foreach (string str in s_pipelinesSettingsButtonsNames)
                         {
@@ -215,8 +215,8 @@ namespace Multifunctional_heat_meters_gui.View
                 }
                 while (ContentMenuStore.IterNext(ref nodeIter));
             }
-            else 
-                Console.WriteLine("Doesn't exist");
+            //else 
+              //  Console.WriteLine("Doesn't exist");
             
         }
 
@@ -224,6 +224,11 @@ namespace Multifunctional_heat_meters_gui.View
         {
             TreeIter iter;
             bool found = ContentMenuStore.GetIterFirst(out iter);
+            IterateTree(found, name, iter);
+        }
+
+        public void IterateTree(bool found, string name, TreeIter iter)
+        {
             while (found)
             {
                 string foundName = (string)ContentMenuStore.GetValue(iter, 0);
@@ -232,6 +237,13 @@ namespace Multifunctional_heat_meters_gui.View
                 {
                     tree.Selection.SelectIter(iter);
                     break;
+                }
+
+                if (ContentMenuStore.IterHasChild(iter))
+                {
+                    TreeIter childIter;
+                    bool iterfound = ContentMenuStore.IterChildren(out childIter, iter);
+                    IterateTree(iterfound, name, childIter);
                 }
                 found = ContentMenuStore.IterNext(ref iter);
             }
