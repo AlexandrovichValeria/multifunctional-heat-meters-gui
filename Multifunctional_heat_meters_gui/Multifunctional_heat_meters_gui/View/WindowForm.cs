@@ -28,8 +28,6 @@ namespace Multifunctional_heat_meters_gui.View
 
             _formName = formName;
             _backForwardComponent = BackForwardComponent.Create();
-            _backForwardComponent.BackButtonClickedEvent += new EventHandler(GoToPreviousForm);
-            _backForwardComponent.ForwardButtonClickedEvent += new EventHandler(GoToNextForm);
 
             SetupHandlers();
         }
@@ -44,8 +42,8 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void SetupHandlers()
         {
-            //DeleteEvent += OnLocalDeleteEvent;
-            //button1.Clicked += OnSendClick;
+            _backForwardComponent.BackButtonClickedEvent += new EventHandler(GoToPreviousForm);
+            _backForwardComponent.ForwardButtonClickedEvent += new EventHandler(GoToNextForm);
         }
 
         public virtual void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
@@ -58,7 +56,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         private void GoToNextForm(object sender, EventArgs e)
         {
-            //Console.WriteLine("GoToNextForm");
             OnNextFormAction();
             
             if (IsAbleToGoToNext())

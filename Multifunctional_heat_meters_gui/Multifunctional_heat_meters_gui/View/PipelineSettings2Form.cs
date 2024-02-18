@@ -17,6 +17,14 @@ namespace Multifunctional_heat_meters_gui.View
         private CheckButton check1;
         [Builder.Object]
         private Entry entry1;
+        [Builder.Object]
+        private Entry entry2;
+        [Builder.Object]
+        private Label par115;
+        [Builder.Object]
+        private ComboBoxText combo1;
+        [Builder.Object]
+        private ComboBoxText combo2;
 
         public static PipelineSettings2Form Create(int index)
         {
@@ -33,12 +41,44 @@ namespace Multifunctional_heat_meters_gui.View
             entry1.CanFocus = false;
             SetupHandlers();
         }
-        
+
+        public Dictionary<string, string> GetPipelineSettings2()
+        {
+            //string low_val = LowerValueTextBox.Text.Replace(',', '.');
+            Dictionary<string, string> res = new Dictionary<string, string>()
+            {
+                { "115н00", $"{par115.Text}" },
+                { "115н01", $"{entry1.Text}" },
+                { "120", $"{entry2.Text}" },
+            };
+            return res;
+        }
+
         protected void SetupHandlers()
         {
             check1.Clicked += OnCheck1Clicked;
+            combo1.Changed += OnComboChanged;
+            combo2.Changed += OnComboChanged;
             //DeleteEvent += OnLocalDeleteEvent;
-            //button1.Clicked += OnSendClick;
+        }
+
+        private void OnComboChanged(object sender, EventArgs e)
+        {
+            if (sender == combo2 && combo2.ActiveId == "0")
+            {
+                MessageDialog dialog = new MessageDialog(null, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "Вы выбрали вторую цифру '0', при отсутствии расхода в архивах будет нд.");
+                dialog.Run();
+                dialog.Destroy();
+
+            }
+            if ((combo1.ActiveId == "0" || combo1.ActiveId == "1") &&(combo2.ActiveId == "0" || combo2.ActiveId == "1"))
+            {
+                par115.Text = combo1.ActiveId + combo2.ActiveId;
+            }
+            else
+            {
+                par115.Text = "не определено";
+            }
         }
 
         private void OnCheck1Clicked(object sender, EventArgs e)
