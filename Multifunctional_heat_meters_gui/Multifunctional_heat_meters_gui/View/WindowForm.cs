@@ -58,14 +58,14 @@ namespace Multifunctional_heat_meters_gui.View
 
         private void GoToNextForm(object sender, EventArgs e)
         {
-            Console.WriteLine("GoToNextForm");
+            //Console.WriteLine("GoToNextForm");
             OnNextFormAction();
             
-            //if (IsAbleToGoToNext())
-            //{
+            if (IsAbleToGoToNext())
+            {
                 EventsArgs.NextFormArgs args = new EventsArgs.NextFormArgs(paramsToNextForm);
                 NextFormEvent?.Invoke(this, args);
-            //}
+            }
         }
 
         private void GoToPreviousForm(object sender, EventArgs e)

@@ -26,6 +26,8 @@ namespace Multifunctional_heat_meters_gui.View
         private GasBlock gas_block;
         private LiquidBlock liquid_block;
 
+        private static readonly string SensorParamName = "034н00";
+
         public static CoolantSelectionForm Create(int index)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.CoolantSelectionForm.CoolantSelectionForm.glade", null);
@@ -73,6 +75,22 @@ namespace Multifunctional_heat_meters_gui.View
                 .ToDictionary(x => x.Key, x => x.Value);
 
             return result;
+        }
+
+        protected override bool IsAbleToGoToNext()
+        {
+            Console.WriteLine("Coolant IsAbleToGoToNext");
+            string result = GetCoolantSettings()[SensorParamName];
+            result = result.Substring(0, result.Length - 1);
+            if (result != "")
+            {
+                paramsToNextForm = new Dictionary<string, string>()
+                {
+                    { "curIndicator", result }
+                };
+                return true;
+            }
+            return false;
         }
 
         protected void SetupHandlers()
