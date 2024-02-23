@@ -7,7 +7,7 @@ using Gtk;
 
 namespace Multifunctional_heat_meters_gui.View
 {
-    class PipelineSettings2Form : WindowForm
+    public class PipelineSettings2Form : WindowForm
     {
         private Builder _builder;
         [Builder.Object]

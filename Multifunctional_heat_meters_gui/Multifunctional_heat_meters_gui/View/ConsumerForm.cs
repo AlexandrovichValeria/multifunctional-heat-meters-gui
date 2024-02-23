@@ -10,7 +10,7 @@ namespace Multifunctional_heat_meters_gui.View
 {
     public class ConsumerForm : WindowForm
     {
-        private Builder _builder;
+        public Builder _builder;
         [Builder.Object]
         private Box button_box;
         [Builder.Object]
@@ -18,7 +18,7 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         public SpinButton spinbutton1;
         [Builder.Object]
-        private ComboBox combo1;
+        public ComboBox combo1;
         [Builder.Object]
         private Grid pipeline_grid;
 
@@ -43,6 +43,7 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 Label label = new Label("Трубопровод №" + pipelinesNumbers[i].ToString());
                 ComboBoxText comboBox = new ComboBoxText();
+                comboBox.Name = "pipeline_combo" + i.ToString();
                 comboBox.AppendText("Не задействован в данной схеме");
                 comboBox.AppendText("Задействован как подающий");
                 comboBox.AppendText("Задействован как обратный");

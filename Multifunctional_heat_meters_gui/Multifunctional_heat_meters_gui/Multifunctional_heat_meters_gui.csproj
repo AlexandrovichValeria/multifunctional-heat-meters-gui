@@ -55,6 +55,9 @@
     <Compile Include="Controller\ADS_97_Controller.cs" />
     <Compile Include="Controller\ConsumerController.cs" />
     <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\CoolantController.cs" />
+    <Compile Include="Controller\PipelineController1.cs" />
+    <Compile Include="Controller\PipelineController2.cs" />
     <Compile Include="Controller\SystemController.cs" />
     <Compile Include="EventsArgs\MenuEventArgs.cs" />
     <Compile Include="EventsArgs\NextFormArgs.cs" />

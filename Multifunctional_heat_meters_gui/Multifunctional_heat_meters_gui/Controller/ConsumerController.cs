@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using Gtk;
 
 namespace Multifunctional_heat_meters_gui.Controller
 {
@@ -24,16 +24,16 @@ namespace Multifunctional_heat_meters_gui.Controller
 
         public override void SaveDataToModel()
         {
-            /*_consumerModel.Id = (int)_view.spinbutton1.Value;
-            _consumerModel.AccountingSchemeNumber = _view.schemeNumberControl.ComboBoxMain.SelectedIndex;
+            _consumerModel.Id = (int)_view.spinbutton1.Value;
+            _consumerModel.AccountingSchemeNumber = Int32.Parse(_view.combo1.ActiveId);
             int pipelinesCount = _model.SystemWideSettings.PipelinesCount;
             for (int i = 0; i < pipelinesCount; i++)
             {
                 if (_model.GetPipelineByInd(i).Active == false)
                     continue;
-                ComboBox comboBox = (ComboBox)_view.Controls.Find("combobox" + (i + 1).ToString(), true)[0];
-                _consumerModel.SetPipelineStatusByInd(i, (Model.Consumer.PipelineStatus)Enum.Parse(typeof(Model.Consumer.PipelineStatus), comboBox.SelectedIndex.ToString()));
-            }*/
+                ComboBoxText comboBox = (ComboBoxText)_view._builder.GetObject("pipeline_combo" + (i + 1).ToString());
+                _consumerModel.SetPipelineStatusByInd(i, (Model.Consumer.PipelineStatus)Enum.Parse(typeof(Model.Consumer.PipelineStatus), comboBox.ActiveId));
+            }
         }
     }
 }
