@@ -36,6 +36,8 @@ namespace Multifunctional_heat_meters_gui.View
         private CheckButton check3;
         [Builder.Object]
         private CheckButton check4;
+        [Builder.Object]
+        private CheckButton check5;
 
         [Builder.Object]
         private Entry entry5;
@@ -122,6 +124,8 @@ namespace Multifunctional_heat_meters_gui.View
             result.Add("037н01", check3.Active ? "1" : "0");
             result.Add("040н00", entry4.Text);
             result.Add("040н01", check4.Active ? "1" : "0");
+
+            result.Add("CurrentTimeAndDate", check5.Active ? "1" : "0");
             return result;
         }
 

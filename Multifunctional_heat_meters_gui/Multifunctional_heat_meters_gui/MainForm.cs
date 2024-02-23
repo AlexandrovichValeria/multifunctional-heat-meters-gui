@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Gtk;
 
 namespace Multifunctional_heat_meters_gui
@@ -92,7 +93,7 @@ namespace Multifunctional_heat_meters_gui
 
         private void saveDataFromAllForms()
         {
-            /*foreach (var form in _allForms)
+            foreach (var form in _allForms)
             {
                 Controller.Controller controller = null;
                 if (form.FormName.StartsWith("Общесистемные"))
@@ -109,7 +110,7 @@ namespace Multifunctional_heat_meters_gui
                 }
                 else if (form.FormName.StartsWith("Первая настройка трубопровода"))
                 {
-                    controller = new Controller.PipelineController1((View.PipelineSettingsLimits)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
+                    controller = new Controller.PipelineController1((View.PipelineSettings1Form)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
                 }
                 else if (form.FormName.StartsWith("Вторая настройка трубопровода"))
                 {
@@ -117,7 +118,7 @@ namespace Multifunctional_heat_meters_gui
                 }
                 if (controller != null)
                     controller.SaveDataToModel();
-            }*/
+            }
         }
 
         protected void SetupHandlers()
@@ -137,6 +138,40 @@ namespace Multifunctional_heat_meters_gui
         protected void OnSaveButtonActivated(object sender, EventArgs a)
         {
             Console.WriteLine("OnSaveButtonActivated");
+            FileChooserDialog fileChooser = new FileChooserDialog(
+            "Сохранение базы данных", // Dialog title
+            null, // Parent window (can be null)
+            FileChooserAction.Save, // Action type (Save)
+            "Отмена", // Cancel button text
+            ResponseType.Cancel, // Response type for the Cancel button
+            "Сохранить", // Accept button text
+            ResponseType.Accept // Response type for the Accept button
+            );
+
+            FileFilter filter = new FileFilter();
+            filter.AddPattern("Configurator DB files|*.xdb");
+            fileChooser.AddFilter(filter);
+
+            // Run the dialog and check the response
+            ResponseType response = (ResponseType)fileChooser.Run();
+            if (response == ResponseType.Accept)
+            {
+                // Get the selected file or file name
+                string selectedFilePath = fileChooser.Filename;
+                // Process the selected file or file name as needed
+                // (e.g., save the file using StreamWriter)
+
+                saveDataFromAllForms();
+                _model.SaveDataToFile(selectedFilePath.Substring(0, selectedFilePath.Length - 4), "");
+                // Clean up and destroy the dialog
+                fileChooser.Destroy();
+            }
+            else
+            {
+                // Clean up and destroy the dialog
+                fileChooser.Destroy();
+                // Handle the case when the user cancels the dialog
+            }
         }
     }
 }
