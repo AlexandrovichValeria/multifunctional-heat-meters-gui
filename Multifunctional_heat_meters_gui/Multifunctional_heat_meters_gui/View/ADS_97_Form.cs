@@ -45,8 +45,9 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 { "038н00", combo1.ActiveId },
                 { "038н01", spinbutton1.Value.ToString() },
-                { "038н02", spinbutton2.Value.ToString() }
             };
+            if (combo1.ActiveId == "1")
+                result.Add("038н02", spinbutton2.Value.ToString());
 
             return result;
         }

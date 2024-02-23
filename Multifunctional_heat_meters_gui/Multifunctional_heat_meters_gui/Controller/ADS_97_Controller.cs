@@ -20,10 +20,11 @@ namespace Multifunctional_heat_meters_gui.Controller
 
         public override void SaveDataToModel()
         {
-            /*_systemModel.ChangeParameterValue("038н00", _view.AdaptersCountCombobox.Text);
-            _systemModel.ChangeParameterValue("038н01", _view.FirstAdapterNumber.Value.ToString());
-            if (_view.AdaptersCountCombobox.SelectedIndex == 1)
-                _systemModel.ChangeParameterValue("038н02", _view.SecondAdapterNumber.Value.ToString());*/
+            Dictionary<string, string> result = _view.GetADS_97_results();
+            foreach(KeyValuePair<string, string> keyval in result)
+            {
+                _systemModel.ChangeParameterValue(keyval.Key, keyval.Value);
+            }
         }
     }
 }

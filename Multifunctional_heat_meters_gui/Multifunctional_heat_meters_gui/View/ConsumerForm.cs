@@ -8,15 +8,19 @@ using Gtk;
 
 namespace Multifunctional_heat_meters_gui.View
 {
-    class ConsumerForm : WindowForm
+    public class ConsumerForm : WindowForm
     {
         private Builder _builder;
         [Builder.Object]
         private Box button_box;
         [Builder.Object]
+        public Label label1;
+        [Builder.Object]
+        public SpinButton spinbutton1;
+        [Builder.Object]
         private ComboBox combo1;
         [Builder.Object]
-        private ListStore liststore1;
+        private Grid pipeline_grid;
 
         public static ConsumerForm Create(List<int> pipelinesNumbers, int consumerNumber)
         {
@@ -33,7 +37,23 @@ namespace Multifunctional_heat_meters_gui.View
 
             button_box.Add(_backForwardComponent);
 
+            label1.Text = "Потребитель №" + consumerNumber.ToString();
+
+            for (int i = 0; i < pipelinesNumbers.Count; i++)
+            {
+                Label label = new Label("Трубопровод №" + pipelinesNumbers[i].ToString());
+                ComboBoxText comboBox = new ComboBoxText();
+                comboBox.AppendText("Не задействован в данной схеме");
+                comboBox.AppendText("Задействован как подающий");
+                comboBox.AppendText("Задействован как обратный");
+                comboBox.AppendText("Задействован как подпитка или трубопровод ГВС");
+
+                pipeline_grid.Attach(label, 0, i, 1, 1);
+                pipeline_grid.Attach(comboBox, 1, i, 1, 1);
+            }
+
             SetupHandlers();
+            ShowAll();
         }
 
         protected void SetupHandlers()
@@ -44,8 +64,8 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void OnComboChanged(object sender, EventArgs a)
         {
-            Console.WriteLine("AAAAAAAAA");
-            Console.WriteLine(combo1.ActiveId);
+            //Console.WriteLine("AAAAAAAAA");
+            //Console.WriteLine(combo1.ActiveId);
         }
 
         protected void OnLocalDeleteEvent(object sender, DeleteEventArgs a)
