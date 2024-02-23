@@ -27,10 +27,8 @@ namespace Multifunctional_heat_meters_gui
         //private Box main_box;
         [Builder.Object]
         private Box content_box;
-        /*[Builder.Object]
-        private Button back_button;
         [Builder.Object]
-        private Button forward_button;*/
+        private MenuItem save;
 
 #pragma warning restore 649
 
@@ -85,7 +83,6 @@ namespace Multifunctional_heat_meters_gui
             formsBuilder.NewFormCreatedEvent += new EventHandler(formSwitcher.SetEventListenersForForm);
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(menuBuilder.AddNewItemInMenu);
 
-            //paned1.Add1(menu);
             menu_box.PackStart(menu, false, false, 0);
             //content_box.ModifyBg(StateType.Normal, new Gdk.Color(253, 246, 227));
             //content_box.PackStart(subForm1, false, false, 0);
@@ -93,35 +90,53 @@ namespace Multifunctional_heat_meters_gui
             SetupHandlers();
         }
 
-        /// <summary> Sets up the handlers. </summary>
+        private void saveDataFromAllForms()
+        {
+            /*foreach (var form in _allForms)
+            {
+                Controller.Controller controller = null;
+                if (form.FormName.StartsWith("Общесистемные"))
+                {
+                    controller = new Controller.SystemController((View.SystemForm)form, _model);
+                }
+                else if (form.FormName.StartsWith("Потребитель"))
+                {
+                    controller = new Controller.ConsumerController((View.ConsumerForm)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
+                }
+                else if (form.FormName.StartsWith("Теплоноситель"))
+                {
+                    controller = new Controller.CoolantController((View.CoolantSelectionForm)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
+                }
+                else if (form.FormName.StartsWith("Первая настройка трубопровода"))
+                {
+                    controller = new Controller.PipelineController1((View.PipelineSettingsLimits)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
+                }
+                else if (form.FormName.StartsWith("Вторая настройка трубопровода"))
+                {
+                    controller = new Controller.PipelineController2((View.PipelineSettings2Form)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
+                }
+                if (controller != null)
+                    controller.SaveDataToModel();
+            }*/
+        }
+
         protected void SetupHandlers()
         {
             DeleteEvent += OnLocalDeleteEvent;
+            save.Activated += OnSaveButtonActivated;
             //back_button.Clicked += BackButtonClicked;
             //forward_button.Clicked += ForwardButtonClicked;
         }
 
-        /// <summary> Handle Close of Form, Quit Application. </summary>
-        /// <param name="sender"> Source of the event. </param>
-        /// <param name="a">      Event information to send to registered event handlers. </param>
         protected void OnLocalDeleteEvent(object sender, DeleteEventArgs a)
         {
             Application.Quit();
             a.RetVal = true;
         }
 
-        /// <summary> Handle Click of Button. </summary>
-        /// <param name="sender"> Source of the event. </param>
-        /// <param name="a">      Event information to send to registered event handlers. </param>
-        protected void BackButtonClicked(object sender, EventArgs a)
+        protected void OnSaveButtonActivated(object sender, EventArgs a)
         {
-            
+            Console.WriteLine("OnSaveButtonActivated");
         }
-
-        protected void ForwardButtonClicked(object sender, EventArgs a)
-        {
-
-        }
-
     }
 }

@@ -7,12 +7,20 @@ using Gtk;
 
 namespace Multifunctional_heat_meters_gui.View
 {
-    class ADS_97_Form : Dialog
+    public class ADS_97_Form : Dialog
     {
         private Builder _builder;
 
         [Builder.Object]
         private Button button1;
+        [Builder.Object]
+        private ComboBoxText combo1;
+        [Builder.Object]
+        private Label label4;
+        [Builder.Object]
+        private SpinButton spinbutton1;
+        [Builder.Object]
+        private SpinButton spinbutton2;
 
         public static ADS_97_Form Create()
         {
@@ -24,17 +32,47 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
+
+            label4.Hide();
+            spinbutton2.Hide();
+
             SetupHandlers();
+        }
+
+        public Dictionary<string, string> GetADS_97_results()
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>()
+            {
+                { "038н00", combo1.ActiveId },
+                { "038н01", spinbutton1.Value.ToString() },
+                { "038н02", spinbutton2.Value.ToString() }
+            };
+
+            return result;
         }
 
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
             button1.Clicked += OnButton1Click;
+            combo1.Changed += OnComboChanged;
         }
         protected void OnButton1Click(object sender, EventArgs a)
         {
             Hide();
+        }
+        protected void OnComboChanged(object sender, EventArgs a)
+        {
+            if (combo1.ActiveId == "0")
+            {
+                label4.Hide();
+                spinbutton2.Hide();
+            }
+            else
+            {
+                label4.Show();
+                spinbutton2.Show();
+            }
         }
     }
 }
