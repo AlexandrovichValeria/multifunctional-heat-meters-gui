@@ -68,11 +68,6 @@ namespace Multifunctional_heat_meters_gui.View
             
             ContentMenuStore = new TreeStore(typeof(string));
             Model = ContentMenuStore;
-            //Add(tree);
-            //Label label = new Label("AAAAAAAAAAA");
-            //Add(label);
-            //tree.Vexpand = true;
-            //tree.Hexpand = true;
 
             TreeViewColumn topColumn = new TreeViewColumn();
             CellRendererText topCell = new CellRendererText();
@@ -81,12 +76,6 @@ namespace Multifunctional_heat_meters_gui.View
             AppendColumn(topColumn);
 
             topColumn.AddAttribute(topCell, "text", 0);
-
-            //Gtk.TreeIter iter = ContentMenuStore.AppendValues("Общесистемные параметры");
-            //ContentMenuStore.AppendValues(iter, "Fannypack");
-
-            //iter = ContentMenuStore.AppendValues("Настройка трубопроводов");
-            //ContentMenuStore.AppendValues(iter, "Nelly");
 
             ContentMenuStore.AppendValues(deviceName);
             ContentMenuStore.AppendValues("Общесистемные параметры");
@@ -103,8 +92,6 @@ namespace Multifunctional_heat_meters_gui.View
 
             SetupHandlers();
             ShowAll();
-            //Console.WriteLine("label.IsVisible");
-            //Console.WriteLine(label.IsVisible);
         }
 
         public void AddDeepButtonsInMenuByButtonsNumbers(DeepButtonsNames buttonName, List<int> buttonsNumbers)
