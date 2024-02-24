@@ -14,22 +14,22 @@
     </columns>
     <data>
       <row>
-        <col id="0">Resources/sceme0.jpg</col>
+        <col id="0">Resources/scheme0.jpg</col>
       </row>
       <row>
-        <col id="0">Resources/sceme1.jpg</col>
+        <col id="0">Resources/scheme1.jpg</col>
       </row>
       <row>
-        <col id="0">Resources/sceme2.jpg</col>
+        <col id="0">Resources/scheme2.jpg</col>
       </row>
       <row>
-        <col id="0">Resources/sceme3.jpg</col>
+        <col id="0">Resources/scheme3.jpg</col>
       </row>
       <row>
-        <col id="0">Resources/sceme4.jpg</col>
+        <col id="0">Resources/scheme4.jpg</col>
       </row>
       <row>
-        <col id="0">Resources/sceme5.jpg</col>
+        <col id="0">Resources/scheme5.jpg</col>
       </row>
     </data>
   </object>
@@ -42,6 +42,10 @@
       <object class="GtkGrid" id="grid1">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
+        <property name="margin-start">10</property>
+        <property name="margin-end">10</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">10</property>
         <property name="row-spacing">10</property>
         <property name="column-spacing">20</property>
         <child>

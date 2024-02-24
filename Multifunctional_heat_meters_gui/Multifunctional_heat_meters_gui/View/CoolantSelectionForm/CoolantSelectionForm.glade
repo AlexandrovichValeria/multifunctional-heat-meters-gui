@@ -98,6 +98,7 @@
                         <property name="can-focus">False</property>
                         <property name="margin-top">5</property>
                         <property name="margin-bottom">5</property>
+                        <property name="hexpand">True</property>
                         <property name="active-id">0</property>
                         <items>
                           <item id="0" translatable="yes">Вода</item>
@@ -146,6 +147,7 @@
                         <property name="can-focus">False</property>
                         <property name="margin-top">5</property>
                         <property name="margin-bottom">5</property>
+                        <property name="hexpand">True</property>
                         <property name="active-id">0</property>
                         <items>
                           <item id="0" translatable="yes">Нет</item>
@@ -192,6 +194,7 @@
                         <property name="can-focus">False</property>
                         <property name="margin-top">5</property>
                         <property name="margin-bottom">5</property>
+                        <property name="hexpand">True</property>
                         <property name="active-id">0</property>
                         <items>
                           <item id="0" translatable="yes">Датчик объема с числоимпульсным выходным сигналом</item>
@@ -226,7 +229,7 @@
         </child>
       </object>
       <packing>
-        <property name="expand">False</property>
+        <property name="expand">True</property>
         <property name="fill">True</property>
         <property name="position">0</property>
       </packing>

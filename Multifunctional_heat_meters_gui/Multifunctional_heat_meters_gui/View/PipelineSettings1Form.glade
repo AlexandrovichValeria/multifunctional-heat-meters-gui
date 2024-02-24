@@ -47,6 +47,7 @@
           <object class="GtkEntry" id="entry1">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
+            <property name="hexpand">True</property>
             <property name="text" translatable="yes">0</property>
           </object>
           <packing>
@@ -128,6 +129,7 @@
           <object class="GtkEntry" id="entry3">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
+            <property name="hexpand">True</property>
             <property name="text" translatable="yes">0</property>
           </object>
           <packing>
@@ -306,6 +308,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
+            <property name="margin-top">10</property>
             <property name="label" translatable="yes">Константное значение абсолютного давления.</property>
             <property name="wrap">True</property>
           </object>
@@ -453,6 +456,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
+            <property name="margin-top">10</property>
             <property name="label" translatable="yes">Константное значение температуры теплоносителя.</property>
             <property name="wrap">True</property>
           </object>
@@ -474,45 +478,10 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="label25">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
-          </object>
-          <packing>
-            <property name="left-attach">6</property>
-            <property name="top-attach">10</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label26">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
-          </object>
-          <packing>
-            <property name="left-attach">6</property>
-            <property name="top-attach">11</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label27">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
-          </object>
-          <packing>
-            <property name="left-attach">6</property>
-            <property name="top-attach">13</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkEntry" id="entry5">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
+            <property name="hexpand">True</property>
             <property name="text" translatable="yes">0</property>
           </object>
           <packing>
@@ -551,8 +520,8 @@
           <object class="GtkSeparator" id="sep4">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-start">10</property>
-            <property name="margin-end">10</property>
+            <property name="margin-start">15</property>
+            <property name="margin-end">15</property>
           </object>
           <packing>
             <property name="left-attach">7</property>
@@ -564,8 +533,8 @@
           <object class="GtkSeparator" id="sep6">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-start">10</property>
-            <property name="margin-end">10</property>
+            <property name="margin-start">15</property>
+            <property name="margin-end">15</property>
           </object>
           <packing>
             <property name="left-attach">7</property>
@@ -577,8 +546,8 @@
           <object class="GtkSeparator" id="sep3">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-start">10</property>
-            <property name="margin-end">10</property>
+            <property name="margin-start">15</property>
+            <property name="margin-end">15</property>
           </object>
           <packing>
             <property name="left-attach">3</property>
@@ -590,8 +559,8 @@
           <object class="GtkSeparator" id="sep5">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-start">10</property>
-            <property name="margin-end">10</property>
+            <property name="margin-start">15</property>
+            <property name="margin-end">15</property>
           </object>
           <packing>
             <property name="left-attach">3</property>
@@ -603,13 +572,49 @@
           <object class="GtkSeparator" id="sep7">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-start">10</property>
-            <property name="margin-end">10</property>
+            <property name="margin-start">15</property>
+            <property name="margin-end">15</property>
           </object>
           <packing>
             <property name="left-attach">3</property>
             <property name="top-attach">9</property>
             <property name="height">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label25">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">м/час</property>
+          </object>
+          <packing>
+            <property name="left-attach">6</property>
+            <property name="top-attach">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label26">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">м/час</property>
+          </object>
+          <packing>
+            <property name="left-attach">6</property>
+            <property name="top-attach">11</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label27">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">м/час</property>
+          </object>
+          <packing>
+            <property name="left-attach">6</property>
+            <property name="top-attach">13</property>
           </packing>
         </child>
         <child>
@@ -725,7 +730,7 @@
         </child>
       </object>
       <packing>
-        <property name="expand">False</property>
+        <property name="expand">True</property>
         <property name="fill">True</property>
         <property name="position">0</property>
       </packing>

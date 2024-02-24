@@ -30,6 +30,8 @@ namespace Multifunctional_heat_meters_gui
         private Box content_box;
         [Builder.Object]
         private MenuItem save;
+        [Builder.Object]
+        private ScrolledWindow scrolled;
 
 #pragma warning restore 649
 
@@ -84,8 +86,8 @@ namespace Multifunctional_heat_meters_gui
             formsBuilder.NewFormCreatedEvent += new EventHandler(formSwitcher.SetEventListenersForForm);
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(menuBuilder.AddNewItemInMenu);
 
-            menu_box.PackStart(menu, false, false, 0);
-            //content_box.ModifyBg(StateType.Normal, new Gdk.Color(253, 246, 227));
+            scrolled.Add(menu);
+            menu_box.ModifyBg(StateType.Normal, new Gdk.Color(253, 246, 227));
             //content_box.PackStart(subForm1, false, false, 0);
             
             SetupHandlers();

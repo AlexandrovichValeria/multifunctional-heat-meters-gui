@@ -37,7 +37,7 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
@@ -57,6 +57,7 @@
                         <property name="margin-end">10</property>
                         <property name="margin-top">10</property>
                         <property name="margin-bottom">10</property>
+                        <property name="hexpand">True</property>
                         <property name="row-spacing">10</property>
                         <property name="column-spacing">5</property>
                         <child>
@@ -86,6 +87,7 @@
                           <object class="GtkEntry" id="entry1">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="hexpand">True</property>
                             <property name="text" translatable="yes">0</property>
                           </object>
                           <packing>
@@ -97,6 +99,7 @@
                           <object class="GtkLabel" id="label7">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="halign">start</property>
                             <property name="label" translatable="yes">С</property>
                           </object>
                           <packing>
@@ -144,6 +147,7 @@
                           <object class="GtkEntry" id="entry2">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="hexpand">True</property>
                             <property name="text" translatable="yes">0,1</property>
                           </object>
                           <packing>
@@ -155,6 +159,7 @@
                           <object class="GtkLabel" id="label10">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="halign">start</property>
                             <property name="label" translatable="yes">мПа</property>
                           </object>
                           <packing>
@@ -190,6 +195,7 @@
                           <object class="GtkEntry" id="entry4">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="hexpand">True</property>
                             <property name="text" translatable="yes">20</property>
                           </object>
                           <packing>
@@ -201,6 +207,7 @@
                           <object class="GtkLabel" id="label16">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="halign">start</property>
                             <property name="label" translatable="yes">С</property>
                           </object>
                           <packing>
@@ -259,6 +266,7 @@
                           <object class="GtkEntry" id="entry3">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="hexpand">True</property>
                             <property name="text" translatable="yes">760</property>
                           </object>
                           <packing>
@@ -270,6 +278,7 @@
                           <object class="GtkLabel" id="label13">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="halign">start</property>
                             <property name="label" translatable="yes">мм. рт. ст.</property>
                           </object>
                           <packing>
@@ -382,6 +391,7 @@
                           <object class="GtkComboBoxText" id="pressure_combo">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="hexpand">True</property>
                             <items>
                               <item id="0" translatable="yes">СИ (МПа, кПа)</item>
                               <item id="1" translatable="yes">Практическая система (кгс/ см², кгс / м²)</item>
@@ -408,6 +418,7 @@
                           <object class="GtkComboBoxText" id="power_combo">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="hexpand">True</property>
                             <items>
                               <item id="0" translatable="yes">Энергия - ГДж, мощность - Гдж / ч</item>
                               <item id="1" translatable="yes">Энергия - Гкал, мощность - Гкал / ч</item>
@@ -476,6 +487,7 @@
                           <object class="GtkEntry" id="entry5">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="hexpand">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">1</property>
@@ -722,6 +734,7 @@
                           <object class="GtkEntry" id="spec1">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="hexpand">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">1</property>
@@ -796,7 +809,7 @@
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
+                <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>

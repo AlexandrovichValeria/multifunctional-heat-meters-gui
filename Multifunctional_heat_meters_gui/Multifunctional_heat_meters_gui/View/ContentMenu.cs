@@ -7,13 +7,16 @@ using Gtk;
 
 namespace Multifunctional_heat_meters_gui.View
 {
-    public class ContentMenu : WindowForm
+    public class ContentMenu : TreeView
     {
         private Builder _builder;
-        [Builder.Object]
-        private Box box;
+        //[Builder.Object]
+        //private Box box;
+        //[Builder.Object]
+        //private ScrolledWindow ScrolledWindow;
 
         private TreeStore ContentMenuStore;
+        [Builder.Object]
         private TreeView tree;
 
         public event EventHandler FormChanged;
@@ -53,24 +56,29 @@ namespace Multifunctional_heat_meters_gui.View
         public static ContentMenu Create(string deviceName)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.ContentMenu.glade", null);
-            return new ContentMenu(deviceName, builder, builder.GetObject("box").Handle);
+            return new ContentMenu(deviceName, builder, builder.GetObject("tree").Handle);
         }
 
-        protected ContentMenu(string deviceName, Builder builder, IntPtr handle) : base("Меню", builder, handle)
+        protected ContentMenu(string deviceName, Builder builder, IntPtr handle) : base()
         {
             _builder = builder;
             builder.Autoconnect(this);
 
-            tree = new TreeView();
+            //tree = new TreeView();
+            
             ContentMenuStore = new TreeStore(typeof(string));
-            tree.Model = ContentMenuStore;
-            Add(tree);
+            Model = ContentMenuStore;
+            //Add(tree);
+            //Label label = new Label("AAAAAAAAAAA");
+            //Add(label);
+            //tree.Vexpand = true;
+            //tree.Hexpand = true;
 
             TreeViewColumn topColumn = new TreeViewColumn();
             CellRendererText topCell = new CellRendererText();
             topColumn.PackStart(topCell, true);
 
-            tree.AppendColumn(topColumn);
+            AppendColumn(topColumn);
 
             topColumn.AddAttribute(topCell, "text", 0);
 
@@ -86,7 +94,7 @@ namespace Multifunctional_heat_meters_gui.View
             ContentMenuStore.AppendValues("Настройка потребителей");
 
             TreePath path = new TreePath("1");
-            tree.Selection.SelectPath(path);
+            Selection.SelectPath(path);
 
             /*foreach (ContentMenuButton a in _topButtons)
             {
@@ -95,6 +103,8 @@ namespace Multifunctional_heat_meters_gui.View
 
             SetupHandlers();
             ShowAll();
+            //Console.WriteLine("label.IsVisible");
+            //Console.WriteLine(label.IsVisible);
         }
 
         public void AddDeepButtonsInMenuByButtonsNumbers(DeepButtonsNames buttonName, List<int> buttonsNumbers)
@@ -154,7 +164,7 @@ namespace Multifunctional_heat_meters_gui.View
                     }
                 }
             }
-            tree.ExpandAll();
+            ExpandAll();
 
         }
 
@@ -235,7 +245,7 @@ namespace Multifunctional_heat_meters_gui.View
 
                 if (foundName == name)
                 {
-                    tree.Selection.SelectIter(iter);
+                    Selection.SelectIter(iter);
                     break;
                 }
 
@@ -251,7 +261,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void SetupHandlers()
         {
-            tree.Selection.Changed += new EventHandler(ButtonClicked);
+            Selection.Changed += new EventHandler(ButtonClicked);
             //DeleteEvent += OnLocalDeleteEvent;
         }
 
