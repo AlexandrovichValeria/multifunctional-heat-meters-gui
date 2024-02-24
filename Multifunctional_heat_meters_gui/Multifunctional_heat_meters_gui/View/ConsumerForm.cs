@@ -50,9 +50,15 @@ namespace Multifunctional_heat_meters_gui.View
                 comboBox.AppendText("Задействован как подпитка или трубопровод ГВС");
 
                 //comboBox.Hexpand = true;
-
-                pipeline_grid.Attach(label, 0, i, 1, 1);
-                pipeline_grid.Attach(comboBox, 1, i, 1, 1);
+                if (i < 8)
+                {
+                    pipeline_grid.Attach(label, 0, i, 1, 1);
+                    pipeline_grid.Attach(comboBox, 1, i, 1, 1);
+                }
+                else {
+                    pipeline_grid.Attach(label, 2, i-8, 1, 1);
+                    pipeline_grid.Attach(comboBox, 3, i-8, 1, 1);
+                }
             }
 
             SetupHandlers();

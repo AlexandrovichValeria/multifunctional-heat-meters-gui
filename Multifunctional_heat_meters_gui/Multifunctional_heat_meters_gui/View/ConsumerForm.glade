@@ -114,12 +114,18 @@
           </packing>
         </child>
         <child>
-          <!-- n-columns=2 n-rows=1 -->
+          <!-- n-columns=4 n-rows=1 -->
           <object class="GtkGrid" id="pipeline_grid">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="row-spacing">10</property>
             <property name="column-spacing">10</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
             <child>
               <placeholder/>
             </child>
