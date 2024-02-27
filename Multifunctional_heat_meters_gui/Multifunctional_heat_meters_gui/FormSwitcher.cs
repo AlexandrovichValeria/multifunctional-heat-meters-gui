@@ -104,7 +104,7 @@ namespace Multifunctional_heat_meters_gui
 
                 SetForm(previousForm);
                 previousForm.OnLoadForm(e, _appState);
-                //_menu.SelectButtonByName(previousForm.FormName);
+                _menu.SelectButtonByName(previousForm.FormName);
             }
         }
 

@@ -44,7 +44,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void ForwardButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("ForwardButton_Click");
             ForwardButtonClickedEvent?.Invoke(this, e);
         }
     }
