@@ -39,6 +39,7 @@ namespace Multifunctional_heat_meters_gui
             View.WindowForm _form = (View.WindowForm)form;
             _form.NextFormEvent += new EventHandler<EventsArgs.NextFormArgs>(GoAhead);
             _form.PreviousFormEvent += new EventHandler<EventsArgs.NextFormArgs>(GoBack);
+
         }
 
         private LinkedListNode<View.WindowForm> GetFormNodeByName(string name)
@@ -115,7 +116,6 @@ namespace Multifunctional_heat_meters_gui
             if (nextFormNode != null)
             {
                 View.WindowForm nextForm = nextFormNode.Value;
-                Console.WriteLine(nextForm.FormName);
 
                 SetForm(nextForm);
                 nextFormNode.Value.OnLoadForm(e, _appState);

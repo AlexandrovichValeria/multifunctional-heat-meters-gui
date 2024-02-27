@@ -35,6 +35,8 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
+
+            _formIndex = index;
             button_box.Add(_backForwardComponent);
             entry1.IsEditable = false;
             entry1.CanFocus = false;

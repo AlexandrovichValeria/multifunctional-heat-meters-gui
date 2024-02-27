@@ -68,6 +68,8 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
+
+            _formIndex = index;
             button_box.Add(_backForwardComponent);
             SetupHandlers();
         }

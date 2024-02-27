@@ -68,6 +68,7 @@ namespace Multifunctional_heat_meters_gui
             List<int> nextConsumersNumbers = GetNumbersOfOneFromZeroOneString(zeroOneStringConsumers);
             List<int> nextPipelinesNumbers = GetNumbersOfOneFromZeroOneString(zeroOneStringPipelines);
 
+
             List<int> consumersNumbersToAdd = GetFormsNumbersToAdd(_currentConsumersNumbers, nextConsumersNumbers);
             List<int> pipelinesNumbersToAdd = GetFormsNumbersToAdd(_currentPipelinesNumbers, nextPipelinesNumbers);
 
@@ -126,7 +127,6 @@ namespace Multifunctional_heat_meters_gui
 
         private void InsertFormsListInLinkedList(LinkedListNode<View.WindowForm> beforeNode, List<View.WindowForm> forms)
         {
-
             LinkedListNode<View.WindowForm> currentBeforeNode = beforeNode;
 
             foreach (View.WindowForm form in forms)
@@ -139,7 +139,7 @@ namespace Multifunctional_heat_meters_gui
         private void InsertNewPipelinesSettings(List<View.WindowForm> forms)
         {
             LinkedListNode<View.WindowForm> beforeNode = GetBeforeNodeForNumber<View.PipelineSettings2Form>(forms[0].FormIndex);
-
+            
             if (beforeNode != null)
             {
                 InsertFormsListInLinkedList(beforeNode, forms);
@@ -165,7 +165,6 @@ namespace Multifunctional_heat_meters_gui
 
                 currentNode = currentNode.Previous;
             }
-
             return null;
         }
 
