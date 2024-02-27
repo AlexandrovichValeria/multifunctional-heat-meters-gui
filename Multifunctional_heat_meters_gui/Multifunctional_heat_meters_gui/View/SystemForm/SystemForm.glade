@@ -735,6 +735,7 @@
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="hexpand">True</property>
+                            <property name="text" translatable="yes">1050100002</property>
                           </object>
                           <packing>
                             <property name="left-attach">1</property>
@@ -783,6 +784,7 @@
                           <object class="GtkEntry" id="spec2">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="text" translatable="yes">1050029299</property>
                           </object>
                           <packing>
                             <property name="left-attach">1</property>

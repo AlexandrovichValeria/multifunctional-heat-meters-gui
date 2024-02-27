@@ -16,8 +16,8 @@ namespace Multifunctional_heat_meters_gui.View
         //private ScrolledWindow ScrolledWindow;
 
         private TreeStore ContentMenuStore;
-        [Builder.Object]
-        private TreeView tree;
+        //[Builder.Object]
+        //private TreeView tree;
 
         public event EventHandler FormChanged;
 
@@ -85,18 +85,36 @@ namespace Multifunctional_heat_meters_gui.View
             TreePath path = new TreePath("1");
             Selection.SelectPath(path);
 
-            /*foreach (ContentMenuButton a in _topButtons)
+            //Selection.SelectFunction = ThisSelectFunction;
+
+            /*Selection.SelectFunction = (TreeSelection treeselection, ITreeModel model, TreePath local_path, bool current) =>
             {
-                ContentMenuStore.AppendValues(a);
-            }*/
+                return true;
+            };*/
 
             SetupHandlers();
             ShowAll();
         }
 
+        /*private bool ThisSelectFunction(TreeSelection treeselection, ITreeModel model, TreePath path, bool current)
+        {
+            TreeIter iter;
+            model.GetIter(out iter, path);
+            string name = (string)model.GetValue(iter, 0);
+            if (name == "Настройка трубопроводов" || name == "Настройка потребителей")
+            {
+                // Return false to prevent selection
+                Console.WriteLine("name");
+                return false;
+            }
+
+            // Return true to allow selection
+            Console.WriteLine(name);
+            return true;
+        }*/
+
         public void AddDeepButtonsInMenuByButtonsNumbers(DeepButtonsNames buttonName, List<int> buttonsNumbers)
         {
-            Console.WriteLine("AddDeepButtonsInMenuByButtonsNumbers");
             string sectionName = "";
             string title = "";
             if (buttonName == DeepButtonsNames.CONSUMERS)
@@ -229,9 +247,9 @@ namespace Multifunctional_heat_meters_gui.View
             while (found)
             {
                 string foundName = (string)ContentMenuStore.GetValue(iter, 0);
-
                 if (foundName == name)
                 {
+                    //SelectChild(name, iter);
                     Selection.SelectIter(iter);
                     break;
                 }
@@ -246,6 +264,7 @@ namespace Multifunctional_heat_meters_gui.View
             }
         }
 
+
         protected void SetupHandlers()
         {
             Selection.Changed += new EventHandler(ButtonClicked);
@@ -254,17 +273,27 @@ namespace Multifunctional_heat_meters_gui.View
 
         private void ButtonClicked(object sender, EventArgs e)
         {
-            Console.WriteLine("ButtonClicked");
-            //tree.SelectionGet
-            //ITreeModel model;
-            //TreeIter iter;
-            //Console.WriteLine(tree.Selection.GetSelected(out model, out iter));
-            /*if(tree.Selection.GetSelected(out model, out iter))
+            ITreeModel model;
+            TreeIter iter;
+            if(Selection.GetSelected(out model, out iter))
             {
-                string textValue = (string)model.GetValue(iter, 0);
-                Console.WriteLine("Selected row text value: " + textValue);
-            }*/
+                string name = (string)model.GetValue(iter, 0);
+                SelectChild(name, iter);
+            }
             FormChanged?.Invoke(sender, e);
+        }
+
+        public void SelectChild(string name, TreeIter iter)
+        {
+            if (ContentMenuStore.IterHasChild(iter))
+            {
+                TreeIter childIter;
+                bool iterfound = ContentMenuStore.IterChildren(out childIter, iter);
+                SelectChild(name, childIter);
+            }
+            else {
+                Selection.SelectIter(iter); 
+            }
         }
     }
 }
