@@ -127,6 +127,7 @@ namespace Multifunctional_heat_meters_gui.Model
 
             DB.DateBase dataBase = new DB.DateBase(serialNumber, targetDevice, "0");
 
+
             //Внесение общесистемных параметров
             DB.Channel systemWideChannel = new DB.Channel("0", "0", "Common", "0", "системный канал");
             Dictionary<string, Parameter> parameters = _systemWideSettings.Parameters;

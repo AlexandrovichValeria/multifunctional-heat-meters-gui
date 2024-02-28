@@ -65,6 +65,7 @@
     <Compile Include="DB\GroupTag.cs" />
     <Compile Include="DB\Tag.cs" />
     <Compile Include="DB\TagGroup.cs" />
+    <Compile Include="EventsArgs\MeasurementEventArgs.cs" />
     <Compile Include="EventsArgs\MenuEventArgs.cs" />
     <Compile Include="EventsArgs\NextFormArgs.cs" />
     <Compile Include="FormsBuilder.cs" />

@@ -14,6 +14,8 @@ namespace Multifunctional_heat_meters_gui.Model
 
         private string _unitOfMeasurement;
 
+        private string _typeOfMeasurement;
+
         //Название параметра
         public string Name
         {
@@ -34,11 +36,18 @@ namespace Multifunctional_heat_meters_gui.Model
             set { _unitOfMeasurement = value; }
         }
 
-        public Parameter(string name, string value, string unitOfMeasurement)
+        public string TypeOfMeasurement
+        {
+            get { return _typeOfMeasurement; }
+            set { _typeOfMeasurement = value; }
+        }
+
+        public Parameter(string name, string value, string unitOfMeasurement, string typeOfMeasurement)
         {
             _name = name;
             _value = value;
             _unitOfMeasurement = unitOfMeasurement;
+            _typeOfMeasurement = typeOfMeasurement;
         }
     }
 }

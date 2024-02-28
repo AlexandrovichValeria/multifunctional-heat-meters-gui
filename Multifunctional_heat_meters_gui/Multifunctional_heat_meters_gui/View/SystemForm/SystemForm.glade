@@ -498,7 +498,8 @@
                           <object class="GtkLabel" id="label21">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">Т</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">т</property>
                           </object>
                           <packing>
                             <property name="left-attach">2</property>
@@ -597,7 +598,8 @@
                           <object class="GtkLabel" id="label26">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">Т</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">ч</property>
                           </object>
                           <packing>
                             <property name="left-attach">2</property>
@@ -608,7 +610,8 @@
                           <object class="GtkLabel" id="label27">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">Т</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">д</property>
                           </object>
                           <packing>
                             <property name="left-attach">2</property>
@@ -616,10 +619,11 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="label28">
+                          <object class="GtkLabel" id="energy_discr_system">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">Т</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">Гдж</property>
                           </object>
                           <packing>
                             <property name="left-attach">2</property>
@@ -630,7 +634,7 @@
                           <object class="GtkLabel" id="label29">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">Т</property>
+                            <property name="halign">start</property>
                           </object>
                           <packing>
                             <property name="left-attach">2</property>

@@ -43,6 +43,22 @@ namespace Multifunctional_heat_meters_gui.Controller
             }
         }
 
+        public void ChangePowerSystem(object sender, EventsArgs.MeasurementEventArgs args)
+        {
+            //update model
+            _systemModel.ChangePowerMeasurement(args.typeOfMeasurement);
+
+            //update view
+        }
+
+        public void ChangePressureSystem(object sender, EventsArgs.MeasurementEventArgs args)
+        {
+            //update model
+            _systemModel.ChangePressureMeasurement(args.typeOfMeasurement);
+
+            //update view
+        }
+
         public override void SaveDataToModel()
         {
             Dictionary<string, string> currentData = _view.GetSystemWindowData();

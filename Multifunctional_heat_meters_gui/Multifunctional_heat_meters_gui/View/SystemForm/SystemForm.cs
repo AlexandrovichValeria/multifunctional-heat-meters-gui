@@ -59,13 +59,19 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Entry spec2;
 
+        [Builder.Object]
+        private Label energy_discr_system;
+
+
         private ParticipatedPipelinesBlock _participatedPipelinesBlock;
         private ADS_97_Form _ADS_97_Form;
-        //private BackForwardComponent BackForwardButtons;
 
         private int _minPipelinesCountFor_ADS_97 = 0;
         private static string SelectedPipelinesParam = "031н00";
         private Dictionary<string, string> ADS_97_result;
+
+        public event EventHandler<EventsArgs.MeasurementEventArgs> PressureSystemChangedEvent;
+        public event EventHandler<EventsArgs.MeasurementEventArgs> PowerSystemChangedEvent;
 
         public static SystemForm Create(Model.Device device)
         {
@@ -180,8 +186,38 @@ namespace Multifunctional_heat_meters_gui.View
         {
             spec1_checkbox.Clicked += OnSpec1CheckBoxClicked;
             spec2_checkbox.Clicked += OnSpec2CheckBoxClicked;
+            power_combo.Changed += OnPowerComboChanged;
+            pressure_combo.Changed += OnPressureComboChanged;
             //DeleteEvent += OnLocalDeleteEvent;
         }
+
+        protected void OnPowerComboChanged(object sender, EventArgs a)
+        { 
+            if(power_combo.ActiveId == "0")
+            {
+                energy_discr_system.Text = "ГДж";
+            } 
+            else if(power_combo.ActiveId == "1")
+            {
+                energy_discr_system.Text = "Гкал";
+            }
+            else if(power_combo.ActiveId == "2")
+            {
+                energy_discr_system.Text = "МВт*ч";
+            }
+
+            EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(Int32.Parse(power_combo.ActiveId));
+
+            PowerSystemChangedEvent?.Invoke(this, args);
+        }
+
+        protected void OnPressureComboChanged(object sender, EventArgs a)
+        {
+            EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(Int32.Parse(pressure_combo.ActiveId));
+
+            PressureSystemChangedEvent?.Invoke(this, args);
+        }
+
         protected void OnSpec1CheckBoxClicked(object sender, EventArgs a)
         {
             if (spec1_checkbox.Active)

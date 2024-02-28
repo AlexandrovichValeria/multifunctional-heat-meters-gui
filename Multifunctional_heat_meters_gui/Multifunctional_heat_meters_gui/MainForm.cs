@@ -85,6 +85,9 @@ namespace Multifunctional_heat_meters_gui
             MenuBuilder menuBuilder = new MenuBuilder(menu);
             formsBuilder.NewFormCreatedEvent += new EventHandler(formSwitcher.SetEventListenersForForm);
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(menuBuilder.AddNewItemInMenu);
+            
+            subForm1.PowerSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePowerSystem);
+            subForm1.PressureSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePressureSystem);
 
             scrolled.Add(menu);
             menu_box.ModifyBg(StateType.Normal, new Gdk.Color(253, 246, 227));
