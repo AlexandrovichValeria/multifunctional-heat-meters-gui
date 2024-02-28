@@ -9,11 +9,11 @@ namespace Multifunctional_heat_meters_gui
     {
         private Model.Device _device;
         private Model.Model _model;
-        private Controller.SystemController _sysController;
+        //private Controller.SystemController _sysController;
         private bool _exitFlag;
         private LinkedList<View.WindowForm> _allForms = new LinkedList<View.WindowForm>();
+        private ControllerBuilder controllerBuilder;
 
-        /// <summary> Used to load in the glade file resource as a window. </summary>
         private Builder _builder;
         //View.SystemForm form = View.SystemForm.Create();
         //View.ContentMenu menu = View.ContentMenu.Create();
@@ -72,7 +72,7 @@ namespace Multifunctional_heat_meters_gui
             View.SystemForm subForm1 = View.SystemForm.Create(device);
             View.SystemForm subForm2 = View.SystemForm.Create(device);
             
-            _sysController = new Controller.SystemController(subForm1, _model);
+            //_sysController = new Controller.SystemController(subForm1, _model);
 
             _allForms.AddFirst(subForm1);
 
@@ -83,20 +83,22 @@ namespace Multifunctional_heat_meters_gui
             FormsBuilder formsBuilder = new FormsBuilder(_allForms);
             FormSwitcher formSwitcher = new FormSwitcher(menu, appState, content_box);
             MenuBuilder menuBuilder = new MenuBuilder(menu);
+            controllerBuilder = new ControllerBuilder(appState, _model);
+
             formsBuilder.NewFormCreatedEvent += new EventHandler(formSwitcher.SetEventListenersForForm);
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(menuBuilder.AddNewItemInMenu);
             
-            subForm1.PowerSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePowerSystem);
-            subForm1.PressureSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePressureSystem);
+            //subForm1.PowerSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePowerSystem);
+            //subForm1.PressureSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePressureSystem);
 
             scrolled.Add(menu);
-            menu_box.ModifyBg(StateType.Normal, new Gdk.Color(253, 246, 227));
+            //menu_box.ModifyBg(StateType.Normal, new Gdk.Color(253, 246, 227));
             //content_box.PackStart(subForm1, false, false, 0);
             
             SetupHandlers();
         }
 
-        private void saveDataFromAllForms()
+        /*private void saveDataFromAllForms()
         {
             foreach (var form in _allForms)
             {
@@ -124,7 +126,7 @@ namespace Multifunctional_heat_meters_gui
                 if (controller != null)
                     controller.SaveDataToModel();
             }
-        }
+        }*/
 
         protected void SetupHandlers()
         {
@@ -166,7 +168,7 @@ namespace Multifunctional_heat_meters_gui
                 // Process the selected file or file name as needed
                 // (e.g., save the file using StreamWriter)
 
-                saveDataFromAllForms();
+                controllerBuilder.saveDataFromAllForms();
                 _model.SaveDataToFile(selectedFilePath.Substring(0, selectedFilePath.Length - 4), "");
                 // Clean up and destroy the dialog
                 fileChooser.Destroy();

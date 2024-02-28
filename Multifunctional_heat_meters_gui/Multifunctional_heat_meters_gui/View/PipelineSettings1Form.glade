@@ -60,7 +60,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">2</property>
@@ -93,7 +93,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">2</property>
@@ -142,7 +142,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">6</property>
@@ -176,7 +176,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">6</property>
@@ -258,7 +258,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">6</property>
@@ -296,7 +296,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">10</property>
@@ -335,7 +335,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">10</property>
@@ -360,7 +360,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">Признак подключения и тип датчика.</property>
+            <property name="label" translatable="yes">Признак подключения и тип датчика расхода.</property>
             <property name="wrap">True</property>
           </object>
           <packing>
@@ -495,7 +495,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">10</property>
@@ -586,7 +586,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">6</property>
@@ -598,7 +598,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">6</property>
@@ -610,7 +610,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">м/час</property>
+            <property name="label" translatable="yes">м³/час</property>
           </object>
           <packing>
             <property name="left-attach">6</property>
