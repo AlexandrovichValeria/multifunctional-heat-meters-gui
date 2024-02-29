@@ -10,6 +10,7 @@ namespace Multifunctional_heat_meters_gui
     {
 
         public event EventHandler NewFormCreatedEvent;
+        public event EventHandler FormDeletedEvent;
         public event EventHandler<EventsArgs.MenuEventArgs> MenuShouldBeUpdatedEvent;
 
         public enum FormsName
@@ -195,6 +196,7 @@ namespace Multifunctional_heat_meters_gui
             while (currentNode != null)
             {
                 View.WindowForm currentForm = currentNode.Value;
+                //FormDeletedEvent?.Invoke(currentForm, EventArgs.Empty);
 
                 if (formsNumbers.Contains(currentForm.FormIndex) & currentForm is FormType)
                 {

@@ -27,7 +27,7 @@ namespace Multifunctional_heat_meters_gui
             // This enables clear text on Win32, makes the text look a lot less crappy
             setts.XftRgba = "rgb";
             // This enlarges the size of the controls based on the dpi
-            setts.XftDpi = 96;
+            //setts.XftDpi = 96;
             // By Default Anti-aliasing is enabled, if you want to disable it for any reason set this value to 0
             //setts.XftAntialias = 0;
             // Enable text hinting

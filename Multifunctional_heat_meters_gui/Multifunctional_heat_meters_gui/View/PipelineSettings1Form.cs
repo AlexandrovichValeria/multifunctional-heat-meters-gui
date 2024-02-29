@@ -76,6 +76,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         public Dictionary<string, string> GetPipelineSettings1()
         {
+            //Console.WriteLine("GetPipelineSettings1");
             string[] cv1 = { "040", "041", "042" };
 
             string combo1Value = ""; //"042" по умолчанию
@@ -101,6 +102,7 @@ namespace Multifunctional_heat_meters_gui.View
             };
             if (entry4.IsVisible)
             {
+                //Console.WriteLine("IsVisible");
                 res.Add("034н01", $"{entry2.Text}"); //верхний предел по паспорту прибора м3/час или т/час (?)
                 res.Add("034н02", $"{entry1.Text}"); //нижний предел по паспорту прибора м3/час или т/час (?)
                 res.Add("034н06", $"{entry4.Text}"); //верхний предел частоты входного сигнала 
@@ -108,6 +110,7 @@ namespace Multifunctional_heat_meters_gui.View
             }
             else
             {
+                //Console.WriteLine("Impulse");
                 res.Add("034н06", $"{entry2.Text}"); //верхний предел по паспорту прибора 
                 res.Add("034н07", $"{entry1.Text}"); //нижний предел по паспорту прибора
                 res.Add("034н08", $"{entry3.Text}"); //цена импульса - из паспорта прибора м³ или т
