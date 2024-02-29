@@ -84,6 +84,7 @@ namespace Multifunctional_heat_meters_gui.View
             _builder = builder;
             builder.Autoconnect(this);
 
+            
             _ADS_97_Form = ADS_97_Form.Create();
 
             if (device == Model.Device.SPT963)
@@ -244,5 +245,6 @@ namespace Multifunctional_heat_meters_gui.View
                 spec2.CanFocus = false;
             }
         }
+        
     }
 }
