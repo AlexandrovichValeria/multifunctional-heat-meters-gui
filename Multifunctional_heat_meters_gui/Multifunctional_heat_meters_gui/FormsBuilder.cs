@@ -258,8 +258,8 @@ namespace Multifunctional_heat_meters_gui
                 NewFormCreatedEvent?.Invoke(pipelineSettings2Form, EventArgs.Empty);
             }
 
-            EventsArgs.MenuEventArgs args = new EventsArgs.MenuEventArgs(View.ContentMenu.DeepButtonsNames.PIPELINES, pipelinesNumbers);
-            MenuShouldBeUpdatedEvent?.Invoke(this, args);
+            //EventsArgs.MenuEventArgs args = new EventsArgs.MenuEventArgs(View.ContentMenu.DeepButtonsNames.PIPELINES, pipelinesNumbers);
+            //MenuShouldBeUpdatedEvent?.Invoke(this, args);
         }
     }
 }

@@ -113,31 +113,51 @@ namespace Multifunctional_heat_meters_gui.View
             return true;
         }*/
 
-        public void AddDeepButtonsInMenuByButtonsNumbers(DeepButtonsNames buttonName, List<int> buttonsNumbers)
+        public void AddDeepButtonsByNumbers(DeepButtonsNames buttonName, List<int> buttonsNumbers)
         {
             string sectionName = "";
             string title = "";
+            TreePath pathToDelete = new TreePath("");
             if (buttonName == DeepButtonsNames.CONSUMERS)
             {
                 sectionName = "Настройка потребителей";
                 title = "п";
+                pathToDelete = new TreePath("3");
             }
             else if (buttonName == DeepButtonsNames.PIPELINES)
             {
                 sectionName = "Настройка трубопроводов";
                 title = "т";
+                pathToDelete = new TreePath("2");
             }
 
+            //delete current rows
+            TreeIter nodeToDeleteIter;
+            if (ContentMenuStore.GetIter(out nodeToDeleteIter, pathToDelete))
+            {
+                TreeIter childIter;
+                bool iterFound = ContentMenuStore.IterChildren(out childIter, nodeToDeleteIter);
+
+                while (iterFound)
+                {
+                    ContentMenuStore.Remove(ref childIter);
+                    iterFound = ContentMenuStore.IterChildren(out childIter, nodeToDeleteIter);
+                }
+            }
+
+            //add new rows
             foreach (int number in buttonsNumbers)
             {
                 TreeIter nodeIter;
                 bool nodeExists = false;
-                if (ContentMenuStore.GetIter(out nodeIter, new TreePath("2:0")))
+                TreePath temp_path = title == "т" ? new TreePath("2:0") : new TreePath("3:0");
+                
+                if (ContentMenuStore.GetIter(out nodeIter, temp_path))
                 {
                     do
                     {
                         string node_name = ContentMenuStore.GetValue(nodeIter, 0).ToString();
-                        if(node_name == title + number.ToString())
+                        if (node_name == title + number.ToString())
                         {
                             nodeExists = true;
                             break;
@@ -170,7 +190,6 @@ namespace Multifunctional_heat_meters_gui.View
                 }
             }
             ExpandAll();
-
         }
 
         /*private List<ContentMenuButton> GetDeepButtonsByNumbers(DeepButtonsNames deepButtonName, List<int> deepButtonNumbers)
