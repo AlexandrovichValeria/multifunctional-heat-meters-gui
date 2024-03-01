@@ -48,7 +48,7 @@ namespace Multifunctional_heat_meters_gui.Model
             _parameters.Add("104", new Parameter("104", "0", "", "pressure")); // Только для "Имп пар"
             _parameters.Add("105", new Parameter("105", "1", "", "")); // Только для "Имп пар"
             _parameters.Add("109н00", new Parameter("109н00", "0", "т/час", "")); //?
-            _parameters.Add("109н01", new Parameter("109н01", "03402", "", ""));
+            _parameters.Add("109н01", new Parameter("109н01", "03401", "", "")); //Пока неверно
             _parameters.Add("113н00", new Parameter("113н00", "4.5", "кгс/см2", "pressure"));
             _parameters.Add("113н01", new Parameter("113н01", "03202", "", ""));
             _parameters.Add("114н00", new Parameter("114н00", "70", "'C", "temperature"));

@@ -13,22 +13,22 @@
       <column type="GdkPixbuf"/>
     </columns>
     <data>
-      <row>
+      <row id="0">
         <col id="0">Resources/scheme0.jpg</col>
       </row>
-      <row>
+      <row id="1">
         <col id="0">Resources/scheme1.jpg</col>
       </row>
-      <row>
+      <row id="2">
         <col id="0">Resources/scheme2.jpg</col>
       </row>
-      <row>
+      <row id="3">
         <col id="0">Resources/scheme3.jpg</col>
       </row>
-      <row>
+      <row id="4">
         <col id="0">Resources/scheme4.jpg</col>
       </row>
-      <row>
+      <row id="5">
         <col id="0">Resources/scheme5.jpg</col>
       </row>
     </data>
@@ -100,6 +100,9 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="model">liststore1</property>
+            <property name="active">0</property>
+            <property name="id-column">0</property>
+            <property name="active-id">0</property>
             <child>
               <object class="GtkCellRendererPixbuf" id="images_renderer"/>
               <attributes>

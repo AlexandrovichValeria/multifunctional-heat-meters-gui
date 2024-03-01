@@ -88,9 +88,16 @@ namespace Multifunctional_heat_meters_gui.View
             if (combo2.ActiveId != "-1")
                 combo2Value = cv2[Int32.Parse(combo2.ActiveId)];
 
+            string value109н01 = "034";
+            if(_formIndex < 10)
+                value109н01 += "0" + _formIndex.ToString();
+            else
+                value109н01 += _formIndex.ToString();
+
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
                 { "109н00", $"{entry5.Text}" }, //константное значение расхода т/час или м^3/час
+                { "109н01", $"{value109н01}" }, //??
                 { "032н00", $"{combo1Value}" }, //выходной сигнал датчика избыточного давления 
                 { "032н01", $"{entry6.Text}" }, //верхний предел мПА или кгС/см2
                 { "032н08", $"{entry7.Text}" }, //поправка на высоту столба в имп. трубке датч. давления мПА или кгС/см2

@@ -16,11 +16,15 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         public Label label1;
         [Builder.Object]
-        public SpinButton spinbutton1;
+        public SpinButton spin_button1;
         [Builder.Object]
         public ComboBox combo1;
         [Builder.Object]
         private Grid pipeline_grid;
+
+        //private List<ComboBoxText> _comboboxes;
+        //private List<int> _pipelinesNumbers;
+        private Dictionary<int, ComboBoxText> combo_numbers;
 
         public static ConsumerForm Create(List<int> pipelinesNumbers, int consumerNumber)
         {
@@ -30,12 +34,16 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected ConsumerForm(List<int> pipelinesNumbers, int consumerNumber, Builder builder, IntPtr handle) : base($"п{consumerNumber}", builder, handle)
         {
+            Console.WriteLine("ConsumerForm created");
             _builder = builder;
             builder.Autoconnect(this);
 
             _formIndex = consumerNumber;
 
             button_box.Add(_backForwardComponent);
+            //_pipelinesNumbers = pipelinesNumbers;
+            //_comboboxes = new List<ComboBoxText>();
+            combo_numbers = new Dictionary<int, ComboBoxText>();
 
             label1.Text = "Потребитель №" + consumerNumber.ToString();
 
@@ -43,13 +51,16 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 Label label = new Label("Трубопровод №" + pipelinesNumbers[i].ToString());
                 ComboBoxText comboBox = new ComboBoxText();
-                comboBox.Name = "pipeline_combo" + i.ToString();
+                comboBox.Name = "pipeline_combo" + pipelinesNumbers[i].ToString();
                 comboBox.AppendText("Не задействован в данной схеме");
                 comboBox.AppendText("Задействован как подающий");
                 comboBox.AppendText("Задействован как обратный");
                 comboBox.AppendText("Задействован как подпитка или трубопровод ГВС");
 
-                //comboBox.Hexpand = true;
+                comboBox.Active = 0;
+                combo_numbers.Add(pipelinesNumbers[i], comboBox);
+
+                //_comboboxes.Add(comboBox);
                 if (i < 8)
                 {
                     pipeline_grid.Attach(label, 0, i, 1, 1);
@@ -65,6 +76,19 @@ namespace Multifunctional_heat_meters_gui.View
             ShowAll();
         }
 
+        public Dictionary<string, string> GetConsumerSettings()
+        {
+            Dictionary<string, string> res = new Dictionary<string, string>()
+            {
+                { "consumer_id", $"{spin_button1.Value}" },
+                { "accountingSchemeNumber", $"{combo1.Active}" },
+            };
+            foreach(int pipeline_number in combo_numbers.Keys)
+            {
+                res.Add($"{pipeline_number}", $"{combo_numbers[pipeline_number].Active}");
+            }
+            return res;
+        }
         protected void SetupHandlers()
         {
             DeleteEvent += OnLocalDeleteEvent;

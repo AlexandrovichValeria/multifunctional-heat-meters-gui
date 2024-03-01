@@ -24,15 +24,22 @@ namespace Multifunctional_heat_meters_gui.Controller
 
         public override void SaveDataToModel()
         {
-            _consumerModel.Id = (int)_view.spinbutton1.Value;
-            _consumerModel.AccountingSchemeNumber = Int32.Parse(_view.combo1.ActiveId);
+            Dictionary<string, string> data = _view.GetConsumerSettings();
+
+            _consumerModel.Id = Int32.Parse(data["consumer_id"]);
+            _consumerModel.AccountingSchemeNumber = Int32.Parse(data["accountingSchemeNumber"]);
+            //_consumerModel.Id = (int)_view.spin_button1.Value;
+            //_consumerModel.AccountingSchemeNumber = _view.combo1.Active;
             int pipelinesCount = _model.SystemWideSettings.PipelinesCount;
-            for (int i = 0; i < pipelinesCount; i++)
+            for (int i = 0; i < pipelinesCount; i++) //для всех чисел
             {
-                if (_model.GetPipelineByInd(i).Active == false)
+                
+                if (_model.GetPipelineByInd(i).Active == false) // пропускаем неактивные
                     continue;
-                ComboBoxText comboBox = (ComboBoxText)_view._builder.GetObject("pipeline_combo" + (i + 1).ToString());
-                _consumerModel.SetPipelineStatusByInd(i, (Model.Consumer.PipelineStatus)Enum.Parse(typeof(Model.Consumer.PipelineStatus), comboBox.ActiveId));
+                _consumerModel.SetPipelineStatusByInd(i, (Model.Consumer.PipelineStatus)Enum.Parse(typeof(Model.Consumer.PipelineStatus), data[(i+1).ToString()])); //забираем у него значение
+
+                //ComboBoxText comboBox = (ComboBoxText)_view._builder.GetObject("pipeline_combo" + (i + 1).ToString()); //находим комбо по id (номер трубопровода)
+                //_consumerModel.SetPipelineStatusByInd(i, (Model.Consumer.PipelineStatus)Enum.Parse(typeof(Model.Consumer.PipelineStatus), comboBox.ActiveId)); //забираем у него значение
             }
         }
     }
