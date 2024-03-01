@@ -60,6 +60,9 @@ namespace Multifunctional_heat_meters_gui.View
             check1.Clicked += OnCheck1Clicked;
             combo1.Changed += OnComboChanged;
             combo2.Changed += OnComboChanged;
+
+            entry1.Changed += TurnIntoNumber;
+            entry2.Changed += TurnIntoNumber;
             //DeleteEvent += OnLocalDeleteEvent;
         }
 

@@ -183,7 +183,17 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void SetupHandlers()
         {
-            
+            entry1.Changed += TurnIntoNumber;
+            entry2.Changed += TurnIntoNumber;
+            entry3.Changed += TurnIntoNumber;
+            entry4.Changed += TurnIntoNumber;
+            entry5.Changed += TurnIntoNumber;
+            entry6.Changed += TurnIntoNumber;
+            entry7.Changed += TurnIntoNumber;
+            entry8.Changed += TurnIntoNumber;
+            entry9.Changed += TurnIntoNumber;
+            entry10.Changed += TurnIntoNumber;
+            entry11.Changed += TurnIntoNumber;
         }
 
     }

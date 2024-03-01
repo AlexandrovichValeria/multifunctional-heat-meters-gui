@@ -42,36 +42,7 @@ namespace Multifunctional_heat_meters_gui
             
         }
 
-        /*public void SetNewControllerForForm(object form, EventArgs args)
-        {
-            View.WindowForm _form = (View.WindowForm)form;
-            Controller.Controller controller = null;
-            if (_form.FormName.StartsWith("Общесистемные"))
-            {
-                controller = new Controller.SystemController((View.SystemForm)form, _model);
-            }
-            else if (_form.FormName.StartsWith("Потребитель"))
-            {
-                controller = new Controller.ConsumerController((View.ConsumerForm)form, _model, int.Parse(Regex.Match(_form.FormName, @"\d+$").Value) - 1);
-            }
-            else if (_form.FormName.StartsWith("Теплоноситель"))
-            {
-                controller = new Controller.CoolantController((View.CoolantSelectionForm)form, _model, int.Parse(Regex.Match(_form.FormName, @"\d+$").Value) - 1);
-            }
-            else if (_form.FormName.StartsWith("Первая настройка трубопровода"))
-            {
-                controller = new Controller.PipelineController1((View.PipelineSettings1Form)form, _model, int.Parse(Regex.Match(_form.FormName, @"\d+$").Value) - 1);
-            }
-            else if (_form.FormName.StartsWith("Вторая настройка трубопровода"))
-            {
-                controller = new Controller.PipelineController2((View.PipelineSettings2Form)form, _model, int.Parse(Regex.Match(_form.FormName, @"\d+$").Value) - 1);
-            }
-            if (controller != null)
-                _controllers.AddLast(controller);
-
-        }
-
-        public void DeleteControllerForm(object form, EventArgs args)
+        /*public void DeleteControllerForm(object form, EventArgs args)
         {
             View.WindowForm _form = (View.WindowForm)form;
         }*/

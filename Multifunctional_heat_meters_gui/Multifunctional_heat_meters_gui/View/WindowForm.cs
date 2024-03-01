@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gtk;
+using System.Text.RegularExpressions;
 
 namespace Multifunctional_heat_meters_gui.View
 {
@@ -74,6 +75,14 @@ namespace Multifunctional_heat_meters_gui.View
                 EventsArgs.NextFormArgs args = new EventsArgs.NextFormArgs(paramsToNextForm);
                 PreviousFormEvent?.Invoke(this, args);
             //}
+        }
+        protected void TurnIntoNumber(object sender, EventArgs e)
+        {
+            Entry temp = (Entry)sender;
+
+            string text = temp.Text;
+            string numberOnly = Regex.Replace(text, "[^0-9. ,-]", "");
+            temp.Text = numberOnly;
         }
     }
 }

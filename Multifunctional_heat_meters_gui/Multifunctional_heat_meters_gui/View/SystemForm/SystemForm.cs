@@ -189,6 +189,19 @@ namespace Multifunctional_heat_meters_gui.View
             spec2_checkbox.Clicked += OnSpec2CheckBoxClicked;
             power_combo.Changed += OnPowerComboChanged;
             pressure_combo.Changed += OnPressureComboChanged;
+
+            entry1.Changed += TurnIntoNumber;
+            entry2.Changed += TurnIntoNumber;
+            entry3.Changed += TurnIntoNumber;
+            entry4.Changed += TurnIntoNumber;
+            entry5.Changed += TurnIntoNumber;
+            entry6.Changed += TurnIntoNumber;
+            entry7.Changed += TurnIntoNumber;
+            entry8.Changed += TurnIntoNumber;
+            entry9.Changed += TurnIntoNumber;
+            spec1.Changed += TurnIntoNumber;
+            spec2.Changed += TurnIntoNumber;
+
             //DeleteEvent += OnLocalDeleteEvent;
         }
 

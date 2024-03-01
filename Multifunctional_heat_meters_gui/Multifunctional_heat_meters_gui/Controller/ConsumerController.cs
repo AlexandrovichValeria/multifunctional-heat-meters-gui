@@ -31,12 +31,11 @@ namespace Multifunctional_heat_meters_gui.Controller
             //_consumerModel.Id = (int)_view.spin_button1.Value;
             //_consumerModel.AccountingSchemeNumber = _view.combo1.Active;
             int pipelinesCount = _model.SystemWideSettings.PipelinesCount;
-            for (int i = 0; i < pipelinesCount; i++) //для всех чисел
+            for (int i = 0; i < pipelinesCount; i++)
             {
-                
-                if (_model.GetPipelineByInd(i).Active == false) // пропускаем неактивные
+                if (_model.GetPipelineByInd(i).Active == false)
                     continue;
-                _consumerModel.SetPipelineStatusByInd(i, (Model.Consumer.PipelineStatus)Enum.Parse(typeof(Model.Consumer.PipelineStatus), data[(i+1).ToString()])); //забираем у него значение
+                _consumerModel.SetPipelineStatusByInd(i, (Model.Consumer.PipelineStatus)Enum.Parse(typeof(Model.Consumer.PipelineStatus), data[(i+1).ToString()]));
 
                 //ComboBoxText comboBox = (ComboBoxText)_view._builder.GetObject("pipeline_combo" + (i + 1).ToString()); //находим комбо по id (номер трубопровода)
                 //_consumerModel.SetPipelineStatusByInd(i, (Model.Consumer.PipelineStatus)Enum.Parse(typeof(Model.Consumer.PipelineStatus), comboBox.ActiveId)); //забираем у него значение
