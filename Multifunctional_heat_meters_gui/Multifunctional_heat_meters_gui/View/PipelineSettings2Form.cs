@@ -25,6 +25,8 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private ComboBoxText combo2;
 
+        private string lowerlimitValue;
+
         public static PipelineSettings2Form Create(int index)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.PipelineSettings2Form.glade", null);
@@ -35,12 +37,32 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
+            lowerlimitValue = "";
 
             _formIndex = index;
             button_box.Add(_backForwardComponent);
-            entry1.IsEditable = false;
-            entry1.CanFocus = false;
+            entry1.Sensitive = false;
+            entry1.Text = lowerlimitValue;
             SetupHandlers();
+        }
+        public override void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
+        {
+            Console.WriteLine("OnLoadForm");
+            if (paramsFromPreviousForm == null)
+            {
+                return;
+            }
+
+            if (paramsFromPreviousForm.Params.ContainsKey("lowLimit"))
+            {
+                Console.WriteLine("Contains");
+                Console.WriteLine(paramsFromPreviousForm.Params["lowLimit"]);
+                lowerlimitValue = paramsFromPreviousForm.Params["lowLimit"];
+                entry1.Text = lowerlimitValue;
+            }
+            else
+                Console.WriteLine("Doesn't contain");
+
         }
 
         public Dictionary<string, string> GetPipelineSettings2()
@@ -89,12 +111,12 @@ namespace Multifunctional_heat_meters_gui.View
         {
             if (check1.Active)
             {
-                entry1.IsEditable = true;
+                entry1.Sensitive = true;
                 entry1.CanFocus = true;
             }
             else
             {
-                entry1.IsEditable = false;
+                entry1.Sensitive = false;
                 entry1.CanFocus = false;
             }
         }

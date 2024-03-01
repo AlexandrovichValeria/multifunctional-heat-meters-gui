@@ -162,6 +162,21 @@ namespace Multifunctional_heat_meters_gui.View
             }
         }
 
+        protected override bool IsAbleToGoToNext()
+        {
+            string result = GetPipelineSettings1().ContainsKey("034н02") ? GetPipelineSettings1()["034н02"] : "0";
+            if ("" == "")
+            {
+                paramsToNextForm = new Dictionary<string, string>()
+                {
+                    { "lowLimit", result }
+                };
+                return true;
+            }
+
+            return false;
+        }
+
         public override void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
         {
             if (paramsFromPreviousForm == null)

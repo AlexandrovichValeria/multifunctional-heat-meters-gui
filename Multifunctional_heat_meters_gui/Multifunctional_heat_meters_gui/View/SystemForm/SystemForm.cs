@@ -21,21 +21,21 @@ namespace Multifunctional_heat_meters_gui.View
         private ComboBoxText power_combo;
 
         [Builder.Object]
-        private Entry entry1;
+        private Entry const_entry1;
         [Builder.Object]
-        private Entry entry2;
+        private Entry const_entry2;
         [Builder.Object]
-        private Entry entry3;
+        private Entry const_entry3;
         [Builder.Object]
-        private Entry entry4;
+        private Entry const_entry4;
         [Builder.Object]
-        private CheckButton check1;
+        private CheckButton sensor_check1;
         [Builder.Object]
-        private CheckButton check2;
+        private CheckButton sensor_check2;
         [Builder.Object]
-        private CheckButton check3;
+        private CheckButton sensor_check3;
         [Builder.Object]
-        private CheckButton check4;
+        private CheckButton sensor_check4;
         [Builder.Object]
         private CheckButton check5;
 
@@ -95,10 +95,11 @@ namespace Multifunctional_heat_meters_gui.View
 
             CalculateMinPipelinesCountForm_ADS_97(device);
             button_box.Add(_backForwardComponent);
-            spec1.IsEditable = false;
+            spec1.Sensitive = false;
             spec1.CanFocus = false;
-            spec2.IsEditable = false;
+            spec2.Sensitive = false;
             spec2.CanFocus = false;
+
 
             SetupHandlers();
         }
@@ -123,14 +124,14 @@ namespace Multifunctional_heat_meters_gui.View
             result.Add("003", spec1.Text);
             result.Add("004", spec2.Text);
 
-            result.Add("035н00", entry1.Text);
-            result.Add("035н01", check1.Active ? "1" : "0");
-            result.Add("036н00", entry2.Text);
-            result.Add("036н01", check2.Active ? "1" : "0");
-            result.Add("037н00", entry3.Text);
-            result.Add("037н01", check3.Active ? "1" : "0");
-            result.Add("040н00", entry4.Text);
-            result.Add("040н01", check4.Active ? "1" : "0");
+            result.Add("035н00", const_entry1.Text);
+            result.Add("035н01", sensor_check1.Active ? "1" : "0");
+            result.Add("036н00", const_entry2.Text);
+            result.Add("036н01", sensor_check2.Active ? "1" : "0");
+            result.Add("037н00", const_entry3.Text);
+            result.Add("037н01", sensor_check3.Active ? "1" : "0");
+            result.Add("040н00", const_entry4.Text);
+            result.Add("040н01", sensor_check4.Active ? "1" : "0");
 
             result.Add("CurrentTimeAndDate", check5.Active ? "1" : "0");
             return result;
@@ -138,19 +139,11 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected override void OnNextFormAction()
         {
-            /*Console.WriteLine("SystemData");
-            Dictionary<string, string> dic = GetSystemWindowData();
-            foreach (KeyValuePair<string, string> kvp in dic)
-            {
-                Console.WriteLine($"{kvp.Key}, {kvp.Value}");
-            }*/
-
             string zeroOneStringPipelines = GetParamFromWindow(SelectedPipelinesParam);
             int countSelectedPipelines = (zeroOneStringPipelines != null) ? GetPipelinesCountByOneZeroString(zeroOneStringPipelines) : 0;
             if (countSelectedPipelines > _minPipelinesCountFor_ADS_97)
             {
                 _ADS_97_Form.Show();
-                //MessageDialog dialog = new MessageDialog(_ADS_97_Form, DialogFlags.DestroyWithParent, MessageType.Question, ButtonsType.YesNo, "Dialog text");
             }
         }
 
@@ -183,6 +176,42 @@ namespace Multifunctional_heat_meters_gui.View
             }
         }
 
+        /*
+         public override void OnLoadForm(EventsArgs.NextFormArgs e, AppState appState)
+        {
+            if(appState.IsAllPipelinesFilledOut())
+            {
+                _systemWindow.EnableSensorsSettings();
+            } else
+            {
+                _systemWindow.DisableSensorsSettings();
+            }
+        }*/
+
+        public void EnableSensorsSettings()
+        {
+            const_entry1.Sensitive = true;
+            const_entry2.Sensitive = true;
+            const_entry3.Sensitive = true;
+            const_entry4.Sensitive = true;
+            sensor_check1.Sensitive = true;
+            sensor_check2.Sensitive = true;
+            sensor_check3.Sensitive = true;
+            sensor_check4.Sensitive = true;
+        }
+
+        public void DisableSensorsSettings()
+        {
+            const_entry1.Sensitive = false;
+            const_entry2.Sensitive = false;
+            const_entry3.Sensitive = false;
+            const_entry4.Sensitive = false;
+            sensor_check1.Sensitive = false;
+            sensor_check2.Sensitive = false;
+            sensor_check3.Sensitive = false;
+            sensor_check4.Sensitive = false;
+        }
+
         protected void SetupHandlers()
         {
             spec1_checkbox.Clicked += OnSpec1CheckBoxClicked;
@@ -190,10 +219,10 @@ namespace Multifunctional_heat_meters_gui.View
             power_combo.Changed += OnPowerComboChanged;
             pressure_combo.Changed += OnPressureComboChanged;
 
-            entry1.Changed += TurnIntoNumber;
-            entry2.Changed += TurnIntoNumber;
-            entry3.Changed += TurnIntoNumber;
-            entry4.Changed += TurnIntoNumber;
+            const_entry1.Changed += TurnIntoNumber;
+            const_entry2.Changed += TurnIntoNumber;
+            const_entry3.Changed += TurnIntoNumber;
+            const_entry4.Changed += TurnIntoNumber;
             entry5.Changed += TurnIntoNumber;
             entry6.Changed += TurnIntoNumber;
             entry7.Changed += TurnIntoNumber;
@@ -236,12 +265,12 @@ namespace Multifunctional_heat_meters_gui.View
         {
             if (spec1_checkbox.Active)
             {
-                spec1.IsEditable = true;
+                spec1.Sensitive = true;
                 spec1.CanFocus = true;
             }
             else
             {
-                spec1.IsEditable = false;
+                spec1.Sensitive = false;
                 spec1.CanFocus = false;
             }
         }
@@ -249,12 +278,12 @@ namespace Multifunctional_heat_meters_gui.View
         {
             if (spec2_checkbox.Active)
             {
-                spec2.IsEditable = true;
+                spec2.Sensitive = true;
                 spec2.CanFocus = true;
             }
             else
             {
-                spec2.IsEditable = false;
+                spec2.Sensitive = false;
                 spec2.CanFocus = false;
             }
         }

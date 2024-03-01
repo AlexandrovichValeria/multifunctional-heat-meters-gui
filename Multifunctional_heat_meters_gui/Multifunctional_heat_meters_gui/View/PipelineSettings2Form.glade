@@ -142,7 +142,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="margin-start">20</property>
-                <property name="editable">False</property>
+                <property name="sensitive">False</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
