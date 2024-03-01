@@ -86,6 +86,7 @@ namespace Multifunctional_heat_meters_gui
             controllerBuilder = new ControllerBuilder(appState, _model);
 
             formsBuilder.NewFormCreatedEvent += new EventHandler(formSwitcher.SetEventListenersForForm);
+            formsBuilder.NewFormCreatedEvent += new EventHandler(SetupHandlerForSaveButton);
             //formsBuilder.NewFormCreatedEvent += new EventHandler(controllerBuilder.SetNewControllerForForm);
             //formsBuilder.FormDeletedEvent += new EventHandler(controllerBuilder.DeleteControllerForm);
 
@@ -102,43 +103,26 @@ namespace Multifunctional_heat_meters_gui
             SetupHandlers();
         }
 
-        /*private void saveDataFromAllForms()
-        {
-            foreach (var form in _allForms)
-            {
-                Controller.Controller controller = null;
-                if (form.FormName.StartsWith("Общесистемные"))
-                {
-                    controller = new Controller.SystemController((View.SystemForm)form, _model);
-                }
-                else if (form.FormName.StartsWith("Потребитель"))
-                {
-                    controller = new Controller.ConsumerController((View.ConsumerForm)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
-                }
-                else if (form.FormName.StartsWith("Теплоноситель"))
-                {
-                    controller = new Controller.CoolantController((View.CoolantSelectionForm)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
-                }
-                else if (form.FormName.StartsWith("Первая настройка трубопровода"))
-                {
-                    controller = new Controller.PipelineController1((View.PipelineSettings1Form)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
-                }
-                else if (form.FormName.StartsWith("Вторая настройка трубопровода"))
-                {
-                    controller = new Controller.PipelineController2((View.PipelineSettings2Form)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
-                }
-                if (controller != null)
-                    controller.SaveDataToModel();
-            }
-        }*/
-
         protected void SetupHandlers()
         {
             DeleteEvent += OnLocalDeleteEvent;
             save.Activated += OnSaveButtonActivated;
+            foreach (View.WindowForm form in _allForms)
+            {
+                form.SaveFormEvent += new EventHandler(OnSaveButtonActivated);
+            }
             //back_button.Clicked += BackButtonClicked;
             //forward_button.Clicked += ForwardButtonClicked;
         }
+
+        protected void SetupHandlerForSaveButton(object form, EventArgs a)
+        {
+            View.WindowForm tempForm = (View.WindowForm)form;
+
+            tempForm.SaveFormEvent += new EventHandler(OnSaveButtonActivated);
+            
+        }
+
 
         protected void OnLocalDeleteEvent(object sender, DeleteEventArgs a)
         {
@@ -148,7 +132,6 @@ namespace Multifunctional_heat_meters_gui
 
         protected void OnSaveButtonActivated(object sender, EventArgs a)
         {
-            Console.WriteLine("OnSaveButtonActivated");
             FileChooserDialog fileChooser = new FileChooserDialog(
             "Сохранение базы данных", // Dialog title
             null, // Parent window (can be null)

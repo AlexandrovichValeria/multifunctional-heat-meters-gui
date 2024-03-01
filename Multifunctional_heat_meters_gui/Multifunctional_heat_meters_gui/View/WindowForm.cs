@@ -14,6 +14,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         public event EventHandler<EventsArgs.NextFormArgs> NextFormEvent;
         public event EventHandler<EventsArgs.NextFormArgs> PreviousFormEvent;
+        public event EventHandler SaveFormEvent;
 
         protected string _formName;
         protected int _formIndex = 0;
@@ -45,6 +46,7 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _backForwardComponent.BackButtonClickedEvent += new EventHandler(GoToPreviousForm);
             _backForwardComponent.ForwardButtonClickedEvent += new EventHandler(GoToNextForm);
+            _backForwardComponent.SaveButtonClickedEvent += new EventHandler(SaveData);
         }
 
         public virtual void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
@@ -83,6 +85,11 @@ namespace Multifunctional_heat_meters_gui.View
             string text = temp.Text;
             string numberOnly = Regex.Replace(text, "[^0-9. ,-]", "");
             temp.Text = numberOnly;
+        }
+
+        private void SaveData(object sender, EventArgs e)
+        {
+            SaveFormEvent?.Invoke(this, e);
         }
     }
 }
