@@ -77,6 +77,14 @@ namespace Multifunctional_heat_meters_gui.View
             return res;
         }
 
+        public override bool IsFormFilledOut()
+        {
+            Dictionary<string, string> pars = GetPipelineSettings2();
+            if (pars["115н00"] == "" || pars["115н01"] == "" || pars["120"] == "")
+                return false;
+            return true;
+        }
+
         protected void SetupHandlers()
         {
             check1.Clicked += OnCheck1Clicked;

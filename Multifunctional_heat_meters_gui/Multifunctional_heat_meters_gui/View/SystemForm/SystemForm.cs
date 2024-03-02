@@ -96,10 +96,8 @@ namespace Multifunctional_heat_meters_gui.View
             CalculateMinPipelinesCountForm_ADS_97(device);
             button_box.Add(_backForwardComponent);
             spec1.Sensitive = false;
-            spec1.CanFocus = false;
             spec2.Sensitive = false;
-            spec2.CanFocus = false;
-
+            DisableSensorsSettings();
 
             SetupHandlers();
         }
@@ -176,17 +174,17 @@ namespace Multifunctional_heat_meters_gui.View
             }
         }
 
-        /*
+        
          public override void OnLoadForm(EventsArgs.NextFormArgs e, AppState appState)
         {
-            if(appState.IsAllPipelinesFilledOut())
+            if(appState.AreAllPipelinesFilledOut())
             {
-                _systemWindow.EnableSensorsSettings();
+                EnableSensorsSettings();
             } else
             {
-                _systemWindow.DisableSensorsSettings();
+                DisableSensorsSettings();
             }
-        }*/
+        }
 
         public void EnableSensorsSettings()
         {

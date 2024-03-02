@@ -82,6 +82,8 @@ namespace Multifunctional_heat_meters_gui
             {
                 textValue = (string)model.GetValue(iter, 0);
             }
+            if (textValue == "Настройка датчиков")
+                textValue = "Общесистемные параметры";
 
             LinkedListNode<View.WindowForm> formNode = GetFormNodeByName(textValue);
             _head = formNode;
@@ -120,6 +122,14 @@ namespace Multifunctional_heat_meters_gui
                 SetForm(nextForm);
                 nextFormNode.Value.OnLoadForm(e, _appState);
                 _menu.SelectButtonByName(nextForm.FormName);
+            }
+            else 
+            {
+                View.WindowForm nextForm = _forms.First.Value;
+
+                SetForm(nextForm);
+                nextForm.OnLoadForm(e, _appState);
+                _menu.SelectButtonByName("Настройка датчиков");
             }
         }
     }

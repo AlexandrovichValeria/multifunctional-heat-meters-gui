@@ -49,6 +49,11 @@ namespace Multifunctional_heat_meters_gui.View
             _backForwardComponent.SaveButtonClickedEvent += new EventHandler(SaveData);
         }
 
+        public virtual bool IsFormFilledOut()
+        {
+            return true;
+        }
+
         public virtual void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
         {
 

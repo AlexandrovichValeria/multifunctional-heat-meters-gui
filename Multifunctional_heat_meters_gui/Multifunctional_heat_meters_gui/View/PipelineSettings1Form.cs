@@ -177,6 +177,25 @@ namespace Multifunctional_heat_meters_gui.View
             return false;
         }
 
+        public override bool IsFormFilledOut()
+        {
+            Dictionary<string, string> pars = GetPipelineSettings1();
+            if (pars["109н00"] == "" || pars["032н00"] == "" || pars["032н01"] == "" || pars["032н08"] == "" ||
+                pars["113н00"] == "" || pars["033н00"] == "" || pars["033н01"] == "" || pars["033н02"] == "" ||
+                pars["114н00"] == "")
+                return false;
+
+            if (pars.ContainsKey("034н01"))
+            {
+                if (pars["034н01"] == "" || pars["034н02"] == "" || pars["034н06"] == "" || pars["034н07"] == "")
+                    return false;
+                return true;
+            }
+            if (pars["034н06"] == "" || pars["034н07"] == "" || pars["034н08"] == "")
+                return false;
+            return true;
+        }
+
         public override void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
         {
             if (paramsFromPreviousForm == null)

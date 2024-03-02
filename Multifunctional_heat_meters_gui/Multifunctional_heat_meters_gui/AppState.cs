@@ -17,12 +17,12 @@ namespace Multifunctional_heat_meters_gui
             return _forms;
         }
 
-        /*public bool IsAllPipelinesFilledOut()
+        public bool AreAllPipelinesFilledOut()
         {
-            return IsAllWindowsFilledOut<View.CoolantSelectionForm>() & IsAllWindowsFilledOut<View.PipelineSettingsLimits>() & IsAllWindowsFilledOut<View.PipelineSettings2>();
-        }*/
+            return AreAllWindowsFilledOut<View.CoolantSelectionForm>() & AreAllWindowsFilledOut<View.PipelineSettings2Form>() & AreAllWindowsFilledOut<View.PipelineSettings2Form>();
+        }
 
-        /*public bool IsAllWindowsFilledOut<Window>()
+        public bool AreAllWindowsFilledOut<Window>()
         {
             LinkedListNode<View.WindowForm> currentNode = _forms.First;
 
@@ -49,6 +49,6 @@ namespace Multifunctional_heat_meters_gui
             }
 
             return true;
-        }*/
+        }
     }
 }

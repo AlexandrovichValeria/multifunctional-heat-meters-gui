@@ -81,6 +81,7 @@ namespace Multifunctional_heat_meters_gui.View
             ContentMenuStore.AppendValues("Общесистемные параметры");
             ContentMenuStore.AppendValues("Настройка трубопроводов");
             ContentMenuStore.AppendValues("Настройка потребителей");
+            ContentMenuStore.AppendValues("Настройка датчиков");
 
             TreePath path = new TreePath("1");
             Selection.SelectPath(path);

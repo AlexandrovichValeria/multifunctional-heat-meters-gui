@@ -95,6 +95,32 @@ namespace Multifunctional_heat_meters_gui.View
             return false;
         }
 
+        public override bool IsFormFilledOut()
+        {
+            Dictionary<string, string> pars = GetCoolantSettings();
+            if (pars["101"] == "" || pars["102н00"] == "" || pars["034н00"] == "000")
+                return false;
+
+            if (pars["101"] == "0")
+                return true;
+
+            if (pars["101"] == "1" || pars["101"] == "2")
+            {
+                if (pars["104"] == "" || pars["105"] == "")
+                    return false;
+                return true;
+            }
+
+            if (pars["101"] == "3")
+            {
+                if (pars["125н00"] == "" || pars["125н01"] == "" || pars["125н02"] == "" || pars["125н03"] == "" ||
+                    pars["125н04"] == "" || pars["125н05"] == "" || pars["125н06"] == "" || pars["125н07"] == "")
+                    return false;
+                return true;
+            }
+            return false;
+        }
+
         protected void SetupHandlers()
         {
             combo1.Changed += Combo1ChangedEvent;
