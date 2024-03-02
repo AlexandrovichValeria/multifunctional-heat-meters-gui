@@ -381,6 +381,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="label" translatable="yes">Давление/перепады давления</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>
@@ -408,6 +409,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="label" translatable="yes">Тепловая энергия/мощность</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>
@@ -477,6 +479,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="label" translatable="yes">Дискретность показаний массы теплоносителя</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>
@@ -512,6 +515,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="label" translatable="yes">Дискретность показаний тепловой энергии</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>
@@ -524,6 +528,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="label" translatable="yes">Расчетный час для формирования архивов за сутки</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>
@@ -536,6 +541,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="label" translatable="yes">Расчетный день для формирования архивов за сутки</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>
@@ -548,6 +554,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="label" translatable="yes">Номер прибора для идентификации внешними системами</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>
@@ -661,6 +668,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">end</property>
                             <property name="label" translatable="yes">При записи НБД в прибор ввести текущие время/дату?</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>
@@ -702,6 +710,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">end</property>
                             <property name="label" translatable="yes">Изменить Спецификация-1 внешнего оборудования?</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>
@@ -752,6 +761,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">end</property>
                             <property name="label" translatable="yes">Изменить Спецификация-2 внешнего оборудования?</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>
