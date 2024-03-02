@@ -83,5 +83,14 @@ namespace Multifunctional_heat_meters_gui.View
             };
         }
 
+        public bool SomeCheckboxesAreChecked()
+        {
+            string emptyPipelines = new string('0', _pipelinesResult.Length) ;
+            string emptyConsumers = new string('0', _consumersResult.Length);
+            if (_pipelinesResult == emptyPipelines || _consumersResult == emptyConsumers)
+                return false;
+            return true;
+        }
+
     }
 }

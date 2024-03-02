@@ -68,6 +68,7 @@ namespace Multifunctional_heat_meters_gui.View
                 { "034н00", $"{0}{Int32.Parse(combo3.ActiveId) + 1}{0}" }, //тип датчика
             };
 
+            //if(combo1.ActiveId == "0")
             Dictionary<string, string> gasSettings = gas_block.GetGasSettings();
             Dictionary<string, string> liquidSettings = liquid_block.GetLiquidSettings();
 
@@ -81,7 +82,8 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected override bool IsAbleToGoToNext()
         {
-            Console.WriteLine("Coolant IsAbleToGoToNext");
+            if (!IsFormFilledOut())
+                return false;
             string result = GetCoolantSettings()[SensorParamName];
             result = result.Substring(0, result.Length - 1);
             if (result != "")

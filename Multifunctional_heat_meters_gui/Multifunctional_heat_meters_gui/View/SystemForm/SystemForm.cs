@@ -135,6 +135,19 @@ namespace Multifunctional_heat_meters_gui.View
             return result;
         }
 
+        public override bool IsFormFilledOut()
+        {
+            if (!_participatedPipelinesBlock.SomeCheckboxesAreChecked())
+                return false;
+            Dictionary<string, string> pars = GetSystemWindowData();
+            if (pars["030н00"] == "" || pars["030н01"] == "" || pars["030н02"] == "" || pars["030н02"] == ""
+                || pars["024"] == "" || pars["025"] == "" || pars["008"] == "" || pars["003"] == "" || pars["004"] == "" 
+                || pars["035н00"] == "" || pars["036н00"] == "" || pars["037н00"] == "" || pars["040н00"] == ""
+                || pars["031н00"] == "" || pars["031н01"] == "")
+                return false;
+            return true;
+        }
+
         protected override void OnNextFormAction()
         {
             string zeroOneStringPipelines = GetParamFromWindow(SelectedPipelinesParam);
@@ -145,10 +158,10 @@ namespace Multifunctional_heat_meters_gui.View
             }
         }
 
-        /*protected override bool IsAbleToGoToNext()
+        protected override bool IsAbleToGoToNext()
         {
-            return !_ADS_97_Form.Visible;
-        }*/
+            return IsFormFilledOut();
+        }
 
         private int GetPipelinesCountByOneZeroString(string oneZeroString)
         {
@@ -185,6 +198,7 @@ namespace Multifunctional_heat_meters_gui.View
                 DisableSensorsSettings();
             }
         }
+
 
         public void EnableSensorsSettings()
         {

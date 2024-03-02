@@ -77,6 +77,11 @@ namespace Multifunctional_heat_meters_gui.View
             return res;
         }
 
+        protected override bool IsAbleToGoToNext()
+        {
+            return IsFormFilledOut();
+        }
+
         public override bool IsFormFilledOut()
         {
             Dictionary<string, string> pars = GetPipelineSettings2();

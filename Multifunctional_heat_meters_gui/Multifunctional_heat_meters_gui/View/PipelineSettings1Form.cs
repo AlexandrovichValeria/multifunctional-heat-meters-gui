@@ -164,6 +164,8 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected override bool IsAbleToGoToNext()
         {
+            if (!IsFormFilledOut())
+                return false;
             string result = GetPipelineSettings1().ContainsKey("034н02") ? GetPipelineSettings1()["034н02"] : "0";
             if ("" == "")
             {
