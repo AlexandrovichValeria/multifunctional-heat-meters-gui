@@ -143,7 +143,8 @@ namespace Multifunctional_heat_meters_gui
             );
 
             FileFilter filter = new FileFilter();
-            filter.AddPattern("Configurator DB files|*.xdb");
+            filter.Name = "Configurator DB files";
+            filter.AddPattern("*.xdb");
             fileChooser.AddFilter(filter);
 
             // Run the dialog and check the response
@@ -156,7 +157,7 @@ namespace Multifunctional_heat_meters_gui
                 // (e.g., save the file using StreamWriter)
 
                 controllerBuilder.saveDataFromAllForms();
-                _model.SaveDataToFile(selectedFilePath.Substring(0, selectedFilePath.Length - 4), "");
+                _model.SaveDataToFile(selectedFilePath, "");
                 // Clean up and destroy the dialog
                 fileChooser.Destroy();
             }
