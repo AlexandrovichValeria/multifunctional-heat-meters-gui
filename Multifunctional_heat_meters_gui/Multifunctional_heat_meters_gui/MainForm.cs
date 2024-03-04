@@ -133,6 +133,10 @@ namespace Multifunctional_heat_meters_gui
 
         protected void OnSaveButtonActivated(object sender, EventArgs a)
         {
+            MessageDialog dialog = new MessageDialog(null, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "Имя файла и путь к нему не должны содержать кириллицу.");
+            dialog.Run();
+            dialog.Destroy();
+
             FileChooserDialog fileChooser = new FileChooserDialog(
             "Сохранение базы данных", // Dialog title
             null, // Parent window (can be null)
@@ -150,10 +154,19 @@ namespace Multifunctional_heat_meters_gui
 
             // Run the dialog and check the response
             ResponseType response = (ResponseType)fileChooser.Run();
+            
             if (response == ResponseType.Accept)
             {
                 // Get the selected file or file name
                 string selectedFilePath = fileChooser.Filename;
+
+                //Console.WriteLine(fileChooser.File.LoadContents(true));
+                /*byte[] content = content.Select(Convert.ToByte).ToArray();
+                string contentUtf8 = Encoding.UTF8.GetString(content);*/
+
+                /*byte[] fnb = Encoding.GetEncoding("UTF-16").GetBytes(selectedFilePath);
+                selectedFilePath = Encoding.GetEncoding("UTF-16").GetString(fnb);*/
+
                 /*Encoding encoding = Encoding.GetEncoding("UTF-8"); // Replace with the desired encoding
                 byte[] bytes = encoding.GetBytes(selectedFilePath);
                 string convertedFilename = encoding.GetString(bytes);

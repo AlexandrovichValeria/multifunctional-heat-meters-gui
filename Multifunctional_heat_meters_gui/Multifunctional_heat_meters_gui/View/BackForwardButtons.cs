@@ -10,6 +10,8 @@ namespace Multifunctional_heat_meters_gui.View
     public class BackForwardButtons : Box
     {
         private Builder _builder;
+        [Builder.Object]
+        private Button forward_button;
 
         public static BackForwardButtons Create()
         {
@@ -23,6 +25,16 @@ namespace Multifunctional_heat_meters_gui.View
             builder.Autoconnect(this);
             SetupHandlers();
         }
+
+        public void SetForwardButtonSensitive()
+        {
+            forward_button.Sensitive = true;
+        }
+        public void SetForwardButtonInsensitive()
+        {
+            forward_button.Sensitive = false;
+        }
+
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
