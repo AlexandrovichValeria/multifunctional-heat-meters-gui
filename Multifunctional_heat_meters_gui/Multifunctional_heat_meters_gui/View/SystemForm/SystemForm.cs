@@ -73,6 +73,9 @@ namespace Multifunctional_heat_meters_gui.View
         public event EventHandler<EventsArgs.MeasurementEventArgs> PressureSystemChangedEvent;
         public event EventHandler<EventsArgs.MeasurementEventArgs> PowerSystemChangedEvent;
 
+        private int PressureMeasure;
+        private int PowerMeasure;
+
         public static SystemForm Create(Model.Device device)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.SystemForm.SystemForm.glade", null);
@@ -84,7 +87,8 @@ namespace Multifunctional_heat_meters_gui.View
             _builder = builder;
             builder.Autoconnect(this);
 
-            
+            PressureMeasure = 0;
+            PowerMeasure = 0;
             _ADS_97_Form = ADS_97_Form.Create();
 
             if (device == Model.Device.SPT963)
@@ -141,7 +145,7 @@ namespace Multifunctional_heat_meters_gui.View
                 return false;
             Dictionary<string, string> pars = GetSystemWindowData();
             if (pars["030н00"] == "" || pars["030н01"] == "" || pars["030н02"] == "" || pars["030н02"] == ""
-                || pars["024"] == "" || pars["025"] == "" || pars["008"] == "" || pars["003"] == "" || pars["004"] == "" 
+                || pars["024"] == "" || pars["025"] == "" /*|| pars["008"] == ""*/ || pars["003"] == "" || pars["004"] == "" 
                 || pars["035н00"] == "" || pars["036н00"] == "" || pars["037н00"] == "" || pars["040н00"] == ""
                 || pars["031н00"] == "" || pars["031н01"] == "")
                 return false;
@@ -156,6 +160,11 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 _ADS_97_Form.Show();
             }
+            /*EventsArgs.MeasurementEventArgs powerArgs = new EventsArgs.MeasurementEventArgs(Int32.Parse(power_combo.ActiveId));
+            PowerSystemChangedEvent?.Invoke(this, powerArgs);
+
+            EventsArgs.MeasurementEventArgs pressureArgs = new EventsArgs.MeasurementEventArgs(Int32.Parse(power_combo.ActiveId));
+            PressureSystemChangedEvent?.Invoke(this, pressureArgs);*/
         }
 
         protected override bool IsAbleToGoToNext()
@@ -187,8 +196,17 @@ namespace Multifunctional_heat_meters_gui.View
             }
         }
 
+        public Dictionary<string, int> GetMeasurementSystems()
+        {
+            Dictionary<string, int> result = new Dictionary<string, int>(){
+                { "Power", PowerMeasure },
+                { "Pressure", PressureMeasure  }
+            };
+            return result;
+        }
+
         
-         public override void OnLoadForm(EventsArgs.NextFormArgs e, AppState appState)
+        public override void OnLoadForm(EventsArgs.NextFormArgs e, AppState appState)
         {
             if(appState.AreAllPipelinesFilledOut())
             {
@@ -261,14 +279,16 @@ namespace Multifunctional_heat_meters_gui.View
                 energy_discr_system.Text = "МВт*ч";
             }
 
-            EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(Int32.Parse(power_combo.ActiveId));
+            PowerMeasure = Int32.Parse(power_combo.ActiveId);
+            EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(PowerMeasure);
 
             PowerSystemChangedEvent?.Invoke(this, args);
         }
 
         protected void OnPressureComboChanged(object sender, EventArgs a)
         {
-            EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(Int32.Parse(pressure_combo.ActiveId));
+            PressureMeasure = Int32.Parse(pressure_combo.ActiveId);
+            EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(PressureMeasure);
 
             PressureSystemChangedEvent?.Invoke(this, args);
         }

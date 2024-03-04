@@ -15,19 +15,29 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label label1;
         [Builder.Object]
-        private Label label4;
+        private Label label2;
         [Builder.Object]
-        private Label label5;
+        private Label entry_label1;
         [Builder.Object]
-        private Label label6;
+        private Label entry_label2;
         [Builder.Object]
-        private Label label7;
+        private Label entry_label3;
         [Builder.Object]
-        private Label label8;
+        private Label entry_label4;
         [Builder.Object]
-        private Label label9;
+        private Label measure_label1;
         [Builder.Object]
-        private Label label10;
+        private Label measure_label2;
+        [Builder.Object]
+        private Label measure_label3;
+        [Builder.Object]
+        private Label measure_label4;
+        [Builder.Object]
+        private Label measure_label6;
+        [Builder.Object]
+        private Label measure_label7;
+        [Builder.Object]
+        private Label measure_label8;
         [Builder.Object]
         private Entry entry1;
         [Builder.Object]
@@ -107,19 +117,17 @@ namespace Multifunctional_heat_meters_gui.View
                 { "033н02", $"{entry9.Text}" }, //нижний предел ºС
                 { "114н00", $"{entry11.Text}" }, //константное значение температуры теплоносителя ºС
             };
-            if (entry4.IsVisible)
+            if (entry4.IsVisible) //с частотным
             {
-                //Console.WriteLine("IsVisible");
                 res.Add("034н01", $"{entry2.Text}"); //верхний предел по паспорту прибора м3/час или т/час (?)
-                res.Add("034н02", $"{entry1.Text}"); //нижний предел по паспорту прибора м3/час или т/час (?)
+                res.Add("034н02", $"{entry1.Text}"); //нижний предел м3/час или т/час (только для частотного выходного сигнала.) (для остальных всегда 0)
                 res.Add("034н06", $"{entry4.Text}"); //верхний предел частоты входного сигнала 
                 res.Add("034н07", $"{entry3.Text}"); //нижний предел частоты входного сигнала
             }
-            else
+            else //с числоимпульсмын
             {
-                //Console.WriteLine("Impulse");
-                res.Add("034н06", $"{entry2.Text}"); //верхний предел по паспорту прибора 
-                res.Add("034н07", $"{entry1.Text}"); //нижний предел по паспорту прибора
+                res.Add("034н06", $"{entry1.Text}"); //верхний предел по паспорту прибора 
+                res.Add("034н07", $"{0}"); //нижний предел по паспорту прибора
                 res.Add("034н08", $"{entry3.Text}"); //цена импульса - из паспорта прибора м³ или т
             }
             return res;
@@ -127,38 +135,58 @@ namespace Multifunctional_heat_meters_gui.View
 
         public void SetWindow()
         {
-            if (curIndicator == "01" || curIndicator == "02")
+            if (curIndicator == "01" || curIndicator == "02") //с числоимпульсным
             {
-                label1.Text = "Укажите нижний и верхний предел частоты входного сигнала.";
-                entry2.Text = "700";
+                label1.Text = "Верхний предел";
 
-                label6.Text = "Введите цену импульса из паспорта прибора";
-                label7.Hide();
-                label8.Hide();
+                /*entry_label1.Hide();
+                entry1.Hide();
+                measure_label1.Hide();
+
+                entry_label2.Hide();
+                entry2.Text = "700";
+                measure_label2.Text = "м³/час";*/
+                entry_label1.Hide();
+                entry1.Text = "700";
+                measure_label1.Text = "м³/час";
+                entry_label2.Hide();
+                entry2.Hide();
+                measure_label2.Hide();
+
+                label2.Text = "Цена импульса из паспорта прибора";
+                entry_label3.Hide();
+                entry_label4.Hide();
                 entry4.Hide();
 
-                label4.Text = "Гц";
-                label5.Text = "Гц";
-
-                label9.Text = "м³";
-                label10.Hide();
+                measure_label3.Text = "м³/имп";
+                measure_label4.Hide();
             }
 
-            else if (curIndicator == "03" || curIndicator == "04")
+            else if (curIndicator == "03" || curIndicator == "04") //с частотным
             {
-                label1.Text = "Нижний и верхний диапазон измерений по паспорту прибора. Нижний предел диапазона измерений должен соответствовать настройкам выхода расходомера.";
+                entry_label1.Show();
+                //entry1.Show();
+                //measure_label1.Show();
+
+                label1.Text = "Нижний и верхний диапазон измерений по паспорту прибора. Нижний предел диапазона измерений должен соответствовать настройкам выхода расходомера";
+                measure_label1.Text = "м³/час";
+
+                entry_label2.Show();
+                entry2.Show();
+                measure_label2.Show();
                 entry2.Text = "763.400";
+                measure_label2.Text = "м³/час";
 
-                label6.Text = "Нижний и верхний предел частоты входного сигнала.";
-                label7.Show();
-                label8.Show();
+                label2.Text = "Нижний и верхний предел частоты входного сигнала";
+                
+                entry_label3.Show();
+                measure_label3.Text = "Гц";
+
+                entry_label4.Show();
                 entry4.Show();
+                measure_label4.Show();
+                measure_label4.Text = "Гц";
 
-                label4.Text = "м³/час";
-                label5.Text = "м³/час";
-
-                label9.Text = "Гц";
-                label10.Show();
             }
         }
 
@@ -215,6 +243,29 @@ namespace Multifunctional_heat_meters_gui.View
             }
 
             SetWindow();
+        }
+
+        public void ChangePressureMeasurement(int unitOfMeasurement)
+        {
+            switch (unitOfMeasurement)
+            {
+                case 0:
+                    measure_label6.Text = "МПа";
+                    measure_label7.Text = "МПа";
+                    measure_label8.Text = "МПа";
+                    break;
+                case 1:
+                    measure_label6.Text = "кгс/см2";
+                    measure_label7.Text = "кгс/см2";
+                    measure_label8.Text = "кгс/см2";
+                    break;
+            }
+        }
+
+
+        public void ChangePowerMeasurement(int unitOfMeasurement)
+        {
+
         }
 
         protected void SetupHandlers()

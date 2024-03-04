@@ -66,6 +66,7 @@ namespace Multifunctional_heat_meters_gui.View
                 { "101", $"{combo1.ActiveId}" }, //тип теплоносителя
                 { "102н00", flowMeter }, //тип расходомера
                 { "034н00", $"{0}{Int32.Parse(combo3.ActiveId) + 1}{0}" }, //тип датчика
+                //034 - Описание датчиков с частотным и числоимпульсным выходным сигналом
             };
 
             //if(combo1.ActiveId == "0")

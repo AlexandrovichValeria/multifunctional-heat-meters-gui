@@ -20,10 +20,11 @@ namespace Multifunctional_heat_meters_gui
             _controllers = new LinkedList<Controller.Controller>();
             _appState = appstate;
             _model = model;
-            SetControllers();
             
-            _sysController = (Controller.SystemController)_controllers.First();
             _sysForm = (View.SystemForm)_appState.GetForms().First();
+
+            SetControllers();
+            _sysController = (Controller.SystemController)_controllers.First();
             SetupHandlers();
         }
 
@@ -49,6 +50,8 @@ namespace Multifunctional_heat_meters_gui
 
         public void SetControllers()
         {
+            int typeOfPowerMeasurement = _sysForm.GetMeasurementSystems()["Power"];
+            int typeOfPressureMeasurement = _sysForm.GetMeasurementSystems()["Pressure"];
             foreach (var form in _appState.GetForms())
             {
                 Controller.Controller controller = null;
@@ -67,6 +70,8 @@ namespace Multifunctional_heat_meters_gui
                 else if (form.FormName.StartsWith("Первая настройка трубопровода"))
                 {
                     controller = new Controller.PipelineController1((View.PipelineSettings1Form)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
+                    controller.ChangePressureSystem(typeOfPressureMeasurement);
+                    controller.ChangePowerSystem(typeOfPowerMeasurement);
                 }
                 else if (form.FormName.StartsWith("Вторая настройка трубопровода"))
                 {
@@ -88,7 +93,7 @@ namespace Multifunctional_heat_meters_gui
 
         public void ChangePowerSystem(object sender, EventsArgs.MeasurementEventArgs args)
         {
-            foreach(Controller.Controller controller in _controllers)
+            foreach (Controller.Controller controller in _controllers)
             {
                 controller.ChangePowerSystem(args.typeOfMeasurement);
             }

@@ -48,7 +48,7 @@ namespace Multifunctional_heat_meters_gui.Model
             _parameters.Add("104", new Parameter("104", "0", "", "pressure")); // Только для "Имп пар"
             _parameters.Add("105", new Parameter("105", "1", "", "")); // Только для "Имп пар"
             _parameters.Add("109н00", new Parameter("109н00", "0", "т/час", "")); //?
-            _parameters.Add("109н01", new Parameter("109н01", "03401", "", "")); //Пока неверно
+            _parameters.Add("109н01", new Parameter("109н01", "03401", "", ""));
             _parameters.Add("113н00", new Parameter("113н00", "4.5", "кгс/см2", "pressure"));
             _parameters.Add("113н01", new Parameter("113н01", "03202", "", ""));
             _parameters.Add("114н00", new Parameter("114н00", "70", "'C", "temperature"));
@@ -69,6 +69,73 @@ namespace Multifunctional_heat_meters_gui.Model
         public void ChangeParameterValue(string parameterName, string value)
         {
             _parameters[parameterName].Value = value;
+        }
+
+        public void ChangePowerMeasurement(int unitOfMeasurement)
+        {
+            foreach (KeyValuePair<string, Parameter> param in _parameters)
+            {
+                if (param.Value.TypeOfMeasurement == "energy")
+                {
+                    switch (unitOfMeasurement)
+                    {
+                        case 0:
+                            param.Value.UnitOfMeasurement = "ГДж";
+                            break;
+                        case 1:
+                            param.Value.UnitOfMeasurement = "Гкал";
+                            break;
+                        case 2:
+                            param.Value.UnitOfMeasurement = "МВт*ч";
+                            break;
+                    }
+                }
+                else if (param.Value.TypeOfMeasurement == "power")
+                {
+                    switch (unitOfMeasurement)
+                    {
+                        case 0:
+                            param.Value.UnitOfMeasurement = "ГДж";
+                            break;
+                        case 1:
+                            param.Value.UnitOfMeasurement = "Гкал";
+                            break;
+                        case 2:
+                            param.Value.UnitOfMeasurement = "МВт*ч";
+                            break;
+                    }
+                }
+            }
+        }
+        public void ChangePressureMeasurement(int unitOfMeasurement)
+        {
+            foreach (KeyValuePair<string, Parameter> param in _parameters)
+            {
+                if (param.Value.TypeOfMeasurement == "pressure")
+                {
+                    switch (unitOfMeasurement)
+                    {
+                        case 0:
+                            param.Value.UnitOfMeasurement = "МПа";
+                            break;
+                        case 1:
+                            param.Value.UnitOfMeasurement = "кгс/см2";
+                            break;
+                    }
+                }
+                else if (param.Value.TypeOfMeasurement == "pressure change")
+                {
+                    switch (unitOfMeasurement)
+                    {
+                        case 0:
+                            param.Value.UnitOfMeasurement = "кПа";
+                            break;
+                        case 1:
+                            param.Value.UnitOfMeasurement = "кгс/м2";
+                            break;
+                    }
+                }
+            }
         }
     }
 }

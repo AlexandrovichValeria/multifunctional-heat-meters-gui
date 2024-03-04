@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 using Gtk;
 
@@ -153,6 +154,13 @@ namespace Multifunctional_heat_meters_gui
             {
                 // Get the selected file or file name
                 string selectedFilePath = fileChooser.Filename;
+                /*Encoding encoding = Encoding.GetEncoding("UTF-8"); // Replace with the desired encoding
+                byte[] bytes = encoding.GetBytes(selectedFilePath);
+                string convertedFilename = encoding.GetString(bytes);
+                Console.WriteLine("selectedFilePath");
+                Console.WriteLine(selectedFilePath);
+                Console.WriteLine("convertedFilename");
+                Console.WriteLine(convertedFilename);*/
                 // Process the selected file or file name as needed
                 // (e.g., save the file using StreamWriter)
 

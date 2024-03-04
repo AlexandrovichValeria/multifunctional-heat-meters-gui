@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Gtk;
+using System.Text;
 
 namespace Multifunctional_heat_meters_gui
 {
@@ -14,6 +15,11 @@ namespace Multifunctional_heat_meters_gui
         [STAThread]
         static void Main()
         {
+            //System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("ru-RU");
+            //System.Environment.SetEnvironmentVariable("G_FILENAME_ENCODING", "@locale");
+            //System.Environment.SetEnvironmentVariable("G_BROKEN_FILENAMES", "1");
+
+            //Encoding = Encoding.UTF8;
             Application.Init();
             ApplyTheme();
             DeviceSelectionForm win = DeviceSelectionForm.Create();

@@ -43,7 +43,7 @@ namespace Multifunctional_heat_meters_gui.Controller
             }
         }
 
-        public void ChangePowerSystem(int typeOfMeasurement)
+        public override void ChangePowerSystem(int typeOfMeasurement)
         {
             //update model
             _systemModel.ChangePowerMeasurement(typeOfMeasurement);
@@ -51,7 +51,7 @@ namespace Multifunctional_heat_meters_gui.Controller
             //update view
         }
 
-        public void ChangePressureSystem(int typeOfMeasurement)
+        public override void ChangePressureSystem(int typeOfMeasurement)
         {
             //update model
             _systemModel.ChangePressureMeasurement(typeOfMeasurement);
