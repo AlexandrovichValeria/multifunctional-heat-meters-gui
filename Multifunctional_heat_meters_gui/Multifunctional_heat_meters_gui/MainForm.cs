@@ -152,6 +152,7 @@ namespace Multifunctional_heat_meters_gui
             filter.AddPattern("*.xdb");
             fileChooser.AddFilter(filter);
 
+            
             // Run the dialog and check the response
             ResponseType response = (ResponseType)fileChooser.Run();
             
@@ -160,7 +161,8 @@ namespace Multifunctional_heat_meters_gui
                 // Get the selected file or file name
                 string selectedFilePath = fileChooser.Filename;
 
-                //Console.WriteLine(fileChooser.File.LoadContents(true));
+                
+                //GLib.FileUtils.GetFileContents.ut
                 /*byte[] content = content.Select(Convert.ToByte).ToArray();
                 string contentUtf8 = Encoding.UTF8.GetString(content);*/
 

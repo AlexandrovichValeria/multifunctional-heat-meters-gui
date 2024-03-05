@@ -37,7 +37,7 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
-            lowerlimitValue = "";
+            lowerlimitValue = "00";
 
             _formIndex = index;
             button_box.Add(_backForwardComponent);
@@ -47,7 +47,7 @@ namespace Multifunctional_heat_meters_gui.View
         }
         public override void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
         {
-            Console.WriteLine("OnLoadForm");
+            OnFormChanged(this, EventArgs.Empty);
             if (paramsFromPreviousForm == null)
             {
                 return;
@@ -55,13 +55,9 @@ namespace Multifunctional_heat_meters_gui.View
 
             if (paramsFromPreviousForm.Params.ContainsKey("lowLimit"))
             {
-                Console.WriteLine("Contains");
-                Console.WriteLine(paramsFromPreviousForm.Params["lowLimit"]);
                 lowerlimitValue = paramsFromPreviousForm.Params["lowLimit"];
                 entry1.Text = lowerlimitValue;
             }
-            else
-                Console.WriteLine("Doesn't contain");
 
         }
 
@@ -98,6 +94,11 @@ namespace Multifunctional_heat_meters_gui.View
 
             entry1.Changed += TurnIntoNumber;
             entry2.Changed += TurnIntoNumber;
+
+            combo1.Changed += OnFormChanged;
+            combo2.Changed += OnFormChanged;
+            entry1.Changed += OnFormChanged;
+            entry2.Changed += OnFormChanged;
             //DeleteEvent += OnLocalDeleteEvent;
         }
 

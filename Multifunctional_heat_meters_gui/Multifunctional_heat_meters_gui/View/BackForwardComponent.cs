@@ -34,6 +34,15 @@ namespace Multifunctional_heat_meters_gui.View
             builder.Autoconnect(this);
             SetupHandlers();
         }
+        public void SetForwardButtonSensitive()
+        {
+            forward_button.Sensitive = true;
+        }
+        public void SetForwardButtonInsensitive()
+        {
+            forward_button.Sensitive = false;
+        }
+
         protected void SetupHandlers()
         {
             back_button.Clicked += BackButton_Click;

@@ -393,6 +393,7 @@
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="hexpand">True</property>
+                            <property name="active-id">0</property>
                             <items>
                               <item id="0" translatable="yes">СИ (МПа, кПа)</item>
                               <item id="1" translatable="yes">Практическая система (кгс/ см², кгс / м²)</item>
@@ -421,6 +422,7 @@
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="hexpand">True</property>
+                            <property name="active-id">0</property>
                             <items>
                               <item id="0" translatable="yes">Энергия - ГДж, мощность - Гдж / ч</item>
                               <item id="1" translatable="yes">Энергия - Гкал, мощность - Гкал / ч</item>

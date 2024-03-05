@@ -28,6 +28,8 @@ namespace Multifunctional_heat_meters_gui.View
         private CheckboxesBlock _participatedPipelinesCheckboxes;
         private CheckboxesBlock _participatedConsumersCheckboxes;
 
+        public event EventHandler BlockChangedEvent;
+        //public event EventHandler ConsumersChangedEvent;
 
         public static ParticipatedPipelinesBlock Create(int participatedPipelinesCount, int participatedConsumerCount)
         {
@@ -61,6 +63,8 @@ namespace Multifunctional_heat_meters_gui.View
             //DeleteEvent += OnLocalDeleteEvent;
             _participatedPipelinesCheckboxes.CheckBoxesChecked += new EventHandler(ChangeParticipatedPipelinesResult);
             _participatedConsumersCheckboxes.CheckBoxesChecked += new EventHandler(ChangeParticipatedConsumersResult);
+            _participatedPipelinesCheckboxes.CheckBoxesChecked += new EventHandler(OnBlockChanged);
+            _participatedConsumersCheckboxes.CheckBoxesChecked += new EventHandler(OnBlockChanged);
         }
         private void ChangeParticipatedPipelinesResult(object sender, EventArgs e)
         {
@@ -72,6 +76,11 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _consumersResult = _participatedConsumersCheckboxes.Result;
             ParticipatedConsumersResult.Text = _consumersResult;
+        }
+
+        private void OnBlockChanged(object sender, EventArgs e)
+        {
+            BlockChangedEvent?.Invoke(this, EventArgs.Empty);
         }
 
         public Dictionary<string, string> GetResult()

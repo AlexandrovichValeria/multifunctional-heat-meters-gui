@@ -54,9 +54,21 @@ namespace Multifunctional_heat_meters_gui.View
             return true;
         }
 
+        public virtual void OnFormChanged(object sender, EventArgs e)
+        {
+            if (IsFormFilledOut())
+            {
+                _backForwardComponent.SetForwardButtonSensitive();
+            }
+            else
+            {
+                _backForwardComponent.SetForwardButtonInsensitive();
+            }
+        }
+
         public virtual void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
         {
-
+            OnFormChanged(this, EventArgs.Empty);
         }
 
         public string FormName => _formName;

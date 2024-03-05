@@ -31,6 +31,7 @@ namespace Multifunctional_heat_meters_gui
             }
             _head = _forms.First;
             SetForm(_head.Value);
+            _head.Value.OnLoadForm(null, _appState);
             _menu.SelectButtonByName(_head.Value.FormName);
         }
 

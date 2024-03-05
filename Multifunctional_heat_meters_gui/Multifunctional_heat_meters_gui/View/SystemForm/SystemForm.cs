@@ -101,7 +101,7 @@ namespace Multifunctional_heat_meters_gui.View
             button_box.Add(_backForwardComponent);
             spec1.Sensitive = false;
             spec2.Sensitive = false;
-            DisableSensorsSettings();
+            //DisableSensorsSettings();
 
             SetupHandlers();
         }
@@ -141,8 +141,8 @@ namespace Multifunctional_heat_meters_gui.View
 
         public override bool IsFormFilledOut()
         {
-            if (!_participatedPipelinesBlock.SomeCheckboxesAreChecked())
-                return false;
+            //if (!_participatedPipelinesBlock.SomeCheckboxesAreChecked())
+              //  return false;
             Dictionary<string, string> pars = GetSystemWindowData();
             if (pars["030н00"] == "" || pars["030н01"] == "" || pars["030н02"] == "" || pars["030н02"] == ""
                 || pars["024"] == "" || pars["025"] == "" /*|| pars["008"] == ""*/ || pars["003"] == "" || pars["004"] == "" 
@@ -208,7 +208,8 @@ namespace Multifunctional_heat_meters_gui.View
         
         public override void OnLoadForm(EventsArgs.NextFormArgs e, AppState appState)
         {
-            if(appState.AreAllPipelinesFilledOut())
+            OnFormChanged(this, EventArgs.Empty);
+            if (appState.AreAllPipelinesFilledOut())
             {
                 EnableSensorsSettings();
             } else
@@ -260,6 +261,21 @@ namespace Multifunctional_heat_meters_gui.View
             entry9.Changed += TurnIntoNumber;
             spec1.Changed += TurnIntoNumber;
             spec2.Changed += TurnIntoNumber;
+
+            _participatedPipelinesBlock.BlockChangedEvent += OnFormChanged;
+            //power_combo.Changed += OnFormChanged;
+            //pressure_combo.Changed += OnFormChanged;
+            const_entry1.Changed += OnFormChanged;
+            const_entry2.Changed += OnFormChanged;
+            const_entry3.Changed += OnFormChanged;
+            const_entry4.Changed += OnFormChanged;
+            entry5.Changed += OnFormChanged;
+            entry6.Changed += OnFormChanged;
+            entry7.Changed += OnFormChanged;
+            entry8.Changed += OnFormChanged;
+            //entry9.Changed += OnFormChanged;
+            spec1.Changed += OnFormChanged;
+            spec2.Changed += OnFormChanged;
 
             //DeleteEvent += OnLocalDeleteEvent;
         }

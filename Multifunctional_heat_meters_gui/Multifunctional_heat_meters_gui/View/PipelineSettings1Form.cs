@@ -133,6 +133,25 @@ namespace Multifunctional_heat_meters_gui.View
             return res;
         }
 
+        public override bool IsFormFilledOut() //проверить
+        {
+            Dictionary<string, string> pars = GetPipelineSettings1();
+            if (pars["109н00"] == "" || pars["032н00"] == "" || pars["032н01"] == "" || pars["032н08"] == "" ||
+                pars["113н00"] == "" || pars["033н00"] == "" || pars["033н01"] == "" || pars["033н02"] == "" ||
+                pars["114н00"] == "")
+                return false;
+
+            if (pars.ContainsKey("034н01")) //с частотным
+            {
+                if (pars["034н01"] == "" || pars["034н02"] == "" || pars["034н06"] == "" || pars["034н07"] == "")
+                    return false;
+                return true;
+            }
+            if (pars["034н06"] == "" || pars["034н07"] == "" || pars["034н08"] == "")
+                return false;
+            return true;
+        }
+
         public void SetWindow()
         {
             if (curIndicator == "01" || curIndicator == "02") //с числоимпульсным
@@ -169,6 +188,7 @@ namespace Multifunctional_heat_meters_gui.View
                 //measure_label1.Show();
 
                 label1.Text = "Нижний и верхний диапазон измерений по паспорту прибора. Нижний предел диапазона измерений должен соответствовать настройкам выхода расходомера";
+                entry1.Text = "0";
                 measure_label1.Text = "м³/час";
 
                 entry_label2.Show();
@@ -207,27 +227,11 @@ namespace Multifunctional_heat_meters_gui.View
             return false;
         }
 
-        public override bool IsFormFilledOut()
-        {
-            Dictionary<string, string> pars = GetPipelineSettings1();
-            if (pars["109н00"] == "" || pars["032н00"] == "" || pars["032н01"] == "" || pars["032н08"] == "" ||
-                pars["113н00"] == "" || pars["033н00"] == "" || pars["033н01"] == "" || pars["033н02"] == "" ||
-                pars["114н00"] == "")
-                return false;
-
-            if (pars.ContainsKey("034н01"))
-            {
-                if (pars["034н01"] == "" || pars["034н02"] == "" || pars["034н06"] == "" || pars["034н07"] == "")
-                    return false;
-                return true;
-            }
-            if (pars["034н06"] == "" || pars["034н07"] == "" || pars["034н08"] == "")
-                return false;
-            return true;
-        }
+        
 
         public override void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
         {
+            OnFormChanged(this, EventArgs.Empty);
             if (paramsFromPreviousForm == null)
             {
                 return;
@@ -281,6 +285,18 @@ namespace Multifunctional_heat_meters_gui.View
             entry9.Changed += TurnIntoNumber;
             entry10.Changed += TurnIntoNumber;
             entry11.Changed += TurnIntoNumber;
+
+            entry1.Changed += OnFormChanged;
+            //entry2.Changed += OnFormChanged;
+            entry3.Changed += OnFormChanged;
+            entry4.Changed += OnFormChanged;
+            entry5.Changed += OnFormChanged;
+            entry6.Changed += OnFormChanged;
+            entry7.Changed += OnFormChanged;
+            entry8.Changed += OnFormChanged;
+            entry9.Changed += OnFormChanged;
+            entry10.Changed += OnFormChanged;
+            entry11.Changed += OnFormChanged;
         }
 
     }

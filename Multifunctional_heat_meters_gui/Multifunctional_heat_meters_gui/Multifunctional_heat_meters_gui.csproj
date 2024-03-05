@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{961DA8D3-146B-40A1-880C-1372448AB746}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Multifunctional_heat_meters_gui</RootNamespace>
     <AssemblyName>Multifunctional_heat_meters_gui</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -86,7 +86,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="View\ADS_97_Form.cs" />
-    <Compile Include="View\BackForwardButtons.cs" />
     <Compile Include="View\BackForwardComponent.cs" />
     <Compile Include="View\ConsumerForm.cs" />
     <Compile Include="View\ContentMenu.cs" />
@@ -116,7 +115,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="View\ADS_97_Form.glade" />
-    <EmbeddedResource Include="View\BackForwardButtons.glade" />
     <EmbeddedResource Include="View\BackForwardComponent.glade" />
     <EmbeddedResource Include="View\ConsumerForm.glade" />
     <EmbeddedResource Include="View\ContentMenu.glade" />
