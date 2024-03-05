@@ -24,6 +24,8 @@ namespace Multifunctional_heat_meters_gui.View
         private ComboBoxText combo1;
         [Builder.Object]
         private ComboBoxText combo2;
+        [Builder.Object]
+        private Label name_label;
 
         private string lowerlimitValue;
 
@@ -43,6 +45,7 @@ namespace Multifunctional_heat_meters_gui.View
             button_box.Add(_backForwardComponent);
             entry1.Sensitive = false;
             entry1.Text = lowerlimitValue;
+            name_label.Text = "Трубопровод " + index.ToString();
             SetupHandlers();
         }
         public override void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)

@@ -22,6 +22,8 @@ namespace Multifunctional_heat_meters_gui.View
         protected BackForwardComponent _backForwardComponent;
         protected Dictionary<string, string> paramsToNextForm = new Dictionary<string, string>();
 
+        //protected Label name_label;
+
 
         protected WindowForm(string formName, Builder builder, IntPtr handle) : base(handle)
         {
@@ -31,6 +33,7 @@ namespace Multifunctional_heat_meters_gui.View
             _formName = formName;
             _backForwardComponent = BackForwardComponent.Create();
 
+          //  name_label = new Label("AAA");
             SetupHandlers();
         }
 

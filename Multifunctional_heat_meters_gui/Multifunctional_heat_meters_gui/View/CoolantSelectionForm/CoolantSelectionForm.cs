@@ -22,6 +22,8 @@ namespace Multifunctional_heat_meters_gui.View
         private Box gas_box;
         [Builder.Object]
         private Box liquid_box;
+        [Builder.Object]
+        private Label name_label;
 
         private GasBlock gas_block;
         private LiquidBlock liquid_block;
@@ -49,6 +51,8 @@ namespace Multifunctional_heat_meters_gui.View
             liquid_block = LiquidBlock.Create();
             liquid_box.Add(liquid_block);
             liquid_box.Hide();
+
+            name_label.Text = "Трубопровод " + index.ToString();
 
             SetupHandlers();
         }

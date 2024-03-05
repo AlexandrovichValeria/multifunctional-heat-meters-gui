@@ -65,6 +65,9 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private ComboBoxText combo2;
 
+        [Builder.Object]
+        private Label name_label;
+
 
         public string curIndicator = "01";
         
@@ -81,6 +84,7 @@ namespace Multifunctional_heat_meters_gui.View
 
             _formIndex = index;
             button_box.Add(_backForwardComponent);
+            name_label.Text = "Трубопровод " + index.ToString();
             SetupHandlers();
         }
 

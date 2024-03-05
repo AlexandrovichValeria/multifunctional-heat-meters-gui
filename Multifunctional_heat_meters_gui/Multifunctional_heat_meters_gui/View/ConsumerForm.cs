@@ -45,7 +45,7 @@ namespace Multifunctional_heat_meters_gui.View
             //_comboboxes = new List<ComboBoxText>();
             combo_numbers = new Dictionary<int, ComboBoxText>();
 
-            label1.Text = "Потребитель №" + consumerNumber.ToString();
+            label1.Text = "Потребитель " + consumerNumber.ToString();
 
             for (int i = 0; i < pipelinesNumbers.Count; i++)
             {
