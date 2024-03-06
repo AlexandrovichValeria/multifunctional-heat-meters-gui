@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface>
+  <requires lib="gtk+" version="3.14"/>
+  <object class="GtkBox" id="form_box">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkBox" id="box">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">10</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkLabel" id="name_label">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <!-- n-columns=7 n-rows=2 -->
+          <object class="GtkGrid" id="grid1">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="row-spacing">5</property>
+            <property name="column-spacing">5</property>
+            <child>
+              <object class="GtkLabel" id="label1">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">Выходной сигнал датчика избыточного давления</property>
+                <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="combo1">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="active-id">0</property>
+                <items>
+                  <item id="0" translatable="yes">Изб с вых. 0-5 мА</item>
+                  <item id="1" translatable="yes">Изб с вых. 0-20 мА</item>
+                  <item id="2" translatable="yes">Изб с вых. 4-20 мА</item>
+                </items>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="sep5">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-left">15</property>
+                <property name="margin-right">15</property>
+                <property name="margin-start">15</property>
+                <property name="margin-end">15</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">0</property>
+                <property name="height">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label2">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">Верхний предел диапазона измерений</property>
+                <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">0</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="entry1">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="text" translatable="yes">15,07</property>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="measure_label1">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">м³/час</property>
+              </object>
+              <packing>
+                <property name="left-attach">3</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="sep6">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-left">15</property>
+                <property name="margin-right">15</property>
+                <property name="margin-start">15</property>
+                <property name="margin-end">15</property>
+              </object>
+              <packing>
+                <property name="left-attach">4</property>
+                <property name="top-attach">0</property>
+                <property name="height">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label3">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">Поправка на высоту столба в имп. трубке датч. давления</property>
+                <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">5</property>
+                <property name="top-attach">0</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="measure_label2">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">м³/час</property>
+              </object>
+              <packing>
+                <property name="left-attach">6</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="entry2">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="text" translatable="yes">0</property>
+              </object>
+              <packing>
+                <property name="left-attach">5</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="button_box">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+  </object>
+</interface>

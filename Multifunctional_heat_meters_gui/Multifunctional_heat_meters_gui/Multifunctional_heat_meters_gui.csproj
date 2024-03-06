@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{961DA8D3-146B-40A1-880C-1372448AB746}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Multifunctional_heat_meters_gui</RootNamespace>
     <AssemblyName>Multifunctional_heat_meters_gui</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -87,6 +87,9 @@
     </Compile>
     <Compile Include="View\ADS_97_Form.cs" />
     <Compile Include="View\BackForwardComponent.cs" />
+    <Compile Include="View\Sensors\PressureSensor.cs" />
+    <Compile Include="View\Sensors\Sensor.cs" />
+    <Compile Include="View\Sensors\TemperatureSensor.cs" />
     <Compile Include="View\ConsumerForm.cs" />
     <Compile Include="View\ContentMenu.cs" />
     <Compile Include="View\CoolantSelectionForm\CoolantSelectionForm.cs" />
@@ -127,6 +130,8 @@
     <EmbeddedResource Include="View\SystemForm\SystemForm.glade" />
     <EmbeddedResource Include="View\CoolantSelectionForm\GasBlock.glade" />
     <EmbeddedResource Include="View\CoolantSelectionForm\LiquidBlock.glade" />
+    <EmbeddedResource Include="View\Sensors\TemperatureSensor.glade" />
+    <EmbeddedResource Include="View\Sensors\PressureSensor.glade" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

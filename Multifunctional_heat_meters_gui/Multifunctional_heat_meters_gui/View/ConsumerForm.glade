@@ -38,7 +38,7 @@
     <property name="can-focus">False</property>
     <property name="orientation">vertical</property>
     <child>
-      <!-- n-columns=3 n-rows=5 -->
+      <!-- n-columns=2 n-rows=5 -->
       <object class="GtkGrid" id="grid1">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
@@ -60,30 +60,32 @@
           <packing>
             <property name="left-attach">0</property>
             <property name="top-attach">0</property>
-            <property name="width">3</property>
+            <property name="width">2</property>
           </packing>
         </child>
         <child>
           <object class="GtkLabel" id="label3">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">Идентификатор потребителя</property>
           </object>
           <packing>
             <property name="left-attach">0</property>
             <property name="top-attach">1</property>
-            <property name="width">2</property>
           </packing>
         </child>
         <child>
           <object class="GtkSpinButton" id="spin_button1">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
+            <property name="halign">start</property>
+            <property name="hexpand">True</property>
             <property name="input-purpose">number</property>
             <property name="adjustment">adjustment1</property>
           </object>
           <packing>
-            <property name="left-attach">2</property>
+            <property name="left-attach">1</property>
             <property name="top-attach">1</property>
           </packing>
         </child>
@@ -91,18 +93,20 @@
           <object class="GtkLabel" id="label4">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">Номер схемы учета</property>
           </object>
           <packing>
             <property name="left-attach">0</property>
             <property name="top-attach">2</property>
-            <property name="width">3</property>
+            <property name="width">2</property>
           </packing>
         </child>
         <child>
           <object class="GtkComboBox" id="combo1">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
             <property name="model">liststore1</property>
             <property name="active">0</property>
             <property name="id-column">0</property>
@@ -117,7 +121,7 @@
           <packing>
             <property name="left-attach">0</property>
             <property name="top-attach">3</property>
-            <property name="width">3</property>
+            <property name="width">2</property>
           </packing>
         </child>
         <child>
@@ -143,11 +147,8 @@
           <packing>
             <property name="left-attach">0</property>
             <property name="top-attach">4</property>
-            <property name="width">3</property>
+            <property name="width">2</property>
           </packing>
-        </child>
-        <child>
-          <placeholder/>
         </child>
       </object>
       <packing>

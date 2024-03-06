@@ -241,7 +241,7 @@
                 <items>
                   <item id="0" translatable="yes">Изб с вых. 0-5 мА</item>
                   <item id="1" translatable="yes">Изб с вых. 0-20 мА</item>
-                  <item translatable="yes">Изб с вых. 4-20 мА</item>
+                  <item id="2" translatable="yes">Изб с вых. 4-20 мА</item>
                 </items>
               </object>
               <packing>
@@ -400,14 +400,14 @@
                 <items>
                   <item id="0" translatable="yes">Pt100 по ГОСТ Р 8.625-2006</item>
                   <item id="1" translatable="yes">Pt50 по ГОСТ Р 8.625-2006</item>
-                  <item translatable="yes">100П по ГОСТ 6651-94</item>
-                  <item translatable="yes">50П по ГОСТ 6651-94</item>
-                  <item translatable="yes">100П по ГОСТ Р 8.625-2006</item>
-                  <item translatable="yes">50П по ГОСТ Р 8.625-2006</item>
-                  <item translatable="yes">100М по ГОСТ 6651-94</item>
-                  <item translatable="yes">50М по ГОСТ 6651-94</item>
-                  <item translatable="yes">100М по ГОСТ Р 8.625-2006</item>
-                  <item translatable="yes">50М по ГОСТ Р 8.625-2006</item>
+                  <item id="2" translatable="yes">100П по ГОСТ 6651-94</item>
+                  <item id="3" translatable="yes">50П по ГОСТ 6651-94</item>
+                  <item id="4" translatable="yes">100П по ГОСТ Р 8.625-2006</item>
+                  <item id="5" translatable="yes">50П по ГОСТ Р 8.625-2006</item>
+                  <item id="6" translatable="yes">100М по ГОСТ 6651-94</item>
+                  <item id="7" translatable="yes">50М по ГОСТ 6651-94</item>
+                  <item id="8" translatable="yes">100М по ГОСТ Р 8.625-2006</item>
+                  <item id="9" translatable="yes">50М по ГОСТ Р 8.625-2006</item>
                 </items>
               </object>
               <packing>

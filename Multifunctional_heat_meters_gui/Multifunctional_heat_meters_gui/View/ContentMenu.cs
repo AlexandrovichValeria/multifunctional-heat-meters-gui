@@ -21,7 +21,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         public event EventHandler FormChanged;
 
-        private static readonly string s_topTreeGroupName = "ContentButtons";
+        /*private static readonly string s_topTreeGroupName = "ContentButtons";
         private static readonly string s_pipelineGroupName = "PipelinesButtons";
         private static readonly string s_consumersGroupName = "ConsumersButtons";
 
@@ -29,7 +29,7 @@ namespace Multifunctional_heat_meters_gui.View
         {
             { "PipelinesButtons", "т" },
             { "ConsumersButtons", "п" }
-        };
+        };*/
         
         private enum TopButtonsTypes
         {
@@ -38,17 +38,26 @@ namespace Multifunctional_heat_meters_gui.View
             CONSUMERS
         }
 
-        private static readonly Dictionary<TopButtonsTypes, string> topButtonsNames = new Dictionary<TopButtonsTypes, string>()
+        /*private static readonly Dictionary<TopButtonsTypes, string> topButtonsNames = new Dictionary<TopButtonsTypes, string>()
         {
             { TopButtonsTypes.SYSTEM, "Общесистемные параметры" },
             { TopButtonsTypes.PIPELINES, "Настройка трубопроводов" },
             { TopButtonsTypes.CONSUMERS, "Настройка потребителей" },
+        };*/
+
+        private static readonly Dictionary<int, string> sensorNames = new Dictionary<int, string>()
+        {
+            {1, "Датчик температуры холодной воды" },
+            {2, "Датчик давления холодной воды" },
+            {3, "Датчик барометрического давления" },
+            {4, "Датчик температуры наружного воздуха" },
         };
 
         public enum DeepButtonsNames
         {
             PIPELINES,
-            CONSUMERS
+            CONSUMERS,
+            SENSORS
         }
 
         private static readonly string[] s_pipelinesSettingsButtonsNames = new string[] { "Теплоноситель", "Первая настройка трубопровода", "Вторая настройка трубопровода" };
@@ -80,8 +89,8 @@ namespace Multifunctional_heat_meters_gui.View
             ContentMenuStore.AppendValues(deviceName);
             ContentMenuStore.AppendValues("Общесистемные параметры");
             ContentMenuStore.AppendValues("Настройка трубопроводов");
-            ContentMenuStore.AppendValues("Настройка потребителей");
             ContentMenuStore.AppendValues("Настройка датчиков");
+            ContentMenuStore.AppendValues("Настройка потребителей");
 
             TreePath path = new TreePath("1");
             Selection.SelectPath(path);
@@ -116,14 +125,19 @@ namespace Multifunctional_heat_meters_gui.View
 
         public void AddDeepButtonsByNumbers(DeepButtonsNames buttonName, List<int> buttonsNumbers)
         {
+            if (buttonName == DeepButtonsNames.SENSORS) {
+                AddSensorButtons(buttonsNumbers);
+                return;
+            }
             string sectionName = "";
             string title = "";
             TreePath pathToDelete = new TreePath("");
             if (buttonName == DeepButtonsNames.CONSUMERS)
             {
+                Console.WriteLine("CONSUMERS");
                 sectionName = "Настройка потребителей";
                 title = "п";
-                pathToDelete = new TreePath("3");
+                pathToDelete = new TreePath("4");
             }
             else if (buttonName == DeepButtonsNames.PIPELINES)
             {
@@ -151,7 +165,7 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 TreeIter nodeIter;
                 bool nodeExists = false;
-                TreePath temp_path = title == "т" ? new TreePath("2:0") : new TreePath("3:0");
+                TreePath temp_path = title == "т" ? new TreePath("2:0") : new TreePath("4:0");
                 
                 if (ContentMenuStore.GetIter(out nodeIter, temp_path))
                 {
@@ -170,19 +184,17 @@ namespace Multifunctional_heat_meters_gui.View
                 if (!nodeExists)
                 {
                     TreeIter parentIter;
-                    if (ContentMenuStore.GetIterFirst(out parentIter))
+                    if (ContentMenuStore.GetIterFirst(out parentIter)) //мб заменить на готовые пути (2:0)
                     {
                         do
                         {
                             string parent_name = ContentMenuStore.GetValue(parentIter, 0).ToString();
+                           
                             if (parent_name == sectionName)
                             {
                                 ContentMenuStore.AppendValues(parentIter, title + number.ToString());
                                 if (buttonName == DeepButtonsNames.PIPELINES)
-                                {
                                     AddPipelinesSettingsButtons(number);
-                                }
-
                                 break;
                             }
                         }
@@ -193,6 +205,69 @@ namespace Multifunctional_heat_meters_gui.View
             ExpandAll();
         }
 
+        private void AddSensorButtons(List<int> buttonsNumbers)
+        {
+            string sectionName = "Настройка датчиков";
+            string title = "";
+            TreePath pathToDelete = new TreePath("3");
+
+            //delete current rows
+            TreeIter nodeToDeleteIter;
+            if (ContentMenuStore.GetIter(out nodeToDeleteIter, pathToDelete))
+            {
+                TreeIter childIter;
+                bool iterFound = ContentMenuStore.IterChildren(out childIter, nodeToDeleteIter);
+
+                while (iterFound)
+                {
+                    ContentMenuStore.Remove(ref childIter);
+                    iterFound = ContentMenuStore.IterChildren(out childIter, nodeToDeleteIter);
+                }
+            }
+
+            //add new rows
+            foreach (int number in buttonsNumbers)
+            {
+                title = sensorNames[number];
+                TreeIter nodeIter;
+                bool nodeExists = false;
+                TreePath temp_path = new TreePath("3:0");
+                if (ContentMenuStore.GetIter(out nodeIter, temp_path))
+                {
+                    do
+                    {
+                        string node_name = ContentMenuStore.GetValue(nodeIter, 0).ToString();
+                        if (node_name == title)
+                        {
+                            nodeExists = true;
+                            break;
+                        }
+                    }
+                    while (ContentMenuStore.IterNext(ref nodeIter));
+                }
+
+                if (!nodeExists)
+                {
+                    TreeIter parentIter;
+                    if (ContentMenuStore.GetIterFirst(out parentIter))
+                    {
+                        do
+                        {
+                            string parent_name = ContentMenuStore.GetValue(parentIter, 0).ToString();
+                            if (parent_name == sectionName)
+                            {
+                                ContentMenuStore.AppendValues(parentIter, title);
+                                break;
+                            }
+                        }
+                        while (ContentMenuStore.IterNext(ref parentIter));
+                    }
+                }
+
+            }
+            ExpandAll();
+
+        }
         /*private List<ContentMenuButton> GetDeepButtonsByNumbers(DeepButtonsNames deepButtonName, List<int> deepButtonNumbers)
         {
 

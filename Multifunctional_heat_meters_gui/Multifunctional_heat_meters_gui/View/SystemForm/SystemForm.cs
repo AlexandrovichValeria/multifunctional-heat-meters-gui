@@ -76,13 +76,13 @@ namespace Multifunctional_heat_meters_gui.View
         private int PressureMeasure;
         private int PowerMeasure;
 
-        public static SystemForm Create(Model.Device device)
+        public static SystemForm Create(int index, Model.Device device)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.SystemForm.SystemForm.glade", null);
-            return new SystemForm(device, builder, builder.GetObject("form_box").Handle);
+            return new SystemForm(index, device, builder, builder.GetObject("form_box").Handle);
         }
 
-        protected SystemForm(Model.Device device, Builder builder, IntPtr handle) : base("Общесистемные параметры", builder, handle)
+        protected SystemForm(int index, Model.Device device, Builder builder, IntPtr handle) : base($"Общесистемные параметры {index}", builder, handle)
         {
             _builder = builder;
             builder.Autoconnect(this);

@@ -70,15 +70,15 @@ namespace Multifunctional_heat_meters_gui
             string window_name = "Настройщик базы данных " + deviceName;
             Title = window_name;
 
-            View.SystemForm subForm1 = View.SystemForm.Create(device);
-            View.SystemForm subForm2 = View.SystemForm.Create(device);
+            View.SystemForm subForm1 = View.SystemForm.Create(1, device);
+            View.SystemForm subForm2 = View.SystemForm.Create(2, device);
             
             //_sysController = new Controller.SystemController(subForm1, _model);
 
             _allForms.AddFirst(subForm1);
+            _allForms.AddLast(subForm2);
 
             View.ContentMenu menu = View.ContentMenu.Create("Прибор " + deviceName);
-
 
             AppState appState = new AppState(_allForms);
             FormsBuilder formsBuilder = new FormsBuilder(_allForms);
@@ -93,7 +93,7 @@ namespace Multifunctional_heat_meters_gui
 
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(menuBuilder.UpdateMenu);
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(controllerBuilder.ResetControllers);
-
+            //subForm1.OnFormChanged
             //subForm1.PowerSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePowerSystem);
             //subForm1.PressureSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePressureSystem);
 
