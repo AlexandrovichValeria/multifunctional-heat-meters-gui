@@ -13,58 +13,16 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Box Checkboxes_box;
         [Builder.Object]
+        private Box sensor_box;
+        [Builder.Object]
         private Box button_box;
-
         [Builder.Object]
-        private ComboBoxText pressure_combo;
-        [Builder.Object]
-        private ComboBoxText power_combo;
-
-        [Builder.Object]
-        private Entry const_entry1;
-        [Builder.Object]
-        private Entry const_entry2;
-        [Builder.Object]
-        private Entry const_entry3;
-        [Builder.Object]
-        private Entry const_entry4;
-        [Builder.Object]
-        private CheckButton sensor_check1;
-        [Builder.Object]
-        private CheckButton sensor_check2;
-        [Builder.Object]
-        private CheckButton sensor_check3;
-        [Builder.Object]
-        private CheckButton sensor_check4;
-        [Builder.Object]
-        private CheckButton check5;
-
-        [Builder.Object]
-        private Entry entry5;
-        [Builder.Object]
-        private Entry entry6;
-        [Builder.Object]
-        private Entry entry7;
-        [Builder.Object]
-        private Entry entry8;
-        [Builder.Object]
-        private Entry entry9;
-
-        [Builder.Object]
-        private CheckButton spec1_checkbox;
-        [Builder.Object]
-        private CheckButton spec2_checkbox;
-        [Builder.Object]
-        private Entry spec1;
-        [Builder.Object]
-        private Entry spec2;
-
-        [Builder.Object]
-        private Label energy_discr_system;
-
+        private Box other_settings_box;
 
         private ParticipatedPipelinesBlock _participatedPipelinesBlock;
         private ADS_97_Form _ADS_97_Form;
+        private SensorBlock _sensorBlock;
+        private OtherSettingsBlock _otherSettingsBlock;
 
         private int _minPipelinesCountFor_ADS_97 = 0;
         private static string SelectedPipelinesParam = "031н00";
@@ -89,7 +47,14 @@ namespace Multifunctional_heat_meters_gui.View
 
             PressureMeasure = 0;
             PowerMeasure = 0;
+
+            _formIndex = index;
+
             _ADS_97_Form = ADS_97_Form.Create();
+            _sensorBlock = SensorBlock.Create();
+            _otherSettingsBlock = OtherSettingsBlock.Create();
+            sensor_box.Add(_sensorBlock);
+            other_settings_box.Add(_otherSettingsBlock);
 
             if (device == Model.Device.SPT963)
                 _participatedPipelinesBlock = ParticipatedPipelinesBlock.Create(16, 8);
@@ -99,9 +64,21 @@ namespace Multifunctional_heat_meters_gui.View
 
             CalculateMinPipelinesCountForm_ADS_97(device);
             button_box.Add(_backForwardComponent);
-            spec1.Sensitive = false;
-            spec2.Sensitive = false;
-            //DisableSensorsSettings();
+
+            if(index == 1)
+            {
+                _sensorBlock.DisableBlock();
+                _participatedPipelinesBlock.EnableBlock();
+                _otherSettingsBlock.EnableBlock();
+            }
+            else if (index == 2)
+            {
+                _sensorBlock.EnableBlock();
+                _participatedPipelinesBlock.DisableBlock();
+                _otherSettingsBlock.DisableBlock();
+            }
+
+            ShowAll();
 
             SetupHandlers();
         }
@@ -111,32 +88,34 @@ namespace Multifunctional_heat_meters_gui.View
             Dictionary<string, string> result = GetSystemWindowData();
             return result.ContainsKey(param) ? result[param] : null;
         }
+
         public Dictionary<string, string> GetSystemWindowData()
         {
-            Dictionary<string, string> result = _participatedPipelinesBlock.GetResult();
+            Dictionary<string, string> pipelinesResult = _participatedPipelinesBlock.GetResult();
+            Dictionary<string, string> sensorResult = _sensorBlock.GetResult();
+            Dictionary<string, string> otherResult = _otherSettingsBlock.GetResult();
 
-            result.Add("030н00", $"{pressure_combo.ActiveId}{power_combo.ActiveId}");
-            
-            result.Add("030н01", entry5.Text);
-            result.Add("030н02", entry6.Text);
-            result.Add("024", entry7.Text);
-            result.Add("025", entry8.Text);
-            result.Add("008", entry9.Text);
-
-            result.Add("003", spec1.Text);
-            result.Add("004", spec2.Text);
-
-            result.Add("035н00", const_entry1.Text);
-            result.Add("035н01", sensor_check1.Active ? "1" : "0");
-            result.Add("036н00", const_entry2.Text);
-            result.Add("036н01", sensor_check2.Active ? "1" : "0");
-            result.Add("037н00", const_entry3.Text);
-            result.Add("037н01", sensor_check3.Active ? "1" : "0");
-            result.Add("040н00", const_entry4.Text);
-            result.Add("040н01", sensor_check4.Active ? "1" : "0");
-
-            result.Add("CurrentTimeAndDate", check5.Active ? "1" : "0");
+            Dictionary<string, string> result = pipelinesResult
+                .Union(sensorResult)
+                .Union(otherResult)
+                .ToDictionary(x => x.Key, x => x.Value);
             return result;
+        }
+
+        public void SetSystemWindowData(Dictionary<string, string> data)
+        {
+            Dictionary<string, string> pipelinesResult = data.Where(s => s.Key == "031н00" || s.Key == "031н01")
+                        .ToDictionary(dict => dict.Key, dict => dict.Value);
+           
+            _participatedPipelinesBlock.SetData(pipelinesResult);
+
+            Dictionary<string, string> otherResult = data.Where(s => s.Key == "030н00" 
+            || s.Key == "030н01" || s.Key == "030н02" || s.Key == "024" || s.Key == "025" || s.Key == "008" 
+            || s.Key == "003" || s.Key == "004" || s.Key == "CurrentTimeAndDate")
+                        .ToDictionary(dict => dict.Key, dict => dict.Value);
+
+            _otherSettingsBlock.SetData(otherResult);
+
         }
 
         public override bool IsFormFilledOut()
@@ -209,132 +188,52 @@ namespace Multifunctional_heat_meters_gui.View
         public override void OnLoadForm(EventsArgs.NextFormArgs e, AppState appState)
         {
             OnFormChanged(this, EventArgs.Empty);
-            if (appState.AreAllPipelinesFilledOut())
+            if (_formIndex == 2)
             {
-                EnableSensorsSettings();
+                View.SystemForm sysform1 = (View.SystemForm)appState.GetForms().First.Value;
+                if (sysform1 != null)
+                {
+                    Dictionary<string, string> data = sysform1.GetSystemWindowData();
+                    SetSystemWindowData(data);
+                }
+            }
+            /*if (appState.AreAllPipelinesFilledOut())
+            {
+                //_sensorBlock.EnableBlock();
+                //EnableSensorsSettings();
             } else
             {
-                DisableSensorsSettings();
-            }
-        }
-
-
-        public void EnableSensorsSettings()
-        {
-            const_entry1.Sensitive = true;
-            const_entry2.Sensitive = true;
-            const_entry3.Sensitive = true;
-            const_entry4.Sensitive = true;
-            sensor_check1.Sensitive = true;
-            sensor_check2.Sensitive = true;
-            sensor_check3.Sensitive = true;
-            sensor_check4.Sensitive = true;
-        }
-
-        public void DisableSensorsSettings()
-        {
-            const_entry1.Sensitive = false;
-            const_entry2.Sensitive = false;
-            const_entry3.Sensitive = false;
-            const_entry4.Sensitive = false;
-            sensor_check1.Sensitive = false;
-            sensor_check2.Sensitive = false;
-            sensor_check3.Sensitive = false;
-            sensor_check4.Sensitive = false;
+                //_sensorBlock.DisableBlock();
+                //DisableSensorsSettings();
+            }*/
         }
 
         protected void SetupHandlers()
         {
-            spec1_checkbox.Clicked += OnSpec1CheckBoxClicked;
-            spec2_checkbox.Clicked += OnSpec2CheckBoxClicked;
-            power_combo.Changed += OnPowerComboChanged;
-            pressure_combo.Changed += OnPressureComboChanged;
-
-            const_entry1.Changed += TurnIntoNumber;
-            const_entry2.Changed += TurnIntoNumber;
-            const_entry3.Changed += TurnIntoNumber;
-            const_entry4.Changed += TurnIntoNumber;
-            entry5.Changed += TurnIntoNumber;
-            entry6.Changed += TurnIntoNumber;
-            entry7.Changed += TurnIntoNumber;
-            entry8.Changed += TurnIntoNumber;
-            entry9.Changed += TurnIntoNumber;
-            spec1.Changed += TurnIntoNumber;
-            spec2.Changed += TurnIntoNumber;
-
             _participatedPipelinesBlock.BlockChangedEvent += OnFormChanged;
-            //power_combo.Changed += OnFormChanged;
-            //pressure_combo.Changed += OnFormChanged;
-            const_entry1.Changed += OnFormChanged;
-            const_entry2.Changed += OnFormChanged;
-            const_entry3.Changed += OnFormChanged;
-            const_entry4.Changed += OnFormChanged;
-            entry5.Changed += OnFormChanged;
-            entry6.Changed += OnFormChanged;
-            entry7.Changed += OnFormChanged;
-            entry8.Changed += OnFormChanged;
-            //entry9.Changed += OnFormChanged;
-            spec1.Changed += OnFormChanged;
-            spec2.Changed += OnFormChanged;
+            _otherSettingsBlock.BlockChangedEvent += OnFormChanged;
+            _otherSettingsBlock.PowerComboChangedEvent += OnPowerComboChanged;
+            _otherSettingsBlock.PressureComboChangedEvent += OnPressureComboChanged;
 
             //DeleteEvent += OnLocalDeleteEvent;
         }
 
         protected void OnPowerComboChanged(object sender, EventArgs a)
-        { 
-            if(power_combo.ActiveId == "0")
-            {
-                energy_discr_system.Text = "ГДж";
-            } 
-            else if(power_combo.ActiveId == "1")
-            {
-                energy_discr_system.Text = "Гкал";
-            }
-            else if(power_combo.ActiveId == "2")
-            {
-                energy_discr_system.Text = "МВт*ч";
-            }
-
-            PowerMeasure = Int32.Parse(power_combo.ActiveId);
+        {
+            PowerMeasure = _otherSettingsBlock.PowerMeasure;
             EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(PowerMeasure);
-
+            
             PowerSystemChangedEvent?.Invoke(this, args);
         }
 
         protected void OnPressureComboChanged(object sender, EventArgs a)
         {
-            PressureMeasure = Int32.Parse(pressure_combo.ActiveId);
+            PressureMeasure = _otherSettingsBlock.PressureMeasure;
             EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(PressureMeasure);
 
             PressureSystemChangedEvent?.Invoke(this, args);
         }
 
-        protected void OnSpec1CheckBoxClicked(object sender, EventArgs a)
-        {
-            if (spec1_checkbox.Active)
-            {
-                spec1.Sensitive = true;
-                spec1.CanFocus = true;
-            }
-            else
-            {
-                spec1.Sensitive = false;
-                spec1.CanFocus = false;
-            }
-        }
-        protected void OnSpec2CheckBoxClicked(object sender, EventArgs a)
-        {
-            if (spec2_checkbox.Active)
-            {
-                spec2.Sensitive = true;
-                spec2.CanFocus = true;
-            }
-            else
-            {
-                spec2.Sensitive = false;
-                spec2.CanFocus = false;
-            }
-        }
         
     }
 }

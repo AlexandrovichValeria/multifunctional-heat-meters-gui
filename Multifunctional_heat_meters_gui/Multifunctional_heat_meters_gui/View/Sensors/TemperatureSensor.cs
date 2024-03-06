@@ -14,6 +14,12 @@ namespace Multifunctional_heat_meters_gui.View
         private Box button_box;
         [Builder.Object]
         private Label name_label;
+        [Builder.Object]
+        private ComboBoxText combo1;
+        [Builder.Object]
+        private Entry entry1;
+        [Builder.Object]
+        private Entry entry2;
 
         //private string _type;
         public static TemperatureSensor Create(string type)
@@ -30,6 +36,22 @@ namespace Multifunctional_heat_meters_gui.View
             _type = type;
             name_label.Text = _formName;
             button_box.Add(_backForwardComponent);
+        }
+
+        public override Dictionary<string, string> GetSensorSettings()
+        {
+            string[] cv1 = { "023", "024", "033", "034", "043", "044", "053", "054", "063", "064" };
+            string combo1Value = ""; //"043" по умолчанию
+            if (combo1.ActiveId != "-1")
+                combo1Value = cv1[Int32.Parse(combo1.ActiveId)];
+
+            Dictionary<string, string> result = new Dictionary<string, string>()
+            {
+                {"033н00", combo1Value},
+                {"033н01", entry2.Text},
+                {"033н02", entry1.Text}
+            };
+            return result;
         }
     }
 }

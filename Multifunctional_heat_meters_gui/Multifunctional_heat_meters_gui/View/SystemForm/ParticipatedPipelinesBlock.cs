@@ -7,7 +7,7 @@ using Gtk;
 
 namespace Multifunctional_heat_meters_gui.View
 {
-    class ParticipatedPipelinesBlock : Box
+    class ParticipatedPipelinesBlock : WindowBlock
     {
         private Builder _builder;
         [Builder.Object]
@@ -37,7 +37,7 @@ namespace Multifunctional_heat_meters_gui.View
             return new ParticipatedPipelinesBlock(participatedPipelinesCount, participatedConsumerCount, builder, builder.GetObject("box").Handle);
         }
 
-        protected ParticipatedPipelinesBlock(int participatedPipelinesCount, int participatedConsumerCount, Builder builder, IntPtr handle) : base(handle)
+        protected ParticipatedPipelinesBlock(int participatedPipelinesCount, int participatedConsumerCount, Builder builder, IntPtr handle) : base(builder, handle)
         {
             _builder = builder;
             builder.Autoconnect(this);
@@ -54,6 +54,7 @@ namespace Multifunctional_heat_meters_gui.View
             pipelines_box.Add(_participatedPipelinesCheckboxes);
             consumers_box.Add(_participatedConsumersCheckboxes);
 
+            ShowAll();
             
             SetupHandlers();
         }
@@ -90,6 +91,11 @@ namespace Multifunctional_heat_meters_gui.View
                 { "031н00", _pipelinesResult },
                 { "031н01", _consumersResult }
             };
+        }
+        public override void SetData(Dictionary<string, string> data)
+        {
+            _participatedPipelinesCheckboxes.SetCheckboxes(data["031н00"]);
+            _participatedConsumersCheckboxes.SetCheckboxes(data["031н01"]);
         }
 
         public bool SomeCheckboxesAreChecked()

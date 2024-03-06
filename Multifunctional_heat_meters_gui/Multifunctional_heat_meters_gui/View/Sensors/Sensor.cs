@@ -21,6 +21,11 @@ namespace Multifunctional_heat_meters_gui.View
 
             SetupHandlers();
         }
+
+        public virtual Dictionary<string, string> GetSensorSettings()
+        {
+            return new Dictionary<string, string>() { };
+        }
         protected void SetupHandlers()
         {
             

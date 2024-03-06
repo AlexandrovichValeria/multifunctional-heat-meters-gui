@@ -7,9 +7,12 @@ using Gtk;
 
 namespace Multifunctional_heat_meters_gui.View
 {
-    class CheckboxesBlock : Grid
+    public class CheckboxesBlock : Box
     {
         private Builder _builder;
+        [Builder.Object]
+        private Grid Checkboxes;
+
         public event EventHandler CheckBoxesChecked;
 
         private static int s_countCheckboxesInLine = 8;
@@ -25,7 +28,7 @@ namespace Multifunctional_heat_meters_gui.View
         public static CheckboxesBlock Create(int countCheckboxes, string prefix)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.SystemForm.CheckboxesBlock.glade", null);
-            return new CheckboxesBlock(countCheckboxes, prefix, builder, builder.GetObject("Checkboxes").Handle);
+            return new CheckboxesBlock(countCheckboxes, prefix, builder, builder.GetObject("box").Handle);
         }
         protected CheckboxesBlock(int countCheckboxes, string prefix, Builder builder, IntPtr handle) : base(handle)
         {
@@ -39,46 +42,23 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 _result += "0";
 
-                /*if (i % 8 == 0)
-                {
-                    Checkboxes.RowDefinitions.Add(new RowDefinition());
-                }
-                StackPanel panel = new StackPanel
-                {
-                    Orientation = Orientation.Horizontal
-                };*/
-
                 Label currentLabel = new Label($"{prefix}{i + 1}");
 
                 CheckButton currentCheckbox = new CheckButton();
-                /*{
-                    Width = 20,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    IsEnabled = true
-                };*/
-
                 
                 currentCheckbox.Clicked += new EventHandler(Checkbox_Checked);
-                
 
                 Box box = new Box(Orientation.Horizontal, 0);
-
 
                 _checkboxes[i] = currentCheckbox;
                 _labels[i] = currentLabel;
 
                 box.Add(currentCheckbox);
                 box.Add(currentLabel);
-                //panel.Children.Add(currentCheckbox);
-                //panel.Children.Add(currentLabel);
-
-                //Grid.SetRow(panel, i / s_countCheckboxesInLine);
-                //Grid.SetColumn(panel, i % s_countCheckboxesInLine);
                 int row = 1;
                 if (i >= 8)
                     row = 2;
-                Attach(box, i%8+1, row, 1, 1);
-                
+                Checkboxes.Attach(box, i%8+1, row, 1, 1);
             }
 
             ShowAll();
@@ -86,7 +66,18 @@ namespace Multifunctional_heat_meters_gui.View
             SetupHandlers();
         }
 
-        /// <summary> Sets up the handlers. </summary>
+        public void SetCheckboxes(string data)
+        {
+            _result = data;
+            for(int i = 0; i < data.Length; i++)
+            {
+                if (data[i] == '1')
+                    _checkboxes[i].Active = true;
+                else
+                    _checkboxes[i].Active = false;
+            }
+        }
+
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
