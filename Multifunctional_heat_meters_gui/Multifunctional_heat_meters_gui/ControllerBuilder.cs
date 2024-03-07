@@ -52,8 +52,11 @@ namespace Multifunctional_heat_meters_gui
         {
             int typeOfPowerMeasurement = _sysForm.GetMeasurementSystems()["Power"];
             int typeOfPressureMeasurement = _sysForm.GetMeasurementSystems()["Pressure"];
+
+            //Console.WriteLine("SetControllers");
             foreach (var form in _appState.GetForms())
             {
+                //Console.WriteLine(form.FormName);
                 Controller.Controller controller = null;
                 if (form.FormName.StartsWith("Общесистемные"))
                 {
@@ -77,9 +80,15 @@ namespace Multifunctional_heat_meters_gui
                 {
                     controller = new Controller.PipelineController2((View.PipelineSettings2Form)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
                 }
+                else if (form.FormName.StartsWith("Датчик"))
+                {
+                    //Console.WriteLine("Датчик created");
+                    controller = new Controller.SensorController((View.Sensor)form, _model, form.FormName);
+                }
 
                 if (controller != null)
                 {
+                    //Console.WriteLine(controller.)
                     _controllers.AddLast(controller);
                 }
             }

@@ -13,7 +13,7 @@ namespace Multifunctional_heat_meters_gui.DB
         private string _prefix;
         private string _description;
         private List<Tag> _tagList;
-        private List<TagGroup> _tagGroupList;
+        public List<TagGroup> _tagGroupList;
         private XElement _XML;
 
         public Channel(string no, string name, string kind, string prefix, string description)

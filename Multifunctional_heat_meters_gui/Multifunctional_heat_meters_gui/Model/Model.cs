@@ -19,6 +19,9 @@ namespace Multifunctional_heat_meters_gui.Model
 
         private List<Pipeline> _pipelines;
 
+        //private List<Sensor> _sensors;
+        private Dictionary<string, Sensor> _sensors;
+
         private List<Consumer> _consumers;
 
         private Device _device;
@@ -88,6 +91,44 @@ namespace Multifunctional_heat_meters_gui.Model
                 _pipelines[i].ChangeParameterValue("113н01", "032" + number);
                 _pipelines[i].ChangeParameterValue("114н01", "033" + number);
             }
+
+            //_sensors = new List<Sensor>();
+            _sensors = new Dictionary<string, Sensor>();
+
+            //Создание датчиков
+            /*TemperatureSensor coldWaterTempSensor = new TemperatureSensor();
+            coldWaterTempSensor.ChangeParameterValue("114н01", "03301"); //ИЗМЕНИТЬ
+            _sensors.Add(Dictionaries.sensorNames[1], coldWaterTempSensor);*/
+
+
+            for (int i = 1; i <= 4; i++)
+            {
+                if (i == 3)
+                    continue;
+                Sensor temp_sensor = null; 
+                if (i == 1) //температура холодной воды
+                {
+                    temp_sensor = new TemperatureSensor();
+                    temp_sensor.ChangeParameterValue("114н01", "03301"); //ИЗМЕНИТЬ
+                }
+                else if(i == 2)//давление холодной воды
+                {
+                    temp_sensor = new PressureSensor();
+                    temp_sensor.ChangeParameterValue("113н01", "03201"); //ИЗМЕНИТЬ
+                }
+                else if (i == 3) //барометрическое давление
+                {
+                    /*PressureSensor barometricPressureSensor = new PressureSensor();
+                    barometricPressureSensor.ChangeParameterValue("113н01", "03201"); //ИЗМЕНИТЬ*/
+                }
+                else if (i == 4)//температура наружного
+                {
+                    temp_sensor = new TemperatureSensor();
+                    temp_sensor.ChangeParameterValue("114н01", "03302"); //ИЗМЕНИТЬ
+                }
+                _sensors.Add(Dictionaries.sensorNames[i], temp_sensor);
+
+            }
             _consumers = new List<Consumer>();
             for (int i = 0; i < consumersCount; i++)
             {
@@ -105,6 +146,11 @@ namespace Multifunctional_heat_meters_gui.Model
         public Pipeline GetPipelineByInd(int index)
         {
             return _pipelines[index];
+        }
+
+        public Sensor GetSensorByName(string name)
+        {
+            return _sensors[name];
         }
 
         public void SaveDataToFile(string path, string serialNumber)
@@ -224,9 +270,13 @@ namespace Multifunctional_heat_meters_gui.Model
                             tagGroups.Add(currentTagGroup);
                         }
                         if (ordinal >= 30 && ordinal < 100) // параметры для каналов
+                        {
                             currentTagGroup.AddNewTag(new DB.GroupTag(index, name + suffixK, parameter.Value, "", parameter.UnitOfMeasurement));
+                        }
                         else //параметры трубопроводов
+                        {
                             currentTagGroup.AddNewTag(new DB.GroupTag(index, name + suffixT, parameter.Value, "", parameter.UnitOfMeasurement));
+                        }
                     }
                 }
                 foreach (var tagGroup in tagGroups)
@@ -241,10 +291,74 @@ namespace Multifunctional_heat_meters_gui.Model
             }
 
             foreach (var channel in channelsListT)
+            {
                 dataBase.AddChannel(channel);
-
+            }
+            
             foreach (var channel in channelsListK)
+            {
                 dataBase.AddChannel(channel);
+            }
+
+            //Внесение информации по датчикам
+            List<DB.Channel> channelsListS = new List<DB.Channel>();
+
+            foreach(KeyValuePair<string, Sensor> name_sensor in _sensors)
+            {
+                //if (_sensors[i].Active == false)
+                int i = Dictionaries.sensorNames.FirstOrDefault(x => x.Value == name_sensor.Key).Key;
+                //if (Dictionaries.sensorNames.[key_value.Key])
+                if(name_sensor.Value.Active == false)
+                {
+                    Console.WriteLine("Sensor inactive");
+                    continue; 
+                }
+                Sensor currentSensor = name_sensor.Value;
+                parameters = currentSensor.Parameters;
+                tagGroups = new List<DB.TagGroup>();
+                string suffixT = "т" + i.ToString();
+                string suffixK = "к" + i.ToString();
+                DB.Channel channelTS = new DB.Channel(i.ToString(), suffixT, "Channel", "т", "трубопровод");
+                DB.Channel channelS = new DB.Channel(i.ToString(), suffixK, "Channel", "к", "доп.канал");
+
+                foreach (var item in parameters)
+                {
+                    string name = item.Key;
+                    Parameter parameter = item.Value;
+
+                    int ordinal = Int32.Parse(name.Substring(0, 3));
+                    int index = Int32.Parse(name.Substring(4, 2));
+                    DB.TagGroup currentTagGroup = null;
+                    foreach (var tagGroup in tagGroups)
+                    {
+                        if (tagGroup.Ordinal == ordinal) currentTagGroup = tagGroup;
+                    }
+                    if (currentTagGroup == null)
+                    {
+                        currentTagGroup = new DB.TagGroup(ordinal);
+                        tagGroups.Add(currentTagGroup);
+                    }
+                    if (ordinal >= 30 && ordinal < 100) // параметры для каналов
+                        currentTagGroup.AddNewTag(new DB.GroupTag(index, name + suffixK, parameter.Value, "", parameter.UnitOfMeasurement));
+                    else //параметры трубопроводов
+                        currentTagGroup.AddNewTag(new DB.GroupTag(index, name + suffixT, parameter.Value, "", parameter.UnitOfMeasurement));
+                }
+                foreach (var tagGroup in tagGroups)
+                {
+                    if (tagGroup.Ordinal >= 30 && tagGroup.Ordinal < 100)
+                        channelS.AddTagGroup(tagGroup);
+                    else
+                        channelTS.AddTagGroup(tagGroup);
+                }
+                channelsListS.Add(channelS);
+                channelsListS.Add(channelTS);
+
+            }
+            
+            foreach (var channel in channelsListS)
+            {
+                dataBase.AddChannel(channel);
+            }
 
             //Внесение информации по потребителям
             for (int i = 0; i < _consumers.Count; i++)

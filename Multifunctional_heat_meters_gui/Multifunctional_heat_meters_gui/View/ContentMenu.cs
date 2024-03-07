@@ -45,13 +45,7 @@ namespace Multifunctional_heat_meters_gui.View
             { TopButtonsTypes.CONSUMERS, "Настройка потребителей" },
         };*/
 
-        private static readonly Dictionary<int, string> sensorNames = new Dictionary<int, string>()
-        {
-            {1, "Датчик температуры холодной воды" },
-            {2, "Датчик давления холодной воды" },
-            {3, "Датчик барометрического давления" },
-            {4, "Датчик температуры наружного воздуха" },
-        };
+        
 
         public enum DeepButtonsNames
         {
@@ -228,7 +222,7 @@ namespace Multifunctional_heat_meters_gui.View
             //add new rows
             foreach (int number in buttonsNumbers)
             {
-                title = sensorNames[number];
+                title = Dictionaries.sensorNames[number];
                 TreeIter nodeIter;
                 bool nodeExists = false;
                 TreePath temp_path = new TreePath("3:0");
