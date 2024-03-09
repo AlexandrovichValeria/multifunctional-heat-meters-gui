@@ -25,6 +25,9 @@ namespace Multifunctional_heat_meters_gui.Model
         private List<Consumer> _consumers;
 
         private Device _device;
+
+        private List<int> ParticipatedChannels;
+        //private List<int> Participated033Channels;
         public SystemWideSettings SystemWideSettings
         {
             get { return _systemWideSettings; }
@@ -38,6 +41,7 @@ namespace Multifunctional_heat_meters_gui.Model
                 _device = value;
                 int newPipelinesCount = 12;
                 int newConsumersCount = 6;
+                int newChannelCount = 16;
                 if (_device == Device.SPT963)
                 {
                     newPipelinesCount = 16;
@@ -45,6 +49,7 @@ namespace Multifunctional_heat_meters_gui.Model
                 }
                 _systemWideSettings.PipelinesCount = newPipelinesCount;
                 _systemWideSettings.ConsumersCount = newConsumersCount;
+                _systemWideSettings.ChannelsCount = newChannelCount;
                 foreach (var consumer in _consumers)
                 {
                     consumer.PipelinesCount = newPipelinesCount;
@@ -76,6 +81,7 @@ namespace Multifunctional_heat_meters_gui.Model
             _device = device;
             int pipelinesCount = 12;
             int consumersCount = 6;
+            int channelsCount = 16;
             if (_device == Device.SPT963)
             {
                 pipelinesCount = 16;
@@ -92,14 +98,16 @@ namespace Multifunctional_heat_meters_gui.Model
                 _pipelines[i].ChangeParameterValue("114н01", "033" + number);
             }
 
-            //_sensors = new List<Sensor>();
-            _sensors = new Dictionary<string, Sensor>();
+            ParticipatedChannels = new List<int>();
+            //Participated033Channels = new List<int>();
+            for (int i = 0; i< channelsCount; i++)
+            {
+                ParticipatedChannels.Add(0);
+                //Participated033Channels.Add(0);
+            }
 
             //Создание датчиков
-            /*TemperatureSensor coldWaterTempSensor = new TemperatureSensor();
-            coldWaterTempSensor.ChangeParameterValue("114н01", "03301"); //ИЗМЕНИТЬ
-            _sensors.Add(Dictionaries.sensorNames[1], coldWaterTempSensor);*/
-
+            _sensors = new Dictionary<string, Sensor>();
 
             for (int i = 1; i <= 4; i++)
             {
@@ -109,12 +117,12 @@ namespace Multifunctional_heat_meters_gui.Model
                 if (i == 1) //температура холодной воды
                 {
                     temp_sensor = new TemperatureSensor();
-                    temp_sensor.ChangeParameterValue("114н01", "03301"); //ИЗМЕНИТЬ
+                    //temp_sensor.ChangeParameterValue("114н01", "03301"); //ИЗМЕНИТЬ
                 }
                 else if(i == 2)//давление холодной воды
                 {
                     temp_sensor = new PressureSensor();
-                    temp_sensor.ChangeParameterValue("113н01", "03201"); //ИЗМЕНИТЬ
+                    //temp_sensor.ChangeParameterValue("113н01", "03201"); //ИЗМЕНИТЬ
                 }
                 else if (i == 3) //барометрическое давление
                 {
@@ -124,7 +132,7 @@ namespace Multifunctional_heat_meters_gui.Model
                 else if (i == 4)//температура наружного
                 {
                     temp_sensor = new TemperatureSensor();
-                    temp_sensor.ChangeParameterValue("114н01", "03302"); //ИЗМЕНИТЬ
+                    //temp_sensor.ChangeParameterValue("114н01", "03302"); //ИЗМЕНИТЬ
                 }
                 _sensors.Add(Dictionaries.sensorNames[i], temp_sensor);
 
@@ -215,6 +223,9 @@ namespace Multifunctional_heat_meters_gui.Model
             for (int i = 0; i < _pipelines.Count; i++)
             {
                 if (_pipelines[i].Active == false) continue;
+
+                ParticipatedChannels[i] = 1;
+                //Participated033Channels[i] = 1;
                 Pipeline currentPipeline = _pipelines[i];
                 parameters = currentPipeline.Parameters;
                 bool freqWater = false; // относится ли к листу "Чатота вода"
@@ -305,21 +316,31 @@ namespace Multifunctional_heat_meters_gui.Model
 
             foreach(KeyValuePair<string, Sensor> name_sensor in _sensors)
             {
-                //if (_sensors[i].Active == false)
-                int i = Dictionaries.sensorNames.FirstOrDefault(x => x.Value == name_sensor.Key).Key;
-                //if (Dictionaries.sensorNames.[key_value.Key])
-                if(name_sensor.Value.Active == false)
+                //int i = Dictionaries.sensorNames.FirstOrDefault(x => x.Value == name_sensor.Key).Key;
+  
+                if (name_sensor.Value.Active == false)
                 {
                     Console.WriteLine("Sensor inactive");
                     continue; 
                 }
                 Sensor currentSensor = name_sensor.Value;
+
+                int channelnumber = OccupyChannel();
+                string channelname = channelnumber.ToString();
+                if (channelname.Length == 1)
+                    channelname = "0" + channelname;
+
+                if (currentSensor is TemperatureSensor)
+                    currentSensor.ChangeParameterValue("114н01", $"033{channelname}");
+                else
+                    currentSensor.ChangeParameterValue("113н01", $"032{channelname}");
+
                 parameters = currentSensor.Parameters;
                 tagGroups = new List<DB.TagGroup>();
-                string suffixT = "т" + i.ToString();
-                string suffixK = "к" + i.ToString();
-                DB.Channel channelTS = new DB.Channel(i.ToString(), suffixT, "Channel", "т", "трубопровод");
-                DB.Channel channelS = new DB.Channel(i.ToString(), suffixK, "Channel", "к", "доп.канал");
+                string suffixT = "т" + channelnumber.ToString();
+                string suffixK = "к" + channelnumber.ToString();
+                DB.Channel channelTS = new DB.Channel(channelnumber.ToString(), suffixT, "Channel", "т", "трубопровод");
+                DB.Channel channelS = new DB.Channel(channelnumber.ToString(), suffixK, "Channel", "к", "доп.канал");
 
                 foreach (var item in parameters)
                 {
@@ -388,5 +409,23 @@ namespace Multifunctional_heat_meters_gui.Model
             dataBase.SaveDBToFile(path, "xdb");
         }
 
+        private int OccupyChannel()
+        {
+            int result = 0;
+            
+            for(int i = 0; i < ParticipatedChannels.Count; i++)
+            {
+                if (ParticipatedChannels[i] == 1)
+                    continue;
+                else
+                {
+                    result = i + 1;
+                    ParticipatedChannels[i] = 1;
+                    break;
+                }
+            }
+            
+            return result;
+        }
     }
 }

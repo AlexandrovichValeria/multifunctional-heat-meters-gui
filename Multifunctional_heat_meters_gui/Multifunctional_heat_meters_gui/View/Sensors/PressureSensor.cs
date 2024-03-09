@@ -15,6 +15,12 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label name_label;
         [Builder.Object]
+        private Label measure_label1;
+        [Builder.Object]
+        private Label measure_label2;
+        [Builder.Object]
+        private Label measure_label3;
+        [Builder.Object]
         private ComboBoxText combo1;
         [Builder.Object]
         private Entry entry1;
@@ -52,6 +58,28 @@ namespace Multifunctional_heat_meters_gui.View
                 {"032н08", entry2.Text},
             };
             return result;
+        }
+        public override void ChangePressureMeasurement(int unitOfMeasurement)
+        {
+            switch (unitOfMeasurement)
+            {
+                case 0:
+                    measure_label1.Text = "МПа";
+                    measure_label2.Text = "МПа";
+                    measure_label3.Text = "МПа";
+                    break;
+                case 1:
+                    measure_label1.Text = "кгс/см2";
+                    measure_label2.Text = "кгс/см2";
+                    measure_label3.Text = "кгс/см2";
+                    break;
+            }
+        }
+
+
+        public override void ChangePowerMeasurement(int unitOfMeasurement)
+        {
+
         }
     }
 }

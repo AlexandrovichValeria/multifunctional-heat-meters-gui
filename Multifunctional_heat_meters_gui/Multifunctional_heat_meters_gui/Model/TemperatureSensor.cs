@@ -23,7 +23,7 @@ namespace Multifunctional_heat_meters_gui.Model
             get { return _parameters; }
         }*/
 
-        public TemperatureSensor(bool active = true)
+        public TemperatureSensor(bool active = false)
         {
             _active = active;
             _parameters = new Dictionary<string, Parameter>();

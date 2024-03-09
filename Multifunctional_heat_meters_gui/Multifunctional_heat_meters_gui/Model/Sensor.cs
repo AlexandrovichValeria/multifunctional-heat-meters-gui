@@ -24,7 +24,7 @@ namespace Multifunctional_heat_meters_gui.Model
             get { return _parameters; }
         }
 
-        public Sensor(bool active = true)
+        public Sensor(bool active = false)
         {
             _active = active;
             _parameters = new Dictionary<string, Parameter>();
@@ -34,5 +34,9 @@ namespace Multifunctional_heat_meters_gui.Model
         {
             _parameters[parameterName].Value = value;
         }
+
+        public virtual void ChangePowerMeasurement(int unitOfMeasurement){ }
+        
+        public virtual void ChangePressureMeasurement(int unitOfMeasurement) { }
     }
 }

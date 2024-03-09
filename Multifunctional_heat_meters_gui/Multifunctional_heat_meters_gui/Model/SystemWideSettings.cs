@@ -12,6 +12,8 @@ namespace Multifunctional_heat_meters_gui.Model
 
         private int _consumersCount;
 
+        private int _channelsCount;
+
         private Dictionary<string, Parameter> _parameters;
 
         public Dictionary<string, Parameter> Parameters
@@ -74,6 +76,20 @@ namespace Multifunctional_heat_meters_gui.Model
                     string additional = new string('0', _consumersCount - _parameters["031н01"].Value.Length);
                     _parameters["031н01"].Value = _parameters["031н01"].Value + additional;
                 }
+            }
+        }
+
+        public int ChannelsCount
+        {
+            get { return _channelsCount; }
+            set
+            {
+                _channelsCount = value;
+                /*if (_parameters["031н01"].Value.Length < _consumersCount)
+                {
+                    string additional = new string('0', _consumersCount - _parameters["031н01"].Value.Length);
+                    _parameters["031н01"].Value = _parameters["031н01"].Value + additional;
+                }*/
             }
         }
 

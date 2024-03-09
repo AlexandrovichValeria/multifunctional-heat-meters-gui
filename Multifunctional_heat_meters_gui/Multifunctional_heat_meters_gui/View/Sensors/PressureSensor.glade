@@ -112,7 +112,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">м³/час</property>
+                <property name="label" translatable="yes">кгс/ см²</property>
               </object>
               <packing>
                 <property name="left-attach">3</property>
@@ -153,7 +153,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">м³/час</property>
+                <property name="label" translatable="yes">кгс/ см²</property>
               </object>
               <packing>
                 <property name="left-attach">6</property>
@@ -176,6 +176,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
+                <property name="margin-top">5</property>
                 <property name="label" translatable="yes">Нижний предел диапазона измерений</property>
                 <property name="wrap">True</property>
               </object>
@@ -201,7 +202,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">м³/час</property>
+                <property name="label" translatable="yes">кгс/ см²</property>
               </object>
               <packing>
                 <property name="left-attach">3</property>

@@ -26,6 +26,10 @@ namespace Multifunctional_heat_meters_gui.View
         {
             return new Dictionary<string, string>() { };
         }
+
+        public virtual void ChangePressureMeasurement(int unitOfMeasurement) { }
+        public virtual void ChangePowerMeasurement(int unitOfMeasurement) { }
+
         protected void SetupHandlers()
         {
             

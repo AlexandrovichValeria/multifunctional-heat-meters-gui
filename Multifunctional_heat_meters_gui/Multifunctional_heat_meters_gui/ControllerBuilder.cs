@@ -84,6 +84,8 @@ namespace Multifunctional_heat_meters_gui
                 {
                     //Console.WriteLine("Датчик created");
                     controller = new Controller.SensorController((View.Sensor)form, _model, form.FormName);
+                    controller.ChangePressureSystem(typeOfPressureMeasurement);
+                    controller.ChangePowerSystem(typeOfPowerMeasurement);
                 }
 
                 if (controller != null)

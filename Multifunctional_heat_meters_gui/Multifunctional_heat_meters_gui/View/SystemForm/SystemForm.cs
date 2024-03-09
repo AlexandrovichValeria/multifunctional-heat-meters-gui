@@ -135,7 +135,7 @@ namespace Multifunctional_heat_meters_gui.View
         {
             string zeroOneStringPipelines = GetParamFromWindow(SelectedPipelinesParam);
             int countSelectedPipelines = (zeroOneStringPipelines != null) ? GetPipelinesCountByOneZeroString(zeroOneStringPipelines) : 0;
-            if (countSelectedPipelines > _minPipelinesCountFor_ADS_97)
+            if (FormIndex == 1 && countSelectedPipelines > _minPipelinesCountFor_ADS_97)
             {
                 _ADS_97_Form.Show();
             }
