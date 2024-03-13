@@ -33,6 +33,8 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label measure_label4;
         [Builder.Object]
+        private Label measure_label5;
+        [Builder.Object]
         private Label measure_label6;
         [Builder.Object]
         private Label measure_label7;
@@ -158,17 +160,10 @@ namespace Multifunctional_heat_meters_gui.View
 
         public void SetWindow()
         {
-            if (curIndicator == "01" || curIndicator == "02") //с числоимпульсным
+            if (curIndicator == "01") //объема с числоимпульсным
             {
                 label1.Text = "Верхний предел";
 
-                /*entry_label1.Hide();
-                entry1.Hide();
-                measure_label1.Hide();
-
-                entry_label2.Hide();
-                entry2.Text = "700";
-                measure_label2.Text = "м³/час";*/
                 entry_label1.Hide();
                 entry1.Text = "700";
                 measure_label1.Text = "м³/час";
@@ -183,13 +178,35 @@ namespace Multifunctional_heat_meters_gui.View
 
                 measure_label3.Text = "м³/имп";
                 measure_label4.Hide();
+
+                measure_label5.Text = "м³/час";
             }
 
-            else if (curIndicator == "03" || curIndicator == "04") //с частотным
+            else if(curIndicator == "02") //массы с числоимпульсным
+            {
+                label1.Text = "Верхний предел";
+
+                entry_label1.Hide();
+                entry1.Text = "700";
+                measure_label1.Text = "т/час";
+                entry_label2.Hide();
+                entry2.Hide();
+                measure_label2.Hide();
+
+                label2.Text = "Цена импульса из паспорта прибора";
+                entry_label3.Hide();
+                entry_label4.Hide();
+                entry4.Hide();
+
+                measure_label3.Text = "т/имп";
+                measure_label4.Hide();
+
+                measure_label5.Text = "т/час";
+            }
+
+            else if (curIndicator == "03") //объема с частотным
             {
                 entry_label1.Show();
-                //entry1.Show();
-                //measure_label1.Show();
 
                 label1.Text = "Нижний и верхний диапазон измерений по паспорту прибора. Нижний предел диапазона измерений должен соответствовать настройкам выхода расходомера";
                 entry1.Text = "0";
@@ -210,7 +227,32 @@ namespace Multifunctional_heat_meters_gui.View
                 entry4.Show();
                 measure_label4.Show();
                 measure_label4.Text = "Гц";
+                measure_label5.Text = "м³/час";
+            }
+            else if (curIndicator == "04") //массы с частотным
+            {
+                entry_label1.Show();
 
+                label1.Text = "Нижний и верхний диапазон измерений по паспорту прибора. Нижний предел диапазона измерений должен соответствовать настройкам выхода расходомера";
+                entry1.Text = "0";
+                measure_label1.Text = "т/час";
+
+                entry_label2.Show();
+                entry2.Show();
+                measure_label2.Show();
+                entry2.Text = "763.400";
+                measure_label2.Text = "т/час";
+
+                label2.Text = "Нижний и верхний предел частоты входного сигнала";
+
+                entry_label3.Show();
+                measure_label3.Text = "Гц";
+
+                entry_label4.Show();
+                entry4.Show();
+                measure_label4.Show();
+                measure_label4.Text = "Гц";
+                measure_label5.Text = "т/час";
             }
         }
 

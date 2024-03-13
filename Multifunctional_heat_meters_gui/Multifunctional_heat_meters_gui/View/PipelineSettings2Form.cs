@@ -129,12 +129,10 @@ namespace Multifunctional_heat_meters_gui.View
             if (check1.Active)
             {
                 entry1.Sensitive = true;
-                entry1.CanFocus = true;
             }
             else
             {
                 entry1.Sensitive = false;
-                entry1.CanFocus = false;
             }
         }
     }
