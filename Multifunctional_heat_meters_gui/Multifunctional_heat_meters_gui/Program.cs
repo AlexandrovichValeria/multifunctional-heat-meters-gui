@@ -22,7 +22,7 @@ namespace Multifunctional_heat_meters_gui
             
             Application.Init();
             ApplyTheme();
-            DeviceSelectionForm win = DeviceSelectionForm.Create();
+            View.DeviceSelectionForm win = View.DeviceSelectionForm.Create();
             win.Show();
             Application.Run();
         }

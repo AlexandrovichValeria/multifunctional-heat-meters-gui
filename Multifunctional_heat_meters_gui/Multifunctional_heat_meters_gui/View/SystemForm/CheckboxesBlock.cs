@@ -42,23 +42,15 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 _result += "0";
 
-                Label currentLabel = new Label($"{prefix}{i + 1}");
+                CheckButton currentCheckbox = new CheckButton($"{prefix}{i + 1}");
 
-                CheckButton currentCheckbox = new CheckButton();
-                
                 currentCheckbox.Clicked += new EventHandler(Checkbox_Checked);
-
-                Box box = new Box(Orientation.Horizontal, 0);
-
+                
                 _checkboxes[i] = currentCheckbox;
-                _labels[i] = currentLabel;
-
-                box.Add(currentCheckbox);
-                box.Add(currentLabel);
                 int row = 1;
                 if (i >= 8)
                     row = 2;
-                Checkboxes.Attach(box, i%8+1, row, 1, 1);
+                Checkboxes.Attach(currentCheckbox, i%8+1, row, 1, 1);
             }
 
             ShowAll();

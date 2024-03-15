@@ -1,7 +1,7 @@
 ﻿using System;
 using Gtk;
 
-namespace Multifunctional_heat_meters_gui
+namespace Multifunctional_heat_meters_gui.View
 {
     public class DeviceSelectionForm : Window
     {

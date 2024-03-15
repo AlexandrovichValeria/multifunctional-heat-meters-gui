@@ -13,22 +13,22 @@
       <column type="GdkPixbuf"/>
     </columns>
     <data>
-      <row id="0">
+      <row>
         <col id="0">Resources/scheme0.jpg</col>
       </row>
-      <row id="1">
+      <row>
         <col id="0">Resources/scheme1.jpg</col>
       </row>
-      <row id="2">
+      <row>
         <col id="0">Resources/scheme2.jpg</col>
       </row>
-      <row id="3">
+      <row>
         <col id="0">Resources/scheme3.jpg</col>
       </row>
-      <row id="4">
+      <row>
         <col id="0">Resources/scheme4.jpg</col>
       </row>
-      <row id="5">
+      <row>
         <col id="0">Resources/scheme5.jpg</col>
       </row>
     </data>
