@@ -45,7 +45,7 @@ namespace Multifunctional_heat_meters_gui
 
             View.WindowForm systemWindow1 = GetFormByName("Общесистемные параметры 1");
 
-            if (!(systemWindow1 is null))
+            if (systemWindow1 != null)
             {
                 _systemForm = systemWindow1 as View.SystemForm;
                 _systemForm.NextFormEvent += new EventHandler<EventsArgs.NextFormArgs>(SystemWindowParamsSet);
@@ -53,7 +53,7 @@ namespace Multifunctional_heat_meters_gui
 
             View.WindowForm systemWindow2 = GetFormByName("Общесистемные параметры 2");
 
-            if (!(systemWindow2 is null))
+            if (systemWindow2 != null)
             {
                 _sensorForm = systemWindow2 as View.SystemForm;
                 _sensorForm.NextFormEvent += new EventHandler<EventsArgs.NextFormArgs>(SystemWindowParamsSet);

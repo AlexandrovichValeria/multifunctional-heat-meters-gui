@@ -163,7 +163,6 @@ namespace Multifunctional_heat_meters_gui.View
             if (curIndicator == "01") //объема с числоимпульсным
             {
                 label1.Text = "Верхний предел";
-
                 entry_label1.Hide();
                 entry1.Text = "700";
                 measure_label1.Text = "м³/час";
@@ -219,7 +218,7 @@ namespace Multifunctional_heat_meters_gui.View
                 measure_label2.Text = "м³/час";
 
                 label2.Text = "Нижний и верхний предел частоты входного сигнала";
-                
+
                 entry_label3.Show();
                 measure_label3.Text = "Гц";
 

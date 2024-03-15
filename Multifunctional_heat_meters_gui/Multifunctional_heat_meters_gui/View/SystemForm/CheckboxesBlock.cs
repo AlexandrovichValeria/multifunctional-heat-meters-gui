@@ -45,7 +45,7 @@ namespace Multifunctional_heat_meters_gui.View
                 CheckButton currentCheckbox = new CheckButton($"{prefix}{i + 1}");
 
                 currentCheckbox.Clicked += new EventHandler(Checkbox_Checked);
-                
+
                 _checkboxes[i] = currentCheckbox;
                 int row = 1;
                 if (i >= 8)

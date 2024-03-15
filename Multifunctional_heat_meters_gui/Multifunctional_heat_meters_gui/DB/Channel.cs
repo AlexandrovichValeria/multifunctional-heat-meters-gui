@@ -119,7 +119,7 @@ namespace Multifunctional_heat_meters_gui.DB
             foreach (TagGroup tagGroup in _tagGroupList)
             {
                 GroupTag result = tagGroup.GetGroupTagById(id);
-                if (!(result is null)) return result;
+                if (result != null) return result;
             }
 
             return null;

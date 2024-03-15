@@ -74,7 +74,18 @@ namespace Multifunctional_heat_meters_gui.DB
             foreach (Channel channel in _channelList)
             {
                 AbstractTag tag = channel.GetTagById(id);
-                if (!(tag is null)) return tag;
+                /*Change:
+
+if (itemInSlot != null && itemInSlot.GetHeldEntity() is BaseLiquidVessel heldEntity && heldEntity.hasLid)
+
+To:
+
+BaseLiquidVessel heldEntity = itemInSlot?.GetHeldEntity() as BaseLiquidVessel;
+if (heldEntity != null && heldEntity.hasLid)
+
+*/
+
+                if (tag != null) return tag;
             }
 
             return null;
