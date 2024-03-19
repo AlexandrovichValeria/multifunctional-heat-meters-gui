@@ -119,8 +119,6 @@
           <object class="GtkGrid" id="grid3">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-left">10</property>
-            <property name="margin-right">10</property>
             <property name="margin-start">10</property>
             <property name="margin-end">10</property>
             <property name="margin-top">10</property>
@@ -145,7 +143,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="hexpand">True</property>
-                <property name="text" translatable="yes">0,01</property>
+                <property name="text" translatable="yes">0.01</property>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -220,7 +218,7 @@
               <object class="GtkEntry" id="entry6">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="text" translatable="yes">0,01</property>
+                <property name="text" translatable="yes">0.01</property>
               </object>
               <packing>
                 <property name="left-attach">1</property>

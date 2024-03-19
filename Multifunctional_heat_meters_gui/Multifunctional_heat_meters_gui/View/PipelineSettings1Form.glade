@@ -267,7 +267,7 @@
               <object class="GtkEntry" id="entry6">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="text" translatable="yes">15,07</property>
+                <property name="text" translatable="yes">15.07</property>
               </object>
               <packing>
                 <property name="left-attach">4</property>

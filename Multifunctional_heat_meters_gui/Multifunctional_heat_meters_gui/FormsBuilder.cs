@@ -153,15 +153,16 @@ namespace Multifunctional_heat_meters_gui
 
         private List<int> GetSensorNumbers()
         {
-            List<string> sensorsIncludedOrNot = new List<string>{
+            /*List<string> sensorsIncludedOrNot = new List<string>{
                 _sensorForm.GetParamFromWindow(sensors["ColdWaterTemperature"]),
                 _sensorForm.GetParamFromWindow(sensors["ColdWaterPressure"]),
                 _sensorForm.GetParamFromWindow(sensors["BarometricPressure"]),
-                _sensorForm.GetParamFromWindow(sensors["AirTemperature"]) };
+                _sensorForm.GetParamFromWindow(sensors["AirTemperature"]) };*/
+            List<int> sensorsIncludedOrNot = _sensorForm.GetSensorsState();
             List<int> result = new List<int>();
             for(int i = 0; i < sensorsIncludedOrNot.Count; i++)
             {
-                if (sensorsIncludedOrNot[i] == "1")
+                if (sensorsIncludedOrNot[i] == 1)
                 {
                     result.Add(i+1);
                 }

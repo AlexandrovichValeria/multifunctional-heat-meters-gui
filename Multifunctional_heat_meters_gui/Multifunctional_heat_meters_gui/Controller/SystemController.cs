@@ -45,10 +45,15 @@ namespace Multifunctional_heat_meters_gui.Controller
 
         private void ActivateSensors(List<int> sensor_indexes)
         {
+            Console.WriteLine("ActivateSensors");
+            foreach(int num in sensor_indexes)
+            {
+                Console.WriteLine(num);
+            }
             for (int i = 0; i < sensor_indexes.Count; i++)
             {
                 if (i == 2) continue; //барометрическое давление
-                if(sensor_indexes[i] == 1)
+                if(sensor_indexes[i] != 0)
                 {
                     _model.GetSensorByName(Dictionaries.sensorNames[i+1]).Active = true;
                 }
@@ -87,12 +92,7 @@ namespace Multifunctional_heat_meters_gui.Controller
             ActivatePipelines(currentData["031н00"]);
             ActivateConsumers(currentData["031н01"]);
 
-            ActivateSensors(new List<int> {
-                Int32.Parse(currentData["035н01"]),
-                Int32.Parse(currentData["036н01"]),
-                Int32.Parse(currentData["037н01"]),
-                Int32.Parse(currentData["040н01"]),
-            });
+            ActivateSensors(_view.GetSensorsState());
 
             foreach (KeyValuePair<string, string> paramValuePair in currentData)
             {

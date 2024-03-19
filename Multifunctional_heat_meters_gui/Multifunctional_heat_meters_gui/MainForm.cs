@@ -16,8 +16,6 @@ namespace Multifunctional_heat_meters_gui
         private ControllerBuilder controllerBuilder;
 
         private Builder _builder;
-        //View.SystemForm form = View.SystemForm.Create();
-        //View.ContentMenu menu = View.ContentMenu.Create();
 
 #pragma warning disable 649
 

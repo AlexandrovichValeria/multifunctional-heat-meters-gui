@@ -103,7 +103,7 @@ namespace Multifunctional_heat_meters_gui.View
             Entry temp = (Entry)sender;
 
             string text = temp.Text;
-            string numberOnly = Regex.Replace(text, "[^0-9. ,-]", "");
+            string numberOnly = Regex.Replace(text, "[^0-9. -]", "");
             temp.Text = numberOnly;
         }
 

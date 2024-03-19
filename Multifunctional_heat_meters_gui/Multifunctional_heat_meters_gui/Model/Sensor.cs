@@ -12,7 +12,10 @@ namespace Multifunctional_heat_meters_gui.Model
 
         protected Dictionary<string, Parameter> _parameters;
 
-        //Является ли трубопровод активным
+        protected int _type;
+
+        protected int _channel_number;
+
         public bool Active
         {
             get { return _active; }
@@ -24,11 +27,23 @@ namespace Multifunctional_heat_meters_gui.Model
             get { return _parameters; }
         }
 
+        public int Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+
+        public int ChannelNumber
+        {
+            get { return _channel_number; }
+            set { _channel_number = value; }
+        }
+
         public Sensor(bool active = false)
         {
             _active = active;
             _parameters = new Dictionary<string, Parameter>();
-
+            _channel_number = 0;
         }
         public void ChangeParameterValue(string parameterName, string value)
         {

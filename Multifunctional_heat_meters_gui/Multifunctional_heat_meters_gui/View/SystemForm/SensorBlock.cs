@@ -26,6 +26,8 @@ namespace Multifunctional_heat_meters_gui.View
         private CheckButton sensor_check3;
         [Builder.Object]
         private CheckButton sensor_check4;
+        [Builder.Object]
+        private Label measure_label2;
 
 
         public static SensorBlock Create()
@@ -41,20 +43,43 @@ namespace Multifunctional_heat_meters_gui.View
             SetupHandlers();
         }
 
+        public List<int> GetSensorsState()
+        {
+            List<int> result = new List<int>();
+            result.Add(sensor_check1.Active ? 1 : 0);
+            result.Add(sensor_check2.Active ? 1 : 0);
+            result.Add(sensor_check3.Active ? 1 : 0);
+            result.Add(sensor_check4.Active ? 1 : 0);
+            return result;
+        }
+
         public override Dictionary<string, string> GetResult()
         {
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
                 { "035н00", const_entry1.Text },
-                { "035н01", sensor_check1.Active ? "1" : "0"},
+                //{ "035н01", sensor_check1.Active ? "1" : "0"},
                 { "036н00", const_entry2.Text},
-                { "036н01", sensor_check2.Active ? "1" : "0" },
+                //{ "036н01", sensor_check2.Active ? "1" : "0" },
                 { "037н00", const_entry3.Text},
-                { "037н01", sensor_check3.Active ? "1" : "0"},
+                //{ "037н01", sensor_check3.Active ? "1" : "0"},
                 { "040н00", const_entry4.Text },
-                { "040н01", sensor_check4.Active? "1" : "0"},
+                //{ "040н01", sensor_check4.Active? "1" : "0"},
             };
             return res;
+        }
+
+        public void ChangePressureMeasurement(int unitOfMeasurement)
+        {
+            switch (unitOfMeasurement)
+            {
+                case 0:
+                    measure_label2.Text = "МПа";
+                    break;
+                case 1:
+                    measure_label2.Text = "кгс/см2";
+                    break;
+            }
         }
 
         protected void SetupHandlers()

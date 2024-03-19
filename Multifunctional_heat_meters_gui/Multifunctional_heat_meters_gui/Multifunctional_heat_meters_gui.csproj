@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{961DA8D3-146B-40A1-880C-1372448AB746}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Multifunctional_heat_meters_gui</RootNamespace>
     <AssemblyName>Multifunctional_heat_meters_gui</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>

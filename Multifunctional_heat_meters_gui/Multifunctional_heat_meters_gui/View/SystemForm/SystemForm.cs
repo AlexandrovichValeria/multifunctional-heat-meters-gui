@@ -89,6 +89,11 @@ namespace Multifunctional_heat_meters_gui.View
             return result.ContainsKey(param) ? result[param] : null;
         }
 
+        public List<int> GetSensorsState()
+        {
+            return _sensorBlock.GetSensorsState();
+        }
+
         public Dictionary<string, string> GetSystemWindowData()
         {
             Dictionary<string, string> pipelinesResult = _participatedPipelinesBlock.GetResult();
@@ -229,6 +234,8 @@ namespace Multifunctional_heat_meters_gui.View
         protected void OnPressureComboChanged(object sender, EventArgs a)
         {
             PressureMeasure = _otherSettingsBlock.PressureMeasure;
+
+            _sensorBlock.ChangePressureMeasurement(PressureMeasure);
             EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(PressureMeasure);
 
             PressureSystemChangedEvent?.Invoke(this, args);

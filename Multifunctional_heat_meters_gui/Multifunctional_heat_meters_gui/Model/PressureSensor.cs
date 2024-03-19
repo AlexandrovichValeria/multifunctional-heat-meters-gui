@@ -8,13 +8,23 @@ namespace Multifunctional_heat_meters_gui.Model
 {
     public class PressureSensor : Sensor
     {
-        public PressureSensor(bool active = false)
+        public PressureSensor(int type, bool active = false)
         {
             _active = active;
             _parameters = new Dictionary<string, Parameter>();
-            _parameters.Add("113н01", new Parameter("113н01", "03201", "", ""));
+            _type = type;
+            _channel_number = 0;
+            /*if (_type == 2)
+            {
+                _parameters.Add("036н01", new Parameter("036н01", "0", "", ""));
+            }
+            else if (_type == 3)
+            {
+                _parameters.Add("037н01", new Parameter("037н01", "0", "", ""));
+            }*/
+            //_parameters.Add("113н01", new Parameter("113н01", "03201", "", ""));
             _parameters.Add("032н00", new Parameter("032н00", "042", "", ""));
-            _parameters.Add("032н01", new Parameter("032н01", "16,31", "кгс/см2", "pressure"));
+            _parameters.Add("032н01", new Parameter("032н01", "16.31", "кгс/см2", "pressure"));
             _parameters.Add("032н02", new Parameter("032н02", "0", "", ""));
             _parameters.Add("032н08", new Parameter("032н08", "0", "кгс/см2", "pressure"));
         }

@@ -39,13 +39,13 @@ namespace Multifunctional_heat_meters_gui.Model
             _parameters.Add("031н00", new Parameter("031н00", new string('0', pipelinesCount), "б/р", ""));
             _parameters.Add("031н01", new Parameter("031н01", new string('0', consumersCount), "б/р", ""));
             _parameters.Add("035н00", new Parameter("035н00", "0", "'C", "temperature"));
-            _parameters.Add("035н01", new Parameter("035н01", "0", "б/р", ""));
+            //_parameters.Add("035н01", new Parameter("035н01", "0", "б/р", ""));
             _parameters.Add("036н00", new Parameter("036н00", "4", "кгс/см2", "pressure"));
-            _parameters.Add("036н01", new Parameter("036н01", "0", "б/р", ""));
+            //_parameters.Add("036н01", new Parameter("036н01", "0", "б/р", ""));
             _parameters.Add("037н00", new Parameter("037н00", "760", "мм.рт.ст", ""));
-            _parameters.Add("037н01", new Parameter("037н01", "0", "б/р", ""));
+            //_parameters.Add("037н01", new Parameter("037н01", "0", "б/р", ""));
             _parameters.Add("040н00", new Parameter("040н00", "20", "'C", "temperature"));
-            _parameters.Add("040н01", new Parameter("040н01", "0", "б/р", ""));
+            //_parameters.Add("040н01", new Parameter("040н01", "0", "б/р", ""));
             _parameters.Add("038н00", new Parameter("038н00", "0", "", ""));
             _parameters.Add("038н01", new Parameter("038н01", "0", "", ""));
             _parameters.Add("038н02", new Parameter("038н02", "0", "", ""));
