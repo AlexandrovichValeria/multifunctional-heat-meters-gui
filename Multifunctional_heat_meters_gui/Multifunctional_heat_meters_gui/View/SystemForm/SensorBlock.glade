@@ -40,6 +40,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Константное значение</property>
+                <property name="wrap">True</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
@@ -51,6 +52,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="hexpand">True</property>
+                <property name="width-chars">10</property>
                 <property name="text" translatable="yes">0</property>
               </object>
               <packing>
@@ -100,6 +102,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Константное значение</property>
+                <property name="wrap">True</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
@@ -111,6 +114,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="hexpand">True</property>
+                <property name="width-chars">10</property>
                 <property name="text" translatable="yes">0.1</property>
               </object>
               <packing>
@@ -148,6 +152,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Константное значение</property>
+                <property name="wrap">True</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
@@ -159,6 +164,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="hexpand">True</property>
+                <property name="width-chars">10</property>
                 <property name="text" translatable="yes">20</property>
               </object>
               <packing>
@@ -219,6 +225,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Константное значение</property>
+                <property name="wrap">True</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
@@ -230,6 +237,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="hexpand">True</property>
+                <property name="width-chars">10</property>
                 <property name="text" translatable="yes">760</property>
               </object>
               <packing>
@@ -242,7 +250,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">мм. рт. ст.</property>
+                <property name="label" translatable="yes">мм.рт.ст.</property>
               </object>
               <packing>
                 <property name="left-attach">2</property>

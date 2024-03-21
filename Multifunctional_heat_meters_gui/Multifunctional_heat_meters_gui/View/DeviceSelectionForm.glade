@@ -33,6 +33,7 @@
             <property name="can-focus">False</property>
             <property name="margin-start">10</property>
             <property name="margin-end">10</property>
+            <property name="hexpand">True</property>
             <property name="active-id">0</property>
             <items>
               <item id="0" translatable="yes">СПТ 961.1</item>

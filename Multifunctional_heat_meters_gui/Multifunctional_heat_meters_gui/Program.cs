@@ -44,16 +44,15 @@ namespace Multifunctional_heat_meters_gui
             setts.XftHintstyle = "hintfull";
             setts.FontName = "Verdana";
 
-
             //Encoding encoding = Encoding.UTF8;
 
             // Load the file with the specified encoding
-            string filePath = "Themes/LightTheme.css";
+            string filePath = "Themes/MainTheme.css";
             string fileContent = File.ReadAllText(filePath);
             // Load the Theme
             CssProvider css_provider = new CssProvider();
             css_provider.LoadFromData(fileContent);
-            //StyleContext.AddProviderForScreen(Gdk.Screen.Default, css_provider, 800);
+            StyleContext.AddProviderForScreen(Gdk.Screen.Default, css_provider, 800);
 
 
             //css_provider.LoadFromPath("themes/DeLorean-3.14/gtk-3.0/gtk.css")

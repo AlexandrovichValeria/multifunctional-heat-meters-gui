@@ -16,10 +16,10 @@
           <object class="GtkBox" id="box1">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-start">5</property>
-            <property name="margin-end">5</property>
-            <property name="margin-top">5</property>
-            <property name="margin-bottom">5</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
             <property name="orientation">vertical</property>
             <property name="spacing">10</property>
             <child>
@@ -64,9 +64,6 @@
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
                     <property name="label" translatable="yes">label</property>
-                    <attributes>
-                      
-                    </attributes>
                   </object>
                 </child>
                 <child type="label_item">
@@ -101,10 +98,10 @@
           <object class="GtkBox" id="box2">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-start">5</property>
-            <property name="margin-end">5</property>
-            <property name="margin-top">5</property>
-            <property name="margin-bottom">5</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
             <property name="orientation">vertical</property>
             <property name="spacing">10</property>
             <child>
@@ -149,8 +146,6 @@
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
                     <property name="label" translatable="yes">label</property>
-                    <attributes>
-                    </attributes>
                   </object>
                 </child>
                 <child type="label_item">

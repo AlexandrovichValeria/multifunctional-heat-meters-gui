@@ -18,13 +18,13 @@
           <object class="GtkBox" id="box1">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="spacing">40</property>
+            <property name="spacing">25</property>
             <child>
               <object class="GtkBox" id="box2">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">20</property>
+                <property name="spacing">10</property>
                 <child>
                   <object class="GtkBox" id="Checkboxes_box">
                     <property name="visible">True</property>
