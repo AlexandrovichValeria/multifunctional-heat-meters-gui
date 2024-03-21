@@ -63,7 +63,6 @@ namespace Multifunctional_heat_meters_gui
 
         private View.WindowForm GetFormByName(string name)
         {
-
             LinkedListNode<View.WindowForm> currentNode = _forms.First;
 
             while (currentNode != null)
@@ -119,7 +118,8 @@ namespace Multifunctional_heat_meters_gui
                 DeleteFormsByFormsNumbers<View.ConsumerForm>(_currentConsumersNumbers);
                 CreateConsumerWindows(nextConsumersNumbers, nextPipelinesNumbers);
             }
-            DeleteFormsByFormsNumbers<View.Sensor>(_currentSensorsNumbers);
+
+            DeleteFormsByFormsNumbers<View.Sensor>(sensorsNumbersToDelete);
             CreateSensorWindows(sensorsNumbersToAdd);
 
             if (pipelinesNumbersToAdd.Count != 0 | pipelinesNumbersToDelete.Count != 0 | consumersNumbersToAdd.Count != 0 | consumersNumbersToDelete.Count != 0 | sensorsNumbersToAdd.Count != 0 | sensorsNumbersToDelete.Count != 0)

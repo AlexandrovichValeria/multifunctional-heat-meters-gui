@@ -39,8 +39,7 @@ namespace Multifunctional_heat_meters_gui.View
             builder.Autoconnect(this);
 
             _type = type;
-
-            _formIndex = Dictionaries.sensorNames.FirstOrDefault(x => x.Value.Contains(_type)).Key;
+            _formIndex = Dictionaries.sensorNames.FirstOrDefault(x => x.Value.Contains($"давления {_type}")).Key;
             name_label.Text = _formName;
             button_box.Add(_backForwardComponent);
         }

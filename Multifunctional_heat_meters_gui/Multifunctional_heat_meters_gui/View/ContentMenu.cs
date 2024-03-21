@@ -111,30 +111,32 @@ namespace Multifunctional_heat_meters_gui.View
 
         public void AddDeepButtonsByNumbers(DeepButtonsNames buttonName, List<int> buttonsNumbers)
         {
-            if (buttonName == DeepButtonsNames.SENSORS) {
-                AddSensorButtons(buttonsNumbers);
-                return;
-            }
-            string sectionName = "";
             string title = "";
-            TreePath pathToDelete = new TreePath("");
+            TreePath parentPath = new TreePath("");
+            TreePath elementPath = new TreePath("");
+
             if (buttonName == DeepButtonsNames.CONSUMERS)
             {
-                Console.WriteLine("CONSUMERS");
-                sectionName = "Настройка потребителей";
                 title = "п";
-                pathToDelete = new TreePath("4");
+                parentPath = new TreePath("4");
+                elementPath = new TreePath("4:0");
             }
             else if (buttonName == DeepButtonsNames.PIPELINES)
             {
-                sectionName = "Настройка трубопроводов";
                 title = "т";
-                pathToDelete = new TreePath("2");
+                parentPath = new TreePath("2");
+                elementPath = new TreePath("2:0");
+            }
+            else if (buttonName == DeepButtonsNames.SENSORS)
+            {
+                title = "";
+                parentPath = new TreePath("3");
+                elementPath = new TreePath("3:0");
             }
 
             //delete current rows
             TreeIter nodeToDeleteIter;
-            if (ContentMenuStore.GetIter(out nodeToDeleteIter, pathToDelete))
+            if (ContentMenuStore.GetIter(out nodeToDeleteIter, parentPath))
             {
                 TreeIter childIter;
                 bool iterFound = ContentMenuStore.IterChildren(out childIter, nodeToDeleteIter);
@@ -149,11 +151,12 @@ namespace Multifunctional_heat_meters_gui.View
             //add new rows
             foreach (int number in buttonsNumbers)
             {
+                if(buttonName == DeepButtonsNames.SENSORS)
+                    title = Dictionaries.sensorNames[number];
                 TreeIter nodeIter;
                 bool nodeExists = false;
-                TreePath temp_path = title == "т" ? new TreePath("2:0") : new TreePath("4:0");
                 
-                if (ContentMenuStore.GetIter(out nodeIter, temp_path))
+                if (ContentMenuStore.GetIter(out nodeIter, elementPath))
                 {
                     do
                     {
@@ -170,90 +173,19 @@ namespace Multifunctional_heat_meters_gui.View
                 if (!nodeExists)
                 {
                     TreeIter parentIter;
-                    if (ContentMenuStore.GetIterFirst(out parentIter)) //мб заменить на готовые пути (2:0)
-                    {
-                        do
-                        {
-                            string parent_name = ContentMenuStore.GetValue(parentIter, 0).ToString();
-                           
-                            if (parent_name == sectionName)
-                            {
-                                ContentMenuStore.AppendValues(parentIter, title + number.ToString());
-                                if (buttonName == DeepButtonsNames.PIPELINES)
-                                    AddPipelinesSettingsButtons(number);
-                                break;
-                            }
-                        }
-                        while (ContentMenuStore.IterNext(ref parentIter));
-                    }
+                    ContentMenuStore.GetIter(out parentIter, parentPath);
+                    if (buttonName == DeepButtonsNames.SENSORS)
+                        ContentMenuStore.AppendValues(parentIter, title);
+                    else
+                        ContentMenuStore.AppendValues(parentIter, title + number.ToString());
+
+                    if (buttonName == DeepButtonsNames.PIPELINES)
+                        AddPipelinesSettingsButtons(number);
                 }
             }
             ExpandAll();
         }
 
-        private void AddSensorButtons(List<int> buttonsNumbers)
-        {
-            string sectionName = "Настройка датчиков";
-            string title = "";
-            TreePath pathToDelete = new TreePath("3");
-
-            //delete current rows
-            TreeIter nodeToDeleteIter;
-            if (ContentMenuStore.GetIter(out nodeToDeleteIter, pathToDelete))
-            {
-                TreeIter childIter;
-                bool iterFound = ContentMenuStore.IterChildren(out childIter, nodeToDeleteIter);
-
-                while (iterFound)
-                {
-                    ContentMenuStore.Remove(ref childIter);
-                    iterFound = ContentMenuStore.IterChildren(out childIter, nodeToDeleteIter);
-                }
-            }
-
-            //add new rows
-            foreach (int number in buttonsNumbers)
-            {
-                title = Dictionaries.sensorNames[number];
-                TreeIter nodeIter;
-                bool nodeExists = false;
-                TreePath temp_path = new TreePath("3:0");
-                if (ContentMenuStore.GetIter(out nodeIter, temp_path))
-                {
-                    do
-                    {
-                        string node_name = ContentMenuStore.GetValue(nodeIter, 0).ToString();
-                        if (node_name == title)
-                        {
-                            nodeExists = true;
-                            break;
-                        }
-                    }
-                    while (ContentMenuStore.IterNext(ref nodeIter));
-                }
-
-                if (!nodeExists)
-                {
-                    TreeIter parentIter;
-                    if (ContentMenuStore.GetIterFirst(out parentIter))
-                    {
-                        do
-                        {
-                            string parent_name = ContentMenuStore.GetValue(parentIter, 0).ToString();
-                            if (parent_name == sectionName)
-                            {
-                                ContentMenuStore.AppendValues(parentIter, title);
-                                break;
-                            }
-                        }
-                        while (ContentMenuStore.IterNext(ref parentIter));
-                    }
-                }
-
-            }
-            ExpandAll();
-
-        }
         /*private List<ContentMenuButton> GetDeepButtonsByNumbers(DeepButtonsNames deepButtonName, List<int> deepButtonNumbers)
         {
 

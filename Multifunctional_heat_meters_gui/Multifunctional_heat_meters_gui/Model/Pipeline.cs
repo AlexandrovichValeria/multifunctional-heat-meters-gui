@@ -40,7 +40,7 @@ namespace Multifunctional_heat_meters_gui.Model
             _parameters.Add("034н02", new Parameter("034н02", "0", "м3/час", ""));
             _parameters.Add("034н06", new Parameter("034н06", "1000", "Гц", "")); //Только для "Частота вода"
             _parameters.Add("034н07", new Parameter("034н07", "0", "Гц", ""));    //Только для "Частота вода"
-            _parameters.Add("034н08", new Parameter("034н08", "", "м3", "")); // Все, кроме "Частота вода"
+            _parameters.Add("034н08", new Parameter("034н08", "", "м3/имп", "")); // Все, кроме "Частота вода"
             //Параметр 100 будет вноситься автоматически во время загрузки бд в файл(т.к. это номер трубопровода)
             _parameters.Add("101", new Parameter("101", "0", "", ""));
             _parameters.Add("102н00", new Parameter("102н00", "12", "", ""));
