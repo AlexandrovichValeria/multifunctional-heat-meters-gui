@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gtk;
 using System.Text;
+using System.IO;
+
 
 namespace Multifunctional_heat_meters_gui
 {
@@ -16,8 +18,8 @@ namespace Multifunctional_heat_meters_gui
         static void Main()
         {
             //System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("ru-RU");
-            Environment.SetEnvironmentVariable("G_FILENAME_ENCODING", "@locale");
-            Environment.SetEnvironmentVariable("G_BROKEN_FILENAMES", "1");
+            //Environment.SetEnvironmentVariable("G_FILENAME_ENCODING", "@locale");
+            //Environment.SetEnvironmentVariable("G_BROKEN_FILENAMES", "1");
             //Encoding = Encoding.UTF8;
             
             Application.Init();
@@ -41,10 +43,19 @@ namespace Multifunctional_heat_meters_gui
             //setts.XftHintstyle = "hintslight"
             setts.XftHintstyle = "hintfull";
             setts.FontName = "Verdana";
-            
 
+
+            //Encoding encoding = Encoding.UTF8;
+
+            // Load the file with the specified encoding
+            string filePath = "Themes/LightTheme.css";
+            string fileContent = File.ReadAllText(filePath);
             // Load the Theme
-            //Gtk.CssProvider css_provider = new Gtk.CssProvider();
+            CssProvider css_provider = new CssProvider();
+            css_provider.LoadFromData(fileContent);
+            //StyleContext.AddProviderForScreen(Gdk.Screen.Default, css_provider, 800);
+
+
             //css_provider.LoadFromPath("themes/DeLorean-3.14/gtk-3.0/gtk.css")
             //css_provider.LoadFromPath("themes/DeLorean-Dark-3.14/gtk-3.0/gtk.css");
             //Gtk.StyleContext.AddProviderForScreen(Gdk.Screen.Default, css_provider, 800);

@@ -1,0 +1,13 @@
+﻿* {
+    color: #434343;
+    background-color: #fdf6e3;
+}
+
+    *:insensitive {
+        color: #939393;
+        /*background-color: #eae4d2;*/
+    }
+
+GtkButton {
+    background-image: linear-gradient(0deg, #f3e5d3, #fdf6e3);
+}
