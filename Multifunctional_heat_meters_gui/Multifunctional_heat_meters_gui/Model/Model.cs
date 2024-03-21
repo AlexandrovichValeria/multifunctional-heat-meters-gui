@@ -98,11 +98,10 @@ namespace Multifunctional_heat_meters_gui.Model
             }
 
             ParticipatedChannels = new List<int>();
-            //Participated033Channels = new List<int>();
+
             for (int i = 0; i< channelsCount; i++)
             {
                 ParticipatedChannels.Add(0);
-                //Participated033Channels.Add(0);
             }
 
             //Создание датчиков

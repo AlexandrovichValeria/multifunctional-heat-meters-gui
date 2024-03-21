@@ -136,6 +136,7 @@ namespace Multifunctional_heat_meters_gui
 
             _currentConsumersNumbers = nextConsumersNumbers;
             _currentPipelinesNumbers = nextPipelinesNumbers;
+            _currentSensorsNumbers = nextSensorsNumbers;
 
             //delete sensor forms
             /*if(coldWaterTemperatureSensor == "1")
@@ -148,7 +149,7 @@ namespace Multifunctional_heat_meters_gui
                 EventsArgs.MenuEventArgs sensorsArgs = new EventsArgs.MenuEventArgs(View.ContentMenu.DeepButtonsNames.SENSORS, sensorsToAdd);
                 MenuShouldBeUpdatedEvent?.Invoke(this, sensorsArgs);
             }*/
-            
+
         }
 
         private List<int> GetSensorNumbers()
@@ -344,7 +345,6 @@ namespace Multifunctional_heat_meters_gui
 
         private void CreateSensorWindows(List<int> sensorNumbers)
         {
-            Console.WriteLine("CreateSensorWindows");
             foreach (int sensorNumber in sensorNumbers.Reverse<int>())
             {
                 if(sensorNumber == 1)
@@ -352,21 +352,18 @@ namespace Multifunctional_heat_meters_gui
                     View.TemperatureSensor coldWaterTempWindow = View.TemperatureSensor.Create("холодной воды");
                     InsertNewSensor(coldWaterTempWindow);
                     NewFormCreatedEvent?.Invoke(coldWaterTempWindow, EventArgs.Empty);
-                    //Console.WriteLine(coldWaterTempWindow.FormName);
                 }
                 if (sensorNumber == 2)
                 {
                     View.PressureSensor coldWaterpressureWindow = View.PressureSensor.Create("холодной воды");
                     InsertNewSensor(coldWaterpressureWindow);
                     NewFormCreatedEvent?.Invoke(coldWaterpressureWindow, EventArgs.Empty);
-                    //Console.WriteLine(coldWaterpressureWindow.FormName);
                 }
                 if (sensorNumber == 4)
                 {
                     View.TemperatureSensor AirTempWindow = View.TemperatureSensor.Create("наружного воздуха");
                     InsertNewSensor(AirTempWindow);
                     NewFormCreatedEvent?.Invoke(AirTempWindow, EventArgs.Empty);
-                    //Console.WriteLine(coldWaterpressureWindow.FormName);
                 }
             }
         }

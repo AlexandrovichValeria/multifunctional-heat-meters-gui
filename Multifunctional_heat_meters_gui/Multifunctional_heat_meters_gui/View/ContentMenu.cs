@@ -10,14 +10,8 @@ namespace Multifunctional_heat_meters_gui.View
     public class ContentMenu : TreeView
     {
         private Builder _builder;
-        //[Builder.Object]
-        //private Box box;
-        //[Builder.Object]
-        //private ScrolledWindow ScrolledWindow;
 
         private TreeStore ContentMenuStore;
-        //[Builder.Object]
-        //private TreeView tree;
 
         public event EventHandler FormChanged;
 
@@ -66,8 +60,6 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
-
-            //tree = new TreeView();
             
             ContentMenuStore = new TreeStore(typeof(string));
             Model = ContentMenuStore;
@@ -367,7 +359,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         public void SelectChild(string name, TreeIter iter)
         {
-            if (ContentMenuStore.IterHasChild(iter))
+            if (ContentMenuStore.IterHasChild(iter) && name != "Настройка датчиков")
             {
                 TreeIter childIter;
                 bool iterfound = ContentMenuStore.IterChildren(out childIter, iter);
