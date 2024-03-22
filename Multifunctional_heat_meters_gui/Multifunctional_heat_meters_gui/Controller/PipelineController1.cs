@@ -19,6 +19,7 @@ namespace Multifunctional_heat_meters_gui.Controller
             _view = view;
             _model = model;
             _pipelineModel = model.GetPipelineByInd(index);
+            _index = index + 1;
         }
         public override void SaveDataToModel()
         {
@@ -47,6 +48,14 @@ namespace Multifunctional_heat_meters_gui.Controller
 
             //update view
             _view.ChangePressureMeasurement(typeOfMeasurement);
+        }
+        public override void ChangeSensorType(int sensorType)
+        {
+            //update model
+            _pipelineModel.ChangeSensorType(sensorType);
+
+            //update view
+            _view.ChangeSensorType(sensorType);
         }
 
     }

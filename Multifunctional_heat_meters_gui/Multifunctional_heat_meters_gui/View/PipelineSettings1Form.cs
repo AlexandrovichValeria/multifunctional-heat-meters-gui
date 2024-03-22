@@ -311,6 +311,11 @@ namespace Multifunctional_heat_meters_gui.View
             }
         }
 
+        public void ChangeSensorType(int sensorType)
+        {
+
+        }
+
 
         public void ChangePowerMeasurement(int unitOfMeasurement)
         {

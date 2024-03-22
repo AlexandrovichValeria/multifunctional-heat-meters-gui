@@ -8,11 +8,14 @@ namespace Multifunctional_heat_meters_gui.Controller
 {
     public abstract class Controller
     {
+        public int _index;
         public abstract void SaveDataToModel();
 
         public virtual void ChangePowerSystem(int typeOfMeasurement) { }
 
         public virtual void ChangePressureSystem(int typeOfMeasurement) { }
+
+        public virtual void ChangeSensorType(int sensorType) { }
 
     }
 }

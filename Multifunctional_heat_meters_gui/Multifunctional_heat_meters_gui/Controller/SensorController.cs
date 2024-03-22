@@ -43,7 +43,6 @@ namespace Multifunctional_heat_meters_gui.Controller
 
         public override void ChangePressureSystem(int typeOfMeasurement)
         {
-            //Console.WriteLine("ChangePressureSystem");
             //update model
             _sensorModel.ChangePressureMeasurement(typeOfMeasurement);
 

@@ -30,6 +30,9 @@ namespace Multifunctional_heat_meters_gui.View
 
         private static readonly string SensorParamName = "034н00";
 
+        private int SensorType;
+        public event EventHandler<EventsArgs.SensorTypeEventArgs> SensorTypeChangedEvent;
+
         public static CoolantSelectionForm Create(int index)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.CoolantSelectionForm.CoolantSelectionForm.glade", null);
@@ -131,6 +134,7 @@ namespace Multifunctional_heat_meters_gui.View
         protected void SetupHandlers()
         {
             combo1.Changed += Combo1ChangedEvent;
+            combo3.Changed += OnSensorTypeComboChanged;
             //DeleteEvent += OnLocalDeleteEvent;
         }
         protected void Combo1ChangedEvent(object sender, EventArgs a)
@@ -162,5 +166,21 @@ namespace Multifunctional_heat_meters_gui.View
                     break;
             }
         }
+
+        protected void OnSensorTypeComboChanged(object sender, EventArgs a)
+        {
+            SensorType = combo3.Active;
+
+            EventsArgs.SensorTypeEventArgs args = new EventsArgs.SensorTypeEventArgs(SensorType, _formIndex);
+            SensorTypeChangedEvent?.Invoke(this, args);
+        }
+
+        /*protected void OnPressureComboChanged(object sender, EventArgs a)
+        {
+            _pressureMeasure = Int32.Parse(pressure_combo.ActiveId);
+            EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(_pressureMeasure);
+
+            PressureComboChangedEvent?.Invoke(this, args);
+        }*/
     }
 }
