@@ -69,6 +69,19 @@ namespace Multifunctional_heat_meters_gui.View
             return res;
         }
 
+        public override void SetData(Dictionary<string, string> data)
+        {
+            const_entry1.Text = data["035н00"];
+            const_entry2.Text = data["036н00"];
+            const_entry3.Text = data["037н00"];
+            const_entry4.Text = data["040н00"];
+
+            sensor_check1.Active = data["sensor1"] == "1" ? true: false;
+            sensor_check2.Active = data["sensor2"] == "1" ? true : false;
+            sensor_check3.Active = data["sensor3"] == "1" ? true : false;
+            sensor_check4.Active = data["sensor4"] == "1" ? true : false;
+        }
+
         public void ChangePressureMeasurement(int unitOfMeasurement)
         {
             switch (unitOfMeasurement)
@@ -88,6 +101,10 @@ namespace Multifunctional_heat_meters_gui.View
             const_entry2.Changed += OnBlockChanged;
             const_entry3.Changed += OnBlockChanged;
             const_entry4.Changed += OnBlockChanged;
+            sensor_check1.Clicked += OnBlockChanged;
+            sensor_check2.Clicked += OnBlockChanged;
+            sensor_check3.Clicked += OnBlockChanged;
+            sensor_check4.Clicked += OnBlockChanged;
             //DeleteEvent += OnLocalDeleteEvent;
         }
     }

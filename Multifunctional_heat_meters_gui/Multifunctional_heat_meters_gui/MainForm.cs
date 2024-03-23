@@ -14,6 +14,7 @@ namespace Multifunctional_heat_meters_gui
         private bool _exitFlag;
         private LinkedList<View.WindowForm> _allForms = new LinkedList<View.WindowForm>();
         private ControllerBuilder controllerBuilder;
+        private View.ADS_97_Form _ADS_97_Form;
 
         private Builder _builder;
 
@@ -70,7 +71,8 @@ namespace Multifunctional_heat_meters_gui
 
             View.SystemForm subForm1 = View.SystemForm.Create(1, device);
             View.SystemForm subForm2 = View.SystemForm.Create(2, device);
-            
+            _ADS_97_Form = View.ADS_97_Form.Create();
+
             //_sysController = new Controller.SystemController(subForm1, _model);
 
             _allForms.AddFirst(subForm1);
@@ -91,7 +93,10 @@ namespace Multifunctional_heat_meters_gui
 
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(menuBuilder.UpdateMenu);
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(controllerBuilder.ResetControllers);
-            //subForm1.OnFormChanged
+            subForm1.OccupiedChannelsChangedEvent += new EventHandler<int>(CheckForADS);
+            subForm2.OccupiedChannelsChangedEvent += new EventHandler<int>(CheckForADS);
+            subForm1.SystemFormChangedEvent += new EventHandler<Dictionary<string, string>>(subForm2.UpdateFromOtherForm);
+            subForm2.SystemFormChangedEvent += new EventHandler<Dictionary<string, string>>(subForm1.UpdateFromOtherForm);
             //subForm1.PowerSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePowerSystem);
             //subForm1.PressureSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePressureSystem);
 
@@ -187,6 +192,16 @@ namespace Multifunctional_heat_meters_gui
                 // Clean up and destroy the dialog
                 fileChooser.Destroy();
                 // Handle the case when the user cancels the dialog
+            }
+        }
+
+        private void CheckForADS(object sender, int e)
+        {
+            Console.WriteLine("CheckForADS");
+            if(e >= 5)
+            {
+                Console.WriteLine("_ADS_97_Form");
+                _ADS_97_Form.Show();
             }
         }
     }

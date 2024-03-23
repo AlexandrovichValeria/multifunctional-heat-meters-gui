@@ -85,7 +85,7 @@ namespace Multifunctional_heat_meters_gui
             }
             if (textValue == "Общесистемные параметры")
                 textValue = "Общесистемные параметры 1";
-            else if (textValue == "Настройка датчиков")
+            else if (textValue == "Настройка датчиков общесистемного канала")
                 textValue = "Общесистемные параметры 2";
 
             LinkedListNode<View.WindowForm> formNode = GetFormNodeByName(textValue);
@@ -114,7 +114,7 @@ namespace Multifunctional_heat_meters_gui
                 if (name == "Общесистемные параметры 1")
                     name = "Общесистемные параметры";
                 if (name == "Общесистемные параметры 2")
-                    name = "Настройка датчиков";
+                    name = "Настройка датчиков общесистемного канала";
                 _menu.SelectButtonByName(name);
             }
         }
@@ -133,16 +133,16 @@ namespace Multifunctional_heat_meters_gui
                 if (name == "Общесистемные параметры 1")
                     name = "Общесистемные параметры";
                 if (name == "Общесистемные параметры 2")
-                    name = "Настройка датчиков";
+                    name = "Настройка датчиков общесистемного канала";
                 _menu.SelectButtonByName(name);
             }
             else 
             {
-                View.WindowForm nextForm = _forms.First.Value;
+                /*View.WindowForm nextForm = _forms.First.Value;
 
                 SetForm(nextForm);
                 nextForm.OnLoadForm(e, _appState);
-                _menu.SelectButtonByName("Настройка датчиков");
+                _menu.SelectButtonByName("Настройка датчиков общесистемного канала");*/
             }
         }
     }

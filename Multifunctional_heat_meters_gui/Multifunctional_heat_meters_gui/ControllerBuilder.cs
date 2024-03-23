@@ -40,7 +40,7 @@ namespace Multifunctional_heat_meters_gui
         {
             _sysForm.PowerSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(ChangePowerSystem);
             _sysForm.PressureSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(ChangePressureSystem);
-            
+            //_sysForm.SystemFormChangedEvent += new EventHandler(ChangePressureSystem);
         }
 
         /*public void DeleteControllerForm(object form, EventArgs args)
@@ -122,7 +122,6 @@ namespace Multifunctional_heat_meters_gui
             {
                 if (controller is Controller.PipelineController1 && controller._index == args.PipelineIndex)
                 {
-                    Console.WriteLine("ChangeSensorType");
                     controller.ChangeSensorType(args.SensorType);
                 }
             }

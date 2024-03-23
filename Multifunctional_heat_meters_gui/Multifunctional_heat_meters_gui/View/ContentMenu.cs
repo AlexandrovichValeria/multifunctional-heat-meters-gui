@@ -75,7 +75,7 @@ namespace Multifunctional_heat_meters_gui.View
             ContentMenuStore.AppendValues(deviceName);
             ContentMenuStore.AppendValues("Общесистемные параметры");
             ContentMenuStore.AppendValues("Настройка трубопроводов");
-            ContentMenuStore.AppendValues("Настройка датчиков");
+            ContentMenuStore.AppendValues("Настройка датчиков общесистемного канала");
             ContentMenuStore.AppendValues("Настройка потребителей");
 
             TreePath path = new TreePath("1");
@@ -291,7 +291,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         public void SelectChild(string name, TreeIter iter)
         {
-            if (ContentMenuStore.IterHasChild(iter) && name != "Настройка датчиков")
+            if (ContentMenuStore.IterHasChild(iter) && name != "Настройка датчиков общесистемного канала")
             {
                 TreeIter childIter;
                 bool iterfound = ContentMenuStore.IterChildren(out childIter, iter);

@@ -130,9 +130,10 @@ namespace Multifunctional_heat_meters_gui.View
             entry6.Changed += OnBlockChanged;
             entry7.Changed += OnBlockChanged;
             entry8.Changed += OnBlockChanged;
-            //entry9.Changed += OnFormChanged;
+            entry9.Changed += OnBlockChanged;
             spec1.Changed += OnBlockChanged;
             spec2.Changed += OnBlockChanged;
+            check5.Clicked += OnBlockChanged;
             //DeleteEvent += OnLocalDeleteEvent;
         }
 

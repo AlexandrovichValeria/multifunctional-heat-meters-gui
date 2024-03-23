@@ -180,8 +180,14 @@ namespace Multifunctional_heat_meters_gui.Model
             DB.DateBase dataBase = new DB.DateBase(serialNumber, targetDevice, "0");
             for (int i = 0; i < _pipelines.Count; i++)
             {
-                if (_pipelines[i].Active == true) 
+                if (_pipelines[i].Active == true)
+                {
                     ParticipatedChannels[i] = 1;
+                }
+                else
+                {
+                    //_pipelines[i].ChangeParameterValue("109н01", "0");
+                }
             }
 
             //Внесение общесистемных параметров
@@ -215,7 +221,8 @@ namespace Multifunctional_heat_meters_gui.Model
                 }
                 if (currentSensor.Active == false)
                 {
-                    parameters.Add(param_name, new Parameter(param_name, "0", "", ""));
+                    parameters[param_name] = new Parameter(param_name, "0", "", "");
+                    //parameters.Add(param_name, new Parameter(param_name, "0", "", ""));
                     continue;
                 }
                 else
@@ -225,7 +232,8 @@ namespace Multifunctional_heat_meters_gui.Model
                     string channel_name2 = channelnumber.ToString();
                     if (channel_name2.Length == 1)
                         channel_name2 = "0" + channel_name2;
-                    parameters.Add(param_name, new Parameter(param_name, $"{channel_name1}{channel_name2}", "", ""));
+                    parameters[param_name] = new Parameter(param_name, $"{channel_name1}{channel_name2}", "", "");
+                    //parameters.Add(param_name, new Parameter(param_name, $"{channel_name1}{channel_name2}", "", ""));
                 }
             }
 
@@ -267,7 +275,7 @@ namespace Multifunctional_heat_meters_gui.Model
             List<DB.Channel> channelsListK = new List<DB.Channel>();
             for (int i = 0; i < _pipelines.Count; i++)
             {
-                //if (_pipelines[i].Active == false) continue;
+                if (_pipelines[i].Active == false) continue;
 
                 //ParticipatedChannels[i] = 1;
                 Pipeline currentPipeline = _pipelines[i];
