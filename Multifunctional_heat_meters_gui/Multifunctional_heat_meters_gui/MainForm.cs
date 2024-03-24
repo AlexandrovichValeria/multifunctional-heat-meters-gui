@@ -15,6 +15,7 @@ namespace Multifunctional_heat_meters_gui
         private LinkedList<View.WindowForm> _allForms = new LinkedList<View.WindowForm>();
         private ControllerBuilder controllerBuilder;
         private View.ADS_97_Form _ADS_97_Form;
+        private int _minPipelinesCountFor_ADS_97 = 0;
 
         private Builder _builder;
 
@@ -71,6 +72,7 @@ namespace Multifunctional_heat_meters_gui
 
             View.SystemForm subForm1 = View.SystemForm.Create(1, device);
             View.SystemForm subForm2 = View.SystemForm.Create(2, device);
+            CalculateMinPipelinesCountForm_ADS_97(device);
             _ADS_97_Form = View.ADS_97_Form.Create();
 
             //_sysController = new Controller.SystemController(subForm1, _model);
@@ -107,6 +109,19 @@ namespace Multifunctional_heat_meters_gui
             SetupHandlers();
         }
 
+        private void CalculateMinPipelinesCountForm_ADS_97(Model.Device device)
+        {
+            switch (device)
+            {
+                case Model.Device.SPT963:
+                    _minPipelinesCountFor_ADS_97 = 8;
+                    break;
+                default:
+                    _minPipelinesCountFor_ADS_97 = 4;
+                    break;
+            }
+        }
+
         protected void SetupHandlers()
         {
             DeleteEvent += OnLocalDeleteEvent;
@@ -126,7 +141,6 @@ namespace Multifunctional_heat_meters_gui
             tempForm.SaveFormEvent += new EventHandler(OnSaveButtonActivated);
             
         }
-
 
         protected void OnLocalDeleteEvent(object sender, DeleteEventArgs a)
         {
@@ -197,10 +211,8 @@ namespace Multifunctional_heat_meters_gui
 
         private void CheckForADS(object sender, int e)
         {
-            Console.WriteLine("CheckForADS");
-            if(e >= 5)
+            if(e > _minPipelinesCountFor_ADS_97)
             {
-                Console.WriteLine("_ADS_97_Form");
                 _ADS_97_Form.Show();
             }
         }

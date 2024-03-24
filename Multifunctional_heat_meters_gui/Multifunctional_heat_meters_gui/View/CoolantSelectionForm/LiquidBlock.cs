@@ -7,7 +7,7 @@ using Gtk;
 
 namespace Multifunctional_heat_meters_gui.View
 {
-    class LiquidBlock : Frame
+    class LiquidBlock : WindowBlock
     {
         private Builder _builder;
 
@@ -31,9 +31,9 @@ namespace Multifunctional_heat_meters_gui.View
         public static LiquidBlock Create()
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.CoolantSelectionForm.LiquidBlock.glade", null);
-            return new LiquidBlock(builder, builder.GetObject("frame").Handle);
+            return new LiquidBlock(builder, builder.GetObject("box").Handle);
         }
-        protected LiquidBlock(Builder builder, IntPtr handle) : base(handle)
+        protected LiquidBlock(Builder builder, IntPtr handle) : base(builder, handle)
         {
             _builder = builder;
             builder.Autoconnect(this);
@@ -41,7 +41,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         }
 
-        public Dictionary<string, string> GetLiquidSettings()
+        public override Dictionary<string, string> GetResult()
         {
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
@@ -60,6 +60,23 @@ namespace Multifunctional_heat_meters_gui.View
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
+            entry0.Changed += OnBlockChanged;
+            entry1.Changed += OnBlockChanged;
+            entry2.Changed += OnBlockChanged;
+            entry3.Changed += OnBlockChanged;
+            entry4.Changed += OnBlockChanged;
+            entry5.Changed += OnBlockChanged;
+            entry6.Changed += OnBlockChanged;
+            entry7.Changed += OnBlockChanged;
+
+            entry0.Changed += TurnIntoNumber;
+            entry1.Changed += TurnIntoNumber;
+            entry2.Changed += TurnIntoNumber;
+            entry3.Changed += TurnIntoNumber;
+            entry4.Changed += TurnIntoNumber;
+            entry5.Changed += TurnIntoNumber;
+            entry6.Changed += TurnIntoNumber;
+            entry7.Changed += TurnIntoNumber;
         }
     }
 }

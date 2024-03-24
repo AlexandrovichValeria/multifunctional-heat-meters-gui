@@ -7,7 +7,7 @@ using Gtk;
 
 namespace Multifunctional_heat_meters_gui.View
 {
-    class GasBlock : Frame
+    class GasBlock : WindowBlock
     {
         private Builder _builder;
 
@@ -20,9 +20,9 @@ namespace Multifunctional_heat_meters_gui.View
         public static GasBlock Create()
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.CoolantSelectionForm.GasBlock.glade", null);
-            return new GasBlock(builder, builder.GetObject("frame").Handle);
+            return new GasBlock(builder, builder.GetObject("box").Handle);
         }
-        protected GasBlock(Builder builder, IntPtr handle) : base(handle)
+        protected GasBlock(Builder builder, IntPtr handle) : base(builder, handle)
         {
             _builder = builder;
             builder.Autoconnect(this);
@@ -30,7 +30,7 @@ namespace Multifunctional_heat_meters_gui.View
             
         }
 
-        public Dictionary<string, string> GetGasSettings()
+        public override Dictionary<string, string> GetResult()
         {
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
@@ -43,6 +43,11 @@ namespace Multifunctional_heat_meters_gui.View
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
+            entry1.Changed += OnBlockChanged;
+            entry2.Changed += OnBlockChanged;
+
+            entry1.Changed += TurnIntoNumber;
+            entry2.Changed += TurnIntoNumber;
         }
     }
 }

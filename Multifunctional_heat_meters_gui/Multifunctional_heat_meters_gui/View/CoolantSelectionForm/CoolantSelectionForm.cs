@@ -77,8 +77,8 @@ namespace Multifunctional_heat_meters_gui.View
             };
 
             //if(combo1.ActiveId == "0")
-            Dictionary<string, string> gasSettings = gas_block.GetGasSettings();
-            Dictionary<string, string> liquidSettings = liquid_block.GetLiquidSettings();
+            Dictionary<string, string> gasSettings = gas_block.GetResult();
+            Dictionary<string, string> liquidSettings = liquid_block.GetResult();
 
             Dictionary<string, string> result = coolantSettings
                 .Union(gasSettings)
@@ -135,6 +135,10 @@ namespace Multifunctional_heat_meters_gui.View
         {
             combo1.Changed += Combo1ChangedEvent;
             combo3.Changed += OnSensorTypeComboChanged;
+
+            gas_block.BlockChangedEvent += OnFormChanged;
+            liquid_block.BlockChangedEvent += OnFormChanged;
+            combo1.Changed += OnFormChanged;
             //DeleteEvent += OnLocalDeleteEvent;
         }
         protected void Combo1ChangedEvent(object sender, EventArgs a)

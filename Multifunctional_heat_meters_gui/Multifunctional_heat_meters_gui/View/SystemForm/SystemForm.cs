@@ -24,7 +24,7 @@ namespace Multifunctional_heat_meters_gui.View
         private SensorBlock _sensorBlock;
         private OtherSettingsBlock _otherSettingsBlock;
 
-        private int _minPipelinesCountFor_ADS_97 = 0;
+        //private int _minPipelinesCountFor_ADS_97 = 0;
         private static string SelectedPipelinesParam = "031н00";
         private Dictionary<string, string> ADS_97_result;
 
@@ -64,7 +64,7 @@ namespace Multifunctional_heat_meters_gui.View
                 _participatedPipelinesBlock = ParticipatedPipelinesBlock.Create(12, 6);
             Checkboxes_box.Add(_participatedPipelinesBlock);
 
-            CalculateMinPipelinesCountForm_ADS_97(device);
+            //CalculateMinPipelinesCountForm_ADS_97(device);
             button_box.Add(_backForwardComponent);
 
             if(index == 1)
@@ -154,11 +154,11 @@ namespace Multifunctional_heat_meters_gui.View
                 countselectedSensors += num;
             }
             int selectedSum = countSelectedPipelines + countselectedSensors;
-            if (FormIndex == 1 && countSelectedPipelines > _minPipelinesCountFor_ADS_97)
+            /*if (FormIndex == 1 && countSelectedPipelines > _minPipelinesCountFor_ADS_97)
             {
                 //OccupiedChannelsChanged?.Invoke(this, EventArgs.Empty);
                 //_ADS_97_Form.Show();
-            }
+            }*/
             OccupiedChannelsChangedEvent?.Invoke(this, selectedSum);
             /*EventsArgs.MeasurementEventArgs powerArgs = new EventsArgs.MeasurementEventArgs(Int32.Parse(power_combo.ActiveId));
             PowerSystemChangedEvent?.Invoke(this, powerArgs);
@@ -183,7 +183,7 @@ namespace Multifunctional_heat_meters_gui.View
             return count;
         }
 
-        private void CalculateMinPipelinesCountForm_ADS_97(Model.Device device)
+        /*private void CalculateMinPipelinesCountForm_ADS_97(Model.Device device)
         {
             switch (device)
             {
@@ -194,7 +194,7 @@ namespace Multifunctional_heat_meters_gui.View
                     _minPipelinesCountFor_ADS_97 = 4;
                     break;
             }
-        }
+        }*/
 
         public Dictionary<string, int> GetMeasurementSystems()
         {

@@ -104,7 +104,7 @@
     <Compile Include="View\DeviceSelectionForm.cs" />
     <Compile Include="View\PipelineSettings2Form.cs" />
     <Compile Include="View\PipelineSettings1Form.cs" />
-    <Compile Include="View\SystemForm\WindowBlock.cs" />
+    <Compile Include="View\WindowBlock.cs" />
     <Compile Include="View\SystemForm\CheckboxesBlock.cs" />
     <Compile Include="View\SystemForm\OtherSettingsBlock.cs" />
     <Compile Include="View\SystemForm\ParticipatedPipelinesBlock.cs" />
