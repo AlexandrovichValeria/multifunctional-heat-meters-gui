@@ -41,6 +41,11 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label energy_discr_system;
 
+        [Builder.Object]
+        private Label spec1_error_message;
+        [Builder.Object]
+        private Label spec2_error_message;
+
         private int _pressureMeasure;
         private int _powerMeasure;
 
@@ -55,7 +60,8 @@ namespace Multifunctional_heat_meters_gui.View
 
         public event EventHandler<EventsArgs.MeasurementEventArgs> PressureComboChangedEvent;
         public event EventHandler<EventsArgs.MeasurementEventArgs> PowerComboChangedEvent;
-        
+        //public event EventHandler<List<string>> ParameterChangedEvent;
+
 
         public static OtherSettingsBlock Create()
         {
@@ -71,6 +77,10 @@ namespace Multifunctional_heat_meters_gui.View
             spec2.Sensitive = false;
 
             ShowAll();
+
+            spec1_error_message.Hide();
+            spec2_error_message.Hide();
+
             SetupHandlers();
         }
 
@@ -108,6 +118,34 @@ namespace Multifunctional_heat_meters_gui.View
                 check5.Active = false;
         }
 
+        protected override void ShowErrorMessage(string param_name)
+        {
+            //base.ShowErrorMessage(param_name);
+            switch (param_name)
+            {
+                case "003":
+                    spec1_error_message.Show();
+                    break;
+                case "004":
+                    spec2_error_message.Show();
+                    break;
+            }
+        }
+
+        protected override void HideErrorMessage(string param_name)
+        {
+            //base.ShowErrorMessage(param_name);
+            switch (param_name)
+            {
+                case "003":
+                    spec1_error_message.Hide();
+                    break;
+                case "004":
+                    spec2_error_message.Hide();
+                    break;
+            }
+        }
+
         protected void SetupHandlers()
         {
             spec1_checkbox.Clicked += OnSpec1CheckBoxClicked;
@@ -124,19 +162,26 @@ namespace Multifunctional_heat_meters_gui.View
             spec1.Changed += TurnIntoNumber;
             spec2.Changed += TurnIntoNumber;
 
+            //new EventHandler<Dictionary<string, string>>(subForm2.UpdateFromOtherForm);
+            //spec1.Changed += (sender, e) => OnParameterChanged(sender, new List<string> { "003", spec1.Text});
+
             power_combo.Changed += OnBlockChanged;
             pressure_combo.Changed += OnBlockChanged;
-            entry5.Changed += OnBlockChanged;
-            entry6.Changed += OnBlockChanged;
-            entry7.Changed += OnBlockChanged;
-            entry8.Changed += OnBlockChanged;
-            entry9.Changed += OnBlockChanged;
-            spec1.Changed += OnBlockChanged;
-            spec2.Changed += OnBlockChanged;
+            entry5.Changed += (sender, e) => OnValueChanged(sender, new List<string> {"", entry5.Text});
+            entry6.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry6.Text });
+            entry7.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry7.Text });
+            entry8.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry8.Text });
+            entry9.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry9.Text });
+            spec1.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "003", spec1.Text });
+            spec2.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "004", spec2.Text });
             check5.Clicked += OnBlockChanged;
             //DeleteEvent += OnLocalDeleteEvent;
         }
 
+        /*protected void OnParameterChanged(object sender, List<string> e)
+        {
+
+        }*/
         
         protected void OnSpec1CheckBoxClicked(object sender, EventArgs a)
         {

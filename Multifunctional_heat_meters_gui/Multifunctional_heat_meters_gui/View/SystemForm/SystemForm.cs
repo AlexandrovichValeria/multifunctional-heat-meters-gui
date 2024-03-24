@@ -80,7 +80,7 @@ namespace Multifunctional_heat_meters_gui.View
                 _otherSettingsBlock.DisableBlock();
             }
 
-            ShowAll();
+            //ShowAll();
 
             SetupHandlers();
         }
@@ -134,12 +134,14 @@ namespace Multifunctional_heat_meters_gui.View
         {
             //if (!_participatedPipelinesBlock.SomeCheckboxesAreChecked())
               //  return false;
+            //get info from all blocks and params that they are filled correctly (through a field value)
             Dictionary<string, string> pars = GetSystemWindowData();
             if (pars["030н00"] == "" || pars["030н01"] == "" || pars["030н02"] == "" || pars["030н02"] == ""
                 || pars["024"] == "" || pars["025"] == "" /*|| pars["008"] == ""*/ || pars["003"] == "" || pars["004"] == "" 
                 || pars["035н00"] == "" || pars["036н00"] == "" || pars["037н00"] == "" || pars["040н00"] == ""
                 || pars["031н00"] == "" || pars["031н01"] == "")
                 return false;
+            
             return true;
         }
 

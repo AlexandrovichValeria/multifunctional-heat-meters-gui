@@ -73,6 +73,10 @@ namespace Multifunctional_heat_meters_gui.View
         {
             OnFormChanged(this, EventArgs.Empty);
         }
+        protected bool CheckParameterValidation(string param_name)
+        {
+            return true;
+        }
 
         public string FormName => _formName;
         public int FormIndex => _formIndex;
