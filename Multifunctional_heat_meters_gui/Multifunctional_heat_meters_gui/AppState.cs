@@ -6,15 +6,22 @@ namespace Multifunctional_heat_meters_gui
     {
 
         private LinkedList<View.WindowForm> _forms;
+        private View.ADS_97_Form _ADS_form;
 
-        public AppState(LinkedList<View.WindowForm> forms)
+        public AppState(LinkedList<View.WindowForm> forms, View.ADS_97_Form ADS_form)
         {
             _forms = forms;
+            _ADS_form = ADS_form;
         }
 
         public LinkedList<View.WindowForm> GetForms()
         {
             return _forms;
+        }
+
+        public View.ADS_97_Form GetADSForm()
+        {
+            return _ADS_form;
         }
 
         public bool AreAllPipelinesFilledOut()

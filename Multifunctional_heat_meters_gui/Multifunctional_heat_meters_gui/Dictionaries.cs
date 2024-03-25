@@ -20,6 +20,7 @@ namespace Multifunctional_heat_meters_gui
         {
             { "003", "^[12][0-4][0-9][0-3][01](0[0-9]|1[0-9]|2[0-9])(0[0-9]|1[0-9]|2[0-9])[1-9]$"},
             { "004", "^[12][0-4][0-9][0-3][0](0[0-9]|1[0-9]|2[0-9])(0[0-9]|1[0-9]|2[0-9])[1-9]$"},
+            { "030н01", "^(1|0\\.1|0\\.01|0\\.001|0\\.0001|0\\.00001|0\\.000001)$"},
             //{ "firstParameter", "^[01]+$" }, // String of zeros and ones
             //{ "secondParameter", "^[A-Za-z0-9]+$" } // Alphanumeric string
             // Add more parameters and patterns as needed

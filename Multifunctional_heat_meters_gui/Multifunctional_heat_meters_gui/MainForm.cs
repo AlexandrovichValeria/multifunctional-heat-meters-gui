@@ -82,7 +82,7 @@ namespace Multifunctional_heat_meters_gui
 
             View.ContentMenu menu = View.ContentMenu.Create("Прибор " + deviceName);
 
-            AppState appState = new AppState(_allForms);
+            AppState appState = new AppState(_allForms, _ADS_97_Form);
             FormsBuilder formsBuilder = new FormsBuilder(_allForms);
             FormSwitcher formSwitcher = new FormSwitcher(menu, appState, content_box);
             MenuBuilder menuBuilder = new MenuBuilder(menu);
@@ -95,8 +95,8 @@ namespace Multifunctional_heat_meters_gui
 
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(menuBuilder.UpdateMenu);
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(controllerBuilder.ResetControllers);
-            subForm1.OccupiedChannelsChangedEvent += new EventHandler<int>(CheckForADS);
-            subForm2.OccupiedChannelsChangedEvent += new EventHandler<int>(CheckForADS);
+            subForm1.OccupiedChannelsChangedEvent += new EventHandler<List<int>>(CheckForADS);
+            subForm2.OccupiedChannelsChangedEvent += new EventHandler<List<int>>(CheckForADS);
             subForm1.SystemFormChangedEvent += new EventHandler<Dictionary<string, string>>(subForm2.UpdateFromOtherForm);
             subForm2.SystemFormChangedEvent += new EventHandler<Dictionary<string, string>>(subForm1.UpdateFromOtherForm);
             //subForm1.PowerSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePowerSystem);
@@ -209,9 +209,11 @@ namespace Multifunctional_heat_meters_gui
             }
         }
 
-        private void CheckForADS(object sender, int e)
+        private void CheckForADS(object sender, List<int> e)
         {
-            if(e > _minPipelinesCountFor_ADS_97)
+            int channels032 = e[0];
+            int channels033 = e[1];
+            if (channels032 > _minPipelinesCountFor_ADS_97 || channels033 > _minPipelinesCountFor_ADS_97)
             {
                 _ADS_97_Form.Show();
             }

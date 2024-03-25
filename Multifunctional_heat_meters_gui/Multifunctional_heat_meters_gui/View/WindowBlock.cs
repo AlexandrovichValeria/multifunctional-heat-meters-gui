@@ -21,7 +21,7 @@ namespace Multifunctional_heat_meters_gui.View
             builder.Autoconnect(this);
 
             ShowAll();
-            SetupHandlers();
+            //SetupHandlers();
         }
 
         public virtual Dictionary<string, string> GetResult()
@@ -54,10 +54,10 @@ namespace Multifunctional_heat_meters_gui.View
             return false;
         }*/
 
-        protected void SetupHandlers()
+        /*protected void SetupHandlers()
         {
 
-        }
+        }*/
 
         protected void TurnIntoNumber(object sender, EventArgs e)
         {
@@ -76,7 +76,6 @@ namespace Multifunctional_heat_meters_gui.View
             if(!ParameterIsValid(param_name, param_value)) {
                 //show error
                 ShowErrorMessage(param_name);
-                Console.WriteLine("ERROR");
                 blockFilledCorrectly = false;
                 //block going forward and saving the file
             }

@@ -30,7 +30,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         public event EventHandler<EventsArgs.MeasurementEventArgs> PressureSystemChangedEvent;
         public event EventHandler<EventsArgs.MeasurementEventArgs> PowerSystemChangedEvent;
-        public event EventHandler<int> OccupiedChannelsChangedEvent;
+        public event EventHandler<List<int>> OccupiedChannelsChangedEvent;
         public event EventHandler<Dictionary<string, string>> SystemFormChangedEvent;
 
         private int PressureMeasure;
@@ -150,18 +150,30 @@ namespace Multifunctional_heat_meters_gui.View
             string zeroOneStringPipelines = GetParamFromWindow(SelectedPipelinesParam);
             int countSelectedPipelines = (zeroOneStringPipelines != null) ? GetPipelinesCountByOneZeroString(zeroOneStringPipelines) : 0;
             
-            int countselectedSensors = 0;
-            foreach(int num in GetSensorsState())
+            int selectedSensors032 = 0;
+            int selectedSensors033 = 0;
+            List<int> sensorState = GetSensorsState();
+            if(sensorState[0] == 1)
+                selectedSensors033++;
+            if (sensorState[1] == 1)
+                selectedSensors032++;
+            if(sensorState[2] == 1)
+                selectedSensors032++;
+            if (sensorState[3] == 1)
+                selectedSensors033++;
+            /*for (int i = 0; i<sensorState.Count; i++)
             {
-                countselectedSensors += num;
-            }
-            int selectedSum = countSelectedPipelines + countselectedSensors;
+                if(i == )
+                //countselectedSensors += num;
+            }*/
+            int channels032 = countSelectedPipelines + selectedSensors032;
+            int channels033 = countSelectedPipelines + selectedSensors033;
             /*if (FormIndex == 1 && countSelectedPipelines > _minPipelinesCountFor_ADS_97)
             {
                 //OccupiedChannelsChanged?.Invoke(this, EventArgs.Empty);
                 //_ADS_97_Form.Show();
             }*/
-            OccupiedChannelsChangedEvent?.Invoke(this, selectedSum);
+            OccupiedChannelsChangedEvent?.Invoke(this, new List<int> { channels032, channels033 });
             /*EventsArgs.MeasurementEventArgs powerArgs = new EventsArgs.MeasurementEventArgs(Int32.Parse(power_combo.ActiveId));
             PowerSystemChangedEvent?.Invoke(this, powerArgs);
 

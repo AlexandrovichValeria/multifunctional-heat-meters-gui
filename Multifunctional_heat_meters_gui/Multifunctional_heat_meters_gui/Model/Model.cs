@@ -26,7 +26,11 @@ namespace Multifunctional_heat_meters_gui.Model
         private Device _device;
 
         private List<int> ParticipatedChannels;
-        //private List<int> Participated033Channels;
+        private List<int> Participated032Channels;
+        private List<int> Participated033Channels;
+
+        private int _channelsCount;
+
         public SystemWideSettings SystemWideSettings
         {
             get { return _systemWideSettings; }
@@ -97,11 +101,17 @@ namespace Multifunctional_heat_meters_gui.Model
                 _pipelines[i].ChangeParameterValue("114н01", "033" + number);
             }
 
-            ParticipatedChannels = new List<int>();
+            _channelsCount = channelsCount;
 
-            for (int i = 0; i< channelsCount; i++)
+            ParticipatedChannels = new List<int>();
+            Participated032Channels = new List<int>();
+            Participated033Channels = new List<int>();
+
+            for (int i = 0; i < _channelsCount; i++)
             {
                 ParticipatedChannels.Add(0);
+                Participated032Channels.Add(0);
+                Participated033Channels.Add(0);
             }
 
             //Создание датчиков
@@ -161,6 +171,17 @@ namespace Multifunctional_heat_meters_gui.Model
 
         public void SaveDataToFile(string path, string serialNumber)
         {
+            ParticipatedChannels = new List<int>();
+            Participated032Channels = new List<int>();
+            Participated033Channels = new List<int>();
+
+            for (int i = 0; i < _channelsCount; i++)
+            {
+                ParticipatedChannels.Add(0);
+                Participated032Channels.Add(0);
+                Participated033Channels.Add(0);
+            }
+
             string targetDevice = "";
             switch (_device)
             {
@@ -183,6 +204,8 @@ namespace Multifunctional_heat_meters_gui.Model
                 if (_pipelines[i].Active == true)
                 {
                     ParticipatedChannels[i] = 1;
+                    Participated032Channels[i] = 1;
+                    Participated033Channels[i] = 1;
                 }
                 else
                 {
@@ -227,7 +250,8 @@ namespace Multifunctional_heat_meters_gui.Model
                 }
                 else
                 {
-                    int channelnumber = OccupyChannel();
+                    //int channelnumber = OccupyChannel();
+                    int channelnumber = OccupyChannel(channel_name1);
                     currentSensor.ChannelNumber = channelnumber;
                     string channel_name2 = channelnumber.ToString();
                     if (channel_name2.Length == 1)
@@ -465,6 +489,42 @@ namespace Multifunctional_heat_meters_gui.Model
                 }
             }
             
+            return result;
+        }
+
+        private int OccupyChannel(string channel_name)
+        {
+            int result = 0;
+
+            if(channel_name == "032")
+            {
+                for (int i = 0; i < Participated032Channels.Count; i++)
+                {
+                    if (Participated032Channels[i] == 1)
+                        continue;
+                    else
+                    {
+                        result = i + 1;
+                        Participated032Channels[i] = 1;
+                        break;
+                    }
+                }
+            }
+            else if(channel_name == "033")
+            {
+                for (int i = 0; i < Participated033Channels.Count; i++)
+                {
+                    if (Participated033Channels[i] == 1)
+                        continue;
+                    else
+                    {
+                        result = i + 1;
+                        Participated033Channels[i] = 1;
+                        break;
+                    }
+                }
+            }
+
             return result;
         }
     }

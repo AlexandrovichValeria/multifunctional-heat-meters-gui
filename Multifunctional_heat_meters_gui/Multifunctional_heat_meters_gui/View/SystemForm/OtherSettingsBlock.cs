@@ -45,9 +45,12 @@ namespace Multifunctional_heat_meters_gui.View
         private Label spec1_error_message;
         [Builder.Object]
         private Label spec2_error_message;
+        [Builder.Object]
+        private Label entry5_error_message;
 
         private int _pressureMeasure;
         private int _powerMeasure;
+        private ParametersState paramState;
 
         public int PressureMeasure
         {
@@ -73,6 +76,8 @@ namespace Multifunctional_heat_meters_gui.View
             _builder = builder;
             builder.Autoconnect(this);
 
+            paramState = new ParametersState(new List<string> {"003", "004", "030н01", "030н02", "024", "025", "008" });
+
             spec1.Sensitive = false;
             spec2.Sensitive = false;
 
@@ -80,6 +85,7 @@ namespace Multifunctional_heat_meters_gui.View
 
             spec1_error_message.Hide();
             spec2_error_message.Hide();
+            entry5_error_message.Hide();
 
             SetupHandlers();
         }
@@ -121,6 +127,8 @@ namespace Multifunctional_heat_meters_gui.View
         protected override void ShowErrorMessage(string param_name)
         {
             //base.ShowErrorMessage(param_name);
+            Console.WriteLine("ShowErrorMessage");
+            Console.WriteLine(param_name);
             switch (param_name)
             {
                 case "003":
@@ -128,6 +136,9 @@ namespace Multifunctional_heat_meters_gui.View
                     break;
                 case "004":
                     spec2_error_message.Show();
+                    break;
+                case "030н01":
+                    entry5_error_message.Show();
                     break;
             }
         }
@@ -142,6 +153,9 @@ namespace Multifunctional_heat_meters_gui.View
                     break;
                 case "004":
                     spec2_error_message.Hide();
+                    break;
+                case "030н01":
+                    entry5_error_message.Hide();
                     break;
             }
         }
@@ -167,7 +181,7 @@ namespace Multifunctional_heat_meters_gui.View
 
             power_combo.Changed += OnBlockChanged;
             pressure_combo.Changed += OnBlockChanged;
-            entry5.Changed += (sender, e) => OnValueChanged(sender, new List<string> {"", entry5.Text});
+            entry5.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н01", entry5.Text});
             entry6.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry6.Text });
             entry7.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry7.Text });
             entry8.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry8.Text });

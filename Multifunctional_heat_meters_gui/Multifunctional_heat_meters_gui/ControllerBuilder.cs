@@ -92,6 +92,12 @@ namespace Multifunctional_heat_meters_gui
                     _controllers.AddLast(controller);
                 }
             }
+            //Controller.Controller ADScontroller = null;
+            Controller.ADS_97_Controller ADScontroller = null;
+            if (_appState.GetADSForm() != null)
+                ADScontroller = new Controller.ADS_97_Controller(_appState.GetADSForm(), _model);
+            if (ADScontroller != null)
+                _controllers.AddLast(ADScontroller);
         }
 
         public void ResetControllers(object sender, EventsArgs.MenuEventArgs args)
