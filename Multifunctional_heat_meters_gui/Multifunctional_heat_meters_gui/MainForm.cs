@@ -46,6 +46,8 @@ namespace Multifunctional_heat_meters_gui
             _builder = builder;
             builder.Autoconnect(this);
 
+            SetIconFromFile("./Resources/icon.ico");
+
             _device = device;
             _exitFlag = true;
             _model = new Model.Model(device);

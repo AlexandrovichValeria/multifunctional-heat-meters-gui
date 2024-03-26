@@ -158,6 +158,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\scheme0.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
