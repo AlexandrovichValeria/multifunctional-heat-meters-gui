@@ -43,7 +43,7 @@ namespace Multifunctional_heat_meters_gui.View
         {
             Dictionary<string, string> result = new Dictionary<string, string>()
             {
-                { "038н00", combo1.ActiveId },
+                { "038н00", (Int32.Parse(combo1.ActiveId)+1).ToString() },
                 { "038н01", spinbutton1.Value.ToString() },
             };
             if (combo1.ActiveId == "1")
