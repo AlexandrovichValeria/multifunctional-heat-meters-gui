@@ -22,6 +22,8 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private SpinButton spinbutton2;
 
+        public event EventHandler ADSChanged;
+
         public static ADS_97_Form Create()
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.ADS_97_Form.glade", null);
@@ -52,6 +54,11 @@ namespace Multifunctional_heat_meters_gui.View
             return result;
         }
 
+        public int GetADSAmount()
+        {
+            return Int32.Parse(combo1.ActiveId) + 1;
+        }
+
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
@@ -60,6 +67,7 @@ namespace Multifunctional_heat_meters_gui.View
         }
         protected void OnButton1Click(object sender, EventArgs a)
         {
+            ADSChanged?.Invoke(this, EventArgs.Empty);
             Hide();
         }
         protected void OnComboChanged(object sender, EventArgs a)

@@ -15,7 +15,11 @@ namespace Multifunctional_heat_meters_gui
         private LinkedList<View.WindowForm> _allForms = new LinkedList<View.WindowForm>();
         private ControllerBuilder controllerBuilder;
         private View.ADS_97_Form _ADS_97_Form;
-        private int _minPipelinesCountFor_ADS_97 = 0;
+        //private int _minPipelinesCountFor_ADS_97 = 0;
+        private int ADSAmount;
+        private int _MaxChannel032Amount;
+        private int _MaxChannel033Amount;
+        private int _MaxChannel034Amount;
 
         private Builder _builder;
 
@@ -74,8 +78,9 @@ namespace Multifunctional_heat_meters_gui
 
             View.SystemForm subForm1 = View.SystemForm.Create(1, device);
             View.SystemForm subForm2 = View.SystemForm.Create(2, device);
-            CalculateMinPipelinesCountForm_ADS_97(device);
+            CalculateMaxChannelsAmount(device);
             _ADS_97_Form = View.ADS_97_Form.Create();
+            ADSAmount = 0;
 
             //_sysController = new Controller.SystemController(subForm1, _model);
 
@@ -101,6 +106,8 @@ namespace Multifunctional_heat_meters_gui
             subForm2.OccupiedChannelsChangedEvent += new EventHandler<List<int>>(CheckForADS);
             subForm1.SystemFormChangedEvent += new EventHandler<Dictionary<string, string>>(subForm2.UpdateFromOtherForm);
             subForm2.SystemFormChangedEvent += new EventHandler<Dictionary<string, string>>(subForm1.UpdateFromOtherForm);
+
+            _ADS_97_Form.ADSChanged += OnADSChanged;
             //subForm1.PowerSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePowerSystem);
             //subForm1.PressureSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePressureSystem);
 
@@ -111,18 +118,33 @@ namespace Multifunctional_heat_meters_gui
             SetupHandlers();
         }
 
-        private void CalculateMinPipelinesCountForm_ADS_97(Model.Device device)
+        private void CalculateMaxChannelsAmount(Model.Device device)
         {
-            switch (device)
+            List<int> channelAmounts = Dictionaries.MaxChannelAmountForDevice[device];
+            _MaxChannel032Amount = channelAmounts[0];
+            _MaxChannel033Amount = channelAmounts[1];
+            _MaxChannel034Amount = channelAmounts[2];
+            /*switch (device)
             {
+                case Model.Device.SPT961:
+                    _MaxChannel032Amount = 8;
+                    _MaxChannel033Amount = 4;
+                    _MaxChannel034Amount = 4;
+                    break;
                 case Model.Device.SPT963:
-                    _minPipelinesCountFor_ADS_97 = 8;
+                    _MaxChannel032Amount = 8;
+                    //_minPipelinesCountFor_ADS_97 = 8;
                     break;
                 default:
-                    _minPipelinesCountFor_ADS_97 = 4;
+                    //_minPipelinesCountFor_ADS_97 = 4;
                     break;
-            }
+            }*/
         }
+
+        /*private int GetAdsAmount()
+        {
+            return 0;
+        }*/
 
         protected void SetupHandlers()
         {
@@ -148,6 +170,11 @@ namespace Multifunctional_heat_meters_gui
         {
             Application.Quit();
             a.RetVal = true;
+        }
+
+        protected void OnADSChanged(object sender, EventArgs a)
+        {
+            ADSAmount = _ADS_97_Form.GetADSAmount();
         }
 
         protected void OnSaveButtonActivated(object sender, EventArgs a)
@@ -215,7 +242,7 @@ namespace Multifunctional_heat_meters_gui
         {
             int channels032 = e[0];
             int channels033 = e[1];
-            if (channels032 > _minPipelinesCountFor_ADS_97 || channels033 > _minPipelinesCountFor_ADS_97)
+            if (channels032 > _MaxChannel032Amount + ADSAmount * 4 || channels033 > _MaxChannel033Amount + ADSAmount * 4)
             {
                 _ADS_97_Form.Show();
             }
