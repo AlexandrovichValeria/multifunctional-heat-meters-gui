@@ -37,6 +37,8 @@ namespace Multifunctional_heat_meters_gui.View
             _formIndex = Dictionaries.sensorNames.FirstOrDefault(x => x.Value.Contains($"температуры {_type}")).Key;
             name_label.Text = _formName;
             button_box.Add(_backForwardComponent);
+
+            SetupHandlers();
         }
 
         public override Dictionary<string, string> GetSensorSettings()
@@ -53,6 +55,12 @@ namespace Multifunctional_heat_meters_gui.View
                 {"033н02", entry1.Text}
             };
             return result;
+        }
+
+        private void SetupHandlers()
+        {
+            entry1.Changed += TurnIntoNumber;
+            entry2.Changed += TurnIntoNumber;
         }
     }
 }

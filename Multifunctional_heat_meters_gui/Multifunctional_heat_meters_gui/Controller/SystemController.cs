@@ -45,14 +45,9 @@ namespace Multifunctional_heat_meters_gui.Controller
 
         private void ActivateSensors(List<int> sensor_indexes)
         {
-            Console.WriteLine("ActivateSensors");
-            foreach(int num in sensor_indexes)
-            {
-                Console.WriteLine(num);
-            }
             for (int i = 0; i < sensor_indexes.Count; i++)
             {
-                if (i == 2) continue; //барометрическое давление
+                //if (i == 2) continue; //барометрическое давление
                 if(sensor_indexes[i] != 0)
                 {
                     _model.GetSensorByName(Dictionaries.sensorNames[i+1]).Active = true;

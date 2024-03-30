@@ -30,16 +30,20 @@ namespace Multifunctional_heat_meters_gui.View
         private Label measure_label2;
 
 
-        public static SensorBlock Create()
+        private int _index;
+
+        public static SensorBlock Create(int index)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.SystemForm.SensorBlock.glade", null);
-            return new SensorBlock(builder, builder.GetObject("box").Handle);
+            return new SensorBlock(index, builder, builder.GetObject("box").Handle);
         }
-        protected SensorBlock(Builder builder, IntPtr handle) : base(builder, handle)
+        protected SensorBlock(int index, Builder builder, IntPtr handle) : base(builder, handle)
         {
             _builder = builder;
             builder.Autoconnect(this);
             ShowAll();
+            _index = index;
+
             SetupHandlers();
         }
 
@@ -55,6 +59,8 @@ namespace Multifunctional_heat_meters_gui.View
 
         public override Dictionary<string, string> GetResult()
         {
+            //Console.WriteLine("GetResult");
+            //Console.WriteLine(_index);
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
                 { "035н00", const_entry1.Text },
@@ -71,6 +77,10 @@ namespace Multifunctional_heat_meters_gui.View
 
         public override void SetData(Dictionary<string, string> data)
         {
+            //Console.WriteLine("SetData");
+            //Console.WriteLine(_index);
+            //Console.WriteLine(data["036н00"]);
+
             const_entry1.Text = data["035н00"];
             const_entry2.Text = data["036н00"];
             const_entry3.Text = data["037н00"];
@@ -88,15 +98,24 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 case 0:
                     measure_label2.Text = "МПа";
+                    if(const_entry2.Text == "1")
+                        const_entry2.Text = "0.1";
                     break;
                 case 1:
                     measure_label2.Text = "кгс/см2";
+                    if (const_entry2.Text == "0.1")
+                        const_entry2.Text = "1";
                     break;
             }
         }
 
         protected void SetupHandlers()
         {
+            const_entry1.Changed += TurnIntoNumber;
+            const_entry2.Changed += TurnIntoNumber;
+            const_entry3.Changed += TurnIntoNumber;
+            const_entry4.Changed += TurnIntoNumber;
+
             const_entry1.Changed += OnBlockChanged;
             const_entry2.Changed += OnBlockChanged;
             const_entry3.Changed += OnBlockChanged;

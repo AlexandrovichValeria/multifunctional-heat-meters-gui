@@ -42,6 +42,8 @@ namespace Multifunctional_heat_meters_gui.View
             _formIndex = Dictionaries.sensorNames.FirstOrDefault(x => x.Value.Contains($"давления {_type}")).Key;
             name_label.Text = _formName;
             button_box.Add(_backForwardComponent);
+
+            SetupHandlers();
         }
 
         public override Dictionary<string, string> GetSensorSettings()
@@ -77,10 +79,15 @@ namespace Multifunctional_heat_meters_gui.View
             }
         }
 
-
         public override void ChangePowerMeasurement(int unitOfMeasurement)
         {
 
+        }
+
+        private void SetupHandlers()
+        {
+            entry1.Changed += TurnIntoNumber;
+            entry2.Changed += TurnIntoNumber;
         }
     }
 }

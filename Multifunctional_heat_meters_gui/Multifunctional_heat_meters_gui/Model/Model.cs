@@ -119,8 +119,8 @@ namespace Multifunctional_heat_meters_gui.Model
 
             for (int i = 1; i <= 4; i++)
             {
-                if (i == 3)
-                    continue;
+                //if (i == 3)
+                //    continue;
                 Sensor temp_sensor = null; 
                 if (i == 1) //температура холодной воды
                 {
@@ -134,6 +134,7 @@ namespace Multifunctional_heat_meters_gui.Model
                 }
                 else if (i == 3) //барометрическое давление
                 {
+                    temp_sensor = new PressureSensor(3);
                     /*PressureSensor barometricPressureSensor = new PressureSensor();
                     barometricPressureSensor.ChangeParameterValue("113н01", "03201"); //ИЗМЕНИТЬ*/
                 }

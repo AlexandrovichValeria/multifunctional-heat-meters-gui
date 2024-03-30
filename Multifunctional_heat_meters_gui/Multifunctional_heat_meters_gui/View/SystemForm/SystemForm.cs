@@ -53,7 +53,7 @@ namespace Multifunctional_heat_meters_gui.View
             _formIndex = index;
 
             //_ADS_97_Form = ADS_97_Form.Create();
-            _sensorBlock = SensorBlock.Create();
+            _sensorBlock = SensorBlock.Create(_formIndex);
             _otherSettingsBlock = OtherSettingsBlock.Create();
             sensor_box.Add(_sensorBlock);
             other_settings_box.Add(_otherSettingsBlock);
@@ -111,23 +111,35 @@ namespace Multifunctional_heat_meters_gui.View
 
         public void SetSystemWindowData(Dictionary<string, string> data)
         {
-            Dictionary<string, string> pipelinesResult = data.Where(s => s.Key == "031н00" || s.Key == "031н01")
-                        .ToDictionary(dict => dict.Key, dict => dict.Value);
-           
-            _participatedPipelinesBlock.SetData(pipelinesResult);
+            Unsubscribe();
+            Console.WriteLine("SetSystemWindowData");
+            Console.WriteLine(_formIndex);
+            if (_formIndex == 2)
+            {
+                Dictionary<string, string> pipelinesResult = data.Where(s => s.Key == "031н00" || s.Key == "031н01")
+                            .ToDictionary(dict => dict.Key, dict => dict.Value);
 
-            Dictionary<string, string> sensorResult = data.Where(s => s.Key == "035н00" || s.Key == "036н00"
-            || s.Key == "037н00" || s.Key == "040н00" || s.Key == "sensor1" || s.Key == "sensor2" 
-            || s.Key == "sensor3" || s.Key == "sensor4").ToDictionary(dict => dict.Key, dict => dict.Value);
-            _sensorBlock.SetData(sensorResult);
+                _participatedPipelinesBlock.SetData(pipelinesResult);
 
-            Dictionary<string, string> otherResult = data.Where(s => s.Key == "030н00" 
-            || s.Key == "030н01" || s.Key == "030н02" || s.Key == "024" || s.Key == "025" || s.Key == "008" 
-            || s.Key == "003" || s.Key == "004" || s.Key == "CurrentTimeAndDate")
-                        .ToDictionary(dict => dict.Key, dict => dict.Value);
+                Dictionary<string, string> otherResult = data.Where(s => s.Key == "030н00"
+                || s.Key == "030н01" || s.Key == "030н02" || s.Key == "024" || s.Key == "025" || s.Key == "008"
+                || s.Key == "003" || s.Key == "004" || s.Key == "CurrentTimeAndDate")
+                            .ToDictionary(dict => dict.Key, dict => dict.Value);
 
-            _otherSettingsBlock.SetData(otherResult);
+                _otherSettingsBlock.SetData(otherResult);
 
+                _sensorBlock.ChangePressureMeasurement(Int32.Parse(data["030н00"][0].ToString()));
+            }
+
+            else if (_formIndex == 1)
+            {
+                Dictionary<string, string> sensorResult = data.Where(s => s.Key == "035н00" || s.Key == "036н00"
+                || s.Key == "037н00" || s.Key == "040н00" || s.Key == "sensor1" || s.Key == "sensor2"
+                || s.Key == "sensor3" || s.Key == "sensor4").ToDictionary(dict => dict.Key, dict => dict.Value);
+
+                _sensorBlock.SetData(sensorResult);
+            }
+            SetupHandlers();
         }
 
         public override bool IsFormFilledOut()
@@ -256,13 +268,24 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void SetupHandlers()
         {
-            _participatedPipelinesBlock.BlockChangedEvent += OnFormChanged;
-            _sensorBlock.BlockChangedEvent += OnFormChanged;
-            _otherSettingsBlock.BlockChangedEvent += OnFormChanged;
             _otherSettingsBlock.PowerComboChangedEvent += OnPowerComboChanged;
             _otherSettingsBlock.PressureComboChangedEvent += OnPressureComboChanged;
 
+            _participatedPipelinesBlock.BlockChangedEvent += OnFormChanged;
+            _otherSettingsBlock.BlockChangedEvent += OnFormChanged;
+            _sensorBlock.BlockChangedEvent += OnFormChanged;
+            
             //DeleteEvent += OnLocalDeleteEvent;
+        }
+
+        protected void Unsubscribe()
+        {
+            _otherSettingsBlock.PowerComboChangedEvent -= OnPowerComboChanged;
+            _otherSettingsBlock.PressureComboChangedEvent -= OnPressureComboChanged;
+
+            _participatedPipelinesBlock.BlockChangedEvent -= OnFormChanged;
+            _otherSettingsBlock.BlockChangedEvent -= OnFormChanged;
+            _sensorBlock.BlockChangedEvent -= OnFormChanged;
         }
 
         protected void OnPowerComboChanged(object sender, EventArgs a)
@@ -271,6 +294,8 @@ namespace Multifunctional_heat_meters_gui.View
             EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(PowerMeasure);
             
             PowerSystemChangedEvent?.Invoke(this, args);
+
+            OnFormChanged(this, EventArgs.Empty);
         }
 
         protected void OnPressureComboChanged(object sender, EventArgs a)
@@ -281,6 +306,8 @@ namespace Multifunctional_heat_meters_gui.View
             EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(PressureMeasure);
 
             PressureSystemChangedEvent?.Invoke(this, args);
+
+            OnFormChanged(this, EventArgs.Empty);
         }
 
         public override void OnFormChanged(object sender, EventArgs e)
@@ -293,10 +320,17 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 _backForwardComponent.SetForwardButtonInsensitive();
             }
-            Dictionary<string, string> data = GetSystemWindowData();
-            List<int> sensors = GetSensorsState();
-            for (int i = 0; i < sensors.Count; i++) {
-                data.Add($"sensor{i+1}", sensors[i].ToString());
+            Dictionary<string, string> data = new Dictionary<string, string>();
+
+            data = GetSystemWindowData();
+
+            if (_formIndex == 2)
+            {
+                List<int> sensors = GetSensorsState();
+                for (int i = 0; i < sensors.Count; i++)
+                {
+                    data.Add($"sensor{i + 1}", sensors[i].ToString());
+                }
             }
 
             SystemFormChangedEvent?.Invoke(this, data);

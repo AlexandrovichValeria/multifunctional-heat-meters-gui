@@ -19,7 +19,6 @@ namespace Multifunctional_heat_meters_gui.View
             //_formName = formName;
             //_backForwardComponent = BackForwardComponent.Create();
 
-            SetupHandlers();
         }
 
         public virtual Dictionary<string, string> GetSensorSettings()
@@ -30,9 +29,9 @@ namespace Multifunctional_heat_meters_gui.View
         public virtual void ChangePressureMeasurement(int unitOfMeasurement) { }
         public virtual void ChangePowerMeasurement(int unitOfMeasurement) { }
 
-        protected void SetupHandlers()
+        /*protected void SetupHandlers()
         {
             
-        }
+        }*/
     }
 }

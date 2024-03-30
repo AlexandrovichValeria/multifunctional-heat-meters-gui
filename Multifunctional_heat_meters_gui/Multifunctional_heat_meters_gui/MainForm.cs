@@ -242,8 +242,25 @@ namespace Multifunctional_heat_meters_gui
         {
             int channels032 = e[0];
             int channels033 = e[1];
-            if (channels032 > _MaxChannel032Amount + ADSAmount * 4 || channels033 > _MaxChannel033Amount + ADSAmount * 4)
+
+            /*if(channels032 > _MaxChannel032Amount + 8)
             {
+                MessageDialog dialog = new MessageDialog(null, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "");
+                dialog.Run();
+                dialog.Destroy();
+            }*/
+            if (channels033 > _MaxChannel033Amount + 8)
+            {
+                MessageDialog dialog = new MessageDialog(null, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "Недостаточно каналов 033");
+                dialog.Run();
+                dialog.Destroy();
+            }
+            else if (channels032 > _MaxChannel032Amount + ADSAmount * 4 || channels033 > _MaxChannel033Amount + ADSAmount * 4)
+            {
+                if(channels032 > _MaxChannel032Amount + 4 || channels033 > _MaxChannel033Amount + 4)
+                {
+                    _ADS_97_Form.ChangeAdaptersAmount(2);
+                }
                 _ADS_97_Form.Show();
             }
         }

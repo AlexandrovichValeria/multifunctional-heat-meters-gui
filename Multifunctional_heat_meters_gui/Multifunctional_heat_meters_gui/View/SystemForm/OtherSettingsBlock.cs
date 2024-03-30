@@ -177,8 +177,9 @@ namespace Multifunctional_heat_meters_gui.View
             //new EventHandler<Dictionary<string, string>>(subForm2.UpdateFromOtherForm);
             //spec1.Changed += (sender, e) => OnParameterChanged(sender, new List<string> { "003", spec1.Text});
 
-            power_combo.Changed += OnBlockChanged;
-            pressure_combo.Changed += OnBlockChanged;
+            //power_combo.Changed += OnBlockChanged;
+            //pressure_combo.Changed += OnBlockChanged;
+
             /*entry5.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н01", entry5.Text});
             entry6.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry6.Text });
             entry7.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry7.Text });

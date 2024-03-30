@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gtk;
+using System.Text.RegularExpressions;
 
 namespace Multifunctional_heat_meters_gui.View
 {
@@ -54,22 +55,41 @@ namespace Multifunctional_heat_meters_gui.View
             return result;
         }
 
+        public void ChangeAdaptersAmount(int amount)
+        {
+            if(amount == 1)
+            {
+                combo1.ActiveId = "0";
+            }
+            else if (amount == 2)
+            {
+                combo1.ActiveId = "1";
+            }
+        }
+
         public int GetADSAmount()
         {
             return Int32.Parse(combo1.ActiveId) + 1;
         }
 
+        
+
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
+            spinbutton1.Changed += TurnIntoNumber;
+            spinbutton2.Changed += TurnIntoNumber;
+
             button1.Clicked += OnButton1Click;
             combo1.Changed += OnComboChanged;
         }
+
         protected void OnButton1Click(object sender, EventArgs a)
         {
             ADSChanged?.Invoke(this, EventArgs.Empty);
             Hide();
         }
+
         protected void OnComboChanged(object sender, EventArgs a)
         {
             if (combo1.ActiveId == "0")
@@ -82,6 +102,16 @@ namespace Multifunctional_heat_meters_gui.View
                 label4.Show();
                 spinbutton2.Show();
             }
+        }
+
+        protected void TurnIntoNumber(object sender, EventArgs e)
+        {
+            SpinButton temp = (SpinButton)sender;
+
+            string text = temp.Text;
+            string numberOnly = Regex.Replace(text, "[^0-9. ,-]", "");
+            numberOnly = numberOnly.Replace(",", ".");
+            temp.Text = numberOnly;
         }
     }
 }
