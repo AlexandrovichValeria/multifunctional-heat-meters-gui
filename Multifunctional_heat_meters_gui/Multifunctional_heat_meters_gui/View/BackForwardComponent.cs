@@ -17,8 +17,8 @@ namespace Multifunctional_heat_meters_gui.View
         private Button forward_button;
         [Builder.Object]
         private Button save_button;
-        [Builder.Object]
-        private CheckButton value_check_button;
+        //[Builder.Object]
+        //private CheckButton value_check_button;
 
         public event EventHandler BackButtonClickedEvent;
         public event EventHandler ForwardButtonClickedEvent;
@@ -53,7 +53,7 @@ namespace Multifunctional_heat_meters_gui.View
             forward_button.Clicked += ForwardButton_Click;
             save_button.Clicked += SaveButton_Click;
 
-            value_check_button.Clicked += ValueCheckButtonClick;
+            //value_check_button.Clicked += ValueCheckButtonClick;
             //DeleteEvent += OnLocalDeleteEvent;
         }
         protected void BackButton_Click(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace Multifunctional_heat_meters_gui.View
             SaveButtonClickedEvent?.Invoke(this, e);
         }
 
-        protected void ValueCheckButtonClick(object sender, EventArgs e)
+        /*protected void ValueCheckButtonClick(object sender, EventArgs e)
         {
             if (value_check_button.Active)
             {
@@ -81,6 +81,6 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 ValueCheckButtonInactiveEvent?.Invoke(this, e);
             }
-        }
+        }*/
     }
 }

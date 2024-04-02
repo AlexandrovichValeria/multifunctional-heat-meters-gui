@@ -12,20 +12,6 @@
     <property name="hexpand">True</property>
     <property name="spacing">40</property>
     <child>
-      <object class="GtkCheckButton" id="value_check_button">
-        <property name="label" translatable="yes">Включить проверку значений</property>
-        <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="receives-default">False</property>
-        <property name="draw-indicator">False</property>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
       <object class="GtkButton" id="back_button">
         <property name="label" translatable="yes">Назад</property>
         <property name="visible">True</property>

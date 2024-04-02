@@ -38,6 +38,8 @@ namespace Multifunctional_heat_meters_gui
         [Builder.Object]
         private MenuItem save;
         [Builder.Object]
+        private CheckMenuItem validation_switch;
+        [Builder.Object]
         private ScrolledWindow scrolled;
 
 #pragma warning restore 649
@@ -127,21 +129,6 @@ namespace Multifunctional_heat_meters_gui
             _MaxChannel032Amount = channelAmounts[0];
             _MaxChannel033Amount = channelAmounts[1];
             _MaxChannel034Amount = channelAmounts[2];
-            /*switch (device)
-            {
-                case Model.Device.SPT961:
-                    _MaxChannel032Amount = 8;
-                    _MaxChannel033Amount = 4;
-                    _MaxChannel034Amount = 4;
-                    break;
-                case Model.Device.SPT963:
-                    _MaxChannel032Amount = 8;
-                    //_minPipelinesCountFor_ADS_97 = 8;
-                    break;
-                default:
-                    //_minPipelinesCountFor_ADS_97 = 4;
-                    break;
-            }*/
         }
 
         /*private int GetAdsAmount()
@@ -153,16 +140,18 @@ namespace Multifunctional_heat_meters_gui
         {
             DeleteEvent += OnLocalDeleteEvent;
             save.Activated += OnSaveButtonActivated;
+
+            validation_switch.Toggled += OnParameterValidationButtonToggled;
             foreach (View.WindowForm form in _allForms)
             {
                 form.SaveFormEvent += new EventHandler(OnSaveButtonActivated);
             }
 
-            foreach (View.WindowForm form in _allForms)
+            /*foreach (View.WindowForm form in _allForms)
             {
                 form.SetValueCheckActiveEvent += new EventHandler(OnValueCheckActive);
                 form.SetValueCheckInactiveEvent += new EventHandler(OnValueCheckInactive);
-            }
+            }*/
             //back_button.Clicked += BackButtonClicked;
             //forward_button.Clicked += ForwardButtonClicked;
         }
@@ -274,7 +263,25 @@ namespace Multifunctional_heat_meters_gui
             }
         }
 
-        private void OnValueCheckActive(object sender, EventArgs e)
+        private void OnParameterValidationButtonToggled(object sender, EventArgs e)
+        {
+            if (validation_switch.Active)
+            {
+                validation_switch.Label = "_Отключить проверку значений";
+                AutoValueCheck = true;
+            }
+            else
+            {
+                validation_switch.Label = "_Включить проверку значений";
+                AutoValueCheck = false;
+            }
+            foreach (View.WindowForm form in _allForms)
+            {
+                form.SetAutoValueCheck(AutoValueCheck);
+            }
+        }
+
+        /*private void OnValueCheckActive(object sender, EventArgs e)
         {
             AutoValueCheck = true;
 
@@ -292,6 +299,6 @@ namespace Multifunctional_heat_meters_gui
             {
                 form.SetAutoValueCheck(false);
             }
-        }
+        }*/
     }
 }

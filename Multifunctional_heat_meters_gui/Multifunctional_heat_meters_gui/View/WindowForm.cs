@@ -53,8 +53,8 @@ namespace Multifunctional_heat_meters_gui.View
             _backForwardComponent.ForwardButtonClickedEvent += new EventHandler(GoToNextForm);
             _backForwardComponent.SaveButtonClickedEvent += new EventHandler(SaveData);
 
-            _backForwardComponent.ValueCheckButtonActiveEvent += new EventHandler(SetValueCheckActive);
-            _backForwardComponent.ValueCheckButtonInactiveEvent += new EventHandler(SetValueCheckInactive);
+            //_backForwardComponent.ValueCheckButtonActiveEvent += new EventHandler(SetValueCheckActive);
+            //_backForwardComponent.ValueCheckButtonInactiveEvent += new EventHandler(SetValueCheckInactive);
         }
 
         public virtual bool IsFormFilledOut()
@@ -128,7 +128,7 @@ namespace Multifunctional_heat_meters_gui.View
             SaveFormEvent?.Invoke(this, e);
         }
 
-        private void SetValueCheckActive(object sender, EventArgs e)
+        /*private void SetValueCheckActive(object sender, EventArgs e)
         {
             SetValueCheckActiveEvent?.Invoke(this, e);
         }
@@ -136,6 +136,6 @@ namespace Multifunctional_heat_meters_gui.View
         private void SetValueCheckInactive(object sender, EventArgs e)
         {
             SetValueCheckInactiveEvent?.Invoke(this, e);
-        }
+        }*/
     }
 }
