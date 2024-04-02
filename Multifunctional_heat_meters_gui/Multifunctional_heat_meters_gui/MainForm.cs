@@ -21,6 +21,8 @@ namespace Multifunctional_heat_meters_gui
         private int _MaxChannel033Amount;
         private int _MaxChannel034Amount;
 
+        private bool AutoValueCheck;
+
         private Builder _builder;
 
 #pragma warning disable 649
@@ -81,6 +83,7 @@ namespace Multifunctional_heat_meters_gui
             CalculateMaxChannelsAmount(device);
             _ADS_97_Form = View.ADS_97_Form.Create();
             ADSAmount = 0;
+            AutoValueCheck = false;
 
             //_sysController = new Controller.SystemController(subForm1, _model);
 
@@ -153,6 +156,12 @@ namespace Multifunctional_heat_meters_gui
             foreach (View.WindowForm form in _allForms)
             {
                 form.SaveFormEvent += new EventHandler(OnSaveButtonActivated);
+            }
+
+            foreach (View.WindowForm form in _allForms)
+            {
+                form.SetValueCheckActiveEvent += new EventHandler(OnValueCheckActive);
+                form.SetValueCheckInactiveEvent += new EventHandler(OnValueCheckInactive);
             }
             //back_button.Clicked += BackButtonClicked;
             //forward_button.Clicked += ForwardButtonClicked;
@@ -262,6 +271,26 @@ namespace Multifunctional_heat_meters_gui
                     _ADS_97_Form.ChangeAdaptersAmount(2);
                 }
                 _ADS_97_Form.Show();
+            }
+        }
+
+        private void OnValueCheckActive(object sender, EventArgs e)
+        {
+            AutoValueCheck = true;
+
+            foreach (View.WindowForm form in _allForms)
+            {
+                form.SetAutoValueCheck(true);
+            }
+        }
+
+        private void OnValueCheckInactive(object sender, EventArgs e)
+        {
+            AutoValueCheck = false;
+
+            foreach (View.WindowForm form in _allForms)
+            {
+                form.SetAutoValueCheck(false);
             }
         }
     }

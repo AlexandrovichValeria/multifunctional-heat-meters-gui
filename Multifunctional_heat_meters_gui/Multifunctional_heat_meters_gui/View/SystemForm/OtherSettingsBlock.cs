@@ -46,7 +46,15 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label spec2_error_message;
         [Builder.Object]
-        private Label entry5_error_message;*/
+        private Label entry5_error_message;
+        [Builder.Object]
+        private Label entry6_error_message;
+        [Builder.Object]
+        private Label entry7_error_message;
+        [Builder.Object]
+        private Label entry8_error_message;
+        [Builder.Object]
+        private Label entry9_error_message;*/
 
         private int _pressureMeasure;
         private int _powerMeasure;
@@ -82,10 +90,7 @@ namespace Multifunctional_heat_meters_gui.View
             spec2.Sensitive = false;
 
             ShowAll();
-
-            //spec1_error_message.Hide();
-            //spec2_error_message.Hide();
-            //entry5_error_message.Hide();
+            
 
             SetupHandlers();
         }
@@ -124,38 +129,43 @@ namespace Multifunctional_heat_meters_gui.View
                 check5.Active = false;
         }
 
+
         protected override void ShowErrorMessage(string param_name)
         {
             //base.ShowErrorMessage(param_name);
-            /*switch (param_name)
+            //StyleContext stylecontext;
+            switch (param_name)
             {
                 case "003":
-                    spec1_error_message.Show();
+                    spec1.StyleContext.AddClass("incorrect-value");
+                    //spec1_error_message.Show();
                     break;
                 case "004":
-                    spec2_error_message.Show();
+                    spec2.StyleContext.AddClass("incorrect-value");
+                    //spec2_error_message.Show();
                     break;
                 case "030н01":
-                    entry5_error_message.Show();
+                    entry5.StyleContext.AddClass("incorrect-value");
+                    //entry5_error_message.Show();
                     break;
-            }*/
+            }
         }
 
         protected override void HideErrorMessage(string param_name)
         {
             //base.ShowErrorMessage(param_name);
-            /*switch (param_name)
+            switch (param_name)
             {
                 case "003":
-                    spec1_error_message.Hide();
+                    spec1.StyleContext.RemoveClass("incorrect-value");
                     break;
                 case "004":
-                    spec2_error_message.Hide();
+                    spec2.StyleContext.RemoveClass("incorrect-value");
                     break;
                 case "030н01":
-                    entry5_error_message.Hide();
+                    entry5.StyleContext.RemoveClass("incorrect-value");
                     break;
-            }*/
+            }
         }
 
         protected void SetupHandlers()
@@ -180,13 +190,13 @@ namespace Multifunctional_heat_meters_gui.View
             //power_combo.Changed += OnBlockChanged;
             //pressure_combo.Changed += OnBlockChanged;
 
-            /*entry5.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н01", entry5.Text});
+            entry5.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н01", entry5.Text});
             entry6.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry6.Text });
             entry7.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry7.Text });
             entry8.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry8.Text });
             entry9.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry9.Text });
             spec1.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "003", spec1.Text });
-            spec2.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "004", spec2.Text });*/
+            spec2.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "004", spec2.Text });
             entry5.Changed += OnBlockChanged;
             entry6.Changed += OnBlockChanged;
             entry7.Changed += OnBlockChanged;

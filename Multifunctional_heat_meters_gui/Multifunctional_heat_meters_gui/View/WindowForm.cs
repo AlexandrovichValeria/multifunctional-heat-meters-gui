@@ -15,6 +15,8 @@ namespace Multifunctional_heat_meters_gui.View
         public event EventHandler<EventsArgs.NextFormArgs> NextFormEvent;
         public event EventHandler<EventsArgs.NextFormArgs> PreviousFormEvent;
         public event EventHandler SaveFormEvent;
+        public event EventHandler SetValueCheckActiveEvent;
+        public event EventHandler SetValueCheckInactiveEvent;
 
         protected string _formName;
         protected int _formIndex = 0;
@@ -50,11 +52,19 @@ namespace Multifunctional_heat_meters_gui.View
             _backForwardComponent.BackButtonClickedEvent += new EventHandler(GoToPreviousForm);
             _backForwardComponent.ForwardButtonClickedEvent += new EventHandler(GoToNextForm);
             _backForwardComponent.SaveButtonClickedEvent += new EventHandler(SaveData);
+
+            _backForwardComponent.ValueCheckButtonActiveEvent += new EventHandler(SetValueCheckActive);
+            _backForwardComponent.ValueCheckButtonInactiveEvent += new EventHandler(SetValueCheckInactive);
         }
 
         public virtual bool IsFormFilledOut()
         {
             return true;
+        }
+
+        public virtual void SetAutoValueCheck(bool flag)
+        {
+
         }
 
         public virtual void OnFormChanged(object sender, EventArgs e)
@@ -73,6 +83,7 @@ namespace Multifunctional_heat_meters_gui.View
         {
             OnFormChanged(this, EventArgs.Empty);
         }
+
         protected bool CheckParameterValidation(string param_name)
         {
             return true;
@@ -115,6 +126,16 @@ namespace Multifunctional_heat_meters_gui.View
         private void SaveData(object sender, EventArgs e)
         {
             SaveFormEvent?.Invoke(this, e);
+        }
+
+        private void SetValueCheckActive(object sender, EventArgs e)
+        {
+            SetValueCheckActiveEvent?.Invoke(this, e);
+        }
+
+        private void SetValueCheckInactive(object sender, EventArgs e)
+        {
+            SetValueCheckInactiveEvent?.Invoke(this, e);
         }
     }
 }

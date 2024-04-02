@@ -59,8 +59,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         public override Dictionary<string, string> GetResult()
         {
-            //Console.WriteLine("GetResult");
-            //Console.WriteLine(_index);
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
                 { "035н00", const_entry1.Text },
@@ -77,10 +75,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         public override void SetData(Dictionary<string, string> data)
         {
-            //Console.WriteLine("SetData");
-            //Console.WriteLine(_index);
-            //Console.WriteLine(data["036н00"]);
-
             const_entry1.Text = data["035н00"];
             const_entry2.Text = data["036н00"];
             const_entry3.Text = data["037н00"];
@@ -108,6 +102,11 @@ namespace Multifunctional_heat_meters_gui.View
                     break;
             }
         }
+
+        /*public void SetAutoValueCheck(bool flag)
+        {
+
+        }*/
 
         protected void SetupHandlers()
         {

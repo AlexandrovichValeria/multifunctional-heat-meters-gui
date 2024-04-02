@@ -13,6 +13,8 @@ namespace Multifunctional_heat_meters_gui.View
         private Builder _builder;
         public bool blockFilledCorrectly;
 
+        protected bool AutoCheckFlag;
+
         public event EventHandler BlockChangedEvent;
 
         protected WindowBlock(Builder builder, IntPtr handle) : base(handle)
@@ -71,22 +73,23 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void OnValueChanged(object sender, List<string> e)
         {
-            string param_name = e[0];
-            string param_value = e[1];
-            if(!ParameterIsValid(param_name, param_value)) {
-                //show error
-                ShowErrorMessage(param_name);
-                blockFilledCorrectly = false;
-                //block going forward and saving the file
-            }
-            else
-            {
-                //remove error
-                HideErrorMessage(param_name);
-                //change blockFilledCorrectly
+            if (AutoCheckFlag == true) {
+                string param_name = e[0];
+                string param_value = e[1];
+                if (!ParameterIsValid(param_name, param_value)) {
+                    //show error
+                    ShowErrorMessage(param_name);
+                    blockFilledCorrectly = false;
+                }
+                else
+                {
+                    //remove error
+                    HideErrorMessage(param_name);
+                }
             }
             OnBlockChanged(sender, EventArgs.Empty);
         }
+
         protected virtual void ShowErrorMessage(string param_name)
         {
 
@@ -97,6 +100,10 @@ namespace Multifunctional_heat_meters_gui.View
 
         }
 
+        public void SetAutoValueCheck(bool flag)
+        {
+            AutoCheckFlag = flag;
+        }
 
         protected bool ParameterIsValid(string param_name, string param_value)
         {

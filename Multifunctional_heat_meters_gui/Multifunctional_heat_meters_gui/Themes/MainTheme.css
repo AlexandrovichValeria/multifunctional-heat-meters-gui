@@ -5,4 +5,9 @@
 
 GtkEntry{
     padding: 5;
+    
+}
+
+.incorrect-value {
+    border-color: #bd0808;
 }

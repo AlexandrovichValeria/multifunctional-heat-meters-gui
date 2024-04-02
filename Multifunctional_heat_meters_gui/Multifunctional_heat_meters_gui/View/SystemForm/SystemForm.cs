@@ -20,7 +20,6 @@ namespace Multifunctional_heat_meters_gui.View
         private Box other_settings_box;
 
         private ParticipatedPipelinesBlock _participatedPipelinesBlock;
-        //private ADS_97_Form _ADS_97_Form;
         private SensorBlock _sensorBlock;
         private OtherSettingsBlock _otherSettingsBlock;
 
@@ -264,6 +263,16 @@ namespace Multifunctional_heat_meters_gui.View
                 //_sensorBlock.DisableBlock();
                 //DisableSensorsSettings();
             }*/
+        }
+
+        public override void SetAutoValueCheck(bool flag)
+        {
+            /*private ParticipatedPipelinesBlock _participatedPipelinesBlock;
+        private SensorBlock _sensorBlock;
+        private OtherSettingsBlock _otherSettingsBlock;*/
+            //_participatedPipelinesBlock.SetAutoValueCheck(flag);
+            _sensorBlock.SetAutoValueCheck(flag);
+            _otherSettingsBlock.SetAutoValueCheck(flag);
         }
 
         protected void SetupHandlers()
