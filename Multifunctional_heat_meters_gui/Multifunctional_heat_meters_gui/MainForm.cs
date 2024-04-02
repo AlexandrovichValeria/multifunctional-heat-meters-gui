@@ -280,25 +280,5 @@ namespace Multifunctional_heat_meters_gui
                 form.SetAutoValueCheck(AutoValueCheck);
             }
         }
-
-        /*private void OnValueCheckActive(object sender, EventArgs e)
-        {
-            AutoValueCheck = true;
-
-            foreach (View.WindowForm form in _allForms)
-            {
-                form.SetAutoValueCheck(true);
-            }
-        }
-
-        private void OnValueCheckInactive(object sender, EventArgs e)
-        {
-            AutoValueCheck = false;
-
-            foreach (View.WindowForm form in _allForms)
-            {
-                form.SetAutoValueCheck(false);
-            }
-        }*/
     }
 }

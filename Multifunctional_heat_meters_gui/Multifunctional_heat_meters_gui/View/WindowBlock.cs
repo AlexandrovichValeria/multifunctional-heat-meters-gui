@@ -11,9 +11,10 @@ namespace Multifunctional_heat_meters_gui.View
     public class WindowBlock : Box
     {
         private Builder _builder;
-        public bool blockFilledCorrectly;
+        //public bool blockFilledCorrectly;
 
         protected bool AutoCheckFlag;
+        protected Dictionary<string, Widget> parameter_widget;
 
         public event EventHandler BlockChangedEvent;
 
@@ -46,16 +47,6 @@ namespace Multifunctional_heat_meters_gui.View
             Sensitive = false;
         }
 
-        /*protected bool CheckParameterValidation(string param_name, string param_value)
-        {
-            //get info from a table and send comparisson result
-            if(!Dictionaries.parameterPatterns.ContainsKey(param_name))
-                return true;
-            if (Regex.IsMatch(param_value, Dictionaries.parameterPatterns[param_name]))
-                return true;
-            return false;
-        }*/
-
         /*protected void SetupHandlers()
         {
 
@@ -73,13 +64,14 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void OnValueChanged(object sender, List<string> e)
         {
+            
             if (AutoCheckFlag == true) {
                 string param_name = e[0];
                 string param_value = e[1];
                 if (!ParameterIsValid(param_name, param_value)) {
                     //show error
                     ShowErrorMessage(param_name);
-                    blockFilledCorrectly = false;
+                    //blockFilledCorrectly = false;
                 }
                 else
                 {
@@ -92,12 +84,18 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected virtual void ShowErrorMessage(string param_name)
         {
-
+            if (parameter_widget.ContainsKey(param_name))
+            {
+                parameter_widget[param_name].StyleContext.AddClass("incorrect-value");
+            }
         }
 
         protected virtual void HideErrorMessage(string param_name)
         {
-
+            if (parameter_widget.ContainsKey(param_name))
+            {
+                parameter_widget[param_name].StyleContext.RemoveClass("incorrect-value");
+            }
         }
 
         public void SetAutoValueCheck(bool flag)
@@ -107,7 +105,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected bool ParameterIsValid(string param_name, string param_value)
         {
-            //get info from a table and send comparisson result
             if (!Dictionaries.parameterPatterns.ContainsKey(param_name))
                 return true;
             if (Regex.IsMatch(param_value, Dictionaries.parameterPatterns[param_name]))

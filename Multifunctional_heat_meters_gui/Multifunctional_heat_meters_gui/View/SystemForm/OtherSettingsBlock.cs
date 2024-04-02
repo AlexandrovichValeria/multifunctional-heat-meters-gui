@@ -58,7 +58,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         private int _pressureMeasure;
         private int _powerMeasure;
-        private ParametersState paramState;
+        //private ParametersState paramState;
 
         public int PressureMeasure
         {
@@ -84,14 +84,22 @@ namespace Multifunctional_heat_meters_gui.View
             _builder = builder;
             builder.Autoconnect(this);
 
-            paramState = new ParametersState(new List<string> {"003", "004", "030н01", "030н02", "024", "025", "008" });
+            //paramState = new ParametersState(new List<string> {"003", "004", "030н01", "030н02", "024", "025", "008" });
+            parameter_widget = new Dictionary<string, Widget>
+            {
+                { "030н01", entry5 },
+                { "030н02", entry6 },
+                { "024", entry7 },
+                { "025", entry8 },
+                { "008", entry9 },
+                { "003", spec1 },
+                { "004", spec2 },
+            };
 
             spec1.Sensitive = false;
             spec2.Sensitive = false;
 
             ShowAll();
-            
-
             SetupHandlers();
         }
 
@@ -100,13 +108,13 @@ namespace Multifunctional_heat_meters_gui.View
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
                 { "030н00", $"{pressure_combo.ActiveId}{power_combo.ActiveId}" },
-                { "030н01", entry5.Text },
-                { "030н02", entry6.Text },
-                { "024", entry7.Text },
-                { "025", entry8.Text },
-                { "008", entry9.Text },
-                { "003", spec1.Text },
-                { "004", spec2.Text },
+                { "030н01", ((Entry)parameter_widget["030н01"]).Text },
+                { "030н02", ((Entry)parameter_widget["030н02"]).Text },
+                { "024", ((Entry)parameter_widget["024"]).Text },
+                { "025", ((Entry)parameter_widget["025"]).Text },
+                { "008", ((Entry)parameter_widget["008"]).Text },
+                { "003", ((Entry)parameter_widget["003"]).Text },
+                { "004", ((Entry)parameter_widget["004"]).Text },
                 { "CurrentTimeAndDate", check5.Active ? "1" : "0" },
             };
             return res;
@@ -116,57 +124,20 @@ namespace Multifunctional_heat_meters_gui.View
         {
             pressure_combo.ActiveId = data["030н00"][0].ToString();
             power_combo.ActiveId = data["030н00"][1].ToString();
-            entry5.Text = data["030н01"];
-            entry6.Text = data["030н02"];
-            entry7.Text = data["024"];
-            entry8.Text = data["025"];
-            entry9.Text = data["008"];
-            spec1.Text = data["003"];
-            spec2.Text = data["004"];
+            ((Entry)parameter_widget["030н01"]).Text = data["030н01"];
+            ((Entry)parameter_widget["030н02"]).Text = data["030н02"];
+            ((Entry)parameter_widget["024"]).Text = data["024"];
+            ((Entry)parameter_widget["025"]).Text = data["025"];
+            ((Entry)parameter_widget["008"]).Text = data["008"];
+            ((Entry)parameter_widget["003"]).Text = data["003"];
+            ((Entry)parameter_widget["004"]).Text = data["004"];
+
             if (data["CurrentTimeAndDate"] == "1")
                 check5.Active = true;
             else
                 check5.Active = false;
         }
 
-
-        protected override void ShowErrorMessage(string param_name)
-        {
-            //base.ShowErrorMessage(param_name);
-            //StyleContext stylecontext;
-            switch (param_name)
-            {
-                case "003":
-                    spec1.StyleContext.AddClass("incorrect-value");
-                    //spec1_error_message.Show();
-                    break;
-                case "004":
-                    spec2.StyleContext.AddClass("incorrect-value");
-                    //spec2_error_message.Show();
-                    break;
-                case "030н01":
-                    entry5.StyleContext.AddClass("incorrect-value");
-                    //entry5_error_message.Show();
-                    break;
-            }
-        }
-
-        protected override void HideErrorMessage(string param_name)
-        {
-            //base.ShowErrorMessage(param_name);
-            switch (param_name)
-            {
-                case "003":
-                    spec1.StyleContext.RemoveClass("incorrect-value");
-                    break;
-                case "004":
-                    spec2.StyleContext.RemoveClass("incorrect-value");
-                    break;
-                case "030н01":
-                    entry5.StyleContext.RemoveClass("incorrect-value");
-                    break;
-            }
-        }
 
         protected void SetupHandlers()
         {
@@ -189,22 +160,26 @@ namespace Multifunctional_heat_meters_gui.View
 
             //power_combo.Changed += OnBlockChanged;
             //pressure_combo.Changed += OnBlockChanged;
+            foreach (KeyValuePair<string, Widget> keyval in parameter_widget)
+            {
+                ((Entry)parameter_widget[keyval.Key]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, ((Entry)keyval.Value).Text });
+            }
 
-            entry5.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н01", entry5.Text});
-            entry6.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry6.Text });
-            entry7.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry7.Text });
-            entry8.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry8.Text });
-            entry9.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "", entry9.Text });
-            spec1.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "003", spec1.Text });
-            spec2.Changed += (sender, e) => OnValueChanged(sender, new List<string> { "004", spec2.Text });
-            entry5.Changed += OnBlockChanged;
+            /*((Entry)parameter_widget["030н01"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н01", entry5.Text});
+            ((Entry)parameter_widget["030н02"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н02", entry6.Text });
+            ((Entry)parameter_widget["024"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "024", entry7.Text });
+            ((Entry)parameter_widget["025"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "025", entry8.Text });
+            ((Entry)parameter_widget["008"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "008", entry9.Text });
+            ((Entry)parameter_widget["003"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "003", spec1.Text });
+            ((Entry)parameter_widget["004"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "004", spec2.Text });*/
+            /*entry5.Changed += OnBlockChanged;
             entry6.Changed += OnBlockChanged;
             entry7.Changed += OnBlockChanged;
             entry8.Changed += OnBlockChanged;
             entry9.Changed += OnBlockChanged;
             spec1.Changed += OnBlockChanged;
             spec2.Changed += OnBlockChanged;
-            check5.Clicked += OnBlockChanged;
+            check5.Clicked += OnBlockChanged;*/
             //DeleteEvent += OnLocalDeleteEvent;
         }
 

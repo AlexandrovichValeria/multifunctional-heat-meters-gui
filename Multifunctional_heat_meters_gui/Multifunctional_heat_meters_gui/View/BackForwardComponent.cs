@@ -23,8 +23,6 @@ namespace Multifunctional_heat_meters_gui.View
         public event EventHandler BackButtonClickedEvent;
         public event EventHandler ForwardButtonClickedEvent;
         public event EventHandler SaveButtonClickedEvent;
-        public event EventHandler ValueCheckButtonActiveEvent;
-        public event EventHandler ValueCheckButtonInactiveEvent;
 
         public static BackForwardComponent Create()
         {
@@ -70,17 +68,5 @@ namespace Multifunctional_heat_meters_gui.View
         {
             SaveButtonClickedEvent?.Invoke(this, e);
         }
-
-        /*protected void ValueCheckButtonClick(object sender, EventArgs e)
-        {
-            if (value_check_button.Active)
-            {
-                ValueCheckButtonActiveEvent?.Invoke(this, e);
-            }
-            else
-            {
-                ValueCheckButtonInactiveEvent?.Invoke(this, e);
-            }
-        }*/
     }
 }
