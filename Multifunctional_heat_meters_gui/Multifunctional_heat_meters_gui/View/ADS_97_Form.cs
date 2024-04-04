@@ -24,6 +24,7 @@ namespace Multifunctional_heat_meters_gui.View
         private SpinButton spinbutton2;
 
         public event EventHandler ADSChanged;
+        private int ADSAmount;
 
         public static ADS_97_Form Create()
         {
@@ -38,6 +39,7 @@ namespace Multifunctional_heat_meters_gui.View
 
             label4.Hide();
             spinbutton2.Hide();
+            ADSAmount = 0;
 
             SetupHandlers();
         }
@@ -46,7 +48,7 @@ namespace Multifunctional_heat_meters_gui.View
         {
             Dictionary<string, string> result = new Dictionary<string, string>()
             {
-                { "038н00", (Int32.Parse(combo1.ActiveId)+1).ToString() },
+                { "038н00", ADSAmount.ToString()},
                 { "038н01", spinbutton1.Value.ToString() },
             };
             if (combo1.ActiveId == "1")
@@ -86,6 +88,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void OnButton1Click(object sender, EventArgs a)
         {
+            ADSAmount = combo1.Active + 1;
             ADSChanged?.Invoke(this, EventArgs.Empty);
             Hide();
         }
