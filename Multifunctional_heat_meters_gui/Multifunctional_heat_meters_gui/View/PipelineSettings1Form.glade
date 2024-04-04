@@ -186,7 +186,6 @@
               <object class="GtkEntry" id="entry4">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="text" translatable="yes">700</property>
               </object>
               <packing>
                 <property name="left-attach">5</property>
@@ -236,7 +235,7 @@
               <object class="GtkComboBoxText" id="combo1">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="active-id">0</property>
+                <property name="active">2</property>
                 <items>
                   <item id="0" translatable="yes">Изб с вых. 0-5 мА</item>
                   <item id="1" translatable="yes">Изб с вых. 0-20 мА</item>
@@ -267,7 +266,7 @@
               <object class="GtkEntry" id="entry6">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="text" translatable="yes">15.07</property>
+                <property name="text" translatable="yes">16.31</property>
               </object>
               <packing>
                 <property name="left-attach">4</property>

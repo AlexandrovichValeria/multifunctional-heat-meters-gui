@@ -74,12 +74,12 @@ namespace Multifunctional_heat_meters_gui.View
         //public event EventHandler<List<string>> ParameterChangedEvent;
 
 
-        public static OtherSettingsBlock Create()
+        public static OtherSettingsBlock Create(string measureSystem = "00")
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.SystemForm.OtherSettingsBlock.glade", null);
-            return new OtherSettingsBlock(builder, builder.GetObject("box").Handle);
+            return new OtherSettingsBlock(measureSystem, builder, builder.GetObject("box").Handle);
         }
-        protected OtherSettingsBlock(Builder builder, IntPtr handle) : base(builder, handle)
+        protected OtherSettingsBlock(string measureSystem, Builder builder, IntPtr handle) : base(builder, handle)
         {
             _builder = builder;
             builder.Autoconnect(this);
@@ -98,6 +98,14 @@ namespace Multifunctional_heat_meters_gui.View
 
             spec1.Sensitive = false;
             spec2.Sensitive = false;
+
+            if (measureSystem.Length == 2)
+            {
+                pressure_combo.ActiveId = measureSystem[0].ToString();
+                power_combo.ActiveId = measureSystem[1].ToString();
+                OnPressureComboChanged(this, EventArgs.Empty);
+                OnPowerComboChanged(this, EventArgs.Empty);
+            }
 
             ShowAll();
             SetupHandlers();

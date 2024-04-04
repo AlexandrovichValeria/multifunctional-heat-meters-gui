@@ -164,7 +164,7 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 label1.Text = "Верхний предел";
                 entry_label1.Hide();
-                entry1.Text = "700";
+                entry1.Text = "";
                 measure_label1.Text = "м³/час";
                 entry_label2.Hide();
                 entry2.Hide();
@@ -172,6 +172,7 @@ namespace Multifunctional_heat_meters_gui.View
 
                 label2.Text = "Цена импульса из паспорта прибора";
                 entry_label3.Hide();
+                entry3.Text = "";
                 entry_label4.Hide();
                 entry4.Hide();
 
@@ -186,7 +187,7 @@ namespace Multifunctional_heat_meters_gui.View
                 label1.Text = "Верхний предел";
 
                 entry_label1.Hide();
-                entry1.Text = "700";
+                entry1.Text = "";
                 measure_label1.Text = "т/час";
                 entry_label2.Hide();
                 entry2.Hide();
@@ -194,6 +195,7 @@ namespace Multifunctional_heat_meters_gui.View
 
                 label2.Text = "Цена импульса из паспорта прибора";
                 entry_label3.Hide();
+                entry3.Text = "";
                 entry_label4.Hide();
                 entry4.Hide();
 
@@ -214,12 +216,13 @@ namespace Multifunctional_heat_meters_gui.View
                 entry_label2.Show();
                 entry2.Show();
                 measure_label2.Show();
-                entry2.Text = "763.400";
+                entry2.Text = "";
                 measure_label2.Text = "м³/час";
 
                 label2.Text = "Нижний и верхний предел частоты входного сигнала";
 
                 entry_label3.Show();
+                entry3.Text = "0";
                 measure_label3.Text = "Гц";
 
                 entry_label4.Show();
@@ -239,12 +242,13 @@ namespace Multifunctional_heat_meters_gui.View
                 entry_label2.Show();
                 entry2.Show();
                 measure_label2.Show();
-                entry2.Text = "763.400";
+                entry2.Text = "";
                 measure_label2.Text = "т/час";
 
                 label2.Text = "Нижний и верхний предел частоты входного сигнала";
 
                 entry_label3.Show();
+                entry3.Text = "0";
                 measure_label3.Text = "Гц";
 
                 entry_label4.Show();

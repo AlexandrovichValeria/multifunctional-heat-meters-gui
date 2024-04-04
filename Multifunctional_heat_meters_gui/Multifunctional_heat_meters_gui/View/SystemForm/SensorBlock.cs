@@ -30,19 +30,19 @@ namespace Multifunctional_heat_meters_gui.View
         private Label measure_label2;
 
 
-        private int _index;
+        //private int _index;
 
-        public static SensorBlock Create(int index)
+        public static SensorBlock Create(string measureSystem)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.SystemForm.SensorBlock.glade", null);
-            return new SensorBlock(index, builder, builder.GetObject("box").Handle);
+            return new SensorBlock(measureSystem, builder, builder.GetObject("box").Handle);
         }
-        protected SensorBlock(int index, Builder builder, IntPtr handle) : base(builder, handle)
+        protected SensorBlock(string measureSystem, Builder builder, IntPtr handle) : base(builder, handle)
         {
             _builder = builder;
             builder.Autoconnect(this);
             
-            _index = index;
+            //_index = index;
             parameter_widget = new Dictionary<string, Widget>
             {
                 { "035н00", const_entry1 },
@@ -50,6 +50,9 @@ namespace Multifunctional_heat_meters_gui.View
                 { "037н00", const_entry3 },
                 { "040н00", const_entry4 },
             };
+
+            int measurement = Int32.Parse(measureSystem[0].ToString());
+            ChangePressureMeasurement(measurement);
 
             ShowAll();
             SetupHandlers();

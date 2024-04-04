@@ -82,14 +82,14 @@ namespace Multifunctional_heat_meters_gui
             Title = window_name;
 
             string configFilePath = Dictionaries.ConfigFileNames[_device];
-            string CheckboxesState = "";
+            string systemFormState = "";
             if (File.Exists(configFilePath))
             {
-                CheckboxesState = File.ReadAllText(configFilePath);
+                systemFormState = File.ReadAllText(configFilePath);
             }
 
-            View.SystemForm subForm1 = View.SystemForm.Create(1, device, CheckboxesState);
-            View.SystemForm subForm2 = View.SystemForm.Create(2, device, CheckboxesState);
+            View.SystemForm subForm1 = View.SystemForm.Create(1, device, systemFormState);
+            View.SystemForm subForm2 = View.SystemForm.Create(2, device, systemFormState);
             CalculateMaxChannelsAmount(device);
             _ADS_97_Form = View.ADS_97_Form.Create();
             ADSAmount = 0;
@@ -178,8 +178,9 @@ namespace Multifunctional_heat_meters_gui
                 Dictionary<string, string> data = ((View.SystemForm)form).GetSystemWindowData();
                 string pipelines = data["031н00"];
                 string consumers = data["031н01"];
+                string measureSystem = data["030н00"];
                 string configFilePath = Dictionaries.ConfigFileNames[_device];
-                File.WriteAllText(configFilePath, pipelines + " " + consumers);
+                File.WriteAllText(configFilePath, pipelines + " " + consumers + " " + measureSystem);
             }
 
             Application.Quit();
