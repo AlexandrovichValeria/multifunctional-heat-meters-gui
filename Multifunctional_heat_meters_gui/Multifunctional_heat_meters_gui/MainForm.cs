@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using Gtk;
@@ -80,14 +81,19 @@ namespace Multifunctional_heat_meters_gui
             string window_name = "Настройщик базы данных " + deviceName;
             Title = window_name;
 
-            View.SystemForm subForm1 = View.SystemForm.Create(1, device);
-            View.SystemForm subForm2 = View.SystemForm.Create(2, device);
+            string configFilePath = Dictionaries.ConfigFileNames[_device];
+            string CheckboxesState = "";
+            if (File.Exists(configFilePath))
+            {
+                CheckboxesState = File.ReadAllText(configFilePath);
+            }
+
+            View.SystemForm subForm1 = View.SystemForm.Create(1, device, CheckboxesState);
+            View.SystemForm subForm2 = View.SystemForm.Create(2, device, CheckboxesState);
             CalculateMaxChannelsAmount(device);
             _ADS_97_Form = View.ADS_97_Form.Create();
             ADSAmount = 0;
             AutoValueCheck = false;
-
-            //_sysController = new Controller.SystemController(subForm1, _model);
 
             _allForms.AddFirst(subForm1);
             _allForms.AddLast(subForm2);
@@ -166,7 +172,18 @@ namespace Multifunctional_heat_meters_gui
 
         protected void OnLocalDeleteEvent(object sender, DeleteEventArgs a)
         {
+            View.WindowForm form = _allForms.First.Value;
+            if (form is View.SystemForm)
+            {
+                Dictionary<string, string> data = ((View.SystemForm)form).GetSystemWindowData();
+                string pipelines = data["031н00"];
+                string consumers = data["031н01"];
+                string configFilePath = Dictionaries.ConfigFileNames[_device];
+                File.WriteAllText(configFilePath, pipelines + " " + consumers);
+            }
+
             Application.Quit();
+            
             a.RetVal = true;
         }
 
@@ -183,13 +200,15 @@ namespace Multifunctional_heat_meters_gui
 
             FileChooserDialog fileChooser = new FileChooserDialog(
             "Сохранение базы данных", // Dialog title
-            null, // Parent window (can be null)
+            this, // Parent window (can be null)
             FileChooserAction.Save, // Action type (Save)
             "Отмена", // Cancel button text
             ResponseType.Cancel, // Response type for the Cancel button
             "Сохранить", // Accept button text
             ResponseType.Accept // Response type for the Accept button
             );
+
+            fileChooser.Show();
 
             FileFilter filter = new FileFilter();
             filter.Name = "Configurator DB files";
@@ -205,24 +224,6 @@ namespace Multifunctional_heat_meters_gui
                 // Get the selected file or file name
                 string selectedFilePath = fileChooser.Filename;
 
-                
-                //GLib.FileUtils.GetFileContents.ut
-                /*byte[] content = content.Select(Convert.ToByte).ToArray();
-                string contentUtf8 = Encoding.UTF8.GetString(content);*/
-
-                /*byte[] fnb = Encoding.GetEncoding("UTF-16").GetBytes(selectedFilePath);
-                selectedFilePath = Encoding.GetEncoding("UTF-16").GetString(fnb);*/
-
-                /*Encoding encoding = Encoding.GetEncoding("UTF-8"); // Replace with the desired encoding
-                byte[] bytes = encoding.GetBytes(selectedFilePath);
-                string convertedFilename = encoding.GetString(bytes);
-                Console.WriteLine("selectedFilePath");
-                Console.WriteLine(selectedFilePath);
-                Console.WriteLine("convertedFilename");
-                Console.WriteLine(convertedFilename);*/
-                // Process the selected file or file name as needed
-                // (e.g., save the file using StreamWriter)
-
                 controllerBuilder.saveDataFromAllForms();
                 _model.SaveDataToFile(selectedFilePath, "");
                 // Clean up and destroy the dialog
@@ -234,6 +235,12 @@ namespace Multifunctional_heat_meters_gui
                 fileChooser.Destroy();
                 // Handle the case when the user cancels the dialog
             }
+
+            // Window window = new Window("AA");
+
+            //FileChooserNative fcn = new FileChooserNative("Сохранение базы данных", this, FileChooserAction.Save, "Сохранить", "Отмена");
+            //dialog.Show();
+
         }
 
         private void CheckForADS(object sender, List<int> e)

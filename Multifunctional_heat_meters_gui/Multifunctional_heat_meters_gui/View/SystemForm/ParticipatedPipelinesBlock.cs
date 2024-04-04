@@ -31,25 +31,36 @@ namespace Multifunctional_heat_meters_gui.View
         public event EventHandler BlockChangedEvent;
         //public event EventHandler ConsumersChangedEvent;
 
-        public static ParticipatedPipelinesBlock Create(int participatedPipelinesCount, int participatedConsumerCount)
+        public static ParticipatedPipelinesBlock Create(int participatedPipelinesCount, int participatedConsumerCount, string CheckboxesState = "")
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.SystemForm.ParticipatedPipelinesBlock.glade", null);
-            return new ParticipatedPipelinesBlock(participatedPipelinesCount, participatedConsumerCount, builder, builder.GetObject("box").Handle);
+            return new ParticipatedPipelinesBlock(participatedPipelinesCount, participatedConsumerCount, CheckboxesState, builder, builder.GetObject("box").Handle);
         }
 
-        protected ParticipatedPipelinesBlock(int participatedPipelinesCount, int participatedConsumerCount, Builder builder, IntPtr handle) : base(builder, handle)
+        protected ParticipatedPipelinesBlock(int participatedPipelinesCount, int participatedConsumerCount, string CheckboxesState, Builder builder, IntPtr handle) : base(builder, handle)
         {
             _builder = builder;
             builder.Autoconnect(this);
 
-            _participatedPipelinesCheckboxes = CheckboxesBlock.Create(participatedPipelinesCount, s_pipelinePrefix);
-            _participatedConsumersCheckboxes = CheckboxesBlock.Create(participatedConsumerCount, s_consumerPrefix);
+            string[] elements = CheckboxesState.Split(' ');
 
-            ParticipatedPipelinesResult.Text = new string('0', participatedPipelinesCount);
-            ParticipatedConsumersResult.Text = new string('0', participatedConsumerCount);
+            _participatedPipelinesCheckboxes = CheckboxesBlock.Create(participatedPipelinesCount, s_pipelinePrefix, elements[0]);
+            _participatedConsumersCheckboxes = CheckboxesBlock.Create(participatedConsumerCount, s_consumerPrefix, elements[1]);
 
-            _pipelinesResult = new string('0', participatedPipelinesCount);
-            _consumersResult = new string('0', participatedConsumerCount);
+            if (elements[0].Length == participatedPipelinesCount && elements[1].Length == participatedConsumerCount)
+            {
+                ParticipatedPipelinesResult.Text = elements[0];
+                ParticipatedConsumersResult.Text = elements[1];
+                _pipelinesResult = elements[0];
+                _consumersResult = elements[1];
+            }
+            else
+            {
+                ParticipatedPipelinesResult.Text = new string('0', participatedPipelinesCount);
+                ParticipatedConsumersResult.Text = new string('0', participatedConsumerCount);
+                _pipelinesResult = new string('0', participatedPipelinesCount);
+                _consumersResult = new string('0', participatedConsumerCount);
+            }
 
             pipelines_box.Add(_participatedPipelinesCheckboxes);
             consumers_box.Add(_participatedConsumersCheckboxes);

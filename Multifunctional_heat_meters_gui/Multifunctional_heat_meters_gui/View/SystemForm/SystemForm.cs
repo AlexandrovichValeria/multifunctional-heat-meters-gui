@@ -35,13 +35,13 @@ namespace Multifunctional_heat_meters_gui.View
         private int PressureMeasure;
         private int PowerMeasure;
 
-        public static SystemForm Create(int index, Model.Device device)
+        public static SystemForm Create(int index, Model.Device device, string CheckboxesState = "")
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.SystemForm.SystemForm.glade", null);
-            return new SystemForm(index, device, builder, builder.GetObject("form_box").Handle);
+            return new SystemForm(index, device, CheckboxesState, builder, builder.GetObject("form_box").Handle);
         }
 
-        protected SystemForm(int index, Model.Device device, Builder builder, IntPtr handle) : base($"Общесистемные параметры {index}", builder, handle)
+        protected SystemForm(int index, Model.Device device, string CheckboxesState, Builder builder, IntPtr handle) : base($"Общесистемные параметры {index}", builder, handle)
         {
             _builder = builder;
             builder.Autoconnect(this);
@@ -58,9 +58,9 @@ namespace Multifunctional_heat_meters_gui.View
             other_settings_box.Add(_otherSettingsBlock);
 
             if (device == Model.Device.SPT963)
-                _participatedPipelinesBlock = ParticipatedPipelinesBlock.Create(16, 8);
+                _participatedPipelinesBlock = ParticipatedPipelinesBlock.Create(16, 8, CheckboxesState);
             else
-                _participatedPipelinesBlock = ParticipatedPipelinesBlock.Create(12, 6);
+                _participatedPipelinesBlock = ParticipatedPipelinesBlock.Create(12, 6, CheckboxesState);
             Checkboxes_box.Add(_participatedPipelinesBlock);
 
             //CalculateMinPipelinesCountForm_ADS_97(device);

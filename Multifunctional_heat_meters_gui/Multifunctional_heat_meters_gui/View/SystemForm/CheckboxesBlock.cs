@@ -25,12 +25,12 @@ namespace Multifunctional_heat_meters_gui.View
             get { return _result; }
         }
 
-        public static CheckboxesBlock Create(int countCheckboxes, string prefix)
+        public static CheckboxesBlock Create(int countCheckboxes, string prefix, string stateString)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.SystemForm.CheckboxesBlock.glade", null);
-            return new CheckboxesBlock(countCheckboxes, prefix, builder, builder.GetObject("box").Handle);
+            return new CheckboxesBlock(countCheckboxes, prefix, stateString, builder, builder.GetObject("box").Handle);
         }
-        protected CheckboxesBlock(int countCheckboxes, string prefix, Builder builder, IntPtr handle) : base(handle)
+        protected CheckboxesBlock(int countCheckboxes, string prefix, string stateString, Builder builder, IntPtr handle) : base(handle)
         {
             _builder = builder;
             builder.Autoconnect(this);
@@ -40,9 +40,11 @@ namespace Multifunctional_heat_meters_gui.View
 
             for (int i = 0; i < countCheckboxes; i++)
             {
-                _result += "0";
-
                 CheckButton currentCheckbox = new CheckButton($"{prefix}{i + 1}");
+                bool state = stateString[i] == '1' ? true : false;
+                currentCheckbox.Active = state;
+
+                _result += stateString[i];
 
                 currentCheckbox.Clicked += new EventHandler(Checkbox_Checked);
 
@@ -76,7 +78,6 @@ namespace Multifunctional_heat_meters_gui.View
         }
         private void Checkbox_Checked(object sender, EventArgs e)
         {
-
             _result = "";
 
             foreach (CheckButton checkbox in _checkboxes)

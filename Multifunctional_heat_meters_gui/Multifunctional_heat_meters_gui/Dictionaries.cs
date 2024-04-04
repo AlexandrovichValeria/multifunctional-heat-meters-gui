@@ -39,5 +39,12 @@ namespace Multifunctional_heat_meters_gui
             { Model.Device.SPT962, new List<int>{ 8, 4, 4 } },
             { Model.Device.SPT963, new List<int>{ 8, 8, 8 } },
         };
+
+        public static readonly Dictionary<Model.Device, string> ConfigFileNames = new Dictionary<Model.Device, string>
+        {
+            { Model.Device.SPT961, "checkbuttons_config961.txt"},
+            { Model.Device.SPT962, "checkbuttons_config961.txt"},
+            { Model.Device.SPT963, "checkbuttons_config963.txt"},
+        };
     }
 }
