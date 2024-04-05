@@ -237,10 +237,8 @@ namespace Multifunctional_heat_meters_gui
                 // Handle the case when the user cancels the dialog
             }
 
-            // Window window = new Window("AA");
-
             //FileChooserNative fcn = new FileChooserNative("Сохранение базы данных", this, FileChooserAction.Save, "Сохранить", "Отмена");
-            //dialog.Show();
+            //fcn.Show();
 
         }
 
