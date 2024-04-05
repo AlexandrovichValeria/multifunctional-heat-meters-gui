@@ -88,6 +88,9 @@ namespace Multifunctional_heat_meters_gui.View
             //ShowAll();
 
             SetupHandlers();
+
+            OnPowerComboChanged(this, EventArgs.Empty);
+            OnPressureComboChanged(this, EventArgs.Empty);
         }
 
         public string GetParamFromWindow(string param)
@@ -314,7 +317,6 @@ namespace Multifunctional_heat_meters_gui.View
         protected void OnPressureComboChanged(object sender, EventArgs a)
         {
             PressureMeasure = _otherSettingsBlock.PressureMeasure;
-
             _sensorBlock.ChangePressureMeasurement(PressureMeasure);
             EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(PressureMeasure);
 
