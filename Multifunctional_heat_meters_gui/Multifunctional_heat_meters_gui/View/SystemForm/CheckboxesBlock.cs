@@ -72,6 +72,22 @@ namespace Multifunctional_heat_meters_gui.View
             }
         }
 
+        public void SelectAll()
+        {
+            foreach(CheckButton checkbox in _checkboxes)
+            {
+                checkbox.Active = true;
+            }
+        }
+
+        public void DeselectAll()
+        {
+            foreach (CheckButton checkbox in _checkboxes)
+            {
+                checkbox.Active = false;
+            }
+        }
+
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
@@ -85,7 +101,7 @@ namespace Multifunctional_heat_meters_gui.View
                 _result += checkbox.Active ? "1" : "0";
             }
             CheckBoxesChecked(this, EventArgs.Empty);
-
         }
+
     }
 }

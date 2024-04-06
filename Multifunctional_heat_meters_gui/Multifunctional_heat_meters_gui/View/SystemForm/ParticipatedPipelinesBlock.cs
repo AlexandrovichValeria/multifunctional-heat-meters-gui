@@ -18,6 +18,10 @@ namespace Multifunctional_heat_meters_gui.View
         private Box pipelines_box;
         [Builder.Object]
         private Box consumers_box;
+        [Builder.Object]
+        private ToggleButton pipelines_toggle;
+        [Builder.Object]
+        private ToggleButton consumers_toggle;
 
         private static string s_pipelinePrefix = "т";
         private static string s_consumerPrefix = "п";
@@ -77,6 +81,9 @@ namespace Multifunctional_heat_meters_gui.View
             _participatedConsumersCheckboxes.CheckBoxesChecked += new EventHandler(ChangeParticipatedConsumersResult);
             _participatedPipelinesCheckboxes.CheckBoxesChecked += new EventHandler(OnBlockChanged);
             _participatedConsumersCheckboxes.CheckBoxesChecked += new EventHandler(OnBlockChanged);
+
+            pipelines_toggle.Toggled += OnPipelinesToggleChanged;
+            consumers_toggle.Toggled += onConsumersToggleChanged;
         }
         private void ChangeParticipatedPipelinesResult(object sender, EventArgs e)
         {
@@ -93,6 +100,34 @@ namespace Multifunctional_heat_meters_gui.View
         private void OnBlockChanged(object sender, EventArgs e)
         {
             BlockChangedEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnPipelinesToggleChanged(object sender, EventArgs e)
+        {
+            if (pipelines_toggle.Active)
+            {
+                pipelines_toggle.Label = "  Очистить  ";
+                _participatedPipelinesCheckboxes.SelectAll();
+            }
+            else
+            {
+                pipelines_toggle.Label = "Выбрать все";
+                _participatedPipelinesCheckboxes.DeselectAll();
+            }
+        }
+
+        private void onConsumersToggleChanged(object sender, EventArgs e)
+        {
+            if (consumers_toggle.Active)
+            {
+                consumers_toggle.Label = "  Очистить  ";
+                _participatedConsumersCheckboxes.SelectAll();
+            }
+            else
+            {
+                consumers_toggle.Label = "Выбрать все";
+                _participatedConsumersCheckboxes.DeselectAll();
+            }
         }
 
         public Dictionary<string, string> GetResult()
