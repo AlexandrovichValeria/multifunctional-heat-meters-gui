@@ -64,7 +64,8 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void OnValueChanged(object sender, List<string> e)
         {
-            
+            Console.WriteLine("OnValueChanged");
+            Console.WriteLine(AutoCheckFlag);
             if (AutoCheckFlag == true) {
                 string param_name = e[0];
                 string param_value = e[1];
@@ -105,6 +106,32 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected bool ParameterIsValid(string param_name, string param_value)
         {
+            Console.WriteLine("ParameterIsValid");
+            //double
+            if (Dictionaries.parameterDoubleLimits.ContainsKey(param_name))
+            {
+                double result;
+                if(!double.TryParse(param_value, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.GetCultureInfo("en-US"), out result))
+                    return false;
+
+                List<double> limits = Dictionaries.parameterDoubleLimits[param_name];
+                if(result >= limits[0] && result <= limits[1])
+                    return true;
+                return false;
+            }
+            //int
+            if (Dictionaries.parameterIntLimits.ContainsKey(param_name))
+            {
+                int result;
+                if (!Int32.TryParse(param_value, out result))
+                    return false;
+
+                List<int> limits = Dictionaries.parameterIntLimits[param_name];
+                if (result >= limits[0] && result <= limits[1])
+                    return true;
+                return false;
+            }
+            //other
             if (!Dictionaries.parameterPatterns.ContainsKey(param_name))
                 return true;
             if (Regex.IsMatch(param_value, Dictionaries.parameterPatterns[param_name]))

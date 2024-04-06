@@ -37,6 +37,19 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
+
+            parameter_widget = new Dictionary<string, Widget>
+            {
+                { "125н00", entry0 },
+                { "125н01", entry1 },
+                { "125н02", entry2 },
+                { "125н03", entry3 },
+                { "125н04", entry4 },
+                { "125н05", entry5 },
+                { "125н06", entry6 },
+                { "125н07", entry7 },
+            };
+
             SetupHandlers();
 
         }
@@ -45,14 +58,14 @@ namespace Multifunctional_heat_meters_gui.View
         {
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
-                { "125н00", entry0.Text },
-                { "125н01", entry1.Text },
-                { "125н02", entry2.Text },
-                { "125н03", entry3.Text },
-                { "125н04", entry4.Text },
-                { "125н05", entry5.Text },
-                { "125н06", entry6.Text },
-                { "125н07", entry7.Text },
+                { "125н00", ((Entry)parameter_widget["125н00"]).Text },
+                { "125н01", ((Entry)parameter_widget["125н01"]).Text },
+                { "125н02", ((Entry)parameter_widget["125н02"]).Text },
+                { "125н03", ((Entry)parameter_widget["125н03"]).Text },
+                { "125н04", ((Entry)parameter_widget["125н04"]).Text },
+                { "125н05", ((Entry)parameter_widget["125н05"]).Text },
+                { "125н06", ((Entry)parameter_widget["125н06"]).Text },
+                { "125н07", ((Entry)parameter_widget["125н07"]).Text },
             };
             return res;
         }
@@ -60,14 +73,14 @@ namespace Multifunctional_heat_meters_gui.View
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
-            entry0.Changed += OnBlockChanged;
+            /*entry0.Changed += OnBlockChanged;
             entry1.Changed += OnBlockChanged;
             entry2.Changed += OnBlockChanged;
             entry3.Changed += OnBlockChanged;
             entry4.Changed += OnBlockChanged;
             entry5.Changed += OnBlockChanged;
             entry6.Changed += OnBlockChanged;
-            entry7.Changed += OnBlockChanged;
+            entry7.Changed += OnBlockChanged;*/
 
             entry0.Changed += TurnIntoNumber;
             entry1.Changed += TurnIntoNumber;
@@ -77,6 +90,11 @@ namespace Multifunctional_heat_meters_gui.View
             entry5.Changed += TurnIntoNumber;
             entry6.Changed += TurnIntoNumber;
             entry7.Changed += TurnIntoNumber;
+
+            foreach (KeyValuePair<string, Widget> keyval in parameter_widget)
+            {
+                ((Entry)parameter_widget[keyval.Key]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, ((Entry)keyval.Value).Text });
+            }
         }
     }
 }

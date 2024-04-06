@@ -105,6 +105,12 @@ namespace Multifunctional_heat_meters_gui.View
             return false;
         }
 
+        public override void SetAutoValueCheck(bool flag)
+        {
+            gas_block.SetAutoValueCheck(flag);
+            liquid_block.SetAutoValueCheck(flag);
+        }
+
         public override bool IsFormFilledOut()
         {
             Dictionary<string, string> pars = GetCoolantSettings();

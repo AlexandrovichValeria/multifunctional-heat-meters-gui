@@ -274,10 +274,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         public override void SetAutoValueCheck(bool flag)
         {
-            /*private ParticipatedPipelinesBlock _participatedPipelinesBlock;
-        private SensorBlock _sensorBlock;
-        private OtherSettingsBlock _otherSettingsBlock;*/
-            //_participatedPipelinesBlock.SetAutoValueCheck(flag);
             _sensorBlock.SetAutoValueCheck(flag);
             _otherSettingsBlock.SetAutoValueCheck(flag);
         }

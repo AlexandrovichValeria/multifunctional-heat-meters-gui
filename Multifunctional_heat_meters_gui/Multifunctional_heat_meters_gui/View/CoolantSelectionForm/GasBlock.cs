@@ -26,16 +26,21 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
+            parameter_widget = new Dictionary<string, Widget>
+            {
+                { "104", entry1 },
+                { "105", entry2 },
+            };
+
             SetupHandlers();
-            
         }
 
         public override Dictionary<string, string> GetResult()
         {
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
-                { "104", entry1.Text }, //ширина зоны насыщения
-                { "105", entry2.Text }, //степень сухости
+                { "104", ((Entry)parameter_widget["104"]).Text }, //ширина зоны насыщения
+                { "105", ((Entry)parameter_widget["105"]).Text }, //степень сухости
             };
             return res;
         }
@@ -43,11 +48,16 @@ namespace Multifunctional_heat_meters_gui.View
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;
-            entry1.Changed += OnBlockChanged;
-            entry2.Changed += OnBlockChanged;
+            //entry1.Changed += OnBlockChanged;
+            //entry2.Changed += OnBlockChanged;
 
             entry1.Changed += TurnIntoNumber;
             entry2.Changed += TurnIntoNumber;
+
+            foreach (KeyValuePair<string, Widget> keyval in parameter_widget)
+            {
+                ((Entry)parameter_widget[keyval.Key]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, ((Entry)keyval.Value).Text });
+            }
         }
     }
 }

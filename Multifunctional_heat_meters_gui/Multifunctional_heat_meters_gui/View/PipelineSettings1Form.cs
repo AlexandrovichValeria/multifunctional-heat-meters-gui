@@ -46,7 +46,7 @@ namespace Multifunctional_heat_meters_gui.View
         private Entry entry2;
         [Builder.Object]
         private Entry entry3;
-        [Builder.Object]
+        [Builder.Object]sdadsc
         private Entry entry4;*/
         [Builder.Object]
         private Box entry_box_top_right;

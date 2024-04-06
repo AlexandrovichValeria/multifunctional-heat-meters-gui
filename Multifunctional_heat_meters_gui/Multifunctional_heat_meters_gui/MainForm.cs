@@ -107,7 +107,7 @@ namespace Multifunctional_heat_meters_gui
             controllerBuilder = new ControllerBuilder(appState, _model);
 
             formsBuilder.NewFormCreatedEvent += new EventHandler(formSwitcher.SetEventListenersForForm);
-            formsBuilder.NewFormCreatedEvent += new EventHandler(SetupHandlerForSaveButton);
+            formsBuilder.NewFormCreatedEvent += new EventHandler(OnNewFormCreated);
             //formsBuilder.NewFormCreatedEvent += new EventHandler(controllerBuilder.SetNewControllerForForm);
             //formsBuilder.FormDeletedEvent += new EventHandler(controllerBuilder.DeleteControllerForm);
 
@@ -162,12 +162,11 @@ namespace Multifunctional_heat_meters_gui
             //forward_button.Clicked += ForwardButtonClicked;
         }
 
-        protected void SetupHandlerForSaveButton(object form, EventArgs a)
+        protected void OnNewFormCreated(object form, EventArgs a)
         {
             View.WindowForm tempForm = (View.WindowForm)form;
-
             tempForm.SaveFormEvent += new EventHandler(OnSaveButtonActivated);
-            
+            tempForm.SetAutoValueCheck(AutoValueCheck);
         }
 
         protected void OnLocalDeleteEvent(object sender, DeleteEventArgs a)

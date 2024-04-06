@@ -20,6 +20,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected string _formName;
         protected int _formIndex = 0;
+        protected bool AutoCheckFlag;
 
         protected BackForwardComponent _backForwardComponent;
         protected Dictionary<string, string> paramsToNextForm = new Dictionary<string, string>();
@@ -64,7 +65,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         public virtual void SetAutoValueCheck(bool flag)
         {
-
+            AutoCheckFlag = flag;
         }
 
         public virtual void OnFormChanged(object sender, EventArgs e)
