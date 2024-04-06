@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Multifunctional_heat_meters_gui.EventsArgs
 {
-    public class SensorTypeEventArgs : EventArgs
+    public class ChangeFormEventArgs : EventArgs
     {
-        public string SensorType { get; set; }
+        public string Data { get; set; }
         public int PipelineIndex { get; set; }
-        public SensorTypeEventArgs(string type, int pipelineIndex)
+        public ChangeFormEventArgs(string type, int pipelineIndex)
         {
-            SensorType = type;
+            Data = type;
             PipelineIndex = pipelineIndex;
         }
     }

@@ -77,7 +77,9 @@ namespace Multifunctional_heat_meters_gui.View
         private Entry entry_034н08; //цена импульса - из паспорта прибора м³/имп или т/имп
 
         public string curIndicator = "01";
-        
+
+        public event EventHandler<EventsArgs.ChangeFormEventArgs> LowerLimitChangedEvent;
+
         public static PipelineSettings1Form Create(int index)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.PipelineSettings1Form.glade", null);
@@ -195,6 +197,10 @@ namespace Multifunctional_heat_meters_gui.View
             SetWindow();
         }
 
+        public void ChangeLowerLimit(string lowerLimit)
+        {
+            entry_034н02.Text = lowerLimit;
+        }
 
         public void SetWindow()
         {
@@ -362,23 +368,20 @@ namespace Multifunctional_heat_meters_gui.View
             entry10.Changed += TurnIntoNumber;
             entry11.Changed += TurnIntoNumber;
 
-            /*entry_034н01.Changed += OnFormChanged;
-            entry_034н02.Changed += OnFormChanged;
-            entry_034н06.Changed += OnFormChanged;
-            entry_034н07.Changed += OnFormChanged;
-            entry_034н08.Changed += OnFormChanged;
-            entry5.Changed += OnFormChanged;
-            entry6.Changed += OnFormChanged;
-            entry7.Changed += OnFormChanged;
-            entry8.Changed += OnFormChanged;
-            entry9.Changed += OnFormChanged;
-            entry10.Changed += OnFormChanged;
-            entry11.Changed += OnFormChanged;*/
+            entry_034н02.Changed += OnLowerLimitValueChanged;
+
             foreach (KeyValuePair<string, Widget> keyval in parameter_widget)
             {
                 ((Entry)parameter_widget[keyval.Key]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, ((Entry)keyval.Value).Text });
             }
         }
 
+        protected void OnLowerLimitValueChanged(object sender, EventArgs a)
+        {
+            string lowerLimit = entry_034н02.Text;
+            
+            EventsArgs.ChangeFormEventArgs args = new EventsArgs.ChangeFormEventArgs(lowerLimit, _formIndex);
+            LowerLimitChangedEvent?.Invoke(this, args);
+        }
     }
 }

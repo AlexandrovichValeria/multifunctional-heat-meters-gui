@@ -19,6 +19,7 @@ namespace Multifunctional_heat_meters_gui.Controller
             _view = view;
             _model = model;
             _pipelineModel = model.GetPipelineByInd(index);
+            _index = index + 1;
         }
         public override void SaveDataToModel()
         {
@@ -32,5 +33,12 @@ namespace Multifunctional_heat_meters_gui.Controller
                 }
             }
         }
+
+        public void ChangeLowerLimit(string lowerLimit)
+        {
+            //update view
+            _view.ChangeLowerLimit(lowerLimit);
+        }
+        
     }
 }

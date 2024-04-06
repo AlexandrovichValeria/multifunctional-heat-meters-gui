@@ -31,7 +31,7 @@ namespace Multifunctional_heat_meters_gui.View
         //private static readonly string SensorParamName = "034н00";
 
         private int SensorType;
-        public event EventHandler<EventsArgs.SensorTypeEventArgs> SensorTypeChangedEvent;
+        public event EventHandler<EventsArgs.ChangeFormEventArgs> SensorTypeChangedEvent;
 
         public static CoolantSelectionForm Create(int index)
         {
@@ -181,7 +181,7 @@ namespace Multifunctional_heat_meters_gui.View
                     break;
             }
 
-            EventsArgs.SensorTypeEventArgs args = new EventsArgs.SensorTypeEventArgs(result, _formIndex);
+            EventsArgs.ChangeFormEventArgs args = new EventsArgs.ChangeFormEventArgs(result, _formIndex);
             SensorTypeChangedEvent?.Invoke(this, args);
         }
     }

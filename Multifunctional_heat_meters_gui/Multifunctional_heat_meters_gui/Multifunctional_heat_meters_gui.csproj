@@ -74,7 +74,7 @@
     <Compile Include="EventsArgs\MeasurementEventArgs.cs" />
     <Compile Include="EventsArgs\MenuEventArgs.cs" />
     <Compile Include="EventsArgs\NextFormArgs.cs" />
-    <Compile Include="EventsArgs\SensorTypeEventArgs.cs" />
+    <Compile Include="EventsArgs\ChangeFormEventArgs.cs" />
     <Compile Include="FormsBuilder.cs" />
     <Compile Include="FormSwitcher.cs" />
     <Compile Include="MainForm.cs" />

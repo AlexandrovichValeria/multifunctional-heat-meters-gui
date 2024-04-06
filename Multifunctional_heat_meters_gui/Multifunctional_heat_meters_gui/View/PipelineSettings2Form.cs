@@ -27,7 +27,9 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label name_label;
 
-        private string lowerlimitValue;
+        public event EventHandler<EventsArgs.ChangeFormEventArgs> LowerLimitChangedEvent;
+
+        //private string lowerlimitValue;
 
         public static PipelineSettings2Form Create(int index)
         {
@@ -39,19 +41,19 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
-            lowerlimitValue = "00";
+            //lowerlimitValue = "0";
 
             _formIndex = index;
             button_box.Add(_backForwardComponent);
             entry1.Sensitive = false;
-            entry1.Text = lowerlimitValue;
+            entry1.Text = "0";
             name_label.Text = "Трубопровод " + index.ToString();
             SetupHandlers();
         }
         public override void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
         {
             OnFormChanged(this, EventArgs.Empty);
-            if (paramsFromPreviousForm == null)
+            /*if (paramsFromPreviousForm == null)
             {
                 return;
             }
@@ -60,7 +62,7 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 lowerlimitValue = paramsFromPreviousForm.Params["lowLimit"];
                 entry1.Text = lowerlimitValue;
-            }
+            }*/
 
         }
 
@@ -74,6 +76,11 @@ namespace Multifunctional_heat_meters_gui.View
                 { "120", $"{entry2.Text}" },
             };
             return res;
+        }
+
+        public void ChangeLowerLimit(string lowerLimit)
+        {
+            entry1.Text = lowerLimit;
         }
 
         protected override bool IsAbleToGoToNext()
@@ -98,6 +105,7 @@ namespace Multifunctional_heat_meters_gui.View
             entry1.Changed += TurnIntoNumber;
             entry2.Changed += TurnIntoNumber;
 
+            entry1.Changed += OnLowerLimitValueChanged;
             combo1.Changed += OnFormChanged;
             combo2.Changed += OnFormChanged;
             entry1.Changed += OnFormChanged;
@@ -127,13 +135,17 @@ namespace Multifunctional_heat_meters_gui.View
         private void OnCheck1Clicked(object sender, EventArgs e)
         {
             if (check1.Active)
-            {
                 entry1.Sensitive = true;
-            }
             else
-            {
                 entry1.Sensitive = false;
-            }
+        }
+
+        protected void OnLowerLimitValueChanged(object sender, EventArgs a)
+        {
+            string lowerLimit = entry1.Text;
+
+            EventsArgs.ChangeFormEventArgs args = new EventsArgs.ChangeFormEventArgs(lowerLimit, _formIndex);
+            LowerLimitChangedEvent?.Invoke(this, args);
         }
     }
 }

@@ -57,6 +57,11 @@ namespace Multifunctional_heat_meters_gui.Controller
             //update view
             _view.ChangeSensorType(sensorType);
         }
+        public void ChangeLowerLimit(string lowerLimit)
+        {
+            //update view
+            _view.ChangeLowerLimit(lowerLimit);
+        }
 
     }
 }

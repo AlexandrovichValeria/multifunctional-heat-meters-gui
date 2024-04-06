@@ -67,18 +67,27 @@ namespace Multifunctional_heat_meters_gui
                 {
                     controller = new Controller.CoolantController((View.CoolantSelectionForm)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
                     View.CoolantSelectionForm coolantForm = (View.CoolantSelectionForm)form;
-                    coolantForm.SensorTypeChangedEvent -= new EventHandler<EventsArgs.SensorTypeEventArgs>(ChangeSensorType);
-                    coolantForm.SensorTypeChangedEvent += new EventHandler<EventsArgs.SensorTypeEventArgs>(ChangeSensorType);
+                    coolantForm.SensorTypeChangedEvent -= new EventHandler<EventsArgs.ChangeFormEventArgs>(ChangeSensorType);
+                    coolantForm.SensorTypeChangedEvent += new EventHandler<EventsArgs.ChangeFormEventArgs>(ChangeSensorType);
                 }
                 else if (form.FormName.StartsWith("Первая настройка трубопровода"))
                 {
                     controller = new Controller.PipelineController1((View.PipelineSettings1Form)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
                     controller.ChangePressureSystem(typeOfPressureMeasurement);
                     controller.ChangePowerSystem(typeOfPowerMeasurement);
+
+                    View.PipelineSettings1Form pipelineForm = (View.PipelineSettings1Form)form;
+                    pipelineForm.LowerLimitChangedEvent -= new EventHandler<EventsArgs.ChangeFormEventArgs>(ChangeLowerLimitFrom1to2);
+                    pipelineForm.LowerLimitChangedEvent += new EventHandler<EventsArgs.ChangeFormEventArgs>(ChangeLowerLimitFrom1to2);
                 }
                 else if (form.FormName.StartsWith("Вторая настройка трубопровода"))
                 {
                     controller = new Controller.PipelineController2((View.PipelineSettings2Form)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
+
+                    View.PipelineSettings2Form pipelineForm = (View.PipelineSettings2Form)form;
+                    pipelineForm.LowerLimitChangedEvent -= new EventHandler<EventsArgs.ChangeFormEventArgs>(ChangeLowerLimitFrom2to1);
+                    pipelineForm.LowerLimitChangedEvent += new EventHandler<EventsArgs.ChangeFormEventArgs>(ChangeLowerLimitFrom2to1);
+
                 }
                 else if (form.FormName.StartsWith("Датчик"))
                 {
@@ -122,13 +131,35 @@ namespace Multifunctional_heat_meters_gui
             }
         }
 
-        public void ChangeSensorType(object sender, EventsArgs.SensorTypeEventArgs args)
+        public void ChangeSensorType(object sender, EventsArgs.ChangeFormEventArgs args)
         {
             foreach (Controller.Controller controller in _controllers)
             {
                 if (controller is Controller.PipelineController1 && controller._index == args.PipelineIndex)
                 {
-                    ((Controller.PipelineController1)controller).ChangeSensorType(args.SensorType);
+                    ((Controller.PipelineController1)controller).ChangeSensorType(args.Data);
+                }
+            }
+        }
+
+        public void ChangeLowerLimitFrom1to2(object sender, EventsArgs.ChangeFormEventArgs args)
+        {
+            foreach (Controller.Controller controller in _controllers)
+            {
+                if (controller is Controller.PipelineController2 && controller._index == args.PipelineIndex)
+                {
+                    ((Controller.PipelineController2)controller).ChangeLowerLimit(args.Data);
+                }
+            }
+        }
+
+        public void ChangeLowerLimitFrom2to1(object sender, EventsArgs.ChangeFormEventArgs args)
+        {
+            foreach (Controller.Controller controller in _controllers)
+            {
+                if (controller is Controller.PipelineController1 && controller._index == args.PipelineIndex)
+                {
+                    ((Controller.PipelineController1)controller).ChangeLowerLimit(args.Data);
                 }
             }
         }
