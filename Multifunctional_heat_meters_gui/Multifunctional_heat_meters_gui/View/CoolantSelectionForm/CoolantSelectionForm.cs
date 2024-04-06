@@ -28,7 +28,7 @@ namespace Multifunctional_heat_meters_gui.View
         private GasBlock gas_block;
         private LiquidBlock liquid_block;
 
-        private static readonly string SensorParamName = "034н00";
+        //private static readonly string SensorParamName = "034н00";
 
         private int SensorType;
         public event EventHandler<EventsArgs.SensorTypeEventArgs> SensorTypeChangedEvent;
@@ -90,18 +90,9 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected override bool IsAbleToGoToNext()
         {
-            if (!IsFormFilledOut())
-                return false;
-            string result = GetCoolantSettings()[SensorParamName];
-            result = result.Substring(0, result.Length - 1);
-            if (result != "")
-            {
-                paramsToNextForm = new Dictionary<string, string>()
-                {
-                    { "curIndicator", result }
-                };
+            if (IsFormFilledOut())
                 return true;
-            }
+
             return false;
         }
 
@@ -149,13 +140,6 @@ namespace Multifunctional_heat_meters_gui.View
         }
         protected void Combo1ChangedEvent(object sender, EventArgs a)
         {
-            /*Console.WriteLine("CoolantData");
-            Dictionary<string, string> dic = GetCoolantSettings();
-            foreach (KeyValuePair<string, string> kvp in dic)
-            {
-                Console.WriteLine($"{kvp.Key}, {kvp.Value}");
-            }*/
-
             switch (combo1.ActiveId)
             {
                 case "0":
@@ -180,17 +164,25 @@ namespace Multifunctional_heat_meters_gui.View
         protected void OnSensorTypeComboChanged(object sender, EventArgs a)
         {
             SensorType = combo3.Active;
+            string result = "";
+            switch (SensorType)
+            {
+                case 0:
+                    result = "01";
+                    break;
+                case 1:
+                    result = "02";
+                    break;
+                case 2:
+                    result = "03";
+                    break;
+                case 3:
+                    result = "04";
+                    break;
+            }
 
-            EventsArgs.SensorTypeEventArgs args = new EventsArgs.SensorTypeEventArgs(SensorType, _formIndex);
+            EventsArgs.SensorTypeEventArgs args = new EventsArgs.SensorTypeEventArgs(result, _formIndex);
             SensorTypeChangedEvent?.Invoke(this, args);
         }
-
-        /*protected void OnPressureComboChanged(object sender, EventArgs a)
-        {
-            _pressureMeasure = Int32.Parse(pressure_combo.ActiveId);
-            EventsArgs.MeasurementEventArgs args = new EventsArgs.MeasurementEventArgs(_pressureMeasure);
-
-            PressureComboChangedEvent?.Invoke(this, args);
-        }*/
     }
 }

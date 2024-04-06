@@ -67,6 +67,7 @@ namespace Multifunctional_heat_meters_gui
                 {
                     controller = new Controller.CoolantController((View.CoolantSelectionForm)form, _model, int.Parse(Regex.Match(form.FormName, @"\d+$").Value) - 1);
                     View.CoolantSelectionForm coolantForm = (View.CoolantSelectionForm)form;
+                    coolantForm.SensorTypeChangedEvent -= new EventHandler<EventsArgs.SensorTypeEventArgs>(ChangeSensorType);
                     coolantForm.SensorTypeChangedEvent += new EventHandler<EventsArgs.SensorTypeEventArgs>(ChangeSensorType);
                 }
                 else if (form.FormName.StartsWith("Первая настройка трубопровода"))
@@ -127,7 +128,7 @@ namespace Multifunctional_heat_meters_gui
             {
                 if (controller is Controller.PipelineController1 && controller._index == args.PipelineIndex)
                 {
-                    controller.ChangeSensorType(args.SensorType);
+                    ((Controller.PipelineController1)controller).ChangeSensorType(args.SensorType);
                 }
             }
         }

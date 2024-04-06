@@ -49,7 +49,7 @@ namespace Multifunctional_heat_meters_gui.Controller
             //update view
             _view.ChangePressureMeasurement(typeOfMeasurement);
         }
-        public override void ChangeSensorType(int sensorType)
+        public void ChangeSensorType(string sensorType)
         {
             //update model
             _pipelineModel.ChangeSensorType(sensorType);

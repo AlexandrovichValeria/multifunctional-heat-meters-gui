@@ -15,7 +15,5 @@ namespace Multifunctional_heat_meters_gui.Controller
 
         public virtual void ChangePressureSystem(int typeOfMeasurement) { }
 
-        public virtual void ChangeSensorType(int sensorType) { }
-
     }
 }

@@ -15,8 +15,6 @@ namespace Multifunctional_heat_meters_gui.View
         public event EventHandler<EventsArgs.NextFormArgs> NextFormEvent;
         public event EventHandler<EventsArgs.NextFormArgs> PreviousFormEvent;
         public event EventHandler SaveFormEvent;
-        public event EventHandler SetValueCheckActiveEvent;
-        public event EventHandler SetValueCheckInactiveEvent;
 
         protected string _formName;
         protected int _formIndex = 0;
@@ -27,9 +25,6 @@ namespace Multifunctional_heat_meters_gui.View
         protected BackForwardComponent _backForwardComponent;
         protected Dictionary<string, string> paramsToNextForm = new Dictionary<string, string>();
 
-        //protected Label name_label;
-
-
         protected WindowForm(string formName, Builder builder, IntPtr handle) : base(handle)
         {
             _builder = builder;
@@ -38,7 +33,6 @@ namespace Multifunctional_heat_meters_gui.View
             _formName = formName;
             _backForwardComponent = BackForwardComponent.Create();
 
-          //  name_label = new Label("AAA");
             SetupHandlers();
         }
 

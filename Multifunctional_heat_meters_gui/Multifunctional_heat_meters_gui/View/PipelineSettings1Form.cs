@@ -113,6 +113,7 @@ namespace Multifunctional_heat_meters_gui.View
                 { "033н01", entry10 },
                 { "114н00", entry11 },
             };
+            SetWindow();
             SetupHandlers();
         }
 
@@ -187,6 +188,13 @@ namespace Multifunctional_heat_meters_gui.View
                 return false;
             return true;
         }
+
+        public void ChangeSensorType(string sensorType)
+        {
+            curIndicator = sensorType;
+            SetWindow();
+        }
+
 
         public void SetWindow()
         {
@@ -311,27 +319,10 @@ namespace Multifunctional_heat_meters_gui.View
             return false;
         }
 
-        
-
-        public override void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
+        /*public override void OnLoadForm(EventsArgs.NextFormArgs paramsFromPreviousForm, AppState appState)
         {
             OnFormChanged(this, EventArgs.Empty);
-            if (paramsFromPreviousForm == null)
-            {
-                return;
-            }
-
-            if (paramsFromPreviousForm.Params.ContainsKey("curIndicator"))
-            {
-                curIndicator = paramsFromPreviousForm.Params["curIndicator"];
-            }
-            else
-            {
-                curIndicator = "01";
-            }
-
-            SetWindow();
-        }
+        }*/
 
         public void ChangePressureMeasurement(int unitOfMeasurement)
         {
@@ -348,11 +339,6 @@ namespace Multifunctional_heat_meters_gui.View
                     measure_label8.Text = "кгс/см2";
                     break;
             }
-        }
-
-        public void ChangeSensorType(int sensorType)
-        {
-
         }
 
 

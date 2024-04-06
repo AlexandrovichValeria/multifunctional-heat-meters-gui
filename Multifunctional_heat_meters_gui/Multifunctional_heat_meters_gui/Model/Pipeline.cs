@@ -138,27 +138,27 @@ namespace Multifunctional_heat_meters_gui.Model
             }
         }
 
-        public void ChangeSensorType(int sensorType)
+        public void ChangeSensorType(string sensorType)
         {
             switch (sensorType)
             {
-                case 0:
+                case "01":
                     _parameters["109н00"].UnitOfMeasurement = "м3/час";
-                    //_parameters["034н01"].UnitOfMeasurement = "м3/час";
-                    //_parameters["034н02"].UnitOfMeasurement = "м3/час";
-                    _parameters["034н06"].UnitOfMeasurement = "м3/час";
+                    _parameters["034н01"].UnitOfMeasurement = "м3/час";
+                    _parameters["034н02"].UnitOfMeasurement = "м3/час";
+                    //_parameters["034н06"].UnitOfMeasurement = "м3/час";
                     //_parameters["034н07"].UnitOfMeasurement = "м3/час";
                     _parameters["034н08"].UnitOfMeasurement = "м3/имп";
                     break;
-                case 1:
+                case "02":
                     _parameters["109н00"].UnitOfMeasurement = "т/час";
-                    //_parameters["034н01"].UnitOfMeasurement = "м3/час";
-                    //_parameters["034н02"].UnitOfMeasurement = "м3/час";
-                    _parameters["034н06"].UnitOfMeasurement = "т/час";
+                    _parameters["034н01"].UnitOfMeasurement = "м3/час";
+                    _parameters["034н02"].UnitOfMeasurement = "м3/час";
+                    //_parameters["034н06"].UnitOfMeasurement = "т/час";
                     //_parameters["034н07"].UnitOfMeasurement = "м3/час";
                     _parameters["034н08"].UnitOfMeasurement = "т/имп";
                     break;
-                case 2:
+                case "03":
                     _parameters["109н00"].UnitOfMeasurement = "м3/час";
                     _parameters["034н01"].UnitOfMeasurement = "м3/час";
                     _parameters["034н02"].UnitOfMeasurement = "м3/час";
@@ -166,7 +166,7 @@ namespace Multifunctional_heat_meters_gui.Model
                     _parameters["034н07"].UnitOfMeasurement = "Гц";
                     //_parameters["034н08"].UnitOfMeasurement = "м3/имп";
                     break;
-                case 3:
+                case "04":
                     _parameters["109н00"].UnitOfMeasurement = "т/час";
                     _parameters["034н01"].UnitOfMeasurement = "т/час";
                     _parameters["034н02"].UnitOfMeasurement = "т/час";
