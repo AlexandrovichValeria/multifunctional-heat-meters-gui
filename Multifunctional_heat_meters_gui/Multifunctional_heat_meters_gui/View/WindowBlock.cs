@@ -69,16 +69,10 @@ namespace Multifunctional_heat_meters_gui.View
             if (AutoCheckFlag == true) {
                 string param_name = e[0];
                 string param_value = e[1];
-                if (!ParameterIsValid(param_name, param_value)) {
-                    //show error
+                if (!ParameterIsValid(param_name, param_value))
                     ShowErrorMessage(param_name);
-                    //blockFilledCorrectly = false;
-                }
                 else
-                {
-                    //remove error
                     HideErrorMessage(param_name);
-                }
             }
             OnBlockChanged(sender, EventArgs.Empty);
         }
@@ -106,7 +100,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected bool ParameterIsValid(string param_name, string param_value)
         {
-            Console.WriteLine("ParameterIsValid");
             //double
             if (Dictionaries.parameterDoubleLimits.ContainsKey(param_name))
             {

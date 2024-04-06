@@ -22,6 +22,8 @@ namespace Multifunctional_heat_meters_gui.View
         protected int _formIndex = 0;
         protected bool AutoCheckFlag;
 
+        protected Dictionary<string, Widget> parameter_widget;
+
         protected BackForwardComponent _backForwardComponent;
         protected Dictionary<string, string> paramsToNextForm = new Dictionary<string, string>();
 
@@ -66,6 +68,70 @@ namespace Multifunctional_heat_meters_gui.View
         public virtual void SetAutoValueCheck(bool flag)
         {
             AutoCheckFlag = flag;
+        }
+
+        protected void OnValueChanged(object sender, List<string> e)
+        {
+            if (AutoCheckFlag == true)
+            {
+                string param_name = e[0];
+                string param_value = e[1];
+                if (!ParameterIsValid(param_name, param_value))
+                    ShowErrorMessage(param_name);
+                else
+                    HideErrorMessage(param_name);
+            }
+            OnFormChanged(sender, EventArgs.Empty);
+        }
+
+        protected virtual void ShowErrorMessage(string param_name)
+        {
+            if (parameter_widget.ContainsKey(param_name))
+            {
+                parameter_widget[param_name].StyleContext.AddClass("incorrect-value");
+            }
+        }
+
+        protected virtual void HideErrorMessage(string param_name)
+        {
+            if (parameter_widget.ContainsKey(param_name))
+            {
+                parameter_widget[param_name].StyleContext.RemoveClass("incorrect-value");
+            }
+        }
+
+        protected bool ParameterIsValid(string param_name, string param_value)
+        {
+            //double
+            if (Dictionaries.parameterDoubleLimits.ContainsKey(param_name))
+            {
+                double result;
+                if (!double.TryParse(param_value, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.GetCultureInfo("en-US"), out result))
+                    return false;
+
+                List<double> limits = Dictionaries.parameterDoubleLimits[param_name];
+                if (result >= limits[0] && result <= limits[1])
+                    return true;
+                return false;
+            }
+            //int
+            if (Dictionaries.parameterIntLimits.ContainsKey(param_name))
+            {
+                int result;
+                if (!Int32.TryParse(param_value, out result))
+                    return false;
+
+                List<int> limits = Dictionaries.parameterIntLimits[param_name];
+                if (result >= limits[0] && result <= limits[1])
+                    return true;
+                return false;
+            }
+            //other
+            if (!Dictionaries.parameterPatterns.ContainsKey(param_name))
+                return true;
+            if (Regex.IsMatch(param_value, Dictionaries.parameterPatterns[param_name]))
+                return true;
+            return false;
         }
 
         public virtual void OnFormChanged(object sender, EventArgs e)
@@ -128,15 +194,5 @@ namespace Multifunctional_heat_meters_gui.View
         {
             SaveFormEvent?.Invoke(this, e);
         }
-
-        /*private void SetValueCheckActive(object sender, EventArgs e)
-        {
-            SetValueCheckActiveEvent?.Invoke(this, e);
-        }
-
-        private void SetValueCheckInactive(object sender, EventArgs e)
-        {
-            SetValueCheckInactiveEvent?.Invoke(this, e);
-        }*/
     }
 }

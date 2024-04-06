@@ -40,14 +40,6 @@ namespace Multifunctional_heat_meters_gui.View
         private Label measure_label7;
         [Builder.Object]
         private Label measure_label8;
-        /*[Builder.Object]
-        private Entry entry1;
-        [Builder.Object]
-        private Entry entry2;
-        [Builder.Object]
-        private Entry entry3;
-        [Builder.Object]sdadsc
-        private Entry entry4;*/
         [Builder.Object]
         private Box entry_box_top_right;
         [Builder.Object]
@@ -105,6 +97,22 @@ namespace Multifunctional_heat_meters_gui.View
             entry_034н06 = new Entry("");
             entry_034н07 = new Entry("0");
             entry_034н08 = new Entry("");
+
+            parameter_widget = new Dictionary<string, Widget>
+            {
+                { "034н01", entry_034н01 },
+                { "034н02", entry_034н02 },
+                { "034н06", entry_034н06 },
+                { "034н07", entry_034н07 },
+                { "034н08", entry_034н08 },
+                { "109н00", entry5 },
+                { "032н01", entry6 },
+                { "032н08", entry7 },
+                { "113н00", entry8 },
+                { "033н02", entry9 },
+                { "033н01", entry10 },
+                { "114н00", entry11 },
+            };
             SetupHandlers();
         }
 
@@ -141,6 +149,9 @@ namespace Multifunctional_heat_meters_gui.View
                 { "033н02", $"{entry9.Text}" }, //нижний предел ºС
                 { "114н00", $"{entry11.Text}" }, //константное значение температуры теплоносителя ºС
             };
+            //foreach(KeyValuePair<string, Widget> keyvalue in parameter_widget)
+                //res.Add(keyvalue.Key, ((Entry)keyvalue.Value).Text);
+
             if (curIndicator == "03" || curIndicator == "04") //с частотным
             {
                 res.Add("034н01", $"{entry_034н01.Text}"); //верхний предел по паспорту прибора м3/час или т/час
@@ -365,8 +376,7 @@ namespace Multifunctional_heat_meters_gui.View
             entry10.Changed += TurnIntoNumber;
             entry11.Changed += TurnIntoNumber;
 
-            entry_034н01.Changed += OnFormChanged;
-            //entry2.Changed += OnFormChanged;
+            /*entry_034н01.Changed += OnFormChanged;
             entry_034н02.Changed += OnFormChanged;
             entry_034н06.Changed += OnFormChanged;
             entry_034н07.Changed += OnFormChanged;
@@ -377,7 +387,11 @@ namespace Multifunctional_heat_meters_gui.View
             entry8.Changed += OnFormChanged;
             entry9.Changed += OnFormChanged;
             entry10.Changed += OnFormChanged;
-            entry11.Changed += OnFormChanged;
+            entry11.Changed += OnFormChanged;*/
+            foreach (KeyValuePair<string, Widget> keyval in parameter_widget)
+            {
+                ((Entry)parameter_widget[keyval.Key]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, ((Entry)keyval.Value).Text });
+            }
         }
 
     }

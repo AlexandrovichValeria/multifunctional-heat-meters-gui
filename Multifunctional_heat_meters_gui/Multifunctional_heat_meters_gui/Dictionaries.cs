@@ -35,6 +35,9 @@ namespace Multifunctional_heat_meters_gui
             {"040н00", new List<double>{ -50, 50 } },
             {"104", new List<double>{ 0, 1 } },
             {"105", new List<double>{ 0, 1 } },
+            {"034н06", new List<double>{ 0, 5000 } },
+            {"034н07", new List<double>{ 0, 5000 } },
+            {"034н08", new List<double>{ 0, 100000 } },
         };
 
         public static readonly Dictionary<string, List<int>> parameterIntLimits = new Dictionary<string, List<int>>
@@ -50,6 +53,9 @@ namespace Multifunctional_heat_meters_gui
             { "125н05", new List<int>{ 0, 1000 }},
             { "125н06", new List<int>{ 10, 2000 }},
             { "125н07", new List<int>{ 10, 2000 }},
+            { "113н00", new List<int>{ 0, 300 }},
+            { "033н01", new List<int>{ -50, 600 }},
+            { "033н02", new List<int>{ -50, 100 }},
         };
 
         public static readonly Dictionary<Model.Device, List<int>> MaxChannelAmountForDevice = new Dictionary<Model.Device, List<int>>
@@ -61,9 +67,9 @@ namespace Multifunctional_heat_meters_gui
 
         public static readonly Dictionary<Model.Device, string> ConfigFileNames = new Dictionary<Model.Device, string>
         {
-            { Model.Device.SPT961, "checkbuttons_config961.txt"},
-            { Model.Device.SPT962, "checkbuttons_config961.txt"},
-            { Model.Device.SPT963, "checkbuttons_config963.txt"},
+            { Model.Device.SPT961, "state_config961.txt"},
+            { Model.Device.SPT962, "state_config961.txt"},
+            { Model.Device.SPT963, "state_config963.txt"},
         };
     }
 }
