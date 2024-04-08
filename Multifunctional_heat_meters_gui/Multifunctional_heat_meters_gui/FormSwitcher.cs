@@ -40,7 +40,6 @@ namespace Multifunctional_heat_meters_gui
             View.WindowForm _form = (View.WindowForm)form;
             _form.NextFormEvent += new EventHandler<EventsArgs.NextFormArgs>(GoAhead);
             _form.PreviousFormEvent += new EventHandler<EventsArgs.NextFormArgs>(GoBack);
-
         }
 
         private LinkedListNode<View.WindowForm> GetFormNodeByName(string name)
@@ -83,9 +82,9 @@ namespace Multifunctional_heat_meters_gui
             {
                 textValue = (string)model.GetValue(iter, 0);
             }
-            if (textValue == "Общесистемные параметры")
+            if (textValue == Dictionaries.topButtonNames[Dictionaries.TopButtonsTypes.SYSTEM])
                 textValue = "Общесистемные параметры 1";
-            else if (textValue == "Настройка датчиков общесистемного канала")
+            else if (textValue == Dictionaries.topButtonNames[Dictionaries.TopButtonsTypes.SENSORS])
                 textValue = "Общесистемные параметры 2";
 
             LinkedListNode<View.WindowForm> formNode = GetFormNodeByName(textValue);
@@ -112,9 +111,9 @@ namespace Multifunctional_heat_meters_gui
                 previousForm.OnLoadForm(e, _appState);
                 string name = previousForm.FormName;
                 if (name == "Общесистемные параметры 1")
-                    name = "Общесистемные параметры";
+                    name = Dictionaries.topButtonNames[Dictionaries.TopButtonsTypes.SYSTEM];
                 if (name == "Общесистемные параметры 2")
-                    name = "Настройка датчиков общесистемного канала";
+                    name = Dictionaries.topButtonNames[Dictionaries.TopButtonsTypes.SENSORS];
                 _menu.SelectButtonByName(name);
             }
         }
@@ -131,9 +130,9 @@ namespace Multifunctional_heat_meters_gui
                 nextFormNode.Value.OnLoadForm(e, _appState);
                 string name = nextForm.FormName;
                 if (name == "Общесистемные параметры 1")
-                    name = "Общесистемные параметры";
+                    name = Dictionaries.topButtonNames[Dictionaries.TopButtonsTypes.SYSTEM];
                 if (name == "Общесистемные параметры 2")
-                    name = "Настройка датчиков общесистемного канала";
+                    name = Dictionaries.topButtonNames[Dictionaries.TopButtonsTypes.SENSORS];
                 _menu.SelectButtonByName(name);
             }
             else 

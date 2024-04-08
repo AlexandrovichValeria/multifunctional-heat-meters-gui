@@ -24,28 +24,12 @@ namespace Multifunctional_heat_meters_gui.View
             { "PipelinesButtons", "т" },
             { "ConsumersButtons", "п" }
         };*/
-        
-        private enum TopButtonsTypes
-        {
-            SYSTEM,
-            PIPELINES,
-            CONSUMERS
-        }
-
-        /*private static readonly Dictionary<TopButtonsTypes, string> topButtonsNames = new Dictionary<TopButtonsTypes, string>()
-        {
-            { TopButtonsTypes.SYSTEM, "Общесистемные параметры" },
-            { TopButtonsTypes.PIPELINES, "Настройка трубопроводов" },
-            { TopButtonsTypes.CONSUMERS, "Настройка потребителей" },
-        };*/
-
-        
 
         public enum DeepButtonsNames
         {
             PIPELINES,
+            SENSORS,
             CONSUMERS,
-            SENSORS
         }
 
         private static readonly string[] s_pipelinesSettingsButtonsNames = new string[] { "Теплоноситель", "Первая настройка трубопровода", "Вторая настройка трубопровода" };
@@ -73,10 +57,8 @@ namespace Multifunctional_heat_meters_gui.View
             topColumn.AddAttribute(topCell, "text", 0);
 
             ContentMenuStore.AppendValues(deviceName);
-            ContentMenuStore.AppendValues("Общесистемные параметры");
-            ContentMenuStore.AppendValues("Настройка трубопроводов");
-            ContentMenuStore.AppendValues("Настройка датчиков общесистемного канала");
-            ContentMenuStore.AppendValues("Настройка потребителей");
+            foreach(KeyValuePair<Dictionaries.TopButtonsTypes, string> keyValue in Dictionaries.topButtonNames)
+                ContentMenuStore.AppendValues(keyValue.Value);
 
             TreePath path = new TreePath("1");
             Selection.SelectPath(path);
@@ -291,7 +273,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         public void SelectChild(string name, TreeIter iter)
         {
-            if (ContentMenuStore.IterHasChild(iter) && name != "Настройка датчиков общесистемного канала")
+            if (ContentMenuStore.IterHasChild(iter) && name != Dictionaries.topButtonNames[Dictionaries.TopButtonsTypes.SENSORS])
             {
                 TreeIter childIter;
                 bool iterfound = ContentMenuStore.IterChildren(out childIter, iter);

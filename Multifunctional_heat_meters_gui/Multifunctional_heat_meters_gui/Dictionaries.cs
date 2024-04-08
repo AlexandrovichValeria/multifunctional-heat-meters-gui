@@ -16,6 +16,22 @@ namespace Multifunctional_heat_meters_gui
             {4, "Датчик температуры наружного воздуха" },
         };
 
+        public enum TopButtonsTypes
+        {
+            SYSTEM,
+            PIPELINES,
+            SENSORS,
+            CONSUMERS
+        }
+
+        public static readonly Dictionary<TopButtonsTypes, string> topButtonNames = new Dictionary<TopButtonsTypes, string>()
+        {
+            { TopButtonsTypes.SYSTEM, "Общесистемные параметры" },
+            { TopButtonsTypes.PIPELINES, "Настройка трубопроводов" },
+            { TopButtonsTypes.SENSORS, "Настройка датчиков общесистемного канала" },
+            { TopButtonsTypes.CONSUMERS, "Настройка потребителей" },
+        };
+
         public static readonly Dictionary<string, string> parameterPatterns = new Dictionary<string, string>
         {
             { "003", "^[12][0-4][0-9][0-3][01](0[0-9]|1[0-9]|2[0-9])(0[0-9]|1[0-9]|2[0-9])[1-9]$"},
@@ -23,10 +39,7 @@ namespace Multifunctional_heat_meters_gui
             { "030н01", "^(1|0\\.1|0\\.01|0\\.001|0\\.0001|0\\.00001|0\\.000001)$"},
             { "030н02", "^(1|0\\.1|0\\.01|0\\.001|0\\.0001|0\\.00001|0\\.000001)$"},
             { "024", "^(0[0-9]|1[0-9]|2[0-3])$"},
-            //{ "025", "^([1-9]|1[0-9]|2[0-8])$"},
             { "008", "(^$)|(^\\d{13}$)"},
-            //{ "035н00", "^(?:100|[1-9]?[0-9])$"},
-            //{ "037н00", "(^[5-8][0-9][0-9]$)|(^900$)"},
         };
 
         public static readonly Dictionary<string, List<double>> parameterDoubleLimits = new Dictionary<string, List<double>>
