@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Multifunctional_heat_meters_gui
 {
-    public class ControllerBuilder
+    public class ControllerManager
     {
         private LinkedList<Controller.Controller> _controllers;
         private AppState _appState;
@@ -15,7 +15,7 @@ namespace Multifunctional_heat_meters_gui
         private Controller.SystemController _sysController;
         private View.SystemForm _sysForm;
 
-        public ControllerBuilder(AppState appstate, Model.Model model)
+        public ControllerManager(AppState appstate, Model.Model model)
         {
             _controllers = new LinkedList<Controller.Controller>();
             _appState = appstate;

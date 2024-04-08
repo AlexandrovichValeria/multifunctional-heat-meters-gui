@@ -14,7 +14,7 @@ namespace Multifunctional_heat_meters_gui
         //private Controller.SystemController _sysController;
         private bool _exitFlag;
         private LinkedList<View.WindowForm> _allForms = new LinkedList<View.WindowForm>();
-        private ControllerBuilder controllerBuilder;
+        private ControllerManager controllerBuilder;
         private View.ADS_97_Form _ADS_97_Form;
         //private int _minPipelinesCountFor_ADS_97 = 0;
         private int ADSAmount;
@@ -104,7 +104,7 @@ namespace Multifunctional_heat_meters_gui
             FormsBuilder formsBuilder = new FormsBuilder(_allForms);
             FormSwitcher formSwitcher = new FormSwitcher(menu, appState, content_box);
             MenuBuilder menuBuilder = new MenuBuilder(menu);
-            controllerBuilder = new ControllerBuilder(appState, _model);
+            controllerBuilder = new ControllerManager(appState, _model);
 
             formsBuilder.NewFormCreatedEvent += new EventHandler(formSwitcher.SetEventListenersForForm);
             formsBuilder.NewFormCreatedEvent += new EventHandler(OnNewFormCreated);
