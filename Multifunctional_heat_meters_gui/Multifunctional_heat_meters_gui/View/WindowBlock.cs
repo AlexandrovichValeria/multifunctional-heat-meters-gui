@@ -14,7 +14,7 @@ namespace Multifunctional_heat_meters_gui.View
         //public bool blockFilledCorrectly;
 
         protected bool AutoCheckFlag;
-        protected Dictionary<string, Widget> parameter_widget;
+        protected Dictionary<string, Entry> parameter_widget;
 
         public event EventHandler BlockChangedEvent;
 
@@ -24,7 +24,6 @@ namespace Multifunctional_heat_meters_gui.View
             builder.Autoconnect(this);
 
             ShowAll();
-            //SetupHandlers();
         }
 
         public virtual Dictionary<string, string> GetResult()
@@ -47,10 +46,6 @@ namespace Multifunctional_heat_meters_gui.View
             Sensitive = false;
         }
 
-        /*protected void SetupHandlers()
-        {
-
-        }*/
 
         protected void TurnIntoNumber(object sender, EventArgs e)
         {
@@ -64,8 +59,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void OnValueChanged(object sender, List<string> e)
         {
-            Console.WriteLine("OnValueChanged");
-            Console.WriteLine(AutoCheckFlag);
             if (AutoCheckFlag == true) {
                 string param_name = e[0];
                 string param_value = e[1];
@@ -96,6 +89,27 @@ namespace Multifunctional_heat_meters_gui.View
         public void SetAutoValueCheck(bool flag)
         {
             AutoCheckFlag = flag;
+
+            if (!(parameter_widget is null))
+            {
+                if (AutoCheckFlag)
+                {
+                    foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+                    {
+                        if (!ParameterIsValid(keyval.Key, keyval.Value.Text))
+                            ShowErrorMessage(keyval.Key);
+                        else
+                            HideErrorMessage(keyval.Key);
+                    }
+                }
+                else
+                {
+                    foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+                    {
+                        HideErrorMessage(keyval.Key);
+                    }
+                }
+            }
         }
 
         protected bool ParameterIsValid(string param_name, string param_value)

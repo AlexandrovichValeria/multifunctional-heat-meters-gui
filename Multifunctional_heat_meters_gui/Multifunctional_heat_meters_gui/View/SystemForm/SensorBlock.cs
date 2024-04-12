@@ -43,7 +43,7 @@ namespace Multifunctional_heat_meters_gui.View
             builder.Autoconnect(this);
             
             //_index = index;
-            parameter_widget = new Dictionary<string, Widget>
+            parameter_widget = new Dictionary<string, Entry>
             {
                 { "035н00", const_entry1 },
                 { "036н00", const_entry2 },
@@ -72,13 +72,13 @@ namespace Multifunctional_heat_meters_gui.View
         {
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
-                { "035н00", ((Entry)parameter_widget["035н00"]).Text },
+                { "035н00", parameter_widget["035н00"].Text },
                 //{ "035н01", sensor_check1.Active ? "1" : "0"},
-                { "036н00", ((Entry)parameter_widget["036н00"]).Text},
+                { "036н00", parameter_widget["036н00"].Text},
                 //{ "036н01", sensor_check2.Active ? "1" : "0" },
-                { "037н00", ((Entry)parameter_widget["037н00"]).Text},
+                { "037н00", parameter_widget["037н00"].Text},
                 //{ "037н01", sensor_check3.Active ? "1" : "0"},
-                { "040н00", ((Entry)parameter_widget["040н00"]).Text },
+                { "040н00", parameter_widget["040н00"].Text },
                 //{ "040н01", sensor_check4.Active? "1" : "0"},
             };
             return res;
@@ -86,10 +86,10 @@ namespace Multifunctional_heat_meters_gui.View
 
         public override void SetData(Dictionary<string, string> data)
         {
-            ((Entry)parameter_widget["035н00"]).Text = data["035н00"];
-            ((Entry)parameter_widget["036н00"]).Text = data["036н00"];
-            ((Entry)parameter_widget["037н00"]).Text = data["037н00"];
-            ((Entry)parameter_widget["040н00"]).Text = data["040н00"];
+            parameter_widget["035н00"].Text = data["035н00"];
+            parameter_widget["036н00"].Text = data["036н00"];
+            parameter_widget["037н00"].Text = data["037н00"];
+            parameter_widget["040н00"].Text = data["040н00"];
 
             sensor_check1.Active = data["sensor1"] == "1" ? true: false;
             sensor_check2.Active = data["sensor2"] == "1" ? true : false;
@@ -127,16 +127,9 @@ namespace Multifunctional_heat_meters_gui.View
             const_entry4.Changed += TurnIntoNumber;
 
             //const_entry1.Changed += OnBlockChanged;
-            foreach(KeyValuePair<string, Widget> keyval in parameter_widget)
-            {
-                ((Entry)parameter_widget[keyval.Key]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, ((Entry)keyval.Value).Text });
-            }
+            foreach(KeyValuePair<string, Entry> keyval in parameter_widget)
+                parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
 
-            /*((Entry)parameter_widget["035н00"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "035н00", const_entry1.Text });
-            ((Entry)parameter_widget["036н00"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "036н00", const_entry1.Text });
-            ((Entry)parameter_widget["037н00"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "037н00", const_entry1.Text });
-            ((Entry)parameter_widget["040н00"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "040н00", const_entry1.Text });
-            */
 
             //const_entry2.Changed += OnBlockChanged;
             //const_entry3.Changed += OnBlockChanged;

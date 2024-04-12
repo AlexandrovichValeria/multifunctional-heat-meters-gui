@@ -41,7 +41,11 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
-            //lowerlimitValue = "0";
+            parameter_widget = new Dictionary<string, Entry>
+            {
+                { "115н01", entry1 },
+                { "120", entry2 },
+            };
 
             _formIndex = index;
             button_box.Add(_backForwardComponent);
@@ -110,6 +114,10 @@ namespace Multifunctional_heat_meters_gui.View
             combo2.Changed += OnFormChanged;
             entry1.Changed += OnFormChanged;
             entry2.Changed += OnFormChanged;
+
+            foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+                parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
+
             //DeleteEvent += OnLocalDeleteEvent;
         }
 

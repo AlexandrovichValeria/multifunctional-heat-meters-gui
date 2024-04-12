@@ -26,7 +26,7 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
-            parameter_widget = new Dictionary<string, Widget>
+            parameter_widget = new Dictionary<string, Entry>
             {
                 { "104", entry1 },
                 { "105", entry2 },
@@ -54,10 +54,8 @@ namespace Multifunctional_heat_meters_gui.View
             entry1.Changed += TurnIntoNumber;
             entry2.Changed += TurnIntoNumber;
 
-            foreach (KeyValuePair<string, Widget> keyval in parameter_widget)
-            {
-                ((Entry)parameter_widget[keyval.Key]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, ((Entry)keyval.Value).Text });
-            }
+            foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+                parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
         }
     }
 }

@@ -33,6 +33,12 @@ namespace Multifunctional_heat_meters_gui.View
             _builder = builder;
             builder.Autoconnect(this);
 
+            parameter_widget = new Dictionary<string, Entry>
+            {
+                { "033н01", entry2 },
+                { "033н02", entry1 },
+            };
+
             _type = type;
             _formIndex = Dictionaries.sensorNames.FirstOrDefault(x => x.Value.Contains($"температуры {_type}")).Key;
             name_label.Text = _formName;
@@ -61,6 +67,9 @@ namespace Multifunctional_heat_meters_gui.View
         {
             entry1.Changed += TurnIntoNumber;
             entry2.Changed += TurnIntoNumber;
+
+            foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+                parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
         }
     }
 }

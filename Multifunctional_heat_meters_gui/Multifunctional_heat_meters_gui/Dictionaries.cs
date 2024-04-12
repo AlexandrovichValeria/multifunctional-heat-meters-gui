@@ -69,6 +69,8 @@ namespace Multifunctional_heat_meters_gui
             { "113н00", new List<int>{ 0, 300 }},
             { "033н01", new List<int>{ -50, 600 }},
             { "033н02", new List<int>{ -50, 100 }},
+            { "120", new List<int>{ 0, 1000000 }},
+            
         };
 
         public static readonly Dictionary<Model.Device, List<int>> MaxChannelAmountForDevice = new Dictionary<Model.Device, List<int>>

@@ -20,7 +20,7 @@ namespace Multifunctional_heat_meters_gui.View
         protected int _formIndex = 0;
         protected bool AutoCheckFlag;
 
-        protected Dictionary<string, Widget> parameter_widget;
+        protected Dictionary<string, Entry> parameter_widget;
 
         protected BackForwardComponent _backForwardComponent;
         protected Dictionary<string, string> paramsToNextForm = new Dictionary<string, string>();
@@ -50,6 +50,12 @@ namespace Multifunctional_heat_meters_gui.View
             _backForwardComponent.ForwardButtonClickedEvent += new EventHandler(GoToNextForm);
             _backForwardComponent.SaveButtonClickedEvent += new EventHandler(SaveData);
 
+            /*if (!(parameter_widget is null))
+            {
+                foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+                    parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
+            }*/
+
             //_backForwardComponent.ValueCheckButtonActiveEvent += new EventHandler(SetValueCheckActive);
             //_backForwardComponent.ValueCheckButtonInactiveEvent += new EventHandler(SetValueCheckInactive);
         }
@@ -62,6 +68,26 @@ namespace Multifunctional_heat_meters_gui.View
         public virtual void SetAutoValueCheck(bool flag)
         {
             AutoCheckFlag = flag;
+
+            if (!(parameter_widget is null)) {
+                if (AutoCheckFlag)
+                {
+                    foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+                    {
+                        if (!ParameterIsValid(keyval.Key, keyval.Value.Text))
+                            ShowErrorMessage(keyval.Key);
+                        else
+                            HideErrorMessage(keyval.Key);
+                    }
+                }
+                else
+                {
+                    foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+                    {
+                        HideErrorMessage(keyval.Key);
+                    }
+                }
+            }
         }
 
         protected void OnValueChanged(object sender, List<string> e)

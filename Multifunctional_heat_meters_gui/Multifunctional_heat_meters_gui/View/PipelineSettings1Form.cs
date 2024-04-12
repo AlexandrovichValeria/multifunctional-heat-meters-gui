@@ -100,7 +100,7 @@ namespace Multifunctional_heat_meters_gui.View
             entry_034н07 = new Entry("0");
             entry_034н08 = new Entry("");
 
-            parameter_widget = new Dictionary<string, Widget>
+            parameter_widget = new Dictionary<string, Entry>
             {
                 { "034н01", entry_034н01 },
                 { "034н02", entry_034н02 },
@@ -370,10 +370,8 @@ namespace Multifunctional_heat_meters_gui.View
 
             entry_034н02.Changed += OnLowerLimitValueChanged;
 
-            foreach (KeyValuePair<string, Widget> keyval in parameter_widget)
-            {
-                ((Entry)parameter_widget[keyval.Key]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, ((Entry)keyval.Value).Text });
-            }
+            foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+                parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
         }
 
         protected void OnLowerLimitValueChanged(object sender, EventArgs a)

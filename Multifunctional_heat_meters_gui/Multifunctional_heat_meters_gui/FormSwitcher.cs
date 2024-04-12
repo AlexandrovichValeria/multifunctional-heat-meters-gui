@@ -67,13 +67,11 @@ namespace Multifunctional_heat_meters_gui
                 _contentBox.Remove(child);
             }
             _contentBox.Add(subForm);
-            //subForm.BringToFront();
             subForm.Show();
         }
 
         public void ChangeFormByClickOnMenu(object sender, EventArgs e)
         {
-            
             TreeSelection selection = (TreeSelection)sender;
             ITreeModel model;
             TreeIter iter;

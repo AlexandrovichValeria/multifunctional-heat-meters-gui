@@ -85,7 +85,7 @@ namespace Multifunctional_heat_meters_gui.View
             builder.Autoconnect(this);
 
             //paramState = new ParametersState(new List<string> {"003", "004", "030н01", "030н02", "024", "025", "008" });
-            parameter_widget = new Dictionary<string, Widget>
+            parameter_widget = new Dictionary<string, Entry>
             {
                 { "030н01", entry5 },
                 { "030н02", entry6 },
@@ -168,10 +168,8 @@ namespace Multifunctional_heat_meters_gui.View
 
             //power_combo.Changed += OnBlockChanged;
             //pressure_combo.Changed += OnBlockChanged;
-            foreach (KeyValuePair<string, Widget> keyval in parameter_widget)
-            {
-                ((Entry)parameter_widget[keyval.Key]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, ((Entry)keyval.Value).Text });
-            }
+            foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+                parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
 
             /*((Entry)parameter_widget["030н01"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н01", entry5.Text});
             ((Entry)parameter_widget["030н02"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н02", entry6.Text });
