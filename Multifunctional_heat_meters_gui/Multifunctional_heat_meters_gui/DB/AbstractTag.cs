@@ -56,7 +56,5 @@ namespace Multifunctional_heat_meters_gui.DB
             _XML = createTag();
 
         }
-
-
     }
 }

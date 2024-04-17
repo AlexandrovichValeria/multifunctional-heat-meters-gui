@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Multifunctional_heat_meters_gui.Model
 {
-    public class Pipeline
+    public class Pipeline : AbstractModel
     {
         private bool _active;
 
-        private Dictionary<string, Parameter> _parameters;
+        //private Dictionary<string, Parameter> _parameters;
 
         //Является ли трубопровод активным
         public bool Active
@@ -54,7 +54,7 @@ namespace Multifunctional_heat_meters_gui.Model
             _parameters.Add("114н00", new Parameter("114н00", "70", "'C", "temperature"));
             _parameters.Add("114н01", new Parameter("114н01", "03302", "", ""));
             _parameters.Add("115н00", new Parameter("115н00", "11", "", ""));
-            _parameters.Add("115н01", new Parameter("115н01", "6.298", "м3/ч", "pressure change"));
+            _parameters.Add("115н01", new Parameter("115н01", "0", "м3/ч", ""));
             _parameters.Add("120", new Parameter("120", "0", "т/час", ""));
             _parameters.Add("125н00", new Parameter("125н00", "", "'C", ""));
             _parameters.Add("125н01", new Parameter("125н01", "", "'C", ""));
@@ -66,52 +66,33 @@ namespace Multifunctional_heat_meters_gui.Model
             _parameters.Add("125н07", new Parameter("125н07", "", "мкПа*с", ""));
         }
 
-        public void ChangeParameterValue(string parameterName, string value)
+
+        /*public void ChangePowerMeasurement(int unitOfMeasurement)
         {
-            _parameters[parameterName].Value = value;
+            
         }
 
-        public void ChangePowerMeasurement(int unitOfMeasurement)
-        {
-            foreach (KeyValuePair<string, Parameter> param in _parameters)
-            {
-                if (param.Value.TypeOfMeasurement == "energy")
-                {
-                    switch (unitOfMeasurement)
-                    {
-                        case 0:
-                            param.Value.UnitOfMeasurement = "ГДж";
-                            break;
-                        case 1:
-                            param.Value.UnitOfMeasurement = "Гкал";
-                            break;
-                        case 2:
-                            param.Value.UnitOfMeasurement = "МВт*ч";
-                            break;
-                    }
-                }
-                else if (param.Value.TypeOfMeasurement == "power")
-                {
-                    switch (unitOfMeasurement)
-                    {
-                        case 0:
-                            param.Value.UnitOfMeasurement = "ГДж";
-                            break;
-                        case 1:
-                            param.Value.UnitOfMeasurement = "Гкал";
-                            break;
-                        case 2:
-                            param.Value.UnitOfMeasurement = "МВт*ч";
-                            break;
-                    }
-                }
-            }
-        }
         public void ChangePressureMeasurement(int unitOfMeasurement)
         {
+            string pressure = "";
+            string pressure_change = "";
+            if (unitOfMeasurement == 0)
+            {
+                pressure = "МПа";
+                pressure_change = "кПа";
+            }
+            else if (unitOfMeasurement == 1)
+            {
+                pressure = "кгс/см2";
+                pressure_change = "кгс/м2";
+            }
             foreach (KeyValuePair<string, Parameter> param in _parameters)
             {
                 if (param.Value.TypeOfMeasurement == "pressure")
+                    param.Value.UnitOfMeasurement = pressure;
+                if (param.Value.TypeOfMeasurement == "pressure change")
+                    param.Value.UnitOfMeasurement = pressure_change;
+                /*if (param.Value.TypeOfMeasurement == "pressure")
                 {
                     switch (unitOfMeasurement)
                     {
@@ -140,42 +121,27 @@ namespace Multifunctional_heat_meters_gui.Model
 
         public void ChangeSensorType(string sensorType)
         {
-            switch (sensorType)
+            string time_sensor = "";
+            string impulse_sensor = "";
+            if (sensorType == "01" || sensorType == "03")
             {
-                case "01":
-                    _parameters["109н00"].UnitOfMeasurement = "м3/час";
-                    _parameters["034н01"].UnitOfMeasurement = "м3/час";
-                    _parameters["034н02"].UnitOfMeasurement = "м3/час";
-                    //_parameters["034н06"].UnitOfMeasurement = "м3/час";
-                    //_parameters["034н07"].UnitOfMeasurement = "м3/час";
-                    _parameters["034н08"].UnitOfMeasurement = "м3/имп";
-                    break;
-                case "02":
-                    _parameters["109н00"].UnitOfMeasurement = "т/час";
-                    _parameters["034н01"].UnitOfMeasurement = "м3/час";
-                    _parameters["034н02"].UnitOfMeasurement = "м3/час";
-                    //_parameters["034н06"].UnitOfMeasurement = "т/час";
-                    //_parameters["034н07"].UnitOfMeasurement = "м3/час";
-                    _parameters["034н08"].UnitOfMeasurement = "т/имп";
-                    break;
-                case "03":
-                    _parameters["109н00"].UnitOfMeasurement = "м3/час";
-                    _parameters["034н01"].UnitOfMeasurement = "м3/час";
-                    _parameters["034н02"].UnitOfMeasurement = "м3/час";
-                    _parameters["034н06"].UnitOfMeasurement = "Гц";
-                    _parameters["034н07"].UnitOfMeasurement = "Гц";
-                    //_parameters["034н08"].UnitOfMeasurement = "м3/имп";
-                    break;
-                case "04":
-                    _parameters["109н00"].UnitOfMeasurement = "т/час";
-                    _parameters["034н01"].UnitOfMeasurement = "т/час";
-                    _parameters["034н02"].UnitOfMeasurement = "т/час";
-                    _parameters["034н06"].UnitOfMeasurement = "Гц";
-                    _parameters["034н07"].UnitOfMeasurement = "Гц";
-                    //_parameters["034н08"].UnitOfMeasurement = "м3/имп";
-                    break;
+                time_sensor = "м3/час";
+                impulse_sensor = "м3/имп";
             }
-            
-        }
+            else if (sensorType == "02" || sensorType == "04")
+            {
+                time_sensor = "т/час";
+                impulse_sensor = "т/имп";
+            }
+
+            foreach (KeyValuePair<string, Parameter> param in _parameters)
+            {
+                if (param.Value.TypeOfMeasurement == "time sensor dependant")
+                    param.Value.UnitOfMeasurement = time_sensor;
+                if (param.Value.TypeOfMeasurement == "impulse sensor dependant")
+                    param.Value.UnitOfMeasurement = impulse_sensor;
+            }
+        }*/
+
     }
 }

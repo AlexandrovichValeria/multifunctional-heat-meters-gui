@@ -32,7 +32,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected ConsumerForm(List<int> pipelinesNumbers, int consumerNumber, Builder builder, IntPtr handle) : base($"п{consumerNumber}", builder, handle)
         {
-            Console.WriteLine("ConsumerForm created");
             _builder = builder;
             builder.Autoconnect(this);
 

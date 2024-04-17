@@ -100,6 +100,12 @@ namespace Multifunctional_heat_meters_gui.View
             return true;
         }
 
+        public void ChangeSensorType(string sensorType)
+        {
+            //curIndicator = sensorType;
+            //SetWindow();
+        }
+
         protected void SetupHandlers()
         {
             check1.Clicked += OnCheck1Clicked;

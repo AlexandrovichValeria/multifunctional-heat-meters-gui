@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{961DA8D3-146B-40A1-880C-1372448AB746}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>Multifunctional_heat_meters_gui</RootNamespace>
     <AssemblyName>Multifunctional_heat_meters_gui</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -79,14 +79,13 @@
     <Compile Include="FormSwitcher.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MenuBuilder.cs" />
+    <Compile Include="Model\AbstractModel.cs" />
     <Compile Include="Model\Consumer.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\Parameter.cs" />
     <Compile Include="Model\Pipeline.cs" />
-    <Compile Include="Model\PressureSensor.cs" />
     <Compile Include="Model\Sensor.cs" />
     <Compile Include="Model\SystemWideSettings.cs" />
-    <Compile Include="Model\TemperatureSensor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Multifunctional_heat_meters_gui.Model
 {
-    public class Sensor
+    public class Sensor : AbstractModel
     {
         protected bool _active;
 
-        protected Dictionary<string, Parameter> _parameters;
+        //protected Dictionary<string, Parameter> _parameters;
 
         protected int _type;
 
@@ -39,19 +39,25 @@ namespace Multifunctional_heat_meters_gui.Model
             set { _channel_number = value; }
         }
 
-        public Sensor(bool active = false)
+        public Sensor(int type, bool active = false)
         {
             _active = active;
-            _parameters = new Dictionary<string, Parameter>();
             _channel_number = 0;
+            _parameters = new Dictionary<string, Parameter>();
+            _type = type;
+            if (_type == 1 || _type == 4)
+            {
+                _parameters.Add("033н00", new Parameter("033н00", "043", "", ""));
+                _parameters.Add("033н01", new Parameter("033н01", "180", "'C", "temperature"));
+                _parameters.Add("033н02", new Parameter("033н02", "0", "'C", "temperature"));
+            }
+            else
+            {
+                _parameters.Add("032н00", new Parameter("032н00", "042", "", ""));
+                _parameters.Add("032н01", new Parameter("032н01", "16.31", "кгс/см2", "pressure"));
+                _parameters.Add("032н02", new Parameter("032н02", "0", "", ""));
+                _parameters.Add("032н08", new Parameter("032н08", "0", "кгс/см2", "pressure"));
+            }
         }
-        public void ChangeParameterValue(string parameterName, string value)
-        {
-            _parameters[parameterName].Value = value;
-        }
-
-        public virtual void ChangePowerMeasurement(int unitOfMeasurement){ }
-        
-        public virtual void ChangePressureMeasurement(int unitOfMeasurement) { }
     }
 }

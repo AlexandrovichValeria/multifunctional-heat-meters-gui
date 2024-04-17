@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Multifunctional_heat_meters_gui.Model
 {
-    public class SystemWideSettings
+    public class SystemWideSettings : AbstractModel
     {
         private int _pipelinesCount;
 
@@ -14,7 +14,7 @@ namespace Multifunctional_heat_meters_gui.Model
 
         private int _channelsCount;
 
-        private Dictionary<string, Parameter> _parameters;
+        //private Dictionary<string, Parameter> _parameters;
 
         public Dictionary<string, Parameter> Parameters
         {
@@ -93,13 +93,9 @@ namespace Multifunctional_heat_meters_gui.Model
             }
         }
 
-        public void ChangeParameterValue(string parameterName, string value)
-        {
-            _parameters[parameterName].Value = value;
-        }
 
 
-        public void ChangePowerMeasurement(int unitOfMeasurement)
+        /*public void ChangePowerMeasurement(int unitOfMeasurement)
         {
             foreach(KeyValuePair<string, Parameter> param in _parameters)
             {
@@ -165,11 +161,7 @@ namespace Multifunctional_heat_meters_gui.Model
                     }
                 }
             }
-        }
+        }*/
 
-        public void ChangeParameterUnitOfMeasurement(string parameterName, string unitOfMeasurement)
-        {
-            _parameters[parameterName].UnitOfMeasurement = unitOfMeasurement;
-        }
     }
 }

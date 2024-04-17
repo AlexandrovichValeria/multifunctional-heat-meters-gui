@@ -116,33 +116,12 @@ namespace Multifunctional_heat_meters_gui.Model
 
             //Создание датчиков
             _sensors = new Dictionary<string, Sensor>();
-
+            
             for (int i = 1; i <= 4; i++)
             {
                 //if (i == 3)
                 //    continue;
-                Sensor temp_sensor = null; 
-                if (i == 1) //температура холодной воды
-                {
-                    temp_sensor = new TemperatureSensor(1);
-                    //temp_sensor.ChangeParameterValue("114н01", "03301"); //ИЗМЕНИТЬ
-                }
-                else if(i == 2)//давление холодной воды
-                {
-                    temp_sensor = new PressureSensor(2);
-                    //temp_sensor.ChangeParameterValue("113н01", "03201"); //ИЗМЕНИТЬ
-                }
-                else if (i == 3) //барометрическое давление
-                {
-                    temp_sensor = new PressureSensor(3);
-                    /*PressureSensor barometricPressureSensor = new PressureSensor();
-                    barometricPressureSensor.ChangeParameterValue("113н01", "03201"); //ИЗМЕНИТЬ*/
-                }
-                else if (i == 4)//температура наружного
-                {
-                    temp_sensor = new TemperatureSensor(4);
-                    //temp_sensor.ChangeParameterValue("114н01", "03302"); //ИЗМЕНИТЬ
-                }
+                Sensor temp_sensor = new Sensor(i);
                 _sensors.Add(Dictionaries.sensorNames[i], temp_sensor);
 
             }
@@ -396,7 +375,6 @@ namespace Multifunctional_heat_meters_gui.Model
                 Sensor currentSensor = name_sensor.Value;
                 if (currentSensor.Active == false)
                 {
-                    Console.WriteLine("Sensor inactive");
                     continue; 
                 }
                 parameters = currentSensor.Parameters;
@@ -432,11 +410,8 @@ namespace Multifunctional_heat_meters_gui.Model
                 {
                     if (tagGroup.Ordinal >= 30 && tagGroup.Ordinal < 100)
                         channelS.AddTagGroup(tagGroup);
-                    //else
-                      //  channelTS.AddTagGroup(tagGroup);
                 }
                 channelsListS.Add(channelS);
-                //channelsListS.Add(channelTS);
 
             }
             //dataBase.AddChannel(systemWideChannel);

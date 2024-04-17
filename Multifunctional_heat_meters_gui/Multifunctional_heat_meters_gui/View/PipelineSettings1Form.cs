@@ -15,7 +15,7 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label label1;
         [Builder.Object]
-        private Label label2;
+        private Label label3;
         [Builder.Object]
         private Label entry_label1;
         [Builder.Object]
@@ -41,6 +41,8 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label measure_label8;
         [Builder.Object]
+        private Label measure_label12;
+        [Builder.Object]
         private Box entry_box_top_right;
         [Builder.Object]
         private Box entry_box_bottom_right;
@@ -48,6 +50,8 @@ namespace Multifunctional_heat_meters_gui.View
         private Box entry_box_top_left;
         [Builder.Object]
         private Box entry_box_bottom_left;
+        [Builder.Object]
+        private Entry entry4;
         [Builder.Object]
         private Entry entry5;
         [Builder.Object]
@@ -70,11 +74,12 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label name_label;
 
-        private Entry entry_034н01; //верхний предел
-        private Entry entry_034н02; //нижний предел
-        private Entry entry_034н06; //верхний предел частоты входного сигнала 
-        private Entry entry_034н07; //нижний предел частоты входного сигнала
-        private Entry entry_034н08; //цена импульса - из паспорта прибора м³/имп или т/имп
+        private Entry entry_034n01; //верхний предел
+        private Entry entry_034n02; //нижний предел
+        private Entry entry_034n06; //верхний предел частоты входного сигнала 
+        private Entry entry_034n07; //нижний предел частоты входного сигнала
+        private Entry entry_034n08; //цена импульса - из паспорта прибора м³/имп или т/имп
+        //private Entry entry_115n01; 
 
         public string curIndicator = "01";
 
@@ -94,19 +99,21 @@ namespace Multifunctional_heat_meters_gui.View
             _formIndex = index;
             button_box.Add(_backForwardComponent);
             name_label.Text = "Трубопровод " + index.ToString();
-            entry_034н01 = new Entry("");
-            entry_034н02 = new Entry("0");
-            entry_034н06 = new Entry("");
-            entry_034н07 = new Entry("0");
-            entry_034н08 = new Entry("");
+            entry_034n01 = new Entry("");
+            entry_034n02 = new Entry("0");
+            entry_034n06 = new Entry("");
+            entry_034n07 = new Entry("0");
+            entry_034n08 = new Entry("");
+            //entry_115n01 = new Entry("0");
 
             parameter_widget = new Dictionary<string, Entry>
             {
-                { "034н01", entry_034н01 },
-                { "034н02", entry_034н02 },
-                { "034н06", entry_034н06 },
-                { "034н07", entry_034н07 },
-                { "034н08", entry_034н08 },
+                { "034н01", entry_034n01 },
+                { "034н02", entry_034n02 },
+                { "034н06", entry_034n06 },
+                { "034н07", entry_034n07 },
+                { "034н08", entry_034n08 },
+                { "115н01", entry4 },
                 { "109н00", entry5 },
                 { "032н01", entry6 },
                 { "032н08", entry7 },
@@ -157,17 +164,17 @@ namespace Multifunctional_heat_meters_gui.View
 
             if (curIndicator == "03" || curIndicator == "04") //с частотным
             {
-                res.Add("034н01", $"{entry_034н01.Text}"); //верхний предел по паспорту прибора м3/час или т/час
-                res.Add("034н02", $"{entry_034н02.Text}"); //нижний предел м3/час или т/час (только для частотного выходного сигнала.) (для остальных всегда 0)
-                res.Add("034н06", $"{entry_034н06.Text}"); //верхний предел частоты входного сигнала 
-                res.Add("034н07", $"{entry_034н07.Text}"); //нижний предел частоты входного сигнала
+                res.Add("034н01", $"{entry_034n01.Text}"); //верхний предел по паспорту прибора м3/час или т/час
+                res.Add("034н02", $"{entry_034n02.Text}"); //нижний предел м3/час или т/час (только для частотного выходного сигнала.) (для остальных всегда 0)
+                res.Add("034н06", $"{entry_034n06.Text}"); //верхний предел частоты входного сигнала 
+                res.Add("034н07", $"{entry_034n07.Text}"); //нижний предел частоты входного сигнала
                 
             }
             else //с числоимпульсным
             {
-                res.Add("034н01", $"{entry_034н01.Text}"); //верхний предел по паспорту прибора 
+                res.Add("034н01", $"{entry_034n01.Text}"); //верхний предел по паспорту прибора 
                 res.Add("034н02", $"{0}"); //нижний предел по паспорту прибора
-                res.Add("034н08", $"{entry_034н08.Text}"); //цена импульса - из паспорта прибора м³/имп или т/имп
+                res.Add("034н08", $"{entry_034n08.Text}"); //цена импульса - из паспорта прибора м³/имп или т/имп
             }
             return res;
         }
@@ -199,7 +206,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         public void ChangeLowerLimit(string lowerLimit)
         {
-            entry_034н02.Text = lowerLimit;
+            entry4.Text = lowerLimit;
         }
 
         public void SetWindow()
@@ -215,96 +222,100 @@ namespace Multifunctional_heat_meters_gui.View
 
             if (curIndicator == "01") //объема с числоимпульсным
             {
-                entry_box_top_right.Add(entry_034н01);
-                entry_box_top_left.Add(entry_034н08);
-                entry_034н01.Show();
-                entry_034н08.Show();
+                entry_box_top_right.Add(entry_034n01);
+                entry_box_top_left.Add(entry_034n08);
+                entry_034n01.Show();
+                entry_034n08.Show();
 
-                label1.Text = "Верхний предел";
+                label1.Text = "Верхний предел из паспорта расходомера";
                 entry_label1.Hide();
                 measure_label1.Text = "м³/час";
                 entry_label2.Hide();
                 measure_label2.Hide();
-                label2.Text = "Цена импульса из паспорта прибора";
+                label3.Text = "Цена импульса из паспорта расходомера";
                 entry_label3.Hide();
                 entry_label4.Hide();
                 measure_label3.Text = "м³/имп";
                 measure_label4.Hide();
 
                 measure_label5.Text = "м³/час";
+                measure_label12.Text = "м³/час";
             }
 
             else if(curIndicator == "02") //массы с числоимпульсным
             {
-                entry_box_top_right.Add(entry_034н01);
-                entry_box_top_left.Add(entry_034н08);
-                entry_034н01.Show();
-                entry_034н08.Show();
+                entry_box_top_right.Add(entry_034n01);
+                entry_box_top_left.Add(entry_034n08);
+                entry_034n01.Show();
+                entry_034n08.Show();
 
-                label1.Text = "Верхний предел";
+                label1.Text = "Верхний предел из паспорта расходомера";
                 entry_label1.Hide();
                 measure_label1.Text = "т/час";
                 entry_label2.Hide();
                 measure_label2.Hide();
-                label2.Text = "Цена импульса из паспорта прибора";
+                label3.Text = "Цена импульса из паспорта расходомера";
                 entry_label3.Hide();
                 entry_label4.Hide();
                 measure_label3.Text = "т/имп";
                 measure_label4.Hide();
                 measure_label5.Text = "т/час";
+                measure_label12.Text = "т/час";
             }
 
             else if (curIndicator == "03") //объема с частотным
             {
-                entry_box_top_right.Add(entry_034н02);
-                entry_box_top_left.Add(entry_034н07);
-                entry_box_bottom_right.Add(entry_034н01);
-                entry_box_bottom_left.Add(entry_034н06);
+                entry_box_top_right.Add(entry_034n02);
+                entry_box_top_left.Add(entry_034n07);
+                entry_box_bottom_right.Add(entry_034n01);
+                entry_box_bottom_left.Add(entry_034n06);
 
-                entry_034н01.Show();
-                entry_034н02.Show();
-                entry_034н06.Show();
-                entry_034н07.Show();
+                entry_034n01.Show();
+                entry_034n02.Show();
+                entry_034n06.Show();
+                entry_034n07.Show();
 
                 entry_label1.Show();
-                label1.Text = "Нижний и верхний диапазон измерений по паспорту прибора. Нижний предел диапазона измерений должен соответствовать настройкам выхода расходомера";
+                label1.Text = "Нижний и верхний диапазон измерений по паспорту расходомера. Нижний предел диапазона измерений должен соответствовать настройкам выхода расходомера";
                 measure_label1.Text = "м³/час";
                 entry_label2.Show();
                 measure_label2.Show();
                 measure_label2.Text = "м³/час";
-                label2.Text = "Нижний и верхний предел частоты входного сигнала";
+                label3.Text = "Нижний и верхний предел частоты входного сигнала";
                 entry_label3.Show();
                 measure_label3.Text = "Гц";
                 entry_label4.Show();
                 measure_label4.Show();
                 measure_label4.Text = "Гц";
                 measure_label5.Text = "м³/час";
+                measure_label12.Text = "м³/час";
             }
             else if (curIndicator == "04") //массы с частотным
             {
-                entry_box_top_right.Add(entry_034н02);
-                entry_box_top_left.Add(entry_034н07);
-                entry_box_bottom_right.Add(entry_034н01);
-                entry_box_bottom_left.Add(entry_034н06);
+                entry_box_top_right.Add(entry_034n02);
+                entry_box_top_left.Add(entry_034n07);
+                entry_box_bottom_right.Add(entry_034n01);
+                entry_box_bottom_left.Add(entry_034n06);
 
-                entry_034н01.Show();
-                entry_034н02.Show();
-                entry_034н06.Show();
-                entry_034н07.Show();
+                entry_034n01.Show();
+                entry_034n02.Show();
+                entry_034n06.Show();
+                entry_034n07.Show();
 
                 entry_label1.Show();
-                label1.Text = "Нижний и верхний диапазон измерений по паспорту прибора. Нижний предел диапазона измерений должен соответствовать настройкам выхода расходомера";
+                label1.Text = "Нижний и верхний диапазон измерений по паспорту расходомера. Нижний предел диапазона измерений должен соответствовать настройкам выхода расходомера";
                 measure_label1.Text = "т/час";
                 entry_label2.Show();
                 measure_label2.Show();
                 measure_label2.Text = "т/час";
-                label2.Text = "Нижний и верхний предел частоты входного сигнала";
+                label3.Text = "Нижний и верхний предел частоты входного сигнала";
                 entry_label3.Show();
                 measure_label3.Text = "Гц";
                 entry_label4.Show();
                 measure_label4.Show();
                 measure_label4.Text = "Гц";
                 measure_label5.Text = "т/час";
+                measure_label12.Text = "т/час";
             }
         }
 
@@ -312,7 +323,7 @@ namespace Multifunctional_heat_meters_gui.View
         {
             if (!IsFormFilledOut())
                 return false;
-            string result = GetPipelineSettings1().ContainsKey("034н02") ? GetPipelineSettings1()["034н02"] : "0";
+            string result = GetPipelineSettings1().ContainsKey("115н01") ? GetPipelineSettings1()["115н01"] : "0";
             if ("" == "")
             {
                 paramsToNextForm = new Dictionary<string, string>()
@@ -321,7 +332,6 @@ namespace Multifunctional_heat_meters_gui.View
                 };
                 return true;
             }
-
             return false;
         }
 
@@ -355,11 +365,11 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void SetupHandlers()
         {
-            entry_034н01.Changed += TurnIntoNumber;
-            entry_034н02.Changed += TurnIntoNumber;
-            entry_034н06.Changed += TurnIntoNumber;
-            entry_034н07.Changed += TurnIntoNumber;
-            entry_034н08.Changed += TurnIntoNumber;
+            entry_034n01.Changed += TurnIntoNumber;
+            entry_034n02.Changed += TurnIntoNumber;
+            entry_034n06.Changed += TurnIntoNumber;
+            entry_034n07.Changed += TurnIntoNumber;
+            entry_034n08.Changed += TurnIntoNumber;
             entry5.Changed += TurnIntoNumber;
             entry6.Changed += TurnIntoNumber;
             entry7.Changed += TurnIntoNumber;
@@ -368,7 +378,7 @@ namespace Multifunctional_heat_meters_gui.View
             entry10.Changed += TurnIntoNumber;
             entry11.Changed += TurnIntoNumber;
 
-            entry_034н02.Changed += OnLowerLimitValueChanged;
+            entry4.Changed += OnLowerLimitValueChanged;
 
             foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
                 parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
@@ -376,7 +386,7 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void OnLowerLimitValueChanged(object sender, EventArgs a)
         {
-            string lowerLimit = entry_034н02.Text;
+            string lowerLimit = ((Entry)sender).Text;
             
             EventsArgs.ChangeFormEventArgs args = new EventsArgs.ChangeFormEventArgs(lowerLimit, _formIndex);
             LowerLimitChangedEvent?.Invoke(this, args);
