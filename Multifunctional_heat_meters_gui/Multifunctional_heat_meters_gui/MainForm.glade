@@ -27,13 +27,6 @@
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <child>
-                      <object class="GtkMenuItem" id="open">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">Открыть</property>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkMenuItem" id="save">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>

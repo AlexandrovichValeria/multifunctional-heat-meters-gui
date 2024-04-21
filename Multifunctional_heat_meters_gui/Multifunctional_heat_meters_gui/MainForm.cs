@@ -39,6 +39,8 @@ namespace Multifunctional_heat_meters_gui
         [Builder.Object]
         private MenuItem save;
         [Builder.Object]
+        private MenuItem quit;
+        [Builder.Object]
         private CheckMenuItem validation_switch;
         [Builder.Object]
         private ScrolledWindow scrolled;
@@ -146,6 +148,7 @@ namespace Multifunctional_heat_meters_gui
         {
             DeleteEvent += OnLocalDeleteEvent;
             save.Activated += OnSaveButtonActivated;
+            quit.Activated += OnQuitButtonActivated;
 
             validation_switch.Toggled += OnParameterValidationButtonToggled;
             foreach (View.WindowForm form in _allForms)
@@ -239,6 +242,13 @@ namespace Multifunctional_heat_meters_gui
             //FileChooserNative fcn = new FileChooserNative("Сохранение базы данных", this, FileChooserAction.Save, "Сохранить", "Отмена");
             //fcn.Show();
 
+        }
+
+        private void OnQuitButtonActivated(object sender, EventArgs e)
+        {
+            DeleteEventArgs a = new DeleteEventArgs();
+            OnLocalDeleteEvent(this, a);
+            //Application.Quit();
         }
 
         private void CheckForADS(object sender, List<int> e)
