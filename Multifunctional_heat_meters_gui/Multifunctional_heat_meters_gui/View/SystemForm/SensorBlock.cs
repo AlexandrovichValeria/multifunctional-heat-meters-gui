@@ -28,10 +28,6 @@ namespace Multifunctional_heat_meters_gui.View
         private CheckButton sensor_check4;
         [Builder.Object]
         private Label measure_label2;
-
-
-        //private int _index;
-
         public static SensorBlock Create(string measureSystem)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.SystemForm.SensorBlock.glade", null);
@@ -42,7 +38,6 @@ namespace Multifunctional_heat_meters_gui.View
             _builder = builder;
             builder.Autoconnect(this);
             
-            //_index = index;
             parameter_widget = new Dictionary<string, Entry>
             {
                 { "035н00", const_entry1 },
@@ -73,13 +68,9 @@ namespace Multifunctional_heat_meters_gui.View
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
                 { "035н00", parameter_widget["035н00"].Text },
-                //{ "035н01", sensor_check1.Active ? "1" : "0"},
                 { "036н00", parameter_widget["036н00"].Text},
-                //{ "036н01", sensor_check2.Active ? "1" : "0" },
                 { "037н00", parameter_widget["037н00"].Text},
-                //{ "037н01", sensor_check3.Active ? "1" : "0"},
                 { "040н00", parameter_widget["040н00"].Text },
-                //{ "040н01", sensor_check4.Active? "1" : "0"},
             };
             return res;
         }
@@ -113,12 +104,6 @@ namespace Multifunctional_heat_meters_gui.View
                     break;
             }
         }
-
-        /*public void SetAutoValueCheck(bool flag)
-        {
-
-        }*/
-
         protected void SetupHandlers()
         {
             const_entry1.Changed += TurnIntoNumber;
@@ -126,21 +111,13 @@ namespace Multifunctional_heat_meters_gui.View
             const_entry3.Changed += TurnIntoNumber;
             const_entry4.Changed += TurnIntoNumber;
 
-            //const_entry1.Changed += OnBlockChanged;
             foreach(KeyValuePair<string, Entry> keyval in parameter_widget)
                 parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
 
-
-            //const_entry2.Changed += OnBlockChanged;
-            //const_entry3.Changed += OnBlockChanged;
-            //const_entry4.Changed += OnBlockChanged;
             sensor_check1.Clicked += OnBlockChanged;
             sensor_check2.Clicked += OnBlockChanged;
             sensor_check3.Clicked += OnBlockChanged;
             sensor_check4.Clicked += OnBlockChanged;
-
-            
-            //DeleteEvent += OnLocalDeleteEvent;
         }
     }
 }

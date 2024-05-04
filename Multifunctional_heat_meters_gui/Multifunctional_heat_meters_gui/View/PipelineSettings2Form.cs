@@ -29,8 +29,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         public event EventHandler<EventsArgs.ChangeFormEventArgs> LowerLimitChangedEvent;
 
-        //private string lowerlimitValue;
-
         public static PipelineSettings2Form Create(int index)
         {
             Builder builder = new Builder(null, "Multifunctional_heat_meters_gui.View.PipelineSettings2Form.glade", null);
@@ -72,7 +70,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         public Dictionary<string, string> GetPipelineSettings2()
         {
-            //string low_val = LowerValueTextBox.Text.Replace(',', '.');
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
                 { "115н00", $"{par115.Text}" },
@@ -123,8 +120,6 @@ namespace Multifunctional_heat_meters_gui.View
 
             foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
                 parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
-
-            //DeleteEvent += OnLocalDeleteEvent;
         }
 
         private void OnComboChanged(object sender, EventArgs e)

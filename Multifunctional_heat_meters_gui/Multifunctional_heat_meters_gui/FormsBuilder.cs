@@ -97,12 +97,6 @@ namespace Multifunctional_heat_meters_gui
             List<int> pipelinesNumbersToDelete = GetFormsNumbersToDelete(_currentPipelinesNumbers, nextPipelinesNumbers);
             List<int> sensorsNumbersToDelete = GetFormsNumbersToDelete(_currentSensorsNumbers, nextSensorsNumbers);
 
-            /*string coldWaterTemperatureSensor = _sensorForm.GetParamFromWindow(sensors["ColdWaterTemperature"]);
-            string coldWaterPressureSensor = _sensorForm.GetParamFromWindow(sensors["ColdWaterPressure"]);
-            string barometricPressureSensor = _sensorForm.GetParamFromWindow(sensors["BarometricPressure"]);
-            string airTemperatureSensor = _sensorForm.GetParamFromWindow(sensors["AirTemperature"]);*/
-
-
             if (pipelinesNumbersToAdd.Count == 0 & pipelinesNumbersToDelete.Count == 0)
             {
                 if (consumersNumbersToAdd.Count != 0 | consumersNumbersToDelete.Count != 0)
@@ -137,28 +131,10 @@ namespace Multifunctional_heat_meters_gui
             _currentConsumersNumbers = nextConsumersNumbers;
             _currentPipelinesNumbers = nextPipelinesNumbers;
             _currentSensorsNumbers = nextSensorsNumbers;
-
-            //delete sensor forms
-            /*if(coldWaterTemperatureSensor == "1")
-            {
-                Console.WriteLine("coldWaterTemperatureSensor == 1");
-                View.TempSensor coldWaterTempWindow = View.TempSensor.Create("Холодная вода");
-                InsertNewSensor(coldWaterTempWindow);
-                NewFormCreatedEvent?.Invoke(coldWaterTempWindow, EventArgs.Empty);
-
-                EventsArgs.MenuEventArgs sensorsArgs = new EventsArgs.MenuEventArgs(View.ContentMenu.DeepButtonsNames.SENSORS, sensorsToAdd);
-                MenuShouldBeUpdatedEvent?.Invoke(this, sensorsArgs);
-            }*/
-
         }
 
         private List<int> GetSensorNumbers()
         {
-            /*List<string> sensorsIncludedOrNot = new List<string>{
-                _sensorForm.GetParamFromWindow(sensors["ColdWaterTemperature"]),
-                _sensorForm.GetParamFromWindow(sensors["ColdWaterPressure"]),
-                _sensorForm.GetParamFromWindow(sensors["BarometricPressure"]),
-                _sensorForm.GetParamFromWindow(sensors["AirTemperature"]) };*/
             List<int> sensorsIncludedOrNot = _sensorForm.GetSensorsState();
             List<int> result = new List<int>();
             for(int i = 0; i < sensorsIncludedOrNot.Count; i++)
@@ -275,8 +251,6 @@ namespace Multifunctional_heat_meters_gui
             while (currentNode != null)
             {
                 View.WindowForm currentForm = currentNode.Value;
-                //FormDeletedEvent?.Invoke(currentForm, EventArgs.Empty);
-
                 if (formsNumbers.Contains(currentForm.FormIndex) & currentForm is FormType)
                 {
                     nodesToDelete.Add(currentNode);
@@ -327,9 +301,6 @@ namespace Multifunctional_heat_meters_gui
                 View.PipelineSettings1Form pipelineSettings1Form = View.PipelineSettings1Form.Create(pipelineNumber);
                 View.PipelineSettings2Form pipelineSettings2Form = View.PipelineSettings2Form.Create(pipelineNumber);
 
-                //coolantSelectionForm.SetNextPipelineSettings(pipelineSettingsLimits);
-                //pipelineSettingsLimits.SetNextPipelineSettings(pipelineSettings2Form);
-
                 List<View.WindowForm> pipelinesSettingsForms = new List<View.WindowForm>() { coolantSelectionForm, pipelineSettings1Form, pipelineSettings2Form };
 
                 InsertNewPipelinesSettings(pipelinesSettingsForms);
@@ -339,8 +310,6 @@ namespace Multifunctional_heat_meters_gui
                 NewFormCreatedEvent?.Invoke(pipelineSettings2Form, EventArgs.Empty);
             }
 
-            //EventsArgs.MenuEventArgs args = new EventsArgs.MenuEventArgs(View.ContentMenu.DeepButtonsNames.PIPELINES, pipelinesNumbers);
-            //MenuShouldBeUpdatedEvent?.Invoke(this, args);
         }
 
         private void CreateSensorWindows(List<int> sensorNumbers)

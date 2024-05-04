@@ -414,7 +414,6 @@ namespace Multifunctional_heat_meters_gui.Model
                 channelsListS.Add(channelS);
 
             }
-            //dataBase.AddChannel(systemWideChannel);
 
             foreach (var channel in channelsListS)
             {

@@ -33,7 +33,7 @@ namespace Multifunctional_heat_meters_gui.View
             _builder = builder;
             builder.Autoconnect(this);
 
-            SetIconFromFile("./Resources/icon.ico");
+            //SetIconFromFile("./Resources/icon.ico");
             SetupHandlers();
         }
 

@@ -42,11 +42,6 @@ namespace Multifunctional_heat_meters_gui
             _sysForm.PressureSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(ChangePressureSystem);
         }
 
-        /*public void DeleteControllerForm(object form, EventArgs args)
-        {
-            View.WindowForm _form = (View.WindowForm)form;
-        }*/
-
         public void SetControllers()
         {
             int typeOfPowerMeasurement = _sysForm.GetMeasurementSystems()["Power"];
@@ -101,7 +96,6 @@ namespace Multifunctional_heat_meters_gui
                     _controllers.AddLast(controller);
                 }
             }
-            //Controller.Controller ADScontroller = null;
             Controller.ADS_97_Controller ADScontroller = null;
             if (_appState.GetADSForm() != null)
                 ADScontroller = new Controller.ADS_97_Controller(_appState.GetADSForm(), _model);

@@ -39,18 +39,14 @@ namespace Multifunctional_heat_meters_gui.View
         {
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
-                { "104", ((Entry)parameter_widget["104"]).Text }, //ширина зоны насыщения
-                { "105", ((Entry)parameter_widget["105"]).Text }, //степень сухости
+                { "104", parameter_widget["104"].Text }, //ширина зоны насыщения
+                { "105", parameter_widget["105"].Text }, //степень сухости
             };
             return res;
         }
 
         protected void SetupHandlers()
         {
-            //DeleteEvent += OnLocalDeleteEvent;
-            //entry1.Changed += OnBlockChanged;
-            //entry2.Changed += OnBlockChanged;
-
             entry1.Changed += TurnIntoNumber;
             entry2.Changed += TurnIntoNumber;
 

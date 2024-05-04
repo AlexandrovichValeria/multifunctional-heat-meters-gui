@@ -20,7 +20,6 @@ namespace Multifunctional_heat_meters_gui.Controller
 
         public override void SaveDataToModel()
         {
-            Console.WriteLine("ADS_97_Controller");
             Dictionary<string, string> result = _view.GetADS_97_results();
             foreach(KeyValuePair<string, string> keyval in result)
             {

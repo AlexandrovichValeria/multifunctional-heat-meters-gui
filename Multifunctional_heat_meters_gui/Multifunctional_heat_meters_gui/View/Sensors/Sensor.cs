@@ -15,10 +15,6 @@ namespace Multifunctional_heat_meters_gui.View
         {
             _builder = builder;
             builder.Autoconnect(this);
-
-            //_formName = formName;
-            //_backForwardComponent = BackForwardComponent.Create();
-
         }
 
         public virtual Dictionary<string, string> GetSensorSettings()

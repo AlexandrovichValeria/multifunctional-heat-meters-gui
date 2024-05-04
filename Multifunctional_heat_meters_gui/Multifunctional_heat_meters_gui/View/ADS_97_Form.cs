@@ -74,8 +74,6 @@ namespace Multifunctional_heat_meters_gui.View
             return Int32.Parse(combo1.ActiveId) + 1;
         }
 
-        
-
         protected void SetupHandlers()
         {
             //DeleteEvent += OnLocalDeleteEvent;

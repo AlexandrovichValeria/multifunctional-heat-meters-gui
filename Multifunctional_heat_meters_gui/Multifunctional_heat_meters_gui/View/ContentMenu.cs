@@ -14,17 +14,6 @@ namespace Multifunctional_heat_meters_gui.View
         private TreeStore ContentMenuStore;
 
         public event EventHandler FormChanged;
-
-        /*private static readonly string s_topTreeGroupName = "ContentButtons";
-        private static readonly string s_pipelineGroupName = "PipelinesButtons";
-        private static readonly string s_consumersGroupName = "ConsumersButtons";
-
-        private static readonly Dictionary<string, string> s_russianNames = new Dictionary<string, string>
-        {
-            { "PipelinesButtons", "т" },
-            { "ConsumersButtons", "п" }
-        };*/
-
         public enum DeepButtonsNames
         {
             PIPELINES,
@@ -63,33 +52,9 @@ namespace Multifunctional_heat_meters_gui.View
             TreePath path = new TreePath("1");
             Selection.SelectPath(path);
 
-            //Selection.SelectFunction = ThisSelectFunction;
-
-            /*Selection.SelectFunction = (TreeSelection treeselection, ITreeModel model, TreePath local_path, bool current) =>
-            {
-                return true;
-            };*/
-
             SetupHandlers();
             ShowAll();
         }
-
-        /*private bool ThisSelectFunction(TreeSelection treeselection, ITreeModel model, TreePath path, bool current)
-        {
-            TreeIter iter;
-            model.GetIter(out iter, path);
-            string name = (string)model.GetValue(iter, 0);
-            if (name == "Настройка трубопроводов" || name == "Настройка потребителей")
-            {
-                // Return false to prevent selection
-                Console.WriteLine("name");
-                return false;
-            }
-
-            // Return true to allow selection
-            Console.WriteLine(name);
-            return true;
-        }*/
 
         public void AddDeepButtonsByNumbers(DeepButtonsNames buttonName, List<int> buttonsNumbers)
         {
@@ -167,42 +132,6 @@ namespace Multifunctional_heat_meters_gui.View
             }
             ExpandAll();
         }
-
-        /*private List<ContentMenuButton> GetDeepButtonsByNumbers(DeepButtonsNames deepButtonName, List<int> deepButtonNumbers)
-        {
-
-            string buttonGroupName = "";
-            string buttonTitle = "";
-
-            switch (deepButtonName)
-            {
-                case DeepButtonsNames.PIPELINES:
-                    buttonGroupName = s_pipelineGroupName;
-                    buttonTitle = "т";
-                    break;
-                case DeepButtonsNames.CONSUMERS:
-                    buttonGroupName = s_consumersGroupName;
-                    buttonTitle = "п";
-                    break;
-                default:
-                    break;
-            }
-
-
-            List<ContentMenuButton> buttons = new List<ContentMenuButton>(deepButtonNumbers.Count);
-
-            foreach (int number in deepButtonNumbers)
-            {
-                ContentMenuButton currentButton = ContentMenuButton.Create($"{buttonTitle}{number}", buttonGroupName);
-                //currentButton.SetWidth(140);
-                currentButton.SetButtonType(deepButtonName);
-                //currentButton.RadioButtonChecked += new EventHandler(ButtonClicked);
-                buttons.Add(currentButton);
-            }
-
-            return buttons;
-
-        }*/
 
         private void AddPipelinesSettingsButtons(int pipelineNumber)
         {

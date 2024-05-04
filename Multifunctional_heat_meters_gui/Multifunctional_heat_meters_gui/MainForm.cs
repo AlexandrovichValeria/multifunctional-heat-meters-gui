@@ -11,12 +11,10 @@ namespace Multifunctional_heat_meters_gui
     {
         private Model.Device _device;
         private Model.Model _model;
-        //private Controller.SystemController _sysController;
         private bool _exitFlag;
         private LinkedList<View.WindowForm> _allForms = new LinkedList<View.WindowForm>();
         private ControllerManager controllerBuilder;
         private View.ADS_97_Form _ADS_97_Form;
-        //private int _minPipelinesCountFor_ADS_97 = 0;
         private int ADSAmount;
         private int _MaxChannel032Amount;
         private int _MaxChannel033Amount;
@@ -26,14 +24,12 @@ namespace Multifunctional_heat_meters_gui
 
         private Builder _builder;
 
-#pragma warning disable 649
+        #pragma warning disable 649
 
         [Builder.Object]
         private Paned paned1;
         [Builder.Object]
         private Box menu_box;
-        //[Builder.Object]
-        //private Box main_box;
         [Builder.Object]
         private Box content_box;
         [Builder.Object]
@@ -57,7 +53,7 @@ namespace Multifunctional_heat_meters_gui
             _builder = builder;
             builder.Autoconnect(this);
 
-            SetIconFromFile("./Resources/icon.ico");
+            //SetIconFromFile("./Resources/icon.ico");
 
             _device = device;
             _exitFlag = true;
@@ -110,8 +106,6 @@ namespace Multifunctional_heat_meters_gui
 
             formsBuilder.NewFormCreatedEvent += new EventHandler(formSwitcher.SetEventListenersForForm);
             formsBuilder.NewFormCreatedEvent += new EventHandler(OnNewFormCreated);
-            //formsBuilder.NewFormCreatedEvent += new EventHandler(controllerBuilder.SetNewControllerForForm);
-            //formsBuilder.FormDeletedEvent += new EventHandler(controllerBuilder.DeleteControllerForm);
 
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(menuBuilder.UpdateMenu);
             formsBuilder.MenuShouldBeUpdatedEvent += new EventHandler<EventsArgs.MenuEventArgs>(controllerBuilder.ResetControllers);
@@ -121,13 +115,9 @@ namespace Multifunctional_heat_meters_gui
             subForm2.SystemFormChangedEvent += new EventHandler<Dictionary<string, string>>(subForm1.UpdateFromOtherForm);
 
             _ADS_97_Form.ADSChanged += OnADSChanged;
-            //subForm1.PowerSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePowerSystem);
-            //subForm1.PressureSystemChangedEvent += new EventHandler<EventsArgs.MeasurementEventArgs>(_sysController.ChangePressureSystem);
 
             scrolled.Add(menu);
-            //menu_box.ModifyBg(StateType.Normal, new Gdk.Color(253, 246, 227));
-            //content_box.PackStart(subForm1, false, false, 0);
-            
+
             SetupHandlers();
         }
 
@@ -138,11 +128,6 @@ namespace Multifunctional_heat_meters_gui
             _MaxChannel033Amount = channelAmounts[1];
             _MaxChannel034Amount = channelAmounts[2];
         }
-
-        /*private int GetAdsAmount()
-        {
-            return 0;
-        }*/
 
         protected void SetupHandlers()
         {
@@ -155,14 +140,6 @@ namespace Multifunctional_heat_meters_gui
             {
                 form.SaveFormEvent += new EventHandler(OnSaveButtonActivated);
             }
-
-            /*foreach (View.WindowForm form in _allForms)
-            {
-                form.SetValueCheckActiveEvent += new EventHandler(OnValueCheckActive);
-                form.SetValueCheckInactiveEvent += new EventHandler(OnValueCheckInactive);
-            }*/
-            //back_button.Clicked += BackButtonClicked;
-            //forward_button.Clicked += ForwardButtonClicked;
         }
 
         protected void OnNewFormCreated(object form, EventArgs a)
@@ -197,51 +174,23 @@ namespace Multifunctional_heat_meters_gui
 
         protected void OnSaveButtonActivated(object sender, EventArgs a)
         {
-            MessageDialog dialog = new MessageDialog(null, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "Имя файла и путь к нему не должны содержать кириллицу.");
-            dialog.Run();
-            dialog.Destroy();
-
-            FileChooserDialog fileChooser = new FileChooserDialog(
-            "Сохранение базы данных", // Dialog title
-            this, // Parent window (can be null)
-            FileChooserAction.Save, // Action type (Save)
-            "Отмена", // Cancel button text
-            ResponseType.Cancel, // Response type for the Cancel button
-            "Сохранить", // Accept button text
-            ResponseType.Accept // Response type for the Accept button
-            );
-
-            fileChooser.Show();
-
+            FileChooserNative fcn = new FileChooserNative("Сохранение базы данных", this, FileChooserAction.Save, "Сохранить", "Отмена");
             FileFilter filter = new FileFilter();
             filter.Name = "Configurator DB files";
             filter.AddPattern("*.xdb");
-            fileChooser.AddFilter(filter);
+            fcn.AddFilter(filter);
 
-            
-            // Run the dialog and check the response
-            ResponseType response = (ResponseType)fileChooser.Run();
-            
+            ResponseType response = (ResponseType)fcn.Run();
+
             if (response == ResponseType.Accept)
             {
-                // Get the selected file or file name
-                string selectedFilePath = fileChooser.Filename;
+                string selectedFilePath = fcn.Filename;
 
                 controllerBuilder.saveDataFromAllForms();
                 _model.SaveDataToFile(selectedFilePath, "");
-                // Clean up and destroy the dialog
-                fileChooser.Destroy();
-            }
-            else
-            {
-                // Clean up and destroy the dialog
-                fileChooser.Destroy();
-                // Handle the case when the user cancels the dialog
             }
 
-            //FileChooserNative fcn = new FileChooserNative("Сохранение базы данных", this, FileChooserAction.Save, "Сохранить", "Отмена");
-            //fcn.Show();
-
+            fcn.Destroy();
         }
 
         private void OnQuitButtonActivated(object sender, EventArgs e)

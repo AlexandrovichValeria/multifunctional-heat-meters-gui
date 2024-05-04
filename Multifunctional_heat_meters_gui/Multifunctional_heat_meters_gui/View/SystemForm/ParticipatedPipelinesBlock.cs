@@ -33,7 +33,6 @@ namespace Multifunctional_heat_meters_gui.View
         private CheckboxesBlock _participatedConsumersCheckboxes;
 
         public event EventHandler BlockChangedEvent;
-        //public event EventHandler ConsumersChangedEvent;
 
         public static ParticipatedPipelinesBlock Create(int participatedPipelinesCount, int participatedConsumerCount, string CheckboxesState = "")
         {

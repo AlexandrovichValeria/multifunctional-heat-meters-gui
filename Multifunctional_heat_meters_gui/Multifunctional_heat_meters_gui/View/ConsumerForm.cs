@@ -20,8 +20,6 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Grid pipeline_grid;
 
-        //private List<ComboBoxText> _comboboxes;
-        //private List<int> _pipelinesNumbers;
         private Dictionary<int, ComboBoxText> combo_numbers;
 
         public static ConsumerForm Create(List<int> pipelinesNumbers, int consumerNumber)
@@ -38,8 +36,6 @@ namespace Multifunctional_heat_meters_gui.View
             _formIndex = consumerNumber;
 
             button_box.Add(_backForwardComponent);
-            //_pipelinesNumbers = pipelinesNumbers;
-            //_comboboxes = new List<ComboBoxText>();
             combo_numbers = new Dictionary<int, ComboBoxText>();
 
             label1.Text = "Потребитель " + consumerNumber.ToString();
@@ -57,7 +53,6 @@ namespace Multifunctional_heat_meters_gui.View
                 comboBox.Active = 0;
                 combo_numbers.Add(pipelinesNumbers[i], comboBox);
 
-                //_comboboxes.Add(comboBox);
                 if (i < 8)
                 {
                     pipeline_grid.Attach(label, 0, i, 1, 1);
@@ -88,14 +83,7 @@ namespace Multifunctional_heat_meters_gui.View
         }
         protected void SetupHandlers()
         {
-            DeleteEvent += OnLocalDeleteEvent;
-            combo1.Changed += OnComboChanged;
-        }
-
-        protected void OnComboChanged(object sender, EventArgs a)
-        {
-            //Console.WriteLine("AAAAAAAAA");
-            //Console.WriteLine(combo1.ActiveId);
+            //DeleteEvent += OnLocalDeleteEvent;
         }
 
         protected void OnLocalDeleteEvent(object sender, DeleteEventArgs a)

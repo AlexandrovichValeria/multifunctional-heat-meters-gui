@@ -16,20 +16,17 @@ namespace Multifunctional_heat_meters_gui.Model
 
         private string _typeOfMeasurement;
 
-        //Название параметра
         public string Name
         {
             get { return _name; }
         }
 
-        //Значение параметра
         public string Value
         {
             get { return _value; }
             set { _value = value; }
         }
 
-        //Единицы измерения
         public string UnitOfMeasurement
         {
             get { return _unitOfMeasurement; }

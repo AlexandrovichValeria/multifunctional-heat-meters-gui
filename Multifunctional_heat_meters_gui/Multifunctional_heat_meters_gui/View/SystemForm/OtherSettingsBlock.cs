@@ -41,24 +41,8 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label energy_discr_system;
 
-        /*[Builder.Object]
-        private Label spec1_error_message;
-        [Builder.Object]
-        private Label spec2_error_message;
-        [Builder.Object]
-        private Label entry5_error_message;
-        [Builder.Object]
-        private Label entry6_error_message;
-        [Builder.Object]
-        private Label entry7_error_message;
-        [Builder.Object]
-        private Label entry8_error_message;
-        [Builder.Object]
-        private Label entry9_error_message;*/
-
         private int _pressureMeasure;
         private int _powerMeasure;
-        //private ParametersState paramState;
 
         public int PressureMeasure
         {
@@ -71,7 +55,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         public event EventHandler<EventsArgs.MeasurementEventArgs> PressureComboChangedEvent;
         public event EventHandler<EventsArgs.MeasurementEventArgs> PowerComboChangedEvent;
-        //public event EventHandler<List<string>> ParameterChangedEvent;
 
 
         public static OtherSettingsBlock Create(string measureSystem = "00")
@@ -84,7 +67,6 @@ namespace Multifunctional_heat_meters_gui.View
             _builder = builder;
             builder.Autoconnect(this);
 
-            //paramState = new ParametersState(new List<string> {"003", "004", "030н01", "030н02", "024", "025", "008" });
             parameter_widget = new Dictionary<string, Entry>
             {
                 { "030н01", entry5 },
@@ -132,13 +114,13 @@ namespace Multifunctional_heat_meters_gui.View
         {
             pressure_combo.ActiveId = data["030н00"][0].ToString();
             power_combo.ActiveId = data["030н00"][1].ToString();
-            ((Entry)parameter_widget["030н01"]).Text = data["030н01"];
-            ((Entry)parameter_widget["030н02"]).Text = data["030н02"];
-            ((Entry)parameter_widget["024"]).Text = data["024"];
-            ((Entry)parameter_widget["025"]).Text = data["025"];
-            ((Entry)parameter_widget["008"]).Text = data["008"];
-            ((Entry)parameter_widget["003"]).Text = data["003"];
-            ((Entry)parameter_widget["004"]).Text = data["004"];
+            parameter_widget["030н01"].Text = data["030н01"];
+            parameter_widget["030н02"].Text = data["030н02"];
+            parameter_widget["024"].Text = data["024"];
+            parameter_widget["025"].Text = data["025"];
+            parameter_widget["008"].Text = data["008"];
+            parameter_widget["003"].Text = data["003"];
+            parameter_widget["004"].Text = data["004"];
 
             if (data["CurrentTimeAndDate"] == "1")
                 check5.Active = true;
@@ -162,37 +144,10 @@ namespace Multifunctional_heat_meters_gui.View
             entry9.Changed += TurnIntoNumber;
             spec1.Changed += TurnIntoNumber;
             spec2.Changed += TurnIntoNumber;
-
-            //new EventHandler<Dictionary<string, string>>(subForm2.UpdateFromOtherForm);
-            //spec1.Changed += (sender, e) => OnParameterChanged(sender, new List<string> { "003", spec1.Text});
-
-            //power_combo.Changed += OnBlockChanged;
-            //pressure_combo.Changed += OnBlockChanged;
             foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
                 parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
 
-            /*((Entry)parameter_widget["030н01"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н01", entry5.Text});
-            ((Entry)parameter_widget["030н02"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "030н02", entry6.Text });
-            ((Entry)parameter_widget["024"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "024", entry7.Text });
-            ((Entry)parameter_widget["025"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "025", entry8.Text });
-            ((Entry)parameter_widget["008"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "008", entry9.Text });
-            ((Entry)parameter_widget["003"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "003", spec1.Text });
-            ((Entry)parameter_widget["004"]).Changed += (sender, e) => OnValueChanged(sender, new List<string> { "004", spec2.Text });*/
-            /*entry5.Changed += OnBlockChanged;
-            entry6.Changed += OnBlockChanged;
-            entry7.Changed += OnBlockChanged;
-            entry8.Changed += OnBlockChanged;
-            entry9.Changed += OnBlockChanged;
-            spec1.Changed += OnBlockChanged;
-            spec2.Changed += OnBlockChanged;
-            check5.Clicked += OnBlockChanged;*/
-            //DeleteEvent += OnLocalDeleteEvent;
         }
-
-        /*protected void OnParameterChanged(object sender, List<string> e)
-        {
-
-        }*/
         
         protected void OnSpec1CheckBoxClicked(object sender, EventArgs a)
         {

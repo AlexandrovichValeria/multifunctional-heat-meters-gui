@@ -58,41 +58,25 @@ namespace Multifunctional_heat_meters_gui.View
         {
             Dictionary<string, string> res = new Dictionary<string, string>()
             {
-                { "125н00", ((Entry)parameter_widget["125н00"]).Text },
-                { "125н01", ((Entry)parameter_widget["125н01"]).Text },
-                { "125н02", ((Entry)parameter_widget["125н02"]).Text },
-                { "125н03", ((Entry)parameter_widget["125н03"]).Text },
-                { "125н04", ((Entry)parameter_widget["125н04"]).Text },
-                { "125н05", ((Entry)parameter_widget["125н05"]).Text },
-                { "125н06", ((Entry)parameter_widget["125н06"]).Text },
-                { "125н07", ((Entry)parameter_widget["125н07"]).Text },
+                { "125н00", parameter_widget["125н00"].Text },
+                { "125н01", parameter_widget["125н01"].Text },
+                { "125н02", parameter_widget["125н02"].Text },
+                { "125н03", parameter_widget["125н03"].Text },
+                { "125н04", parameter_widget["125н04"].Text },
+                { "125н05", parameter_widget["125н05"].Text },
+                { "125н06", parameter_widget["125н06"].Text },
+                { "125н07", parameter_widget["125н07"].Text },
             };
             return res;
         }
 
         protected void SetupHandlers()
         {
-            //DeleteEvent += OnLocalDeleteEvent;
-            /*entry0.Changed += OnBlockChanged;
-            entry1.Changed += OnBlockChanged;
-            entry2.Changed += OnBlockChanged;
-            entry3.Changed += OnBlockChanged;
-            entry4.Changed += OnBlockChanged;
-            entry5.Changed += OnBlockChanged;
-            entry6.Changed += OnBlockChanged;
-            entry7.Changed += OnBlockChanged;*/
-
-            entry0.Changed += TurnIntoNumber;
-            entry1.Changed += TurnIntoNumber;
-            entry2.Changed += TurnIntoNumber;
-            entry3.Changed += TurnIntoNumber;
-            entry4.Changed += TurnIntoNumber;
-            entry5.Changed += TurnIntoNumber;
-            entry6.Changed += TurnIntoNumber;
-            entry7.Changed += TurnIntoNumber;
-
             foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
-                parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text});
+            {
+                parameter_widget[keyval.Key].Changed += TurnIntoNumber;
+                parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
+            }
         }
     }
 }

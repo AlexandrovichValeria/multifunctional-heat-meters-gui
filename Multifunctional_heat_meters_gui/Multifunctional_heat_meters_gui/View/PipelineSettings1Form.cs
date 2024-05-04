@@ -74,12 +74,11 @@ namespace Multifunctional_heat_meters_gui.View
         [Builder.Object]
         private Label name_label;
 
-        private Entry entry_034n01; //верхний предел
-        private Entry entry_034n02; //нижний предел
-        private Entry entry_034n06; //верхний предел частоты входного сигнала 
-        private Entry entry_034n07; //нижний предел частоты входного сигнала
-        private Entry entry_034n08; //цена импульса - из паспорта прибора м³/имп или т/имп
-        //private Entry entry_115n01; 
+        private Entry entry_034n01; 
+        private Entry entry_034n02; 
+        private Entry entry_034n06; 
+        private Entry entry_034n07; 
+        private Entry entry_034n08; 
 
         public string curIndicator = "01";
 
@@ -104,7 +103,6 @@ namespace Multifunctional_heat_meters_gui.View
             entry_034n06 = new Entry("");
             entry_034n07 = new Entry("0");
             entry_034n08 = new Entry("");
-            //entry_115n01 = new Entry("0");
 
             parameter_widget = new Dictionary<string, Entry>
             {
@@ -128,7 +126,6 @@ namespace Multifunctional_heat_meters_gui.View
 
         public Dictionary<string, string> GetPipelineSettings1()
         {
-            //Console.WriteLine("GetPipelineSettings1");
             string[] cv1 = { "040", "041", "042" };
 
             string combo1Value = ""; //"042" по умолчанию
@@ -159,8 +156,6 @@ namespace Multifunctional_heat_meters_gui.View
                 { "033н02", $"{entry9.Text}" }, //нижний предел ºС
                 { "114н00", $"{entry11.Text}" }, //константное значение температуры теплоносителя ºС
             };
-            //foreach(KeyValuePair<string, Widget> keyvalue in parameter_widget)
-                //res.Add(keyvalue.Key, ((Entry)keyvalue.Value).Text);
 
             if (curIndicator == "03" || curIndicator == "04") //с частотным
             {
@@ -365,23 +360,12 @@ namespace Multifunctional_heat_meters_gui.View
 
         protected void SetupHandlers()
         {
-            entry_034n01.Changed += TurnIntoNumber;
-            entry_034n02.Changed += TurnIntoNumber;
-            entry_034n06.Changed += TurnIntoNumber;
-            entry_034n07.Changed += TurnIntoNumber;
-            entry_034n08.Changed += TurnIntoNumber;
-            entry5.Changed += TurnIntoNumber;
-            entry6.Changed += TurnIntoNumber;
-            entry7.Changed += TurnIntoNumber;
-            entry8.Changed += TurnIntoNumber;
-            entry9.Changed += TurnIntoNumber;
-            entry10.Changed += TurnIntoNumber;
-            entry11.Changed += TurnIntoNumber;
-
-            entry4.Changed += OnLowerLimitValueChanged;
-
             foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
+            {
+                parameter_widget[keyval.Key].Changed += TurnIntoNumber;
                 parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
+            }
+            entry4.Changed += OnLowerLimitValueChanged;
         }
 
         protected void OnLowerLimitValueChanged(object sender, EventArgs a)

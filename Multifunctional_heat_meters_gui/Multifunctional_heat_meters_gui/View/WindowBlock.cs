@@ -11,7 +11,6 @@ namespace Multifunctional_heat_meters_gui.View
     public class WindowBlock : Box
     {
         private Builder _builder;
-        //public bool blockFilledCorrectly;
 
         protected bool AutoCheckFlag;
         protected Dictionary<string, Entry> parameter_widget;

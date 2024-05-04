@@ -49,15 +49,6 @@ namespace Multifunctional_heat_meters_gui.View
             _backForwardComponent.BackButtonClickedEvent += new EventHandler(GoToPreviousForm);
             _backForwardComponent.ForwardButtonClickedEvent += new EventHandler(GoToNextForm);
             _backForwardComponent.SaveButtonClickedEvent += new EventHandler(SaveData);
-
-            /*if (!(parameter_widget is null))
-            {
-                foreach (KeyValuePair<string, Entry> keyval in parameter_widget)
-                    parameter_widget[keyval.Key].Changed += (sender, e) => OnValueChanged(sender, new List<string> { keyval.Key, keyval.Value.Text });
-            }*/
-
-            //_backForwardComponent.ValueCheckButtonActiveEvent += new EventHandler(SetValueCheckActive);
-            //_backForwardComponent.ValueCheckButtonInactiveEvent += new EventHandler(SetValueCheckInactive);
         }
 
         public virtual bool IsFormFilledOut()
@@ -194,11 +185,8 @@ namespace Multifunctional_heat_meters_gui.View
         {
             OnPreviousFormAction();
 
-            //if (IsAbleToGoToPrevious())
-            //{
-                EventsArgs.NextFormArgs args = new EventsArgs.NextFormArgs(paramsToNextForm);
-                PreviousFormEvent?.Invoke(this, args);
-            //}
+            EventsArgs.NextFormArgs args = new EventsArgs.NextFormArgs(paramsToNextForm);
+            PreviousFormEvent?.Invoke(this, args);
         }
         protected void TurnIntoNumber(object sender, EventArgs e)
         {

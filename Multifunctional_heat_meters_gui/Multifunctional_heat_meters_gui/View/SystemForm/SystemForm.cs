@@ -23,7 +23,6 @@ namespace Multifunctional_heat_meters_gui.View
         private SensorBlock _sensorBlock;
         private OtherSettingsBlock _otherSettingsBlock;
 
-        //private int _minPipelinesCountFor_ADS_97 = 0;
         private static string SelectedPipelinesParam = "031н00";
         private Dictionary<string, string> ADS_97_result;
 
@@ -56,7 +55,6 @@ namespace Multifunctional_heat_meters_gui.View
             {
                 measureSystem = elements[2];
             }
-            //_ADS_97_Form = ADS_97_Form.Create();
 
             _otherSettingsBlock = OtherSettingsBlock.Create(measureSystem);
             _sensorBlock = SensorBlock.Create(measureSystem);
@@ -69,7 +67,6 @@ namespace Multifunctional_heat_meters_gui.View
                 _participatedPipelinesBlock = ParticipatedPipelinesBlock.Create(12, 6, state);
             Checkboxes_box.Add(_participatedPipelinesBlock);
 
-            //CalculateMinPipelinesCountForm_ADS_97(device);
             button_box.Add(_backForwardComponent);
 
             if(index == 1)
@@ -84,8 +81,6 @@ namespace Multifunctional_heat_meters_gui.View
                 _participatedPipelinesBlock.DisableBlock();
                 _otherSettingsBlock.DisableBlock();
             }
-
-            //ShowAll();
 
             SetupHandlers();
 
@@ -152,7 +147,6 @@ namespace Multifunctional_heat_meters_gui.View
         {
             //if (!_participatedPipelinesBlock.SomeCheckboxesAreChecked())
               //  return false;
-            //get info from all blocks and params that they are filled correctly (through a field value)
             Dictionary<string, string> pars = GetSystemWindowData();
             if (pars["030н00"] == "" || pars["030н01"] == "" || pars["030н02"] == "" || pars["030н02"] == ""
                 || pars["024"] == "" || pars["025"] == "" /*|| pars["008"] == ""*/ || pars["003"] == "" || pars["004"] == "" 
@@ -179,24 +173,9 @@ namespace Multifunctional_heat_meters_gui.View
                 selectedSensors032++;
             if (sensorState[3] == 1)
                 selectedSensors033++;
-            /*for (int i = 0; i<sensorState.Count; i++)
-            {
-                if(i == )
-                //countselectedSensors += num;
-            }*/
             int channels032 = countSelectedPipelines + selectedSensors032;
             int channels033 = countSelectedPipelines + selectedSensors033;
-            /*if (FormIndex == 1 && countSelectedPipelines > _minPipelinesCountFor_ADS_97)
-            {
-                //OccupiedChannelsChanged?.Invoke(this, EventArgs.Empty);
-                //_ADS_97_Form.Show();
-            }*/
             OccupiedChannelsChangedEvent?.Invoke(this, new List<int> { channels032, channels033 });
-            /*EventsArgs.MeasurementEventArgs powerArgs = new EventsArgs.MeasurementEventArgs(Int32.Parse(power_combo.ActiveId));
-            PowerSystemChangedEvent?.Invoke(this, powerArgs);
-
-            EventsArgs.MeasurementEventArgs pressureArgs = new EventsArgs.MeasurementEventArgs(Int32.Parse(power_combo.ActiveId));
-            PressureSystemChangedEvent?.Invoke(this, pressureArgs);*/
         }
 
         protected override bool IsAbleToGoToNext()
@@ -215,19 +194,6 @@ namespace Multifunctional_heat_meters_gui.View
             return count;
         }
 
-        /*private void CalculateMinPipelinesCountForm_ADS_97(Model.Device device)
-        {
-            switch (device)
-            {
-                case Model.Device.SPT963:
-                    _minPipelinesCountFor_ADS_97 = 8;
-                    break;
-                default:
-                    _minPipelinesCountFor_ADS_97 = 4;
-                    break;
-            }
-        }*/
-
         public Dictionary<string, int> GetMeasurementSystems()
         {
             Dictionary<string, int> result = new Dictionary<string, int>(){
@@ -241,26 +207,7 @@ namespace Multifunctional_heat_meters_gui.View
         public override void OnLoadForm(EventsArgs.NextFormArgs e, AppState appState)
         {
             OnFormChanged(this, EventArgs.Empty);
-            /*if (_formIndex == 2)
-            {
-                SystemForm sysform1 = (SystemForm)appState.GetForms().First.Value;
-                if (sysform1 != null)
-                {
-                    Dictionary<string, string> data = sysform1.GetSystemWindowData();
-                    SetSystemWindowData(data);
-                }
-            }
-            else if (_formIndex == 1)
-            {
-                foreach (var form in appState.GetForms())
-                {
-                    if (form.FormName.StartsWith("Общесистемные") && form.FormIndex == 2)
-                    {
-                        Dictionary<string, string> data = ((SystemForm)form).GetSystemWindowData();
-                        SetSystemWindowData(data);
-                    }
-                }
-            }*/
+            
             /*if (appState.AreAllPipelinesFilledOut())
             {
                 //_sensorBlock.EnableBlock();
