@@ -46,8 +46,11 @@ namespace Multifunctional_heat_meters_gui.View
                 { "040н00", const_entry4 },
             };
 
-            int measurement = Int32.Parse(measureSystem[0].ToString());
-            ChangePressureMeasurement(measurement);
+            
+            if (measureSystem.Length > 0) {
+                int measurement = Int32.Parse(measureSystem[0].ToString());
+                ChangePressureMeasurement(measurement);
+            }
 
             ShowAll();
             SetupHandlers();

@@ -41,10 +41,14 @@ namespace Multifunctional_heat_meters_gui.View
             for (int i = 0; i < countCheckboxes; i++)
             {
                 CheckButton currentCheckbox = new CheckButton($"{prefix}{i + 1}");
-                bool state = stateString[i] == '1' ? true : false;
+                bool state;
+                if (stateString.Length > 0)
+                    state = stateString[i] == '1' ? true : false;
+                else
+                    state = false;
                 currentCheckbox.Active = state;
 
-                _result += stateString[i];
+                _result += state ? "1" : "0";
 
                 currentCheckbox.Clicked += new EventHandler(Checkbox_Checked);
 

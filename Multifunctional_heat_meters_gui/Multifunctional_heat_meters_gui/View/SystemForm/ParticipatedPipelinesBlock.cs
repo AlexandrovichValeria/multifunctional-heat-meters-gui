@@ -46,9 +46,16 @@ namespace Multifunctional_heat_meters_gui.View
             builder.Autoconnect(this);
 
             string[] elements = CheckboxesState.Split(' ');
+            string pipelinesState = "";
+            string consumersState = "";
+            if(elements.Count() > 1)
+            {
+                pipelinesState = elements[0];
+                consumersState = elements[1];
+            }
 
-            _participatedPipelinesCheckboxes = CheckboxesBlock.Create(participatedPipelinesCount, s_pipelinePrefix, elements[0]);
-            _participatedConsumersCheckboxes = CheckboxesBlock.Create(participatedConsumerCount, s_consumerPrefix, elements[1]);
+            _participatedPipelinesCheckboxes = CheckboxesBlock.Create(participatedPipelinesCount, s_pipelinePrefix, pipelinesState);
+            _participatedConsumersCheckboxes = CheckboxesBlock.Create(participatedConsumerCount, s_consumerPrefix, consumersState);
 
             if (elements[0].Length == participatedPipelinesCount && elements[1].Length == participatedConsumerCount)
             {
